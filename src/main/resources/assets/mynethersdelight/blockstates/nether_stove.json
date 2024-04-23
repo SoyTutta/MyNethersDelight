@@ -1,0 +1,49 @@
+{
+  "variants": {
+    "facing=north,lit=false": {
+      "model": "mynethersdelight:block/nether_stove"
+    },
+    "facing=south,lit=false": {
+      "model": "mynethersdelight:block/nether_stove",
+      "y": 180
+    },
+    "facing=west,lit=false": {
+      "model": "mynethersdelight:block/nether_stove",
+      "y": 270
+    },
+    "facing=east,lit=false": {
+      "model": "mynethersdelight:block/nether_stove",
+      "y": 90
+    },
+    "facing=north,lit=true,soul=false": {
+      "model": "mynethersdelight:block/nether_stove_on"
+    },
+    "facing=south,lit=true,soul=false": {
+      "model": "mynethersdelight:block/nether_stove_on",
+      "y": 180
+    },
+    "facing=west,lit=true,soul=false": {
+      "model": "mynethersdelight:block/nether_stove_on",
+      "y": 270
+    },
+    "facing=east,lit=true,soul=false": {
+      "model": "mynethersdelight:block/nether_stove_on",
+      "y": 90
+    },
+    "facing=north,lit=true,soul=true": {
+      "model": "mynethersdelight:block/nether_stove_soul"
+    },
+    "facing=south,lit=true,soul=true": {
+      "model": "mynethersdelight:block/nether_stove_soul",
+      "y": 180
+    },
+    "facing=west,lit=true,soul=true": {
+      "model": "mynethersdelight:block/nether_stove_soul",
+      "y": 270
+    },
+    "facing=east,lit=true,soul=true": {
+      "model": "mynethersdelight:block/nether_stove_soul",
+      "y": 90
+    }
+  }
+}

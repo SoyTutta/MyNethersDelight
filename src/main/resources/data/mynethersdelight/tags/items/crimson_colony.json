@@ -1,0 +1,9 @@
+{
+  "values": [
+    "mynethersdelight:crimson_fungus_colony",
+    {
+      "id": "nethersdelight:crimson_fungus_colony",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mynethersdelight:powder_cannon",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "mynethersdelight:powdery_cannon",
+              "properties": {
+                "lit": "false"
+              }
+            },
+            {
+              "condition": "minecraft:survives_explosion"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mynethersdelight:powder_cannon",
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "mynethersdelight:powdery_cannon",
+              "properties": {
+                "lit": "true"
+              }
+            },
+            {
+              "condition": "minecraft:survives_explosion"
+            }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mynethersdelight:bullet_pepper",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 3.0,
+                "max": 5.0
+              }
+            }
+          ],
+          "conditions": [
+            {
+              "condition": "minecraft:block_state_property",
+              "block": "mynethersdelight:powdery_cannon",
+              "properties": {
+                "lit": "true"
+              }
+            },
+            {
+              "condition": "minecraft:survives_explosion"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

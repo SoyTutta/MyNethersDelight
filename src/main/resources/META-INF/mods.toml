@@ -1,0 +1,39 @@
+
+modLoader="javafml"
+loaderVersion="[41,)"
+license="MIT License"
+
+[[mods]]
+modId="mynethersdelight"
+version="1.19-1.0"
+displayName="My Nether's Delight"
+
+# updateJSONURL=""
+logoFile="logo.png"
+logoBlur=false
+credits="SoyTutta;"
+authors="SoyTutta"
+description="A nether expansion for the Farmer's Delight mod!"
+itemIcon="mynethersdelight:nether_stove"
+configBackground="minecraft:textures/block/netherrack.png"
+
+[[dependencies.mynethersdelight]]
+modId="forge"
+mandatory=true
+versionRange="[41.1.0,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.mynethersdelight]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.19,1.20)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.mynethersdelight]]
+modId="farmersdelight"
+mandatory=true
+versionRange="[1.1.2,)"
+ordering="NONE"
+side="BOTH"

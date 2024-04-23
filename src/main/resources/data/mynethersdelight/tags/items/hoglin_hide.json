@@ -1,0 +1,9 @@
+{
+  "values": [
+    "mynethersdelight:hoglin_hide",
+    {
+      "id": "nethersdelight:hoglin_hide",
+      "required": false
+    }
+  ]
+}

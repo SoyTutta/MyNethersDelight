@@ -1,0 +1,44 @@
+
+{
+  "multipart": [
+    {
+      "apply": [
+        {
+          "model": "mynethersdelight:block/bullet_age0"
+        }
+      ],
+      "when": {
+        "age": "0"
+      }
+    },{
+      "apply": [
+        {
+          "model": "mynethersdelight:block/bullet_age1"
+        }
+      ],
+      "when": {
+        "age": "1", "lit": "false"
+
+      }
+    },{
+      "apply": [
+        {
+          "model": "mynethersdelight:block/bullet_age1"
+        }
+      ],
+      "when": {
+        "age": "2", "lit": "false"
+
+      }
+    },{
+      "apply": [
+        {
+          "model": "mynethersdelight:block/bullet_age2"
+        }
+      ],
+      "when": {
+        "lit": "true"
+      }
+    }
+  ]
+}

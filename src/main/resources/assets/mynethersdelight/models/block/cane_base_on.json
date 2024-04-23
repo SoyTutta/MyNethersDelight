@@ -1,0 +1,7 @@
+{
+  "ambientocclusion": "false","render_type": "minecraft:cutout",
+  "parent": "minecraft:block/tinted_cross",
+  "textures": {
+    "cross": "mynethersdelight:block/powdery_cane_base_leaves_bloomed"
+  }
+}

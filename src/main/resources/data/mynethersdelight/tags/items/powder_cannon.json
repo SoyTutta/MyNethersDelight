@@ -1,0 +1,9 @@
+{
+  "values": [
+    "mynethersdelight:powder_cannon",
+    {
+      "id": "nethersdelight:propelplant_cane",
+      "required": false
+    }
+  ]
+}

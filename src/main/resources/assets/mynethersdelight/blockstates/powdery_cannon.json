@@ -1,0 +1,76 @@
+{
+  "multipart": [
+    {
+      "apply": [
+        {
+          "model": "mynethersdelight:block/cannon1_age0"
+        },
+        {
+          "model": "mynethersdelight:block/cannon2_age0"
+        },
+        {
+          "model": "mynethersdelight:block/cannon3_age0"
+        },
+        {
+          "model": "mynethersdelight:block/cannon4_age0"
+        }
+      ],
+      "when": {
+        "age": "0"
+      }
+    },
+    {
+      "apply": [
+        {
+          "model": "mynethersdelight:block/cannon1_age1"
+        },
+        {
+          "model": "mynethersdelight:block/cannon2_age1"
+        },
+        {
+          "model": "mynethersdelight:block/cannon3_age1"
+        },
+        {
+          "model": "mynethersdelight:block/cannon4_age1"
+        }
+      ],
+      "when": {
+        "age": "1"
+      }
+    },
+    {
+      "apply": {
+        "model": "mynethersdelight:block/cannon_small_leaves"
+      },
+      "when": {
+        "leaves": "small"
+
+      }
+    },
+    {
+      "apply": {
+        "model": "mynethersdelight:block/cannon_large_leaves"
+      },
+      "when": {
+        "leaves": "large"
+      }
+    },
+    {
+      "apply": {
+        "model": "mynethersdelight:block/cannon_small_bullet"
+      },
+      "when": {
+        "leaves": "small","lit": "true"
+
+      }
+    },
+    {
+      "apply": {
+        "model": "mynethersdelight:block/cannon_large_bullet"
+      },
+      "when": {
+        "leaves": "large","lit": "true"
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "com.soytutta.mynethersdelight.core.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "mynethersdelight.refmap.json",
+  "mixins": [
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "minVersion": "0.8"
+}

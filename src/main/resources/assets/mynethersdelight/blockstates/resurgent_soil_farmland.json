@@ -1,0 +1,12 @@
+{
+  "variants": {
+    "moisture=0": { "model": "mynethersdelight:block/resurgent_soil_farmland" },
+    "moisture=1": { "model": "mynethersdelight:block/resurgent_soil_farmland" },
+    "moisture=2": { "model": "mynethersdelight:block/resurgent_soil_farmland" },
+    "moisture=3": { "model": "mynethersdelight:block/resurgent_soil_farmland" },
+    "moisture=4": { "model": "mynethersdelight:block/resurgent_soil_farmland" },
+    "moisture=5": { "model": "mynethersdelight:block/resurgent_soil_farmland" },
+    "moisture=6": { "model": "mynethersdelight:block/resurgent_soil_farmland" },
+    "moisture=7": { "model": "mynethersdelight:block/resurgent_soil_farmland_moist" }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "mynethersdelight:block/wall_powdery_torch"
+    },
+    "facing=north": {
+      "model": "mynethersdelight:block/wall_powdery_torch",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "mynethersdelight:block/wall_powdery_torch",
+      "y": 90
+    },
+    "facing=west": {
+      "model": "mynethersdelight:block/wall_powdery_torch",
+      "y": 180
+    }
+  }
+}

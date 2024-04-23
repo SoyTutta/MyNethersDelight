@@ -1,0 +1,64 @@
+{
+  "variants": {
+    "forgoting=0": [
+      { "model": "mynethersdelight:block/letios_compost_0" },
+      { "model": "mynethersdelight:block/letios_compost_0", "y": 90 },
+      { "model": "mynethersdelight:block/letios_compost_0", "y": 180 },
+      { "model": "mynethersdelight:block/letios_compost_0", "y": 270 }
+    ],
+    "forgoting=1": [
+      { "model": "mynethersdelight:block/letios_compost_1" },
+      { "model": "mynethersdelight:block/letios_compost_1", "y": 90 },
+      { "model": "mynethersdelight:block/letios_compost_1", "y": 180 },
+      { "model": "mynethersdelight:block/letios_compost_1", "y": 270 }
+    ],
+    "forgoting=2": [
+      { "model": "mynethersdelight:block/letios_compost_2" },
+      { "model": "mynethersdelight:block/letios_compost_2", "y": 90 },
+      { "model": "mynethersdelight:block/letios_compost_2", "y": 180 },
+      { "model": "mynethersdelight:block/letios_compost_2", "y": 270 }
+    ],
+    "forgoting=3": [
+      { "model": "mynethersdelight:block/letios_compost_3" },
+      { "model": "mynethersdelight:block/letios_compost_3", "y": 90 },
+      { "model": "mynethersdelight:block/letios_compost_3", "y": 180 },
+      { "model": "mynethersdelight:block/letios_compost_3", "y": 270 }
+    ],
+    "forgoting=4": [
+      { "model": "mynethersdelight:block/letios_compost_4" },
+      { "model": "mynethersdelight:block/letios_compost_4", "y": 90 },
+      { "model": "mynethersdelight:block/letios_compost_4", "y": 180 },
+      { "model": "mynethersdelight:block/letios_compost_4", "y": 270 }
+    ],
+    "forgoting=5": [
+      { "model": "mynethersdelight:block/letios_compost_5" },
+      { "model": "mynethersdelight:block/letios_compost_5", "y": 90 },
+      { "model": "mynethersdelight:block/letios_compost_5", "y": 180 },
+      { "model": "mynethersdelight:block/letios_compost_5", "y": 270 }
+    ],
+    "forgoting=6": [
+      { "model": "mynethersdelight:block/letios_compost_6" },
+      { "model": "mynethersdelight:block/letios_compost_6", "y": 90 },
+      { "model": "mynethersdelight:block/letios_compost_6", "y": 180 },
+      { "model": "mynethersdelight:block/letios_compost_6", "y": 270 }
+    ],
+    "forgoting=7": [
+      { "model": "mynethersdelight:block/letios_compost_7" },
+      { "model": "mynethersdelight:block/letios_compost_7", "y": 90 },
+      { "model": "mynethersdelight:block/letios_compost_7", "y": 180 },
+      { "model": "mynethersdelight:block/letios_compost_7", "y": 270 }
+    ],
+    "forgoting=8": [
+      { "model": "mynethersdelight:block/letios_compost_8" },
+      { "model": "mynethersdelight:block/letios_compost_8", "y": 90 },
+      { "model": "mynethersdelight:block/letios_compost_8", "y": 180 },
+      { "model": "mynethersdelight:block/letios_compost_8", "y": 270 }
+    ],
+    "forgoting=9": [
+      { "model": "mynethersdelight:block/letios_compost_9" },
+      { "model": "mynethersdelight:block/letios_compost_9", "y": 90 },
+      { "model": "mynethersdelight:block/letios_compost_9", "y": 180 },
+      { "model": "mynethersdelight:block/letios_compost_9", "y": 270 }
+    ]
+  }
+}

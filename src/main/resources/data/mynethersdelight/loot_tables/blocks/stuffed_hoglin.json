@@ -1,0 +1,54 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "name": "pool1",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mynethersdelight:roast_stuffed_hoglin"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "mynethersdelight:stuffed_hoglin",
+          "properties": {
+            "servings": "11",
+            "part": "head"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pool2",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bowl"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:block_state_property",
+            "block": "mynethersdelight:stuffed_hoglin",
+            "properties": {
+              "servings": "11"
+            }
+          }
+        },
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "mynethersdelight:stuffed_hoglin",
+          "properties": {
+            "part": "head"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "values": [
+    "mynethersdelight:minced_strider",
+    {
+      "id": "nethersdelight:ground_strider",
+      "required": false
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "values": [
+    "mynethersdelight:hoglin_sausage",
+    "mynethersdelight:hoglin_loin",
+    {
+      "id": "nethersdelight:hoglin_loin",
+      "required": false
+    }
+  ]
+}

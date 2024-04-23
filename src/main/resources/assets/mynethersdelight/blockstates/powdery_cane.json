@@ -1,0 +1,55 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "mynethersdelight:block/cane_on"
+      }
+    },
+    {
+      "when": {
+        "leave": "true"
+      },
+      "apply": {
+        "model": "mynethersdelight:block/cane_leaves"
+      }
+    },
+    {
+      "when": {
+        "base": "true",
+        "age": "0"
+      },
+      "apply": {
+        "model": "mynethersdelight:block/cane_base_0"
+      }
+    },
+    {
+      "when": {
+        "base": "true",
+        "lit": "false",
+        "age": "1"
+      },
+      "apply": {
+        "model": "mynethersdelight:block/cane_base_1"
+      }
+    }, {
+      "when": {
+        "base": "true",
+        "lit": "false",
+        "age": "2"
+      },
+      "apply": {
+        "model": "mynethersdelight:block/cane_base_1"
+      }
+    },
+    {
+      "when": {
+        "base": "true",
+        "lit": "true",
+        "age": "2"
+      },
+      "apply": {
+        "model": "mynethersdelight:block/cane_base_on"
+      }
+    }
+  ]
+}
