@@ -35,12 +35,12 @@ public class ClientSetupEvents {
 
     @SubscribeEvent
     public static void onEntityRendererRegister(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer((EntityType) MNDEntityTypes.STRIDER_ROCK.get(), ThrownItemRenderer::new);
+        event.registerEntityRenderer(MNDEntityTypes.STRIDER_ROCK.get(), ThrownItemRenderer::new);
     }
 
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer((BlockEntityType) MNDBlockEntityTypes.NETHER_STOVE.get(), NetherStoveRenderer::new);
+        event.registerBlockEntityRenderer(MNDBlockEntityTypes.NETHER_STOVE.get(), NetherStoveRenderer::new);
     }
 
     @SubscribeEvent
@@ -48,8 +48,8 @@ public class ClientSetupEvents {
         BlockEntityRenderers.register(MNDBlockEntityTypes.MND_SIGN.get(), SignRenderer::new);
         event.enqueueWork(() -> {
             FlowerPotBlock pot = (FlowerPotBlock) Blocks.FLOWER_POT;
-            pot.addPlant(MNDBlocks.POWDERY_CANNON.getId(), () -> MNDBlocks.POTTED_POWDERY_CANNON.get());
-            pot.addPlant(MNDBlocks.BULLET_PEPPER.getId(), () -> MNDBlocks.POTTED_BULLET_PEPPER.get());
+            pot.addPlant(MNDBlocks.POWDERY_CANNON.getId(), MNDBlocks.POTTED_POWDERY_CANNON::get);
+            pot.addPlant(MNDBlocks.BULLET_PEPPER.getId(), MNDBlocks.POTTED_BULLET_PEPPER::get);
             Sheets.addWoodType(MNDWoodTypes.POWDERY_CANNON);
         });
     }
