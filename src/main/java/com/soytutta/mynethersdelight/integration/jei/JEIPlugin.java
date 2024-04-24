@@ -32,8 +32,9 @@ public class JEIPlugin implements IModPlugin {
 
     public JEIPlugin() {
     }
+
     public void registerCategories(IRecipeCategoryRegistration registry) {
-        registry.addRecipeCategories(new IRecipeCategory[]{new ForgotingRecipeCategory(registry.getJeiHelpers().getGuiHelper())});
+        registry.addRecipeCategories(new ForgotingRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
     }
 
     public void registerRecipes(IRecipeRegistration registration) {
@@ -45,7 +46,7 @@ public class JEIPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(MNDItems.NETHER_STOVE.get()), RecipeTypes.CAMPFIRE_COOKING);
         registration.addRecipeCatalyst(new ItemStack(MNDItems.SOUL_NETHER_STOVE.get()), RecipeTypes.CAMPFIRE_COOKING);
-        registration.addRecipeCatalyst(new ItemStack((ItemLike) MNDBlocks.LETIOS_COMPOST.get()), new RecipeType[]{MNDRecipeTypes.FORGOTING});
+        registration.addRecipeCatalyst(new ItemStack((ItemLike) MNDBlocks.LETIOS_COMPOST.get()), MNDRecipeTypes.FORGOTING);
 
     }
 

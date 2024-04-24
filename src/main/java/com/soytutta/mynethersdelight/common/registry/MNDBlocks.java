@@ -28,7 +28,8 @@ import vectorwing.farmersdelight.common.registry.ModBlocks;
 import java.util.function.ToIntFunction;
 
 public class MNDBlocks {
-    public static final DeferredRegister<Block> BLOCKS;
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, "mynethersdelight");
+
     public static final RegistryObject<Block> NETHER_BRICKS_CABINET;
     public static final RegistryObject<Block> NETHER_STOVE;
     public static final RegistryObject<Block> LETIOS_COMPOST;
@@ -69,8 +70,6 @@ public class MNDBlocks {
     public MNDBlocks() {
     }
     static {
-        BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, "mynethersdelight");
-
         NETHER_BRICKS_CABINET = BLOCKS.register("nether_bricks_cabinet", () -> {
             return new CabinetBlock(Properties.copy(Blocks.NETHER_BRICKS));
         });
@@ -126,7 +125,7 @@ public class MNDBlocks {
             }).sound(SoundType.BAMBOO), ParticleTypes.FLAME);
         });
         WALL_POWDERY_TORCH = BLOCKS.register("wall_powdery_torch", () -> {
-            return new WallTorchBlock(Properties.of(Material.DECORATION).dropsLike((Block) POWDERY_TORCH.get()).noCollission().instabreak().lightLevel((light) -> {
+            return new WallTorchBlock(Properties.of(Material.DECORATION).dropsLike(POWDERY_TORCH.get()).noCollission().instabreak().lightLevel((light) -> {
                 return 8;
             }).sound(SoundType.BAMBOO), ParticleTypes.FLAME);
         });

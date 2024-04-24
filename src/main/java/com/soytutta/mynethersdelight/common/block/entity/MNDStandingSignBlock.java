@@ -7,12 +7,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
 public class MNDStandingSignBlock extends StandingSignBlock {
-    public MNDStandingSignBlock(Properties p_56990_, WoodType p_56991_) {
-        super(p_56990_, p_56991_);
+    public MNDStandingSignBlock(Properties properties, WoodType woodType) {
+        super(properties, woodType);
     }
 
     @Override
-    public BlockEntity newBlockEntity(BlockPos pPos, BlockState pState) {
-        return new MNDSignBlockEntity(pPos, pState);
+    public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return new MNDSignBlockEntity(pos, state);
     }
 }

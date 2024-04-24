@@ -22,7 +22,8 @@ import vectorwing.farmersdelight.common.item.FuelBlockItem;
 import vectorwing.farmersdelight.common.item.MushroomColonyItem;
 
 public class MNDItems {
-    public static final DeferredRegister<Item> ITEMS;
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "mynethersdelight");
+
 
     public static final RegistryObject<Item> NETHER_STOVE;
     public static final RegistryObject<Item> NETHER_BRICKS_CABINET;
@@ -113,20 +114,20 @@ public class MNDItems {
     public static Item.Properties bucketFoodItem(FoodProperties food) {
         return (new Item.Properties()).food(food).craftRemainder(Items.BUCKET).stacksTo(16).tab(MyNethersDelight.CREATIVE_TAB);
     }
+
     static {
-        ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "mynethersdelight");
         NETHER_BRICKS_CABINET = ITEMS.register("nether_bricks_cabinet", () -> {
-            return new BlockItem((Block)MNDBlocks.NETHER_BRICKS_CABINET.get(), basicItem());
+            return new BlockItem(MNDBlocks.NETHER_BRICKS_CABINET.get(), basicItem());
         });
         NETHER_STOVE = ITEMS.register("nether_bricks_stove", () -> {
-            return new BlockItem((Block)MNDBlocks.NETHER_STOVE.get(), basicItem()) {
+            return new BlockItem(MNDBlocks.NETHER_STOVE.get(), basicItem()) {
                 protected boolean placeBlock(BlockPlaceContext context, BlockState state) {
                     return super.placeBlock(context, state.setValue(NetherStoveBlock.SOUL, false));
                 }
             };
         });
         SOUL_NETHER_STOVE = ITEMS.register("nether_bricks_soul_stove", () -> {
-            return new BlockItem((Block) MNDBlocks.NETHER_STOVE.get(), new Item.Properties().tab(CreativeModeTab.TAB_SEARCH)) {
+            return new BlockItem(MNDBlocks.NETHER_STOVE.get(), new Item.Properties().tab(CreativeModeTab.TAB_SEARCH)) {
                 protected boolean placeBlock(BlockPlaceContext context, BlockState state) {
                     return super.placeBlock(context, state.setValue(NetherStoveBlock.SOUL, true));
                 }
@@ -134,75 +135,75 @@ public class MNDItems {
         });
         // LETIOS-Compost/soil
         LETIOS_COMPOST = ITEMS.register("letios_compost", () -> {
-            return new BlockItem((Block)MNDBlocks.LETIOS_COMPOST.get(), basicItem());
+            return new BlockItem(MNDBlocks.LETIOS_COMPOST.get(), basicItem());
         });
         RESURGENT_SOIL = ITEMS.register("resurgent_soil", () -> {
-            return new BlockItem((Block)MNDBlocks.RESURGENT_SOIL.get(), basicItem());
+            return new BlockItem(MNDBlocks.RESURGENT_SOIL.get(), basicItem());
         });
         RESURGENT_SOIL_FARMLAND = ITEMS.register("resurgent_soil_farmland", () -> {
-            return new BlockItem((Block)MNDBlocks.RESURGENT_SOIL_FARMLAND.get(), basicItem());
+            return new BlockItem(MNDBlocks.RESURGENT_SOIL_FARMLAND.get(), basicItem());
         });
         // POWDERY
         POWDER_CANNON = ITEMS.register("powder_cannon", () -> {
-            return new FuelBlockItem((Block)MNDBlocks.POWDERY_CANNON.get(), basicItem(),500);
+            return new FuelBlockItem(MNDBlocks.POWDERY_CANNON.get(), basicItem(),500);
         });
         POWDERY_TORCH = ITEMS.register("powdery_torch", () -> {
-            return new StandingAndWallBlockItem((Block) MNDBlocks.POWDERY_TORCH.get(), (Block)MNDBlocks.WALL_POWDERY_TORCH.get(), basicItem());
+            return new StandingAndWallBlockItem(MNDBlocks.POWDERY_TORCH.get(), (Block)MNDBlocks.WALL_POWDERY_TORCH.get(), basicItem());
         });
         POWDERY_CABINET = ITEMS.register("powdery_cabinet", () -> {
-            return new BlockItem((Block)MNDBlocks.POWDERY_CABINET.get(), basicItem());
+            return new BlockItem(MNDBlocks.POWDERY_CABINET.get(), basicItem());
         });
         BLOCK_OF_POWDERY_CANNON = ITEMS.register("block_of_powdery_cannon", () -> {
-            return new BlockItem((Block)MNDBlocks.BLOCK_OF_POWDERY_CANNON.get(), basicItem());
+            return new BlockItem(MNDBlocks.BLOCK_OF_POWDERY_CANNON.get(), basicItem());
         });
         BLOCK_OF_STRIPPED_POWDERY_CANNON = ITEMS.register("block_of_stripped_powdery_cannon", () -> {
-            return new BlockItem((Block)MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get(), basicItem());
+            return new BlockItem(MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get(), basicItem());
         });
         POWDERY_PLANKS = ITEMS.register("powdery_planks", () -> {
-            return new BlockItem((Block)MNDBlocks.POWDERY_PLANKS.get(), basicItem());
+            return new BlockItem(MNDBlocks.POWDERY_PLANKS.get(), basicItem());
         });
         POWDERY_PLANKS_STAIRS = ITEMS.register("powdery_stairs", () -> {
-            return new BlockItem((Block)MNDBlocks.POWDERY_PLANKS_STAIRS.get(), basicItem());
+            return new BlockItem(MNDBlocks.POWDERY_PLANKS_STAIRS.get(), basicItem());
         });
         POWDERY_PLANKS_SLAB = ITEMS.register("powdery_slab", () -> {
-            return new BlockItem((Block)MNDBlocks.POWDERY_PLANKS_SLAB.get(), basicItem());
+            return new BlockItem(MNDBlocks.POWDERY_PLANKS_SLAB.get(), basicItem());
         });
         POWDERY_MOSAIC = ITEMS.register("powdery_mosaic", () -> {
-            return new BlockItem((Block)MNDBlocks.POWDERY_MOSAIC.get(), basicItem());
+            return new BlockItem(MNDBlocks.POWDERY_MOSAIC.get(), basicItem());
         });
         POWDERY_MOSAIC_STAIRS = ITEMS.register("powdery_mosaic_stairs", () -> {
-            return new BlockItem((Block)MNDBlocks.POWDERY_MOSAIC_STAIRS.get(), basicItem());
+            return new BlockItem(MNDBlocks.POWDERY_MOSAIC_STAIRS.get(), basicItem());
         });
         POWDERY_MOSAIC_SLAB = ITEMS.register("powdery_mosaic_slab", () -> {
-            return new BlockItem((Block)MNDBlocks.POWDERY_MOSAIC_SLAB.get(), basicItem());
+            return new BlockItem(MNDBlocks.POWDERY_MOSAIC_SLAB.get(), basicItem());
         });
         POWDERY_FENCE = ITEMS.register("powdery_fence", () -> {
-            return new BlockItem((Block)MNDBlocks.POWDERY_FENCE.get(), basicItem());
+            return new BlockItem(MNDBlocks.POWDERY_FENCE.get(), basicItem());
         });
         POWDERY_FENCE_GATE = ITEMS.register("powdery_fence_gate", () -> {
-            return new BlockItem((Block)MNDBlocks.POWDERY_FENCE_GATE.get(), basicItem());
+            return new BlockItem(MNDBlocks.POWDERY_FENCE_GATE.get(), basicItem());
         });
         POWDERY_DOOR = ITEMS.register("powdery_door", () -> {
-            return new BlockItem((Block)MNDBlocks.POWDERY_DOOR.get(), basicItem());
+            return new BlockItem(MNDBlocks.POWDERY_DOOR.get(), basicItem());
         });
         POWDERY_TRAPDOOR = ITEMS.register("powdery_trapdoor", () -> {
-            return new BlockItem((Block)MNDBlocks.POWDERY_TRAPDOOR.get(), basicItem());
+            return new BlockItem(MNDBlocks.POWDERY_TRAPDOOR.get(), basicItem());
         });
         POWDERY_BUTTON = ITEMS.register("powdery_button", () -> {
-            return new BlockItem((Block)MNDBlocks.POWDERY_BUTTON.get(), basicItem());
+            return new BlockItem(MNDBlocks.POWDERY_BUTTON.get(), basicItem());
         });
         POWDERY_PRESSURE_PLATE = ITEMS.register("powdery_pressure_plate", () -> {
-            return new BlockItem((Block)MNDBlocks.POWDERY_PRESSURE_PLATE.get(), basicItem());
+            return new BlockItem(MNDBlocks.POWDERY_PRESSURE_PLATE.get(), basicItem());
         });
         POWDERY_SIGN = ITEMS.register("powdery_sign", () -> {
-            return new StandingAndWallBlockItem((Block) MNDBlocks.POWDERY_SIGN.get(), (Block)MNDBlocks.POWDERY_WALL_SIGN.get(), basicItem());
+            return new StandingAndWallBlockItem(MNDBlocks.POWDERY_SIGN.get(), MNDBlocks.POWDERY_WALL_SIGN.get(), basicItem());
         });
         // FUNGUS-Colony
         WARPED_FUNGUS_COLONY = ITEMS.register("warped_fungus_colony", () -> {
-            return new MushroomColonyItem((Block)MNDBlocks.WARPED_FUNGUS_COLONY.get(), basicItem());
+            return new MushroomColonyItem(MNDBlocks.WARPED_FUNGUS_COLONY.get(), basicItem());
         });
         CRIMSON_FUNGUS_COLONY = ITEMS.register("crimson_fungus_colony", () -> {
-            return new MushroomColonyItem((Block)MNDBlocks.CRIMSON_FUNGUS_COLONY.get(), basicItem());
+            return new MushroomColonyItem(MNDBlocks.CRIMSON_FUNGUS_COLONY.get(), basicItem());
         });
         // STRIDER
         STRIDER_ROCK = ITEMS.register("strider_rock", () -> {
@@ -288,13 +289,13 @@ public class MNDItems {
         });
         // THOPHY
         HOGLIN_TROPHY = ITEMS.register("hoglin_trophy", () -> {
-            return new BlockItem((Block)MNDBlocks.HOGLIN_TROPHY.get(), basicItem().tab(CreativeModeTab.TAB_SEARCH).stacksTo(1));
+            return new BlockItem(MNDBlocks.HOGLIN_TROPHY.get(), basicItem().tab(CreativeModeTab.TAB_SEARCH).stacksTo(1));
         });
         WAXED_HOGLIN_TROPHY = ITEMS.register("waxed_hoglin_trophy", () -> {
-            return new BlockItem((Block)MNDBlocks.WAXED_HOGLIN_TROPHY.get(), basicItem().stacksTo(1));
+            return new BlockItem(MNDBlocks.WAXED_HOGLIN_TROPHY.get(), basicItem().stacksTo(1));
         });
         ZOGLIN_TROPHY = ITEMS.register("zoglin_trophy", () -> {
-            return new BlockItem((Block)MNDBlocks.ZOGLIN_TROPHY.get(), basicItem().stacksTo(1));
+            return new BlockItem(MNDBlocks.ZOGLIN_TROPHY.get(), basicItem().stacksTo(1));
         });
         // STUFFED HOGLIN
         HOGLIN_HIDE = ITEMS.register("hoglin_hide", () -> {
@@ -304,7 +305,7 @@ public class MNDItems {
             return new Item(basicItem().stacksTo(1));
         });
         ROAST_STUFFED_HOGLIN = ITEMS.register("roast_stuffed_hoglin", () -> {
-            return new BlockItem((Block) MNDBlocks.STUFFED_HOGLIN.get(),(basicItem().stacksTo(1)));
+            return new BlockItem(MNDBlocks.STUFFED_HOGLIN.get(),(basicItem().stacksTo(1)));
         });
         ROAST_EAR = ITEMS.register("roast_ear", ()  -> {
             return new ConsumableItem(foodItem(MNDFoodValues.ROAST_EAR));

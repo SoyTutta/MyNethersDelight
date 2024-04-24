@@ -93,18 +93,20 @@ public class HotCreamConeItem extends ConsumableItem {
     public static final List<MobEffectInstance> EFFECTS;
 
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag isAdvanced) {
-        if ((Boolean) Configuration.FOOD_EFFECT_TOOLTIP.get()) {
-            MutableComponent textWhenFeeding = TextUtils.getTranslation("tooltip.strider_feed.when_feeding", new Object[0]);
+        if (Configuration.FOOD_EFFECT_TOOLTIP.get()) {
+            MutableComponent textWhenFeeding = TextUtils.getTranslation("tooltip.strider_feed.when_feeding");
             tooltip.add(textWhenFeeding.withStyle(ChatFormatting.GRAY));
 
             MutableComponent effectDescription;
             MobEffect effect;
-            for (Iterator var6 = EFFECTS.iterator(); var6.hasNext(); tooltip.add(effectDescription.withStyle(effect.getCategory().getTooltipFormatting()))) {
-                MobEffectInstance effectInstance = (MobEffectInstance) var6.next();
+
+            for (Iterator<MobEffectInstance> var6 = EFFECTS.iterator(); var6.hasNext(); tooltip.add(effectDescription.withStyle(effect.getCategory().getTooltipFormatting()))) {
+                MobEffectInstance effectInstance = var6.next();
                 effectDescription = Component.literal(" ");
                 MutableComponent effectName = Component.translatable(effectInstance.getDescriptionId());
                 effectDescription.append(effectName);
                 effect = effectInstance.getEffect();
+
                 if (effectInstance.getAmplifier() > 0) {
                     effectDescription.append(" ").append(Component.translatable("potion.potency." + effectInstance.getAmplifier()));
                 }
@@ -132,7 +134,7 @@ public class HotCreamConeItem extends ConsumableItem {
                 double d0 = MathUtils.RAND.nextGaussian() * 0.02;
                 double d1 = MathUtils.RAND.nextGaussian() * 0.02;
                 double d2 = MathUtils.RAND.nextGaussian() * 0.02;
-                strider.level.addParticle((ParticleOptions) ModParticleTypes.STAR.get(), strider.getRandomX(1.0),
+                strider.level.addParticle(ModParticleTypes.STAR.get(), strider.getRandomX(1.0),
                         strider.getRandomY() + 0.5, strider.getRandomZ(1.0), d0, d1, d2);
             }
 

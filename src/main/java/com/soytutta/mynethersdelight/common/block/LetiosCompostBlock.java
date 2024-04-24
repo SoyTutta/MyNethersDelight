@@ -34,14 +34,14 @@ public class LetiosCompostBlock extends Block {
     public static IntegerProperty FORGOTING = IntegerProperty.create("forgoting", 0, 9);
     public LetiosCompostBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState)super.defaultBlockState().setValue(FORGOTING, 0));
+        this.registerDefaultState(super.defaultBlockState().setValue(FORGOTING, 0));
     }
     public boolean isRandomlyTicking(BlockState state) {
         return true;
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FORGOTING});
+        builder.add(FORGOTING);
         super.createBlockStateDefinition(builder);
     }
 
@@ -55,9 +55,7 @@ public class LetiosCompostBlock extends Block {
             boolean hasLava = false;
             boolean isNetherBiome = false;
 
-            Iterator var8 = BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1)).iterator();
-            while(var8.hasNext()) {
-                BlockPos neighborPos = (BlockPos)var8.next();
+            for (BlockPos neighborPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
                 BlockState neighborState = worldIn.getBlockState(neighborPos);
 
                 if (neighborState.is(MNDTags.LETIOS_ACTIVATORS)) {
@@ -74,29 +72,33 @@ public class LetiosCompostBlock extends Block {
                 }
 
                 if (worldIn.getBiome(pos) == BuiltinDimensionTypes.NETHER) {
-                    isNetherBiome= true;
+                    isNetherBiome = true;
                 }
             }
 
             chance += hasLava ? 0.3F : 0.0F;
             chance += isNetherBiome ? 0.3F : 0.0F;
             if (worldIn.getRandom().nextFloat() <= chance && worldIn.dimensionType().ultraWarm()) {
-                if ((Integer)state.getValue(FORGOTING) == this.getMaxForgotingStage()) {
-                    worldIn.setBlock(pos, ((Block) MNDBlocks.RESURGENT_SOIL.get()).defaultBlockState(), 3);
+                if (state.getValue(FORGOTING) == this.getMaxForgotingStage()) {
+                    worldIn.setBlock(pos, MNDBlocks.RESURGENT_SOIL.get().defaultBlockState(), 3);
                 } else {
-                    worldIn.setBlock(pos, (BlockState)state.setValue(FORGOTING, (Integer) state.getValue(FORGOTING) + 1), 3);
+                    worldIn.setBlock(pos, state.setValue(FORGOTING, (Integer) state.getValue(FORGOTING) + 1), 3);
                 }
             }
 
         }
     }
 
+    @Override
+    @SuppressWarnings("deprecation")
     public boolean hasAnalogOutputSignal(BlockState state) {
         return true;
     }
 
+    @Override
+    @SuppressWarnings("deprecation")
     public int getAnalogOutputSignal(BlockState blockState, Level worldIn, BlockPos pos) {
-        return this.getMaxForgotingStage() + 1 - (Integer)blockState.getValue(FORGOTING);
+        return this.getMaxForgotingStage() + 1 - blockState.getValue(FORGOTING);
     }
 
     @OnlyIn(Dist.CLIENT)

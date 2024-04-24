@@ -49,6 +49,7 @@ import vectorwing.farmersdelight.common.utility.TextUtils;
 
 // thanks Umpaz for letting me use this code <3
 public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
+
     public static final EnumProperty<BedPart> PART;
     public static final IntegerProperty SERVINGS;
     protected static final VoxelShape[] SHAPES_NORTH_HEAD;
@@ -62,37 +63,39 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
 
     public StuffedHoglinBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState)((BlockState)((BlockState)((BlockState)this.getStateDefinition().any()).setValue(FACING, Direction.NORTH)).setValue(SERVINGS, 11)).setValue(PART, BedPart.HEAD));
+        this.registerDefaultState(this.getStateDefinition().any().setValue(FACING, Direction.NORTH).setValue(SERVINGS, 11).setValue(PART, BedPart.HEAD));
     }
 
+    @Override
+    @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         if (state.getValue(PART) == BedPart.HEAD) {
-            switch ((Direction)state.getValue(FACING)) {
+            switch (state.getValue(FACING)) {
                 case NORTH:
-                    return SHAPES_NORTH_HEAD[(Integer)state.getValue(SERVINGS)];
+                    return SHAPES_NORTH_HEAD[state.getValue(SERVINGS)];
                 case SOUTH:
-                    return SHAPES_SOUTH_HEAD[(Integer)state.getValue(SERVINGS)];
+                    return SHAPES_SOUTH_HEAD[state.getValue(SERVINGS)];
                 case WEST:
-                    return SHAPES_WEST_HEAD[(Integer)state.getValue(SERVINGS)];
+                    return SHAPES_WEST_HEAD[state.getValue(SERVINGS)];
                 case EAST:
-                    return SHAPES_EAST_HEAD[(Integer)state.getValue(SERVINGS)];
+                    return SHAPES_EAST_HEAD[state.getValue(SERVINGS)];
             }
         }
 
         if (state.getValue(PART) == BedPart.FOOT) {
-            switch ((Direction)state.getValue(FACING)) {
+            switch (state.getValue(FACING)) {
                 case NORTH:
-                    return SHAPES_NORTH_FOOT[(Integer)state.getValue(SERVINGS)];
+                    return SHAPES_NORTH_FOOT[state.getValue(SERVINGS)];
                 case SOUTH:
-                    return SHAPES_SOUTH_FOOT[(Integer)state.getValue(SERVINGS)];
+                    return SHAPES_SOUTH_FOOT[state.getValue(SERVINGS)];
                 case WEST:
-                    return SHAPES_WEST_FOOT[(Integer)state.getValue(SERVINGS)];
+                    return SHAPES_WEST_FOOT[state.getValue(SERVINGS)];
                 case EAST:
-                    return SHAPES_EAST_FOOT[(Integer)state.getValue(SERVINGS)];
+                    return SHAPES_EAST_FOOT[state.getValue(SERVINGS)];
             }
         }
 
-        return SHAPES_NORTH_HEAD[(Integer)state.getValue(SERVINGS)];
+        return SHAPES_NORTH_HEAD[state.getValue(SERVINGS)];
     }
 
     private static Direction getDirectionToOther(BedPart part, Direction direction) {
@@ -100,38 +103,47 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(new Property[]{FACING, SERVINGS, PART});
+        builder.add(FACING, SERVINGS, PART);
     }
 
+    @Override
+    @SuppressWarnings("deprecation")
     public RenderShape getRenderShape(BlockState state) {
         return RenderShape.MODEL;
     }
 
+    @Override
+    @SuppressWarnings("deprecation")
     public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, LevelAccessor worldIn, BlockPos currentPos, BlockPos facingPos) {
-        if (facing != getDirectionToOther((BedPart)stateIn.getValue(PART), (Direction)stateIn.getValue(FACING))) {
+        if (facing != getDirectionToOther(stateIn.getValue(PART), stateIn.getValue(FACING))) {
             return !stateIn.canSurvive(worldIn, currentPos) ? Blocks.AIR.defaultBlockState() : super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
         } else {
             return stateIn.canSurvive(worldIn, currentPos) && facingState.is(this) && facingState.getValue(PART) != stateIn.getValue(PART) ? stateIn : Blocks.AIR.defaultBlockState();
         }
     }
+
+    @Override
+    @SuppressWarnings("deprecation")
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         return level.getBlockState(pos.below()).getMaterial().isSolid();
     }
 
-    public void playerWillDestroy(Level p_49505_, BlockPos p_49506_, BlockState p_49507_, Player p_49508_) {
-        if (!p_49505_.isClientSide && p_49508_.isCreative()) {
-            BedPart bedpart = (BedPart)p_49507_.getValue(PART);
+    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide && player.isCreative()) {
+            BedPart bedpart = state.getValue(PART);
+
             if (bedpart == BedPart.FOOT) {
-                BlockPos blockpos = p_49506_.relative(getDirectionToOther(bedpart, (Direction)p_49507_.getValue(FACING)));
-                BlockState blockstate = p_49505_.getBlockState(blockpos);
+                BlockPos blockpos = pos.relative(getDirectionToOther(bedpart, state.getValue(FACING)));
+                BlockState blockstate = level.getBlockState(blockpos);
+
                 if (blockstate.is(this) && blockstate.getValue(PART) == BedPart.HEAD) {
-                    p_49505_.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
-                    p_49505_.levelEvent(p_49508_, 2001, blockpos, Block.getId(blockstate));
+                    level.setBlock(blockpos, Blocks.AIR.defaultBlockState(), 35);
+                    level.levelEvent(player, 2001, blockpos, Block.getId(blockstate));
                 }
             }
         }
 
-        super.playerWillDestroy(p_49505_, p_49506_, p_49507_, p_49508_);
+        super.playerWillDestroy(level, pos, state, player);
     }
 
     @Nullable
@@ -143,6 +155,8 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
         return level.getBlockState(blockpos1).canBeReplaced(p_49479_) && level.getWorldBorder().isWithinBounds(blockpos1) ? (BlockState)this.defaultBlockState().setValue(FACING, direction) : null;
     }
 
+    @Override
+    @SuppressWarnings("deprecation")
     public PushReaction getPistonPushReaction(BlockState state) {
         return PushReaction.DESTROY;
     }
@@ -150,50 +164,51 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
     public void setPlacedBy(Level worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
         super.setPlacedBy(worldIn, pos, state, placer, stack);
         if (!worldIn.isClientSide) {
-            BlockPos facingPos = pos.relative((Direction)state.getValue(FACING));
-            worldIn.setBlock(facingPos, (BlockState)state.setValue(PART, BedPart.FOOT), 3);
+            BlockPos facingPos = pos.relative(state.getValue(FACING));
+            worldIn.setBlock(facingPos, state.setValue(PART, BedPart.FOOT), 3);
             worldIn.blockUpdated(pos, Blocks.AIR);
             state.updateNeighbourShapes(worldIn, pos, 3);
         }
-
     }
 
     public static DoubleBlockCombiner.BlockType getBlockType(BlockState state) {
-        BedPart bedpart = (BedPart)state.getValue(PART);
+        BedPart bedpart = state.getValue(PART);
         return bedpart == BedPart.FOOT ? BlockType.FIRST : BlockType.SECOND;
     }
 
+    @Override
+    @SuppressWarnings("deprecation")
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand handIn, BlockHitResult hit) {
-        int servings = (Integer)state.getValue(SERVINGS);
+        int servings = state.getValue(SERVINGS);
         ItemStack heldStack = player.getItemInHand(handIn);
         if (servings > 9) {
             if (heldStack.is(ModTags.KNIVES)) {
                 return this.cutEar(level, pos, state);
             }
 
-            player.displayClientMessage(MNDTextUtils.getTranslation("block.feast.use_knife", new Object[0]), true);
+            player.displayClientMessage(MNDTextUtils.getTranslation("block.feast.use_knife"), true);
         }
 
         if (servings < 10) {
             if (heldStack.is(Items.BOWL)) {
                 if (servings == 9) {
-                    return this.takeServing(level, pos, state, player, handIn, (Item)MNDItems.PLATE_OF_STUFFED_HOGLIN_SNOUT.get());
+                    return this.takeServing(level, pos, state, player, handIn, MNDItems.PLATE_OF_STUFFED_HOGLIN_SNOUT.get());
                 }
 
                 if (servings > 4 && servings < 9) {
-                    return this.takeServing(level, pos, state, player, handIn, (Item)MNDItems.PLATE_OF_STUFFED_HOGLIN_HAM.get());
+                    return this.takeServing(level, pos, state, player, handIn, MNDItems.PLATE_OF_STUFFED_HOGLIN_HAM.get());
                 }
 
                 if (servings > 0 && servings < 5) {
-                    return this.takeServing(level, pos, state, player, handIn, (Item)MNDItems.PLATE_OF_STUFFED_HOGLIN.get());
+                    return this.takeServing(level, pos, state, player, handIn, MNDItems.PLATE_OF_STUFFED_HOGLIN.get());
                 }
             }
 
             if (servings == 0) {
-                level.playSound((Player)null, pos, SoundEvents.WOOD_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
+                level.playSound(null, pos, SoundEvents.WOOD_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
                 level.destroyBlock(pos, true);
             } else {
-                player.displayClientMessage(TextUtils.getTranslation("block.feast.use_container", new Object[]{(new ItemStack(Items.BOWL)).getHoverName()}), true);
+                player.displayClientMessage(TextUtils.getTranslation("block.feast.use_container", (new ItemStack(Items.BOWL)).getHoverName()), true);
             }
         }
 
@@ -201,25 +216,25 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
     }
 
     protected InteractionResult cutEar(Level level, BlockPos pos, BlockState state) {
-        int servings = (Integer)state.getValue(SERVINGS);
-        BedPart part = (BedPart)state.getValue(PART);
-        BlockPos pairPos = pos.relative(getDirectionToOther(part, (Direction)state.getValue(FACING)));
+        int servings = state.getValue(SERVINGS);
+        BedPart part = state.getValue(PART);
+        BlockPos pairPos = pos.relative(getDirectionToOther(part, state.getValue(FACING)));
         BlockState pairState = level.getBlockState(pairPos);
-        level.setBlock(pairPos, (BlockState)pairState.setValue(SERVINGS, servings - 1), 3);
-        level.setBlock(pos, (BlockState)state.setValue(SERVINGS, servings - 1), 3);
-        Containers.dropItemStack(level, (double)pos.getX(), (double)pos.getY(), (double)pos.getZ(), new ItemStack((ItemLike)MNDItems.ROAST_EAR.get()));
-        level.playSound((Player)null, pos, (SoundEvent)ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
+        level.setBlock(pairPos, pairState.setValue(SERVINGS, servings - 1), 3);
+        level.setBlock(pos, state.setValue(SERVINGS, servings - 1), 3);
+        Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MNDItems.ROAST_EAR.get()));
+        level.playSound(null, pos, ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), SoundSource.PLAYERS, 0.8F, 0.8F);
         return InteractionResult.SUCCESS;
     }
 
     protected InteractionResult takeServing(Level level, BlockPos pos, BlockState state, Player player, InteractionHand handIn, Item serving) {
-        int servings = (Integer)state.getValue(SERVINGS);
-        BedPart part = (BedPart)state.getValue(PART);
-        BlockPos pairPos = pos.relative(getDirectionToOther(part, (Direction)state.getValue(FACING)));
+        int servings = state.getValue(SERVINGS);
+        BedPart part = state.getValue(PART);
+        BlockPos pairPos = pos.relative(getDirectionToOther(part, state.getValue(FACING)));
         BlockState pairState = level.getBlockState(pairPos);
         ItemStack heldItem = player.getItemInHand(handIn);
-        level.setBlock(pairPos, (BlockState)pairState.setValue(SERVINGS, servings - 1), 3);
-        level.setBlock(pos, (BlockState)state.setValue(SERVINGS, servings - 1), 3);
+        level.setBlock(pairPos, pairState.setValue(SERVINGS, servings - 1), 3);
+        level.setBlock(pos, state.setValue(SERVINGS, servings - 1), 3);
         if (!player.isCreative()) {
             heldItem.shrink(1);
         }
@@ -228,7 +243,7 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
             player.drop(new ItemStack(serving), false);
         }
 
-        level.playSound((Player)null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.PLAYERS, 1.0F, 1.0F);
+        level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.PLAYERS, 1.0F, 1.0F);
         return InteractionResult.SUCCESS;
     }
 

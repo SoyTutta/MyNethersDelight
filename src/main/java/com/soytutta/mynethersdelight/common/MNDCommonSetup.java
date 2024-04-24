@@ -25,17 +25,17 @@ public class MNDCommonSetup {
         });
     }
     public static void registerDispenserBehaviors() {
-        DispenserBlock.registerBehavior((ItemLike) MNDItems.STRIDER_ROCK.get(), new AbstractProjectileDispenseBehavior() {
+        DispenserBlock.registerBehavior(MNDItems.STRIDER_ROCK.get(), new AbstractProjectileDispenseBehavior() {
             protected Projectile getProjectile(Level pLevel, Position pPosition, ItemStack pStack) {
                 return new StriderRockEntity(pLevel, pPosition.x(), pPosition.y(), pPosition.z());
             }
         });
     }
     public static void registerCompostables() {
-        ComposterBlock.COMPOSTABLES.put((ItemLike) MNDItems.WARPED_FUNGUS_COLONY.get(), 1.0F);
-        ComposterBlock.COMPOSTABLES.put((ItemLike) MNDItems.CRIMSON_FUNGUS_COLONY.get(), 1.0F);
-        ComposterBlock.COMPOSTABLES.put((ItemLike) MNDItems.BULLET_PEPPER.get(), 0.3F);
-        ComposterBlock.COMPOSTABLES.put((ItemLike) MNDItems.STRIDER_EGG.get(), 0.4F);
+        ComposterBlock.COMPOSTABLES.put(MNDItems.WARPED_FUNGUS_COLONY.get(), 1.0F);
+        ComposterBlock.COMPOSTABLES.put(MNDItems.CRIMSON_FUNGUS_COLONY.get(), 1.0F);
+        ComposterBlock.COMPOSTABLES.put(MNDItems.BULLET_PEPPER.get(), 0.3F);
+        ComposterBlock.COMPOSTABLES.put(MNDItems.STRIDER_EGG.get(), 0.4F);
     }
 }
 

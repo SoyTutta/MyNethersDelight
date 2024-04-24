@@ -41,7 +41,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> {
     public static final ResourceLocation UID = new ResourceLocation("farmersdelight", "composition");
     private static final int slotSize = 22;
-    private final Component title = MNDTextUtils.getTranslation("jei.forgoting", new Object[0]);
+    private final Component title = MNDTextUtils.getTranslation("jei.forgoting");
 
     private final IDrawable background;
     private final IDrawable slotIcon;
@@ -52,8 +52,8 @@ public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> 
     public ForgotingRecipeCategory(IGuiHelper helper) {
         ResourceLocation backgroundImage = new ResourceLocation("mynethersdelight", "textures/gui/jei/composition.png");
         this.background = helper.createDrawable(backgroundImage, 0, 0, 118, 80);
-        this.letiosCompost = new ItemStack((ItemLike) MNDBlocks.LETIOS_COMPOST.get());
-        this.resurgentSoil = new ItemStack((ItemLike) MNDItems.RESURGENT_SOIL.get());
+        this.letiosCompost = new ItemStack(MNDBlocks.LETIOS_COMPOST.get());
+        this.resurgentSoil = new ItemStack(MNDItems.RESURGENT_SOIL.get());
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, this.resurgentSoil);
         this.slotIcon = helper.createDrawable(backgroundImage, 119, 0, 22, 22);
     }
@@ -75,8 +75,8 @@ public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> 
     }
 
     public void setRecipe(IRecipeLayoutBuilder builder, ForgotingDummy recipe, IFocusGroup focusGroup) {
-        List<ItemStack> accelerators = (List)ForgeRegistries.BLOCKS.tags().getTag(MNDTags.SHOWCASE_ACTIVATORS).stream().map(ItemStack::new).collect(Collectors.toList());
-        List<ItemStack> flames = (List)ForgeRegistries.BLOCKS.tags().getTag(MNDTags.SHOWCASE_FLAMES).stream().map(ItemStack::new).collect(Collectors.toList());
+        List<ItemStack> accelerators = ForgeRegistries.BLOCKS.tags().getTag(MNDTags.SHOWCASE_ACTIVATORS).stream().map(ItemStack::new).collect(Collectors.toList());
+        List<ItemStack> flames = ForgeRegistries.BLOCKS.tags().getTag(MNDTags.SHOWCASE_FLAMES).stream().map(ItemStack::new).collect(Collectors.toList());
         builder.addSlot(RecipeIngredientRole.INPUT, 9, 26).addItemStack(this.letiosCompost);
         builder.addSlot(RecipeIngredientRole.OUTPUT, 93, 26).addItemStack(this.resurgentSoil);
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 64, 54).addItemStacks(accelerators);
@@ -96,7 +96,7 @@ public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> 
         } else if (inIconAt(67, 38, mouseX, mouseY)) {
             return ImmutableList.of(translateKey(".accelerators"));
         } else {
-            return (List)(inIconOn(49, 9, mouseX, mouseY) ? ImmutableList.of(translateKey(".nether")) : Collections.emptyList());
+            return inIconOn(49, 9, mouseX, mouseY) ? ImmutableList.of(translateKey(".nether")) : Collections.emptyList();
         }
     }
 

@@ -9,16 +9,13 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class MNDBiomeFeatures {
 
-    public static final DeferredRegister<Feature<?>> FEATURES;
+    public static final DeferredRegister<Feature<?>> FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, "mynethersdelight");
     public static final RegistryObject<Feature<NoneFeatureConfiguration>> POWDERYCANE;
 
     public MNDBiomeFeatures() {
     }
 
     static {
-        FEATURES = DeferredRegister.create(ForgeRegistries.FEATURES, "mynethersdelight");
-        POWDERYCANE = FEATURES.register("powderycane", () -> {
-            return new PowderyCaneFeature(NoneFeatureConfiguration.CODEC);
-        });
+        POWDERYCANE = FEATURES.register("powderycane", () -> new PowderyCaneFeature(NoneFeatureConfiguration.CODEC));
     }
 }

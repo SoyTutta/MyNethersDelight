@@ -50,7 +50,7 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(new Property[]{LIT,AGE,PRESSURE});
+        builder.add(LIT,AGE,PRESSURE);
     }
 
     @Override
@@ -76,6 +76,7 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (level.isClientSide) return;
         int age = state.getValue(AGE);
@@ -102,29 +103,37 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
         boolean isBlockBelowPerfectSoil = blockBelow.is(MNDBlocks.RESURGENT_SOIL.get()) || blockBelow.is(MNDBlocks.POWDERY_CANNON.get());;
         boolean isBlockBelowPowderySoil = blockBelow.is(Blocks.CRIMSON_NYLIUM) || blockBelow.is(Blocks.GRAVEL);
         boolean isBlockBelowLeave = blockBelow.hasProperty(LEAVE) && !blockBelow.getValue(LEAVE);
+
         if (age == 2 && random.nextInt(2) == 0) {
             world.setBlock(pos, state.setValue(LIT, true), 2);
-        } else if (age < 2 && ForgeHooks.onCropsGrowPre(world, pos, state, random.nextInt(3) == 0)) {
+        }
+        else if (age < 2 && ForgeHooks.onCropsGrowPre(world, pos, state, random.nextInt(3) == 0)) {
             world.setBlock(pos, state.setValue(AGE, age + 1), 2);
             ForgeHooks.onCropsGrowPost(world, pos, state);
-        } else if (age != 2 && random.nextInt(8) == 0 && world.isEmptyBlock(pos.above()) && world.getRawBrightness(pos.above(), 0) >= 2 && isBlockBelowLeave) {
+        }
+        else if (age != 2 && random.nextInt(8) == 0 && world.isEmptyBlock(pos.above()) && world.getRawBrightness(pos.above(), 0) >= 2 && isBlockBelowLeave) {
             this.growBamboo(world, pos);
-        } else if (age <= 2 && (isBlockBelowPerfectSoil || isBlockBelowPowderyCane || isBlockBelowPowderySoil) && world.isEmptyBlock(pos.above())) {
+        }
+        else if (age <= 2 && (isBlockBelowPerfectSoil || isBlockBelowPowderyCane || isBlockBelowPowderySoil) && world.isEmptyBlock(pos.above())) {
             if (isBlockBelowPerfectSoil) {
                 this.growBamboo(world, pos);
-            } else if (isBlockBelowPowderyCane && isBlockBelowLeave && random.nextInt(60) == 0) {
+            }
+            else if (isBlockBelowPowderyCane && isBlockBelowLeave && random.nextInt(60) == 0) {
                 this.growBamboo(world, pos);
-            } else if (!isBlockBelowLeave && random.nextInt(1800) == 0) {
+            }
+            else if (!isBlockBelowLeave && random.nextInt(1800) == 0) {
                 this.growBamboo(world, pos);
-            } else if (!isBlockBelowPowderySoil && random.nextInt(1200) == 0) {
+            }
+            else if (!isBlockBelowPowderySoil && random.nextInt(1200) == 0) {
                 this.growBamboo(world, pos);
             }
         }
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (!(entity instanceof LivingEntity) || entity.getType() == EntityType.PANDA || entity.getType() == EntityType.BEE || ((LivingEntity) entity).isCrouching())
+        if (!(entity instanceof LivingEntity) || entity.getType() == EntityType.PANDA || entity.getType() == EntityType.BEE || entity.isCrouching())
             return;
         if (!level.isClientSide && state.getValue(PRESSURE) < 2) {
             level.setBlock(pos, state.setValue(PRESSURE, state.getValue(PRESSURE) + 1), 2);
@@ -183,16 +192,18 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult context) {
         int age = state.getValue(AGE);
-        if ( age == 2 && (Boolean)state.getValue(LIT)) {
+
+        if ( age == 2 && state.getValue(LIT)) {
             ItemStack heldItem = player.getItemInHand(hand);
             if (heldItem.is(ForgeTags.TOOLS_KNIVES) ||heldItem.is(net.minecraftforge.common.Tags.Items.SHEARS)) {
                 heldItem.hurtAndBreak(1, player, (action) -> { action.broadcastBreakEvent(hand); });
-                level.playSound((Player)null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+                level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
                 level.destroyBlock(pos, true);
                 Random random = new Random();
-                popResource(level, pos, new ItemStack((ItemLike) MNDItems.BULLET_PEPPER.get(), random.nextInt(100) < 25 ? 1 : 0));
+                popResource(level, pos, new ItemStack(MNDItems.BULLET_PEPPER.get(), random.nextInt(100) < 25 ? 1 : 0));
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
         }

@@ -20,7 +20,7 @@ public class NetherStoveRenderer  implements BlockEntityRenderer<NetherStoveBloc
     }
 
     public void render(NetherStoveBlockEntity stoveEntity, float partialTicks, PoseStack poseStack, MultiBufferSource buffer, int combinedLightIn, int combinedOverlayIn) {
-        Direction direction = ((Direction)stoveEntity.getBlockState().getValue(StoveBlock.FACING)).getOpposite();
+        Direction direction = stoveEntity.getBlockState().getValue(StoveBlock.FACING).getOpposite();
         ItemStackHandler inventory = stoveEntity.getInventory();
         int posLong = (int)stoveEntity.getBlockPos().asLong();
 

@@ -59,14 +59,17 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(new Property[]{LIT, BASE, LEAVE, AGE, PRESSURE});
-    }
-
-    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
-        return new ItemStack((ItemLike)MNDItems.BULLET_PEPPER.get());
+        builder.add(LIT, BASE, LEAVE, AGE, PRESSURE);
     }
 
     @Override
+    @SuppressWarnings("deprecation")
+    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+        return new ItemStack(MNDItems.BULLET_PEPPER.get());
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         Vec3 vec3 = state.getOffset(worldIn, pos);
         return SHAPE.move(vec3.x, vec3.y, vec3.z);
@@ -84,11 +87,14 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
         }
         BlockState blockAbove = level.getBlockState(pos.above());
         BlockState blockBelow = level.getBlockState(pos.below());
+
         if (blockBelow.is(MNDTags.POWDERY_CANNON_PLANTABLE_ON)) {
             state = state.setValue(BASE, true);
-        } else if (!blockAbove.is(MNDBlocks.BULLET_PEPPER.get()) && !blockAbove.is(Blocks.AIR)) {
+        }
+        else if (!blockAbove.is(MNDBlocks.BULLET_PEPPER.get()) && !blockAbove.is(Blocks.AIR)) {
             state = state.setValue(LEAVE, false);
-        } else if (blockBelow.is(MNDBlocks.POWDERY_CANE.get()) && !state.getValue(BASE) && !state.getValue(LEAVE)) {
+        }
+        else if (blockBelow.is(MNDBlocks.POWDERY_CANE.get()) && !state.getValue(BASE) && !state.getValue(LEAVE)) {
             state = state.setValue(LEAVE, new Random().nextInt(100) < 85);
         }
         return super.updateShape(state, direction, offsetState, level, pos, offsetPos);
@@ -96,6 +102,7 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
 
 
     @Override
+    @SuppressWarnings("deprecation")
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (level.isClientSide) return;
         BlockPos posAbove = pos.above();
@@ -121,22 +128,27 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         int age = state.getValue(AGE);
         BlockState blockBelow = world.getBlockState(pos.below());
+
         if (age < 2 && ForgeHooks.onCropsGrowPre(world, pos, state, random.nextInt(3) == 0) && (blockBelow.is(MNDBlocks.RESURGENT_SOIL.get()) || blockBelow.is(MNDBlocks.POWDERY_CANNON.get()))) {
             world.setBlock(pos, state.setValue(AGE, age + 1), 2);
             ForgeHooks.onCropsGrowPost(world, pos, state);
-        } else if (world.isEmptyBlock(pos.above())) {
+        }
+        else if (world.isEmptyBlock(pos.above())) {
             world.setBlockAndUpdate(pos.above(), MNDBlocks.BULLET_PEPPER.get().defaultBlockState());
-        } else if (age == 2) {
+        }
+        else if (age == 2) {
             world.setBlock(pos, state.setValue(LIT, true), 2);
         }
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (!(entity instanceof LivingEntity) || entity.getType() == EntityType.PANDA || entity.getType() == EntityType.BEE || ((LivingEntity) entity).isCrouching())
+        if (!(entity instanceof LivingEntity) || entity.getType() == EntityType.PANDA || entity.getType() == EntityType.BEE || entity.isCrouching())
             return;
         entity.hurt(DamageSource.CACTUS, 1);
         entity.makeStuckInBlock(state, new Vec3(0.8, 0.75, 0.8));
@@ -195,23 +207,28 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult context) {
         ItemStack heldItem = player.getItemInHand(hand);
-        if ((Boolean)state.getValue(LIT)) {
+
+        if (state.getValue(LIT)) {
             if (heldItem.is(ForgeTags.TOOLS_KNIVES) || heldItem.is(net.minecraftforge.common.Tags.Items.SHEARS)) {
-            heldItem.hurtAndBreak(1, player, (action) -> { action.broadcastBreakEvent(hand); });
-            level.playSound((Player)null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+                heldItem.hurtAndBreak(1, player, (action) -> { action.broadcastBreakEvent(hand); });
+                level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
                 int j = 2 + level.random.nextInt(3);
-                popResource(level, pos, new ItemStack((ItemLike) MNDItems.BULLET_PEPPER.get(), j));
+                popResource(level, pos, new ItemStack(MNDItems.BULLET_PEPPER.get(), j));
                 int age = state.getValue(AGE);
+
                 if (age > 0) {
                     level.setBlock(pos, state.setValue(AGE, age - 1), 3);
                 }
-                level.setBlock(pos, (BlockState)state.setValue(LIT, Boolean.FALSE), 2);
-            } else if (!state.getValue(BASE) && !state.getValue(LEAVE)) {
+                level.setBlock(pos, state.setValue(LIT, Boolean.FALSE), 2);
+            }
+            else if (!state.getValue(BASE) && !state.getValue(LEAVE)) {
                 level.destroyBlock(pos, true);
-            } else if (state.getValue(LEAVE)) {
-                level.setBlock(pos, (BlockState)state.setValue(LEAVE, Boolean.FALSE), 2);
+            }
+            else if (state.getValue(LEAVE)) {
+                level.setBlock(pos, state.setValue(LEAVE, Boolean.FALSE), 2);
             }
             return InteractionResult.sidedSuccess(level.isClientSide);
         }

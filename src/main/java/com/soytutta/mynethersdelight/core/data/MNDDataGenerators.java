@@ -15,8 +15,10 @@ import net.minecraftforge.fml.common.Mod;
         bus = Mod.EventBusSubscriber.Bus.MOD
 )
 public class MNDDataGenerators {
+
     public MNDDataGenerators() {
     }
+
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();

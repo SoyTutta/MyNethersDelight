@@ -36,20 +36,21 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.MathUtils;
 
 public class ResurgentSoilFarmlandBlock extends FarmBlock {
+
     protected static final VoxelShape SHAPE = Block.box(0.0, 0.0, 0.0, 16.0, 14.0, 16.0);
     public ResurgentSoilFarmlandBlock(BlockBehaviour.Properties properties) {
         super(properties);
     }
 
     private static boolean hasFireOrLava(LevelReader level, BlockPos pos) {
-        Iterator var2 = BlockPos.betweenClosed(pos.offset(-8, -4, -8), pos.offset(8, 4, 8)).iterator();
+        Iterator<BlockPos> var2 = BlockPos.betweenClosed(pos.offset(-8, -4, -8), pos.offset(8, 4, 8)).iterator();
 
         BlockPos nearbyPos;
         do {
             if (!var2.hasNext()) {
                 return false;
             }
-            nearbyPos = (BlockPos)var2.next();
+            nearbyPos = var2.next();
             BlockState state = level.getBlockState(nearbyPos);
             if (state.getFluidState().is(FluidTags.LAVA)) {
                 return true;
@@ -72,8 +73,8 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
     }
 
     public boolean isFertile(BlockState state, BlockGetter world, BlockPos pos) {
-        if (state.is((Block)MNDBlocks.RESURGENT_SOIL_FARMLAND.get())) {
-            return (Integer)state.getValue(MOISTURE) > 0;
+        if (state.is(MNDBlocks.RESURGENT_SOIL_FARMLAND.get())) {
+            return state.getValue(MOISTURE) > 0;
         } else {
             return false;
         }
@@ -87,15 +88,15 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
 
 
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        int moisture = (Integer)state.getValue(MOISTURE);
+        int moisture = state.getValue(MOISTURE);
         if (!hasFireOrLava(level, pos) && !level.isRainingAt(pos.above())) {
             if (moisture > 0) {
-                level.setBlock(pos, (BlockState)state.setValue(MOISTURE, moisture - 1), 2);
+                level.setBlock(pos, state.setValue(MOISTURE, moisture - 1), 2);
             }
         } else if (moisture < 7) {
-                level.setBlock(pos, (BlockState)state.setValue(MOISTURE, 7), 2);
+                level.setBlock(pos, state.setValue(MOISTURE, 7), 2);
         } else if (moisture == 7) {
-                if ((Double)Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
+                if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
                     return;
                 }
 
@@ -107,7 +108,7 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
 
                 if (aboveBlock instanceof BonemealableBlock) {
                     BonemealableBlock growable = (BonemealableBlock)aboveBlock;
-                    if ((double)MathUtils.RAND.nextFloat() <= (Double)Configuration.RICH_SOIL_BOOST_CHANCE.get() && growable.isValidBonemealTarget(level, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(level, pos.above(), aboveState, true)) {
+                    if ((double)MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get() && growable.isValidBonemealTarget(level, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(level, pos.above(), aboveState, true)) {
                         growable.performBonemeal(level, level.random, pos.above(), aboveState);
                         if (!level.isClientSide) {
                             level.levelEvent(2005, pos.above(), 0);
@@ -123,7 +124,7 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
         return plantType == PlantType.CROP || plantType == PlantType.PLAINS;
         }
         public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return !this.defaultBlockState().canSurvive(context.getLevel(), context.getClickedPos()) ? ((Block)MNDBlocks.RESURGENT_SOIL.get()).defaultBlockState() : super.getStateForPlacement(context);
+        return !this.defaultBlockState().canSurvive(context.getLevel(), context.getClickedPos()) ? MNDBlocks.RESURGENT_SOIL.get().defaultBlockState() : super.getStateForPlacement(context);
         }
         public void fallOn(Level level, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
     }

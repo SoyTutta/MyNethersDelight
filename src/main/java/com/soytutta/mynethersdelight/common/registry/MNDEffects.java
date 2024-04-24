@@ -12,7 +12,7 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class MNDEffects {
-    public static final DeferredRegister<MobEffect> EFFECTS;
+    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, "mynethersdelight");
     public static final RegistryObject<MobEffect> GPUNGENT;
     public static final RegistryObject<MobEffect> BPUNGENT;
 
@@ -20,7 +20,6 @@ public class MNDEffects {
     }
 
     static {
-        EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, "mynethersdelight");
         GPUNGENT = EFFECTS.register("g_pungent", PungentEffect::new);
         BPUNGENT = EFFECTS.register("b_pungent", PungentEffect::new);
     }

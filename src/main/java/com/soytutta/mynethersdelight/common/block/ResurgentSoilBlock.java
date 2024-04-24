@@ -26,6 +26,8 @@ public class ResurgentSoilBlock extends Block {
         super(properties);
     }
 
+    @Override
+    @SuppressWarnings("deprecation")
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
         if (!level.isClientSide) {
             BlockPos abovePos = pos.above();
@@ -33,7 +35,6 @@ public class ResurgentSoilBlock extends Block {
             Block aboveBlock = aboveState.getBlock();
 
             if (aboveBlock instanceof NetherWartBlock) {
-                NetherWartBlock wartBlock = (NetherWartBlock) aboveBlock;
                 int age = aboveState.getValue(NetherWartBlock.AGE);
                 if (age < NetherWartBlock.MAX_AGE) {
                     aboveState = aboveState.setValue(NetherWartBlock.AGE, age + 1);
@@ -46,15 +47,15 @@ public class ResurgentSoilBlock extends Block {
                 return;
             }
             if (aboveBlock == Blocks.CRIMSON_FUNGUS) {
-                level.setBlockAndUpdate(pos.above(), ((Block)MNDBlocks.CRIMSON_FUNGUS_COLONY.get()).defaultBlockState());
+                level.setBlockAndUpdate(pos.above(), MNDBlocks.CRIMSON_FUNGUS_COLONY.get().defaultBlockState());
                 return;
             }
             if (aboveBlock == Blocks.WARPED_FUNGUS) {
-                level.setBlockAndUpdate(pos.above(), ((Block)MNDBlocks.WARPED_FUNGUS_COLONY.get()).defaultBlockState());
+                level.setBlockAndUpdate(pos.above(), MNDBlocks.WARPED_FUNGUS_COLONY.get().defaultBlockState());
                 return;
             }
             if (aboveBlock == Blocks.BROWN_MUSHROOM) {
-                level.setBlockAndUpdate(pos.above(), ((Block)ModBlocks.BROWN_MUSHROOM_COLONY.get()).defaultBlockState());
+                level.setBlockAndUpdate(pos.above(), ModBlocks.BROWN_MUSHROOM_COLONY.get().defaultBlockState());
                 return;
             }
 
@@ -63,13 +64,13 @@ public class ResurgentSoilBlock extends Block {
                 return;
             }
 
-            if ((Double)Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
+            if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
                 return;
             }
 
             if (aboveBlock instanceof BonemealableBlock) {
                 BonemealableBlock growable = (BonemealableBlock)aboveBlock;
-                if ((double)MathUtils.RAND.nextFloat() <= (Double)Configuration.RICH_SOIL_BOOST_CHANCE.get() && growable.isValidBonemealTarget(level, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(level, pos.above(), aboveState, true)) {
+                if ((double)MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get() && growable.isValidBonemealTarget(level, pos.above(), aboveState, false) && ForgeHooks.onCropsGrowPre(level, pos.above(), aboveState, true)) {
                     growable.performBonemeal(level, level.random, pos.above(), aboveState);
                     level.levelEvent(2005, pos.above(), 0);
                     ForgeHooks.onCropsGrowPost(level, pos.above(), aboveState);
@@ -80,7 +81,7 @@ public class ResurgentSoilBlock extends Block {
 
     @Nullable
     public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
-        return toolAction.equals(ToolActions.HOE_TILL) && context.getLevel().getBlockState(context.getClickedPos().above()).isAir() ? ((Block)MNDBlocks.RESURGENT_SOIL_FARMLAND.get()).defaultBlockState() : null;
+        return toolAction.equals(ToolActions.HOE_TILL) && context.getLevel().getBlockState(context.getClickedPos().above()).isAir() ? MNDBlocks.RESURGENT_SOIL_FARMLAND.get().defaultBlockState() : null;
     }
 
     public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {

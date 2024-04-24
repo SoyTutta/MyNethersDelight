@@ -27,11 +27,11 @@ public class PowderyCaneFeature extends Feature<NoneFeatureConfiguration> {
         WorldGenLevel level = context.level();
         BlockPos pos = context.origin();
         RandomSource rand = level.getRandom();
-        BlockState powderyCaneBase = ((Block) MNDBlocks.POWDERY_CANE.get()).defaultBlockState().setValue(PowderyCaneBlock.BASE, true);
-        BlockState PowderyCaneLeave = ((Block) MNDBlocks.POWDERY_CANE.get()).defaultBlockState().setValue(PowderyCaneBlock.LEAVE, true);
-        BlockState powderyFlower = ((Block) MNDBlocks.BULLET_PEPPER.get()).defaultBlockState().setValue(PowderyCaneBlock.LIT, true).setValue(PowderyCaneBlock.AGE, 2);
-        BlockState powderyCannon = ((Block) MNDBlocks.POWDERY_CHUBBY_SAPLING.get()).defaultBlockState();
-        HashMap<BlockPos, BlockState> blocks = new HashMap();
+        BlockState powderyCaneBase = MNDBlocks.POWDERY_CANE.get().defaultBlockState().setValue(PowderyCaneBlock.BASE, true);
+        BlockState PowderyCaneLeave = MNDBlocks.POWDERY_CANE.get().defaultBlockState().setValue(PowderyCaneBlock.LEAVE, true);
+        BlockState powderyFlower = MNDBlocks.BULLET_PEPPER.get().defaultBlockState().setValue(PowderyCaneBlock.LIT, true).setValue(PowderyCaneBlock.AGE, 2);
+        BlockState powderyCannon = MNDBlocks.POWDERY_CHUBBY_SAPLING.get().defaultBlockState();
+        HashMap<BlockPos, BlockState> blocks = new HashMap<>();
         int i = 0;
 
         for(int x = -3; x <= 3; ++x) {
@@ -63,12 +63,10 @@ public class PowderyCaneFeature extends Feature<NoneFeatureConfiguration> {
                 }
             }
         }
-        Iterator var19 = blocks.entrySet().iterator();
 
-        while(var19.hasNext()) {
-            Map.Entry<BlockPos, BlockState> entry = (Map.Entry)var19.next();
-            BlockPos entryPos = (BlockPos)entry.getKey();
-            BlockState entryState = (BlockState)entry.getValue();
+        for (Map.Entry<BlockPos, BlockState> entry : blocks.entrySet()) {
+            BlockPos entryPos = entry.getKey();
+            BlockState entryState = entry.getValue();
             level.setBlock(entryPos, entryState, 19);
         }
         return i > 0;

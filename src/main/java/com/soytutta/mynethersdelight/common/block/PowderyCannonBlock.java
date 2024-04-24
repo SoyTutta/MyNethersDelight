@@ -48,7 +48,7 @@ public class PowderyCannonBlock extends BambooBlock {
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        builder.add(new Property[]{LIT,PRESSURE});
+        builder.add(LIT,PRESSURE);
     }
 
     @Override
@@ -57,19 +57,23 @@ public class PowderyCannonBlock extends BambooBlock {
         FluidState fluidstate = context.getLevel().getFluidState(context.getClickedPos());
         if (!fluidstate.isEmpty()) {
             return null;
-        } else {
+        }
+        else {
             BlockState state = context.getLevel().getBlockState(context.getClickedPos().below());
             if (state.is(MNDTags.POWDERY_CANNON_PLANTABLE_ON)) {
                 if (state.is(MNDBlocks.POWDERY_CHUBBY_SAPLING.get())) {
                     return this.defaultBlockState().setValue(AGE, 0);
-                } else if (state.is(MNDBlocks.POWDERY_CANNON.get())) {
+                }
+                else if (state.is(MNDBlocks.POWDERY_CANNON.get())) {
                     int i = state.getValue(AGE) > 0 ? 1 : 0;
                     return this.defaultBlockState().setValue(AGE, i);
-                } else {
+                }
+                else {
                     BlockState aboveState = context.getLevel().getBlockState(context.getClickedPos().above());
                     return aboveState.is(MNDBlocks.POWDERY_CANNON.get()) ? this.defaultBlockState().setValue(AGE, aboveState.getValue(AGE)) : MNDBlocks.POWDERY_CHUBBY_SAPLING.get().defaultBlockState();
                 }
-            } else {
+            }
+            else {
                 return null;
             }
         }
@@ -134,10 +138,12 @@ public class PowderyCannonBlock extends BambooBlock {
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         BlockPos posAbove = pos.above();
         BlockState stateAbove = world.getBlockState(posAbove);
+
         if (state.getValue(LEAVES) != BambooLeaves.NONE && !state.getValue(LIT) && random.nextInt(900) != 0) {
             world.setBlock(pos, state.setValue(LIT, true), 2);
             world.playSound(null, pos, SoundEvents.CROSSBOW_LOADING_MIDDLE, SoundSource.BLOCKS, 0.5F, 0.25F);
-        } else if (state.getValue(LIT) && stateAbove.is(MNDBlocks.POWDERY_CANNON.get()) && !stateAbove.getValue(LIT)) {
+        }
+        else if (state.getValue(LIT) && stateAbove.is(MNDBlocks.POWDERY_CANNON.get()) && !stateAbove.getValue(LIT)) {
             world.setBlock(pos, state.setValue(LIT, false), 2);
             world.playSound(null, pos, SoundEvents.CROSSBOW_LOADING_MIDDLE, SoundSource.BLOCKS, 0.5F, 0.25F);
             world.setBlock(posAbove, stateAbove.setValue(LIT, true), 2);
@@ -148,7 +154,8 @@ public class PowderyCannonBlock extends BambooBlock {
                 this.growBamboo(state, world, pos, random, height);
                 ForgeHooks.onCropsGrowPost(world, pos, state);
             }
-        }  else if (world.getBlockState(posAbove).is(MNDTags.POWDERY_CANE)) {
+        }
+        else if (world.getBlockState(posAbove).is(MNDTags.POWDERY_CANE)) {
             if (world.getBlockState(posAbove).hasProperty(STAGE) && world.getBlockState(posAbove).getValue(STAGE) > 0) {
                 if (world.isEmptyBlock(posAbove.above())) {
                     world.setBlock(posAbove.above(), MNDBlocks.BULLET_PEPPER.get().defaultBlockState(), 3);
@@ -158,8 +165,10 @@ public class PowderyCannonBlock extends BambooBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         int pressure = state.getValue(PRESSURE);
+
         if ((entity instanceof LivingEntity && entity.getType() != EntityType.PANDA && entity.getType() != EntityType.BEE) && !((LivingEntity) entity).isCrouching()) {
             entity.hurt(DamageSource.CACTUS,1);
             entity.makeStuckInBlock(state, new Vec3(0.8, 0.75, 0.8));
@@ -228,16 +237,17 @@ public class PowderyCannonBlock extends BambooBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult context) {
-        if ((Boolean)state.getValue(LIT)) {
+        if (state.getValue(LIT)) {
             ItemStack heldItem = player.getItemInHand(hand);
-            BlockState blockstate = level.getBlockState(pos.below());
+
             if (heldItem.is(ForgeTags.TOOLS_KNIVES) ||heldItem.is(net.minecraftforge.common.Tags.Items.SHEARS)) {
                 heldItem.hurtAndBreak(1, player, (action) -> { action.broadcastBreakEvent(hand); });
                 int j = 3 + level.random.nextInt(6);
-                popResource(level, pos, new ItemStack((ItemLike) MNDItems.BULLET_PEPPER.get(), j));
-                level.playSound((Player)null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-                level.setBlock(pos, (BlockState)state.setValue(LIT, Boolean.FALSE), 3);
+                popResource(level, pos, new ItemStack(MNDItems.BULLET_PEPPER.get(), j));
+                level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+                level.setBlock(pos, state.setValue(LIT, Boolean.FALSE), 3);
                 return InteractionResult.sidedSuccess(level.isClientSide);
             }
         }

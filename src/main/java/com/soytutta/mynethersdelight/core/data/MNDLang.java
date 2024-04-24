@@ -23,24 +23,22 @@ public class MNDLang extends LanguageProvider {
     }
 
     protected void addTranslations() {
-        Set<RegistryObject<Block>> blocks = new HashSet(MNDBlocks.BLOCKS.getEntries());
-        Set<RegistryObject<Item>> items = new HashSet(MNDItems.ITEMS.getEntries());
+        Set<RegistryObject<Block>> blocks = new HashSet<>(MNDBlocks.BLOCKS.getEntries());
+        Set<RegistryObject<Item>> items = new HashSet<>(MNDItems.ITEMS.getEntries());
         blocks.remove(MNDBlocks.WALL_POWDERY_TORCH);
         blocks.remove(MNDBlocks.POWDERY_WALL_SIGN);
         blocks.forEach((b) -> {
-            String name = ((Block)b.get()).getDescriptionId().replaceFirst("block.mynethersdelight.", "");
+            String name = (b.get()).getDescriptionId().replaceFirst("block.mynethersdelight.", "");
             name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("Of", "of");
-            this.add(((Block)b.get()).getDescriptionId(), name);
+            this.add((b.get()).getDescriptionId(), name);
         });
-        items.removeIf((i) -> {
-            return i.get() instanceof BlockItem;
-        });
+        items.removeIf((i) -> i.get() instanceof BlockItem);
         items.forEach((i) -> {
-            String name = ((Item)i.get()).getDescriptionId().replaceFirst("item.mynethersdelight.", "");
+            String name = (i.get()).getDescriptionId().replaceFirst("item.mynethersdelight.", "");
             name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("Of", "of");
             name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("And", "and");
             name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("With", "with");
-            this.add(((Item)i.get()).getDescriptionId(), name);
+            this.add(i.get().getDescriptionId(), name);
         });
         this.add("itemGroup.mynethersdelight", "My Nether's Delight");
         this.add("effect.mynethersdelight.g_pungent", "Pungent");

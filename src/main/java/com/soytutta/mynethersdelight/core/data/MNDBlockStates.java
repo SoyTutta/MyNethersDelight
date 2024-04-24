@@ -31,20 +31,20 @@ public class MNDBlockStates extends BlockStateProvider {
     }
 
     protected void registerStatesAndModels() {
-        this.simpleBlock((Block) MNDBlocks.RESURGENT_SOIL.get(), this.cubeRandomRotation((Block)MNDBlocks.RESURGENT_SOIL.get(), ""));
-        this.stageBlock((Block)MNDBlocks.CRIMSON_FUNGUS_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
-        this.stageBlock((Block)MNDBlocks.WARPED_FUNGUS_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
-        this.cabinetBlock((Block)MNDBlocks.NETHER_BRICKS_CABINET.get(), "nether_bricks");
+        this.simpleBlock( MNDBlocks.RESURGENT_SOIL.get(), this.cubeRandomRotation(MNDBlocks.RESURGENT_SOIL.get(), ""));
+        this.stageBlock(MNDBlocks.CRIMSON_FUNGUS_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
+        this.stageBlock(MNDBlocks.WARPED_FUNGUS_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
+        this.cabinetBlock(MNDBlocks.NETHER_BRICKS_CABINET.get(), "nether_bricks");
 
         // POWDERY
-        this.cabinetBlock((Block)MNDBlocks.POWDERY_CABINET.get(), "powdery");
+        this.cabinetBlock(MNDBlocks.POWDERY_CABINET.get(), "powdery");
         this.logBlock(((RotatedPillarBlock) MNDBlocks.BLOCK_OF_POWDERY_CANNON.get()));
         this.blockItem(MNDBlocks.BLOCK_OF_POWDERY_CANNON);
 
         this.logBlock(((RotatedPillarBlock) MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get()));
         this.blockItem(MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON);
 
-        this.simpleBlock((Block) MNDBlocks.POWDERY_PLANKS.get());
+        this.simpleBlock(MNDBlocks.POWDERY_PLANKS.get());
         this.stairsBlock(((StairBlock) MNDBlocks.POWDERY_PLANKS_STAIRS.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
         this.slabBlock(((SlabBlock) MNDBlocks.POWDERY_PLANKS_SLAB.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
         this.doorBlockWithRenderType(((DoorBlock) MNDBlocks.POWDERY_DOOR.get()), modLoc("block/powdery_door_bottom"), modLoc("block/powdery_door_top"), "cutout");
@@ -54,7 +54,7 @@ public class MNDBlockStates extends BlockStateProvider {
         this.fenceBlock(((FenceBlock) MNDBlocks.POWDERY_FENCE.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
         this.fenceGateBlock(((FenceGateBlock) MNDBlocks.POWDERY_FENCE_GATE.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
 
-        this.simpleBlock((Block) MNDBlocks.POWDERY_MOSAIC.get());
+        this.simpleBlock(MNDBlocks.POWDERY_MOSAIC.get());
         this.stairsBlock(((StairBlock) MNDBlocks.POWDERY_MOSAIC_STAIRS.get()), blockTexture(MNDBlocks.POWDERY_MOSAIC.get()));
         this.slabBlock(((SlabBlock) MNDBlocks.POWDERY_MOSAIC_SLAB.get()), blockTexture(MNDBlocks.POWDERY_MOSAIC.get()), blockTexture(MNDBlocks.POWDERY_MOSAIC.get()));
 
@@ -76,15 +76,15 @@ public class MNDBlockStates extends BlockStateProvider {
 
     public void stageBlock(Block block, IntegerProperty ageProperty, Property<?>... ignored) {
         this.getVariantBuilder(block).forAllStatesExcept((state) -> {
-            int ageSuffix = (Integer)state.getValue(ageProperty);
-            String var10000 = this.blockName(block);
-            String stageName = var10000 + "_stage" + ageSuffix;
-            return ConfiguredModel.builder().modelFile(((BlockModelBuilder)this.models().cross(stageName, this.resourceBlock(stageName))).renderType("cutout")).build();
+            int ageSuffix = state.getValue(ageProperty);
+            String blockName = this.blockName(block);
+            String stageName = blockName + "_stage" + ageSuffix;
+            return ConfiguredModel.builder().modelFile((this.models().cross(stageName, this.resourceBlock(stageName))).renderType("cutout")).build();
         }, ignored);
     }
     public void cabinetBlock(Block block, String woodType) {
         this.horizontalBlock(block, (state) -> {
-            String suffix = (Boolean)state.getValue(CabinetBlock.OPEN) ? "_open" : "";
+            String suffix = state.getValue(CabinetBlock.OPEN) ? "_open" : "";
             return this.models().orientable(this.blockName(block) + suffix, this.resourceBlock(woodType + "_cabinet_side"), this.resourceBlock(woodType + "_cabinet_front" + suffix), this.resourceBlock(woodType + "_cabinet_top"));
         });
     }

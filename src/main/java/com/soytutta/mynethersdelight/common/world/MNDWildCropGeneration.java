@@ -23,7 +23,7 @@ public class MNDWildCropGeneration {
     public static void addMNDGeneration() {
         FEATURE_PATCH_POWDERY_CANE = register(
                 (new ResourceLocation("mynethersdelight", "patch_powdery_cane")),
-                (Feature)((Feature) MNDBiomeFeatures.POWDERYCANE.get()),
+                (Feature) MNDBiomeFeatures.POWDERYCANE.get(),
                 (FeatureConfiguration)FeatureConfiguration.NONE
         );
 
@@ -39,7 +39,7 @@ public class MNDWildCropGeneration {
     }
 
     protected static <FC extends FeatureConfiguration, F extends Feature<FC>> Holder<ConfiguredFeature<FC, ?>> register(ResourceLocation id, F feature, FC featureConfig) {
-        return register((Registry)BuiltinRegistries.CONFIGURED_FEATURE, (ResourceLocation)id, (Object)(new ConfiguredFeature(feature, featureConfig)));
+        return register((Registry)BuiltinRegistries.CONFIGURED_FEATURE, id, (Object)(new ConfiguredFeature<>(feature, featureConfig)));
     }
 
     private static <V extends T, T> Holder<T> register(Registry<T> registry, ResourceLocation id, V value) {

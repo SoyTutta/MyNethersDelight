@@ -47,14 +47,14 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(MNDTags.STRIDER_MEATS).addTag(MNDTags.STRIDER_SLICE).addTag(MNDTags.MINCED_STRIDER);
         this.tag(MNDTags.STUFFED_HOGLIN_ITEMS).add(MNDItems.ROAST_EAR.get(), MNDItems.PLATE_OF_STUFFED_HOGLIN.get(),
                 MNDItems.PLATE_OF_STUFFED_HOGLIN_HAM.get(), MNDItems.PLATE_OF_STUFFED_HOGLIN_SNOUT.get());
-        this.tag(ModTags.CABBAGE_ROLL_INGREDIENTS).add((Item) MNDItems.STRIDER_SLICE.get(), MNDItems.MINCED_STRIDER.get(), MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
-        this.tag(ModTags.WOLF_PREY).add((Item) MNDItems.MINCED_STRIDER.get(), MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
+        this.tag(ModTags.CABBAGE_ROLL_INGREDIENTS).add( MNDItems.STRIDER_SLICE.get(), MNDItems.MINCED_STRIDER.get(), MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
+        this.tag(ModTags.WOLF_PREY).add(MNDItems.MINCED_STRIDER.get(), MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
         this.tag(ModTags.WILD_CROPS_ITEM).add(MNDItems.BULLET_PEPPER.get(),MNDItems.POWDER_CANNON.get());
     }
     private void registerForgeTags() {
-        this.tag(ForgeTags.EGGS).add((Item) MNDItems.STRIDER_EGG.get());
-        this.tag(ForgeTags.RAW_FISHES).add((Item) MNDItems.STRIDER_SLICE.get());
-        this.tag(ForgeTags.RAW_PORK).add((Item) MNDItems.HOGLIN_SAUSAGE.get());
+        this.tag(ForgeTags.EGGS).add(MNDItems.STRIDER_EGG.get());
+        this.tag(ForgeTags.RAW_FISHES).add(MNDItems.STRIDER_SLICE.get());
+        this.tag(ForgeTags.RAW_PORK).add(MNDItems.HOGLIN_SAUSAGE.get());
     }
     private void registerMinecraftTags() {
         this.tag(ItemTags.SOUL_FIRE_BASE_BLOCKS).add(MNDItems.LETIOS_COMPOST.get(), MNDItems.RESURGENT_SOIL.get());
@@ -62,7 +62,7 @@ public class MNDItemTags extends ItemTagsProvider {
     }
 
     public void registerCompatibilityTags() {
-        this.tag(CompatibilityTags.HORROR_LASAGNA_MEATS).add((Item) MNDItems.MINCED_STRIDER.get(), MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
-        this.tag(CompatibilityTags.RAW_MEATS).add((Item) MNDItems.MINCED_STRIDER.get(), MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
+        this.tag(CompatibilityTags.HORROR_LASAGNA_MEATS).add(MNDItems.MINCED_STRIDER.get(), MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
+        this.tag(CompatibilityTags.RAW_MEATS).add(MNDItems.MINCED_STRIDER.get(), MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
     }
 }

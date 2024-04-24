@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Block;
 public class CompatibilityTags {
     public static final TagKey<Item> HORROR_LASAGNA_MEATS = externalItemTag("brewinandchewin", "horror_lasagna_meats");
     public static final TagKey<Item> RAW_MEATS = externalItemTag("brewinandchewin", "horror_lasagna_meats");
+
     public CompatibilityTags() {
     }
 

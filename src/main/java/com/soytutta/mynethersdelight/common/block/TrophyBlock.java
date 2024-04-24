@@ -18,6 +18,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
@@ -103,36 +104,38 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
         ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
     }
 
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext hit) {
-        switch (state.getValue(FACING)) {
-            case NORTH:
-                return NORTH_AABB;
-            case SOUTH:
-                return SOUTH_AABB;
-            case WEST:
-                return WEST_AABB;
-            case EAST:
-            default:
-                return EAST_AABB;
-        }
-    }
-
-    public int getMaxRottingStage() {
-        return 2;
-    }
-    public boolean isRandomlyTicking(BlockState state) {
-        return true;
-    }
 
     public TrophyBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false).setValue(ROTTING, 0));
     }
 
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext hit) {
+        return switch (state.getValue(FACING)) {
+            case NORTH -> NORTH_AABB;
+            case SOUTH -> SOUTH_AABB;
+            case WEST -> WEST_AABB;
+            default -> EAST_AABB;
+        };
+    }
+
+    public int getMaxRottingStage() {
+        return 2;
+    }
+
+    public boolean isRandomlyTicking(BlockState state) {
+        return true;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         if (worldIn.isClientSide || state.getBlock() != MNDBlocks.HOGLIN_TROPHY.get()) return;
 
-        if (worldIn.getBiome(pos) == BuiltinDimensionTypes.NETHER || worldIn.dimensionType().ultraWarm()) return;
+        if (worldIn.getBiome(pos).is(BiomeTags.IS_NETHER) || worldIn.dimensionType().ultraWarm()) return;
 
         int currentRotting = state.getValue(ROTTING);
         int maxRotting = this.getMaxRottingStage();
@@ -164,6 +167,7 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
+    @SuppressWarnings("deprecation")
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         Block block = state.getBlock();
         ItemStack heldItem = player.getItemInHand(hand);
@@ -174,17 +178,18 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
         if (block == MNDBlocks.HOGLIN_TROPHY.get() && (heldItem.is(MNDTags.HOGLIN_WAXED))) {
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.WAXED_HOGLIN_TROPHY.get(), SoundEvents.HONEYCOMB_WAX_ON, ParticleTypes.WAX_ON, secondParticle, secondSoundEvent, useSecondEffects);
             return InteractionResult.SUCCESS;
-        } else if (block == MNDBlocks.WAXED_HOGLIN_TROPHY.get() && heldItem.is(ForgeTags.TOOLS_AXES)) {
+        }
+        else if (block == MNDBlocks.WAXED_HOGLIN_TROPHY.get() && heldItem.is(ForgeTags.TOOLS_AXES)) {
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.HONEYCOMB_WAX_ON, ParticleTypes.WAX_OFF, secondParticle, secondSoundEvent, useSecondEffects);
             return InteractionResult.SUCCESS;
-        } else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && heldItem.is(MNDTags.HOGLIN_CURE)) {
+        }
+        else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && heldItem.is(MNDTags.HOGLIN_CURE)) {
             secondParticle = ParticleTypes.ENCHANT;
             secondSoundEvent = SoundEvents.ENCHANTMENT_TABLE_USE;
             useSecondEffects = true;
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.ZOMBIE_VILLAGER_CURE, ParticleTypes.CLOUD, secondParticle, secondSoundEvent, useSecondEffects);
             return InteractionResult.SUCCESS;
         }
-
         return InteractionResult.PASS;
     }
 
@@ -201,8 +206,7 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
         level.playSound(null, pos, soundEvent, SoundSource.BLOCKS, 0.8F, 0.8F);
         level.setBlockAndUpdate(pos, trophyBlock.defaultBlockState().setValue(FACING, level.getBlockState(pos).getValue(FACING)));
 
-        if (!level.isClientSide && level instanceof ServerLevel) {
-            ServerLevel serverLevel = (ServerLevel) level;
+        if (!level.isClientSide && level instanceof ServerLevel serverLevel) {
             for (int i = 0; i < 6; i++) {
                 double d0 = (double) pos.getX() + level.getRandom().nextDouble();
                 double d1 = (double) pos.getY() + level.getRandom().nextDouble();
@@ -220,6 +224,8 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
         return level.getBlockState(pos).isFaceSturdy(level, pos, facing);
     }
 
+    @Override
+    @SuppressWarnings("deprecation")
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         Direction direction = state.getValue(FACING);
         return this.canAttachTo(level, pos.relative(direction.getOpposite()), direction);
@@ -254,10 +260,14 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
         }
     }
 
+    @Override
+    @SuppressWarnings("deprecation")
     public BlockState rotate(BlockState state, Rotation facing) {
         return state.setValue(FACING, facing.rotate(state.getValue(FACING)));
     }
 
+    @Override
+    @SuppressWarnings("deprecation")
     public BlockState mirror(BlockState state, Mirror facing) {
         return state.rotate(facing.getRotation(state.getValue(FACING)));
     }
@@ -267,6 +277,8 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
         super.createBlockStateDefinition(builder);
     }
 
+    @Override
+    @SuppressWarnings("deprecation")
     public FluidState getFluidState(BlockState state) {
         return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
