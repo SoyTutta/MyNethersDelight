@@ -2,6 +2,7 @@ package com.soytutta.mynethersdelight.common.registry;
 
 import com.soytutta.mynethersdelight.common.block.entity.MNDSignBlockEntity;
 import com.soytutta.mynethersdelight.common.block.entity.NetherStoveBlockEntity;
+import net.minecraft.world.item.SignItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;

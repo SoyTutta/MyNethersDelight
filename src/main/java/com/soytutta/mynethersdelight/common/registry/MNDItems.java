@@ -196,7 +196,7 @@ public class MNDItems {
             return new BlockItem(MNDBlocks.POWDERY_PRESSURE_PLATE.get(), basicItem());
         });
         POWDERY_SIGN = ITEMS.register("powdery_sign", () -> {
-            return new StandingAndWallBlockItem(MNDBlocks.POWDERY_SIGN.get(), MNDBlocks.POWDERY_WALL_SIGN.get(), basicItem());
+            return new SignItem(basicItem(), MNDBlocks.POWDERY_SIGN.get(), MNDBlocks.POWDERY_WALL_SIGN.get());
         });
         // FUNGUS-Colony
         WARPED_FUNGUS_COLONY = ITEMS.register("warped_fungus_colony", () -> {

@@ -7,8 +7,8 @@ package com.soytutta.mynethersdelight.common.registry;
 
 import com.soytutta.mynethersdelight.common.block.*;
 import com.soytutta.mynethersdelight.common.block.PowderyCannonSaplingBlock;
-import com.soytutta.mynethersdelight.common.block.entity.MNDStandingSignBlock;
-import com.soytutta.mynethersdelight.common.block.entity.MNDWallSignBlock;
+import com.soytutta.mynethersdelight.common.block.MNDStandingSignBlock;
+import com.soytutta.mynethersdelight.common.block.MNDWallSignBlock;
 import com.soytutta.mynethersdelight.common.block.utility.MNDWoodTypes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.item.Items;
