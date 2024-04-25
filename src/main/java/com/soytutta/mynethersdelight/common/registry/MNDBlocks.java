@@ -143,7 +143,7 @@ public class MNDBlocks {
             return new CabinetBlock(Properties.copy(ModBlocks.CRIMSON_CABINET.get()));
         });
         BLOCK_OF_POWDERY_CANNON = BLOCKS.register("block_of_powdery_cannon", () -> {
-            return new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS));
+            return new StrippableBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS));
         });
         BLOCK_OF_STRIPPED_POWDERY_CANNON = BLOCKS.register("block_of_stripped_powdery_cannon", () -> {
             return new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS));
