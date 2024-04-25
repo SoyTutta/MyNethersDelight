@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench",
-	"ambientocclusion": false,
+	"ambientocclusion": "false","render_type": "minecraft:cutout",
 	"textures": {
 		"3": "mynethersdelight:block/powdery_top_bloomed",
 		"particle": "block/flower_pot",

@@ -7,12 +7,18 @@ package com.soytutta.mynethersdelight.core.data.recipes;
 
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import net.minecraft.data.recipes.FinishedRecipe;
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraftforge.common.ToolActions;
+import net.minecraftforge.registries.ForgeRegistries;
+import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
+import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
+import java.util.Objects;
 import java.util.function.Consumer;
 
 
@@ -21,9 +27,11 @@ public class MNDCuttingRecipes {
     }
     public static void register(Consumer<FinishedRecipe> consumer) {
         cuttingAnimalItems(consumer);
+        strippingWood(consumer);
+        salvagingWoodenFurniture(consumer);
         cuttingVegetables(consumer);
-
     }
+
     private static void cuttingAnimalItems(Consumer<FinishedRecipe> consumer) {
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.STRIDER_ROCK.get()),
                         Ingredient.of(ForgeTags.TOOLS_PICKAXES),
@@ -51,6 +59,13 @@ public class MNDCuttingRecipes {
                 .addResultWithChance(Items.BLAZE_POWDER, 0.25F, 1)
                 .build(consumer, "mynethersdelight:cutting/balze_rod");
     }
+    private static void strippingWood(Consumer<FinishedRecipe> consumer) {
+        stripLogForBark(consumer, MNDItems.BLOCK_OF_POWDERY_CANNON.get(), MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
+    }
+
+    private static void salvagingWoodenFurniture(Consumer<FinishedRecipe> consumer) {
+        salvagePlankFromFurniture(consumer, MNDItems.POWDERY_PLANKS.get(), MNDItems.POWDERY_DOOR.get(), MNDItems.POWDERY_TRAPDOOR.get(), MNDItems.POWDERY_SIGN.get());
+    }
 
     private static void cuttingVegetables(Consumer<FinishedRecipe> consumer) {
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.SUGAR_CANE),
@@ -77,4 +92,14 @@ public class MNDCuttingRecipes {
                         Items.WARPED_FUNGUS, 5)
                 .build(consumer, "mynethersdelight:cutting/warped_fungus");
         }
+
+    private static void stripLogForBark(Consumer<FinishedRecipe> consumer, ItemLike log, ItemLike strippedLog) {
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(log), new ToolActionIngredient(ToolActions.AXE_STRIP), strippedLog).addResult(ModItems.TREE_BARK.get()).addSound(Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getKey(SoundEvents.AXE_STRIP)).toString()).build(consumer);
+    }
+
+    private static void salvagePlankFromFurniture(Consumer<FinishedRecipe> consumer, ItemLike plank, ItemLike door, ItemLike trapdoor, ItemLike sign) {
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(door), new ToolActionIngredient(ToolActions.AXE_DIG), plank).build(consumer);
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(trapdoor), new ToolActionIngredient(ToolActions.AXE_DIG), plank).build(consumer);
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(sign), new ToolActionIngredient(ToolActions.AXE_DIG), plank).build(consumer);
+    }
 }

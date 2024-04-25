@@ -1,7 +1,7 @@
 {
   "variants": {
     "": {
-      "model": "minecraft:block/potted_powdery_cannon"
+      "model": "mynethersdelight:block/potted_powdery_cannon"
     }
   }
 }
