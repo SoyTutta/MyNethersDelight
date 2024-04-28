@@ -211,27 +211,25 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
     public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult context) {
         ItemStack heldItem = player.getItemInHand(hand);
 
-        if (state.getValue(LIT)) {
-            if (heldItem.is(ForgeTags.TOOLS_KNIVES) || heldItem.is(net.minecraftforge.common.Tags.Items.SHEARS)) {
-                heldItem.hurtAndBreak(1, player, (action) -> { action.broadcastBreakEvent(hand); });
-                level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-                int j = 2 + level.random.nextInt(3);
-                popResource(level, pos, new ItemStack(MNDItems.BULLET_PEPPER.get(), j));
-                int age = state.getValue(AGE);
-
-                if (age > 0) {
+         if (heldItem.is(ForgeTags.TOOLS_KNIVES) || heldItem.is(net.minecraftforge.common.Tags.Items.SHEARS)) {
+             int age = state.getValue(AGE);
+             if (state.getValue(LIT)) {
+                 if (age > 0) {
                     level.setBlock(pos, state.setValue(AGE, age - 1), 3);
                 }
-                level.setBlock(pos, state.setValue(LIT, Boolean.FALSE), 2);
-            }
-            else if (!state.getValue(BASE) && !state.getValue(LEAVE)) {
-                level.destroyBlock(pos, true);
-            }
-            else if (state.getValue(LEAVE)) {
-                level.setBlock(pos, state.setValue(LEAVE, Boolean.FALSE), 2);
-            }
-            return InteractionResult.sidedSuccess(level.isClientSide);
-        }
+                 int j = 2 + level.random.nextInt(3);
+                 popResource(level, pos, new ItemStack(MNDItems.BULLET_PEPPER.get(), j));
+                 level.setBlock(pos, state.setValue(LIT, Boolean.FALSE), 2);
+                 heldItem.hurtAndBreak(1, player, (action) -> { action.broadcastBreakEvent(hand); });
+                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+             }
+             else if (state.getValue(LEAVE)) {
+                 level.setBlock(pos, state.setValue(LEAVE, Boolean.FALSE), 2);
+                 heldItem.hurtAndBreak(1, player, (action) -> { action.broadcastBreakEvent(hand); });
+                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+             }
+             return InteractionResult.sidedSuccess(level.isClientSide);
+         }
         return super.use(state, level, pos, player, hand, context);
     }
 
