@@ -33,7 +33,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.ItemLike;
 import net.minecraftforge.registries.ForgeRegistries;
 // thanks Umpaz for letting me use this code <3
 @ParametersAreNonnullByDefault

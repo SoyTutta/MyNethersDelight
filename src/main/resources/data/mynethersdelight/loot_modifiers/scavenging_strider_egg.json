@@ -21,10 +21,9 @@
     },
     {
       "condition": "minecraft:random_chance_with_looting",
-      "chance": 0.9,
-      "looting_multiplier": 0.1
+      "chance": 0.75,
+      "looting_multiplier": 0.25
     }
   ],
-  "item": "mynethersdelight:strider_rock",
-  "count" : 1
+  "item": "mynethersdelight:strider_rock"
 }

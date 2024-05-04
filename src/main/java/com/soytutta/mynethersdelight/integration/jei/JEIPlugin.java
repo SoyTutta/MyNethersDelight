@@ -10,20 +10,28 @@ import javax.annotation.ParametersAreNonnullByDefault;
 import com.google.common.collect.ImmutableList;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
+import com.soytutta.mynethersdelight.common.utility.MNDTextUtils;
 import com.soytutta.mynethersdelight.integration.jei.category.ForgotingRecipeCategory;
 import com.soytutta.mynethersdelight.integration.jei.resource.ForgotingDummy;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
+import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
+import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.utility.TextUtils;
 import vectorwing.farmersdelight.integration.jei.FDRecipes;
+
+import java.util.List;
 
 @ParametersAreNonnullByDefault
 @JeiPlugin
@@ -40,6 +48,12 @@ public class JEIPlugin implements IModPlugin {
     public void registerRecipes(IRecipeRegistration registration) {
         new FDRecipes();
         registration.addRecipes(MNDRecipeTypes.FORGOTING, ImmutableList.of(new ForgotingDummy()));
+        registration.addIngredientInfo(List.of( new ItemStack(MNDItems.BULLET_PEPPER.get()), new ItemStack(MNDItems.POWDER_CANNON.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.wild_powdery"));
+        registration.addIngredientInfo(List.of( new ItemStack(ModItems.BROWN_MUSHROOM_COLONY.get()), new ItemStack(ModItems.RED_MUSHROOM_COLONY.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.mushroom_colony"));
+        registration.addIngredientInfo(List.of( new ItemStack(Items.NETHER_WART), new ItemStack(MNDItems.WARPED_FUNGUS_COLONY.get()), new ItemStack(MNDItems.CRIMSON_FUNGUS_COLONY.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.fungus_colony"));
+        registration.addIngredientInfo(new ItemStack(MNDItems.STRIDER_ROCK.get()), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.strider_egg"));
+        registration.addIngredientInfo(new ItemStack(MNDItems.HOGLIN_HIDE.get()), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.hoglin_hide"));
+        registration.addIngredientInfo(List.of( new ItemStack(MNDItems.ROAST_STUFFED_HOGLIN.get()), new ItemStack(MNDItems.ROAST_EAR.get()), new ItemStack(MNDItems.PLATE_OF_STUFFED_HOGLIN_SNOUT.get()), new ItemStack(MNDItems.PLATE_OF_STUFFED_HOGLIN_HAM.get()), new ItemStack(MNDItems.PLATE_OF_STUFFED_HOGLIN.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.plate_of_stuffed_hoglin"));
     }
 
 

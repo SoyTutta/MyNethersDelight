@@ -48,7 +48,7 @@ public class MNDCraftingRecipes {
                 .requires(Items.PAPER)
                 .unlockedBy("has_powder_cannon", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDER_CANNON.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "firework_alt"));
-        ShapedRecipeBuilder.shaped( Blocks.TNT)
+        ShapedRecipeBuilder.shaped(Blocks.TNT)
                 .pattern("#s#")
                 .pattern("s#s")
                 .pattern("#s#")
@@ -180,7 +180,7 @@ public class MNDCraftingRecipes {
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_fence_gate"));
 
-        ShapedRecipeBuilder.shaped(MNDBlocks.POWDERY_TORCH.get())
+        ShapedRecipeBuilder.shaped(MNDBlocks.POWDERY_TORCH.get(),2)
                 .pattern("P").pattern("#")
                 .define('#', MNDTags.POWDER_CANNON).define('P', MNDTags.BULLET_PEPPER)
                 .unlockedBy("has_powder_cannon", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDER_CANNON.get()))

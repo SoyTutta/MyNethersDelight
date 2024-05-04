@@ -58,7 +58,7 @@ public class MNDFoodValues
                 .nutrition(11).saturationMod(0.55f)
                 .build();
         public static final FoodProperties BREAKFAST_SAMPLER = (new FoodProperties.Builder())
-                .nutrition(13).saturationMod(0.75f)
+                .nutrition(15).saturationMod(0.75f)
                 .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 2400, 0), 1.0F)
                 .build();
         // HOGLIN-Loin

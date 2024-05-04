@@ -52,6 +52,14 @@ public class MNDLang extends LanguageProvider {
         this.add("farmersdelight.tooltip.strider_egg", "Nourished by 1 Harmful Effect");
         this.add("farmersdelight.tooltip.hot_cream", "Burning Effects");
         this.add("farmersdelight.tooltip.strider_feed.when_feeding", "When fed to a Strider");
+
+        this.add("mynethersdelight.jei.info.strider_egg", "Wait... Are Striders Ovoviviparous? that's weird...\n\nAnyway, it's only obtainable by careful hunting.\nhard shell, it can only be eaten starry...");
+        this.add("mynethersdelight.jei.info.hoglin_hide", "A great source of leather, it could also serve as a nice hunting trophy.\n\nIf you do not want to damage the leather, try to use something lighter than a Sword...");
+        this.add("mynethersdelight.jei.info.mushroom_colony", "Some Mushrooms form colonies when they are on top of Rich Soil or Resurgent Soil.");
+        this.add("mynethersdelight.jei.info.fungus_colony", "Some Nethers Fungus form colonies when they are on top of Resurgent Soil.");
+        this.add("mynethersdelight.jei.info.wild_powdery", "Powdery Canes are an invasive crop in Crimson Forests.\n\nIts Berries are explosive on Contact, try Cutting the red stem...");
+        this.add("mynethersdelight.jei.info.plate_of_stuffed_hoglin", "It's astonishing how much Dishes can be obtained from such a Primitive Feast...");
+
     }
 
     public String getName() {
