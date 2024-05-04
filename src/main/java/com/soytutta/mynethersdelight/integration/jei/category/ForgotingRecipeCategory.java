@@ -6,7 +6,6 @@
 package com.soytutta.mynethersdelight.integration.jei.category;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,16 +28,19 @@ import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.MethodsReturnNonnullByDefault;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
+import vectorwing.farmersdelight.FarmersDelight;
+
 // thanks Umpaz for letting me use this code <3
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> {
-    public static final ResourceLocation UID = new ResourceLocation("farmersdelight", "composition");
+    public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "composition");
     private static final int slotSize = 22;
     private final Component title = MNDTextUtils.getTranslation("jei.forgoting");
 
@@ -82,9 +84,9 @@ public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> 
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 38, 54).addItemStacks(flames);
     }
 
-    public void draw(ForgotingDummy recipe, IRecipeSlotsView recipeSlotsView, PoseStack ms, double mouseX, double mouseY) {
-        this.slotIcon.draw(ms, 63, 53);
-        this.slotIcon.draw(ms, 37, 53);
+    public void draw(ForgotingDummy recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        this.slotIcon.draw(guiGraphics, 63, 53);
+        this.slotIcon.draw(guiGraphics, 37, 53);
     }
 
     public List<Component> getTooltipStrings(ForgotingDummy recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {

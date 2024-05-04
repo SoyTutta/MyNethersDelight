@@ -10,7 +10,7 @@ import java.util.Set;
 
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
-import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -18,8 +18,8 @@ import net.minecraftforge.common.data.LanguageProvider;
 import net.minecraftforge.registries.RegistryObject;
 
 public class MNDLang extends LanguageProvider {
-    public MNDLang(DataGenerator generatorIn) {
-        super(generatorIn, "mynethersdelight", "en_us");
+    public MNDLang(PackOutput output) {
+        super(output, "mynethersdelight", "en_us");
     }
 
     protected void addTranslations() {

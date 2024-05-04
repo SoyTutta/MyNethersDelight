@@ -2,23 +2,25 @@ package com.soytutta.mynethersdelight.core.data;
 
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
-import net.minecraft.data.DataGenerator;
-import net.minecraft.data.tags.BlockTagsProvider;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
 import javax.annotation.Nullable;
+import java.util.concurrent.CompletableFuture;
 
 public class MNDBlockTags extends BlockTagsProvider {
-    public MNDBlockTags(DataGenerator generatorIn, String modId, @Nullable ExistingFileHelper existingFileHelper) {
-        super(generatorIn, modId, existingFileHelper);
+    public MNDBlockTags(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, @Nullable ExistingFileHelper existingFileHelper) {
+        super(output, lookupProvider, "mynethersdelight", existingFileHelper);
     }
     @Override
-    protected void addTags() {
+    protected void addTags(HolderLookup.Provider provider) {
         this.registerModTags();
         this.registerMinecraftTags();
         this.registerForgeTags();

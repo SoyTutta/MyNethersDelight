@@ -126,7 +126,7 @@ public class NetherStoveBlockEntity extends SyncedBlockEntity {
                         Container inventoryWrapper = new SimpleContainer(stoveStack);
                         Optional<CampfireCookingRecipe> recipe = this.getMatchingRecipe(inventoryWrapper, i);
                         if (recipe.isPresent()) {
-                            ItemStack resultStack = recipe.get().getResultItem();
+                            ItemStack resultStack = recipe.get().getResultItem(level.registryAccess());
                             if (!resultStack.isEmpty()) {
                                 ItemUtils.spawnItemEntity(this.level, resultStack.copy(), (double)this.worldPosition.getX() + 0.5, (double)this.worldPosition.getY() + 1.0, (double)this.worldPosition.getZ() + 0.5, this.level.random.nextGaussian() * 0.009999999776482582, 0.10000000149011612, this.level.random.nextGaussian() * 0.009999999776482582);
                             }

@@ -10,8 +10,8 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.BambooBlock;
 import net.minecraft.world.level.block.BambooSaplingBlock;
+import net.minecraft.world.level.block.BambooStalkBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -49,6 +49,6 @@ public class PowderyCannonSaplingBlock extends BambooSaplingBlock {
 
     @Override
     protected void growBamboo(Level level, BlockPos pos) {
-        level.setBlock(pos.above(), MNDBlocks.POWDERY_CANNON.get().defaultBlockState().setValue(BambooBlock.LEAVES, BambooLeaves.SMALL), 3);
+        level.setBlock(pos.above(), MNDBlocks.POWDERY_CANNON.get().defaultBlockState().setValue(BambooStalkBlock.LEAVES, BambooLeaves.SMALL), 3);
     }
 }

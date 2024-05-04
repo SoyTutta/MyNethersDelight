@@ -5,11 +5,16 @@
 
 package com.soytutta.mynethersdelight.core.data;
 
+import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import java.util.concurrent.CompletableFuture;
+
 @Mod.EventBusSubscriber(
         modid = "mynethersdelight",
         bus = Mod.EventBusSubscriber.Bus.MOD
@@ -22,13 +27,15 @@ public class MNDDataGenerators {
     @SubscribeEvent
     public static void gatherData(GatherDataEvent event) {
         DataGenerator generator = event.getGenerator();
+        PackOutput output = generator.getPackOutput();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
         ExistingFileHelper helper = event.getExistingFileHelper();
-        MNDBlockTags blockTags = new MNDBlockTags(generator, "mynethersdelight", helper);
+        MNDBlockTags blockTags = new MNDBlockTags(output, lookupProvider, helper);
         generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(), new MNDItemTags(generator, blockTags, "mynethersdelight", helper));
-        generator.addProvider(event.includeServer(), new MNDRecipes(generator));
-        MNDBlockStates blockStates = new MNDBlockStates(generator, helper);
+        generator.addProvider(event.includeServer(), new MNDItemTags(output, lookupProvider, blockTags.contentsGetter(), helper));
+        generator.addProvider(event.includeServer(), new MNDRecipes(output));
+        MNDBlockStates blockStates = new MNDBlockStates(output, helper);
         generator.addProvider(event.includeClient(), blockStates);
-        generator.addProvider(event.includeClient(), new MNDLang(generator));
+        generator.addProvider(event.includeClient(), new MNDLang(output));
     }
 }

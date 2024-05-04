@@ -16,9 +16,12 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.Material;
-import net.minecraft.world.level.material.MaterialColor;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.block.state.properties.WoodType;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
@@ -77,13 +80,13 @@ public class MNDBlocks {
             return new NetherStoveBlock(Properties.copy(Blocks.NETHER_BRICKS).lightLevel(litBlockEmission(13)));
         });
         LETIOS_COMPOST = BLOCKS.register("letios_compost", () -> {
-            return new LetiosCompostBlock(Properties.copy(Blocks.DIRT).color(MaterialColor.COLOR_BROWN).strength(1.2F).speedFactor(0.4F).sound(SoundType.SOUL_SAND));
+            return new LetiosCompostBlock(Properties.copy(Blocks.DIRT).mapColor(MapColor.COLOR_BROWN).strength(1.2F).speedFactor(0.4F).sound(SoundType.SOUL_SAND));
         });
         RESURGENT_SOIL = BLOCKS.register("resurgent_soil", () -> {
-            return new ResurgentSoilBlock(Properties.copy(Blocks.SOUL_SOIL).color(MaterialColor.COLOR_BROWN).speedFactor(0.4F).randomTicks());
+            return new ResurgentSoilBlock(Properties.copy(Blocks.SOUL_SOIL).mapColor(MapColor.COLOR_BROWN).speedFactor(0.4F).randomTicks());
         });
         RESURGENT_SOIL_FARMLAND = BLOCKS.register("resurgent_soil_farmland", () -> {
-            return new ResurgentSoilFarmlandBlock(Properties.copy(Blocks.FARMLAND).color(MaterialColor.COLOR_BROWN).speedFactor(0.4F).lightLevel(FlameBlockEmission(7)));
+            return new ResurgentSoilFarmlandBlock(Properties.copy(Blocks.FARMLAND).mapColor(MapColor.COLOR_BROWN).speedFactor(0.4F).lightLevel(FlameBlockEmission(7)));
         });
         WARPED_FUNGUS_COLONY = BLOCKS.register("warped_fungus_colony", () -> {
             return new MushroomColonyBlock(Properties.copy(Blocks.WARPED_FUNGUS), () -> {
@@ -96,99 +99,101 @@ public class MNDBlocks {
             });
         });
         STUFFED_HOGLIN = BLOCKS.register("stuffed_hoglin", () -> {
-            return new StuffedHoglinBlock(Properties.copy(Blocks.CAKE).color(MaterialColor.TERRACOTTA_PINK));
+            return new StuffedHoglinBlock(Properties.copy(Blocks.CAKE).mapColor(MapColor.TERRACOTTA_PINK));
         });
         HOGLIN_TROPHY = BLOCKS.register("hoglin_trophy", () -> {
-            return new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD).color(MaterialColor.TERRACOTTA_PINK));
+            return new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD).mapColor(MapColor.TERRACOTTA_PINK));
         });
         WAXED_HOGLIN_TROPHY = BLOCKS.register("waxed_hoglin_trophy", () -> {
-            return new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD).color(MaterialColor.TERRACOTTA_PINK));
+            return new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD).mapColor(MapColor.TERRACOTTA_PINK));
         });
         ZOGLIN_TROPHY = BLOCKS.register("zoglin_trophy", () -> {
-            return new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD).color(MaterialColor.TERRACOTTA_GREEN));
+            return new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD).mapColor(MapColor.TERRACOTTA_GREEN));
         });
         POWDERY_CHUBBY_SAPLING = BLOCKS.register("powdery_chubby_sapling", () -> {
-            return new PowderyCannonSaplingBlock(Properties.copy(Blocks.BAMBOO_SAPLING).color(MaterialColor.TERRACOTTA_BLACK).strength(2.0F, 3.0F));
+            return new PowderyCannonSaplingBlock(Properties.copy(Blocks.BAMBOO_SAPLING).mapColor(MapColor.TERRACOTTA_BLACK).strength(2.0F, 3.0F));
         });
         POWDERY_CANNON = BLOCKS.register("powdery_cannon", () -> {
-            return new PowderyCannonBlock(Properties.copy(Blocks.BAMBOO).color(MaterialColor.TERRACOTTA_BLACK).strength(3.0F, 3.0F).lightLevel(litBlockEmission(12)));
+            return new PowderyCannonBlock(Properties.copy(Blocks.BAMBOO).mapColor(MapColor.TERRACOTTA_BLACK).strength(3.0F, 3.0F).lightLevel(litBlockEmission(12)));
         });
         POWDERY_CANE = BLOCKS.register("powdery_cane", () -> {
-            return new PowderyCaneBlock(Properties.copy(Blocks.BAMBOO).color(MaterialColor.TERRACOTTA_BLACK).noCollission().instabreak().lightLevel(litBlockEmission(12)));
+            return new PowderyCaneBlock(Properties.copy(Blocks.BAMBOO).mapColor(MapColor.TERRACOTTA_BLACK).noCollission().instabreak().lightLevel(litBlockEmission(12)));
         });
         BULLET_PEPPER = BLOCKS.register("bullet_pepper", () -> {
-            return new PowderyFlowerBlock(Properties.copy(Blocks.BAMBOO_SAPLING).color(MaterialColor.TERRACOTTA_BLACK).noCollission().instabreak().lightLevel(litBlockEmission(8)));
+            return new PowderyFlowerBlock(Properties.copy(Blocks.BAMBOO_SAPLING).mapColor(MapColor.TERRACOTTA_BLACK).noCollission().instabreak().lightLevel(litBlockEmission(8)));
         });
         POWDERY_TORCH = BLOCKS.register("powdery_torch", () -> {
-            return new TorchBlock(Properties.of(Material.DECORATION).noCollission().instabreak().lightLevel((light) -> {
+            return new TorchBlock(Properties.of().noCollission().instabreak().lightLevel((light) -> {
                 return 8;
             }).sound(SoundType.BAMBOO), ParticleTypes.FLAME);
         });
         WALL_POWDERY_TORCH = BLOCKS.register("wall_powdery_torch", () -> {
-            return new WallTorchBlock(Properties.of(Material.DECORATION).dropsLike(POWDERY_TORCH.get()).noCollission().instabreak().lightLevel((light) -> {
+            return new WallTorchBlock(Properties.of().dropsLike(POWDERY_TORCH.get()).noCollission().instabreak().lightLevel((light) -> {
                 return 8;
             }).sound(SoundType.BAMBOO), ParticleTypes.FLAME);
         });
         // POWDERY_POTS
         POTTED_POWDERY_CANNON = BLOCKS.register("potted_powdery_cannon", () -> {
-            return new FlowerPotBlock(POWDERY_CANNON.get(), Properties.of(Material.DECORATION).instabreak().noOcclusion());
+            return new FlowerPotBlock(POWDERY_CANNON.get(), Properties.of().instabreak().noOcclusion());
         });
         POTTED_BULLET_PEPPER = BLOCKS.register("potted_bullet_pepper", () -> {
-            return new FlowerPotBlock(BULLET_PEPPER.get(), Properties.of(Material.DECORATION).instabreak().noOcclusion().lightLevel((light) -> {
+            return new FlowerPotBlock(BULLET_PEPPER.get(), Properties.of().instabreak().noOcclusion().lightLevel((light) -> {
                 return 8;
             }));
         });
         // POWDERY_BLOCKS
         POWDERY_CABINET = BLOCKS.register("powdery_cabinet", () -> {
-            return new CabinetBlock(Properties.copy(ModBlocks.CRIMSON_CABINET.get()));
+            return new CabinetBlock(Properties.copy(ModBlocks.CRIMSON_CABINET.get()).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
         });
         BLOCK_OF_POWDERY_CANNON = BLOCKS.register("block_of_powdery_cannon", () -> {
-            return new StrippableBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS));
+            return new StrippableBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS).mapColor(MapColor.TERRACOTTA_BLACK).sound(SoundType.BAMBOO_WOOD));
         });
         BLOCK_OF_STRIPPED_POWDERY_CANNON = BLOCKS.register("block_of_stripped_powdery_cannon", () -> {
-            return new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS));
+            return new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
         });
         POWDERY_PLANKS = BLOCKS.register("powdery_planks", () -> {
-            return new Block(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS));
+            return new Block(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
         });
         POWDERY_PLANKS_STAIRS = BLOCKS.register("powdery_stairs", () -> {
-            return new StairBlock(Blocks.CRIMSON_PLANKS::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.CRIMSON_STAIRS));
+            return new StairBlock(Blocks.CRIMSON_PLANKS::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.CRIMSON_STAIRS).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
         });
         POWDERY_PLANKS_SLAB = BLOCKS.register("powdery_slab", () -> {
-            return new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SLAB));
+            return new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SLAB).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
         });
         POWDERY_MOSAIC = BLOCKS.register("powdery_mosaic", () -> {
-            return new Block(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS));
+            return new Block(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
         });
         POWDERY_MOSAIC_STAIRS = BLOCKS.register("powdery_mosaic_stairs", () -> {
-            return new StairBlock(Blocks.CRIMSON_PLANKS::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.CRIMSON_STAIRS));
+            return new StairBlock(Blocks.CRIMSON_PLANKS::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.CRIMSON_STAIRS).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
         });
         POWDERY_MOSAIC_SLAB = BLOCKS.register("powdery_mosaic_slab", () -> {
-            return new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SLAB));
+            return new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SLAB).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
         });
         POWDERY_FENCE = BLOCKS.register("powdery_fence", () -> {
-            return new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE));
+            return new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
         });
         POWDERY_FENCE_GATE = BLOCKS.register("powdery_fence_gate", () -> {
-            return new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE));
+            return new FenceGateBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F), WoodType.CRIMSON);
         });
         POWDERY_DOOR = BLOCKS.register("powdery_door", () -> {
-            return new DoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_DOOR));
+            return new DoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().pushReaction(PushReaction.DESTROY), BlockSetType.CRIMSON);
+
         });
         POWDERY_TRAPDOOR = BLOCKS.register("powdery_trapdoor", () -> {
-            return new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_TRAPDOOR));
+            return new TrapDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion(), BlockSetType.CRIMSON);
         });
         POWDERY_BUTTON = BLOCKS.register("powdery_button", () -> {
-            return new WoodButtonBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_BUTTON));
+            return new ButtonBlock(BlockBehaviour.Properties.copy(POWDERY_PLANKS.get()).noCollission().strength(0.5F).sound(SoundType.WOOD).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.OAK, 30, true);
+
         });
         POWDERY_PRESSURE_PLATE = BLOCKS.register("powdery_pressure_plate", () -> {
-            return new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.CRIMSON_PRESSURE_PLATE));
+            return new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.CRIMSON_PRESSURE_PLATE).sound(SoundType.BAMBOO_WOOD).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.CRIMSON);
         });
         POWDERY_SIGN = BLOCKS.register("powdery_sign", () -> {
-            return new MNDStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SIGN), MNDWoodTypes.POWDERY_CANNON);
+            return new MNDStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SIGN).sound(SoundType.BAMBOO_WOOD), MNDWoodTypes.POWDERY_CANNON);
         });
         POWDERY_WALL_SIGN = BLOCKS.register("powdery_wall_sign", () -> {
-            return new MNDWallSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_SIGN), MNDWoodTypes.POWDERY_CANNON);
+            return new MNDWallSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_SIGN).sound(SoundType.BAMBOO_WOOD), MNDWoodTypes.POWDERY_CANNON);
         });
     }
 

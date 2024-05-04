@@ -4,6 +4,7 @@ import com.soytutta.mynethersdelight.MyNethersDelight;
 import com.soytutta.mynethersdelight.common.block.NetherStoveBlock;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import net.minecraft.data.DataGenerator;
+import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -18,8 +19,8 @@ import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 public class MNDBlockStates extends BlockStateProvider {
     private static final int DEFAULT_ANGLE_OFFSET = 180;
 
-    public MNDBlockStates(DataGenerator gen, ExistingFileHelper exFileHelper) {
-        super(gen, "mynethersdelight", exFileHelper);
+    public MNDBlockStates(PackOutput output, ExistingFileHelper exFileHelper) {
+        super(output, "mynethersdelight", exFileHelper);
     }
 
     private String blockName(Block block) {
@@ -51,8 +52,6 @@ public class MNDBlockStates extends BlockStateProvider {
         this.trapdoorBlockWithRenderType(((TrapDoorBlock) MNDBlocks.POWDERY_TRAPDOOR.get()), modLoc("block/powdery_trapdoor"), true, "cutout");
         this.buttonBlock(((ButtonBlock) MNDBlocks.POWDERY_BUTTON.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
         this.pressurePlateBlock(((PressurePlateBlock) MNDBlocks.POWDERY_PRESSURE_PLATE.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
-        this.fenceBlock(((FenceBlock) MNDBlocks.POWDERY_FENCE.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
-        this.fenceGateBlock(((FenceGateBlock) MNDBlocks.POWDERY_FENCE_GATE.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
 
         this.simpleBlock(MNDBlocks.POWDERY_MOSAIC.get());
         this.stairsBlock(((StairBlock) MNDBlocks.POWDERY_MOSAIC_STAIRS.get()), blockTexture(MNDBlocks.POWDERY_MOSAIC.get()));

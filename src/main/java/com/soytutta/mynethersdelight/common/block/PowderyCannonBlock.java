@@ -8,7 +8,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.damagesource.DamageSources;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,11 +23,10 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BambooBlock;
+import net.minecraft.world.level.block.BambooStalkBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -37,7 +36,7 @@ import vectorwing.farmersdelight.common.tag.ForgeTags;
 
 import javax.annotation.Nullable;
 
-public class PowderyCannonBlock extends BambooBlock {
+public class PowderyCannonBlock extends BambooStalkBlock {
     public static final BooleanProperty LIT = BooleanProperty.create("lit");
     public static final IntegerProperty PRESSURE = IntegerProperty.create("pressure", 0, 2);
 
@@ -86,7 +85,7 @@ public class PowderyCannonBlock extends BambooBlock {
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return level.getBlockState(pos.below()).is(MNDTags.POWDERY_CANNON_PLANTABLE_ON) || level.getBlockState(pos.below()).getMaterial().isSolid();
+        return level.getBlockState(pos.below()).is(MNDTags.POWDERY_CANNON_PLANTABLE_ON) || level.getBlockState(pos.below()).isSolid();
     }
 
     @Override
@@ -170,7 +169,7 @@ public class PowderyCannonBlock extends BambooBlock {
         int pressure = state.getValue(PRESSURE);
 
         if ((entity instanceof LivingEntity && entity.getType() != EntityType.PANDA && entity.getType() != EntityType.BEE) && !((LivingEntity) entity).isCrouching()) {
-            entity.hurt(DamageSource.CACTUS,1);
+            entity.hurt(level.damageSources().cactus(), 1.0F);
             entity.makeStuckInBlock(state, new Vec3(0.8, 0.75, 0.8));
             if (!level.isClientSide && state.getValue(PRESSURE) < 2) {
                 level.setBlock(pos, state.setValue(PRESSURE, pressure + 1), 2);
@@ -204,7 +203,7 @@ public class PowderyCannonBlock extends BambooBlock {
     private void explodeAndDestroy(Level level, BlockPos pos, BlockState state) {
         level.playSound(null, pos, SoundEvents.CREEPER_PRIMED, SoundSource.BLOCKS, 0.5F, 0.25F);
         for (int i = 1; i <= 5; i++) {
-            level.explode(null, pos.getX(), pos.getY() + i, pos.getZ(), 1.0F, Explosion.BlockInteraction.BREAK);
+            level.explode(null, pos.getX(), pos.getY() + i, pos.getZ(), 1.0F, Level.ExplosionInteraction.TNT);
         }
         level.setBlock(pos, state.setValue(LIT, false), 2);
         level.destroyBlock(pos, true);

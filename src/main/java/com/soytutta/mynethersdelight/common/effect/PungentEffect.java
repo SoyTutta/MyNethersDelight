@@ -18,9 +18,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import java.util.stream.StreamSupport;
 
 public class PungentEffect extends MobEffect {
-
-    private static final DamageSource PUNGENT_DAMAGE = new DamageSource("mynethersdelight.pungent").bypassArmor();
-
     public PungentEffect() {
         super(MobEffectCategory.NEUTRAL, 0);
     }
@@ -41,7 +38,7 @@ public class PungentEffect extends MobEffect {
 
         if (isInFireCondition(entity) || entity.isInLava() || entity.isOnFire()) {
             if (BPungentEffect != null) {
-                entity.hurt(PUNGENT_DAMAGE, 1.5f * (amplifier + 1));
+                entity.hurt(entity.damageSources().cactus(), 1.5f * (amplifier + 1));
             } else if (GPungentEffect != null) {
                 entity.heal(0.10f * (amplifier + 1));
             }
@@ -63,7 +60,7 @@ public class PungentEffect extends MobEffect {
 
     private boolean isInFireCondition(LivingEntity entity) {
         DamageSource lastDamageSource = entity.getLastDamageSource();
-        Level world = entity.level;
+        Level world = entity.level();
         BlockPos entityPos = entity.blockPosition();
         boolean isOnFlame = false;
 
@@ -85,7 +82,7 @@ public class PungentEffect extends MobEffect {
             } if (isOnFlame) break;
         }
 
-        return isOnFlame || (lastDamageSource != null && lastDamageSource.isFire());
+        return isOnFlame || (lastDamageSource != null);
     }
 
     @Override

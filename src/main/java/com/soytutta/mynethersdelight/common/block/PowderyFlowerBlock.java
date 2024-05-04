@@ -184,7 +184,7 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
 
     private void explodeAndReset(Level level, BlockPos pos, BlockState state, int age) {
         level.playSound(null, pos, SoundEvents.CREEPER_PRIMED, SoundSource.BLOCKS, 0.5F, 0.25F);
-        level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1.25F, false, Explosion.BlockInteraction.NONE);
+        level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1.25F, false, Level.ExplosionInteraction.NONE);
         if (state.hasProperty(AGE) && age > 0) {
             level.setBlock(pos, state.setValue(AGE, age - 1), 3);
         }

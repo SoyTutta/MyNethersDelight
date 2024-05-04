@@ -9,6 +9,7 @@ import com.soytutta.mynethersdelight.MyNethersDelight;
 import com.soytutta.mynethersdelight.common.item.*;
 import com.soytutta.mynethersdelight.common.utility.MNDFoodValues;
 import com.soytutta.mynethersdelight.common.block.NetherStoveBlock;
+import net.minecraft.core.Direction;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -102,17 +103,17 @@ public class MNDItems {
     }
 
     public static Item.Properties basicItem() {
-        return (new Item.Properties()).tab(MyNethersDelight.CREATIVE_TAB);
+        return (new Item.Properties());
     }
     public static Item.Properties foodItem(FoodProperties food) {
-        return (new Item.Properties()).food(food).tab(MyNethersDelight.CREATIVE_TAB);
+        return (new Item.Properties()).food(food);
     }
 
     public static Item.Properties bowlFoodItem(FoodProperties food) {
-        return (new Item.Properties()).food(food).craftRemainder(Items.BOWL).stacksTo(16).tab(MyNethersDelight.CREATIVE_TAB);
+        return (new Item.Properties()).food(food).craftRemainder(Items.BOWL).stacksTo(16);
     }
     public static Item.Properties bucketFoodItem(FoodProperties food) {
-        return (new Item.Properties()).food(food).craftRemainder(Items.BUCKET).stacksTo(16).tab(MyNethersDelight.CREATIVE_TAB);
+        return (new Item.Properties()).food(food).craftRemainder(Items.BUCKET).stacksTo(16);
     }
 
     static {
@@ -127,7 +128,7 @@ public class MNDItems {
             };
         });
         SOUL_NETHER_STOVE = ITEMS.register("nether_bricks_soul_stove", () -> {
-            return new BlockItem(MNDBlocks.NETHER_STOVE.get(), new Item.Properties().tab(CreativeModeTab.TAB_SEARCH)) {
+            return new BlockItem(MNDBlocks.NETHER_STOVE.get(), new Item.Properties()) {
                 protected boolean placeBlock(BlockPlaceContext context, BlockState state) {
                     return super.placeBlock(context, state.setValue(NetherStoveBlock.SOUL, true));
                 }
@@ -148,7 +149,12 @@ public class MNDItems {
             return new FuelBlockItem(MNDBlocks.POWDERY_CANNON.get(), basicItem(),500);
         });
         POWDERY_TORCH = ITEMS.register("powdery_torch", () -> {
-            return new StandingAndWallBlockItem(MNDBlocks.POWDERY_TORCH.get(), (Block)MNDBlocks.WALL_POWDERY_TORCH.get(), basicItem());
+            return new StandingAndWallBlockItem(
+                    MNDBlocks.POWDERY_TORCH.get(),
+                    MNDBlocks.WALL_POWDERY_TORCH.get(),
+                    new Item.Properties(),
+                    Direction.DOWN
+            );
         });
         POWDERY_CABINET = ITEMS.register("powdery_cabinet", () -> {
             return new BlockItem(MNDBlocks.POWDERY_CABINET.get(), basicItem());
@@ -207,7 +213,7 @@ public class MNDItems {
         });
         // STRIDER
         STRIDER_ROCK = ITEMS.register("strider_rock", () -> {
-            return new StriderRockItem((new Item.Properties()).stacksTo(16).tab(MyNethersDelight.CREATIVE_TAB).fireResistant());
+            return new StriderRockItem((new Item.Properties()).stacksTo(16).fireResistant());
         });
         STRIDER_EGG = ITEMS.register("strider_egg", () -> {
             return new StriderEggItem(foodItem(MNDFoodValues.STRIDER_EGG).stacksTo(16));
@@ -263,7 +269,7 @@ public class MNDItems {
         // SPICY
         BULLET_PEPPER = ITEMS.register("bullet_pepper", () -> {
             return new ConsumableBlockItem(MNDBlocks.BULLET_PEPPER.get(),
-                    new Item.Properties().food((MNDFoodValues.BULLET_PEPPER)).tab(MyNethersDelight.CREATIVE_TAB));
+                    new Item.Properties().food((MNDFoodValues.BULLET_PEPPER)));
         });
         SPICY_SKEWER = ITEMS.register("spicy_skewer", ()  -> {
             return new ConsumableItem(foodItem(MNDFoodValues.SPICY_SKEWER));
@@ -289,7 +295,7 @@ public class MNDItems {
         });
         // THOPHY
         HOGLIN_TROPHY = ITEMS.register("hoglin_trophy", () -> {
-            return new BlockItem(MNDBlocks.HOGLIN_TROPHY.get(), basicItem().tab(CreativeModeTab.TAB_SEARCH).stacksTo(1));
+            return new BlockItem(MNDBlocks.HOGLIN_TROPHY.get(), basicItem().stacksTo(1));
         });
         WAXED_HOGLIN_TROPHY = ITEMS.register("waxed_hoglin_trophy", () -> {
             return new BlockItem(MNDBlocks.WAXED_HOGLIN_TROPHY.get(), basicItem().stacksTo(1));

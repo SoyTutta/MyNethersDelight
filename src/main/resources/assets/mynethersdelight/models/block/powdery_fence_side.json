@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/custom_fence_inventory",
+  "parent": "minecraft:block/custom_fence_side",
   "textures": {
     "texture": "mynethersdelight:block/powdery_fence"
   }

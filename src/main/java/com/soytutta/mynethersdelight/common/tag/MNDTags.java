@@ -1,7 +1,10 @@
 package com.soytutta.mynethersdelight.common.tag;
 
 import net.minecraft.core.Registry;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -43,10 +46,10 @@ public class MNDTags {
     public MNDTags() {}
 
     private static TagKey<Item> modItemTag(String path) {
-        return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("mynethersdelight:" + path));
+        return ItemTags.create(new ResourceLocation("mynethersdelight:" + path));
     }
     private static TagKey<Block> modBlockTag(String path) {
-        return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation("mynethersdelight:" + path));
+        return BlockTags.create(new ResourceLocation("mynethersdelight:" + path));
     }
 
 }

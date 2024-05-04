@@ -125,7 +125,7 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
     @Override
     @SuppressWarnings("deprecation")
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
-        return level.getBlockState(pos.below()).getMaterial().isSolid();
+        return level.getBlockState(pos.below()).isSolid();
     }
 
     public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {

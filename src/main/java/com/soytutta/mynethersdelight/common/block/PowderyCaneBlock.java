@@ -150,7 +150,7 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
     public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         if (!(entity instanceof LivingEntity) || entity.getType() == EntityType.PANDA || entity.getType() == EntityType.BEE || entity.isCrouching())
             return;
-        entity.hurt(DamageSource.CACTUS, 1);
+        entity.hurt(level.damageSources().cactus(), 1.0F);
         entity.makeStuckInBlock(state, new Vec3(0.8, 0.75, 0.8));
         if (!level.isClientSide && state.getValue(PRESSURE) < 2) {
             level.setBlock(pos, state.setValue(PRESSURE, state.getValue(PRESSURE) + 1), 2);
@@ -199,7 +199,7 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
 
     private void explodeAndReset(Level level, BlockPos pos, BlockState state, int age) {
         level.playSound(null, pos, SoundEvents.CREEPER_PRIMED, SoundSource.BLOCKS, 0.5F, 0.25F);
-        level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1.25F, false, Explosion.BlockInteraction.NONE);
+        level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1.25F,  false, Level.ExplosionInteraction.NONE);
         level.setBlock(pos, state.setValue(LIT, false), 2);
         if (state.hasProperty(AGE) && age > 0) {
             level.setBlock(pos, state.setValue(AGE, age - 1), 3);
@@ -249,7 +249,7 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
     }
 
     @Override
-    public boolean isValidBonemealTarget(BlockGetter level, BlockPos pos, BlockState state, boolean isClientSide) {
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClientSide) {
         return false;
     }
 
