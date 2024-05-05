@@ -5,7 +5,6 @@
 
 package com.soytutta.mynethersdelight.common.registry;
 
-import com.soytutta.mynethersdelight.MyNethersDelight;
 import com.soytutta.mynethersdelight.common.item.*;
 import com.soytutta.mynethersdelight.common.utility.MNDFoodValues;
 import com.soytutta.mynethersdelight.common.block.NetherStoveBlock;
@@ -13,7 +12,6 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -24,7 +22,6 @@ import vectorwing.farmersdelight.common.item.MushroomColonyItem;
 
 public class MNDItems {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, "mynethersdelight");
-
 
     public static final RegistryObject<Item> NETHER_STOVE;
     public static final RegistryObject<Item> NETHER_BRICKS_CABINET;

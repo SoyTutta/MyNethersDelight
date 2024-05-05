@@ -40,7 +40,7 @@ public class MNDLang extends LanguageProvider {
             name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("With", "with");
             this.add(i.get().getDescriptionId(), name);
         });
-        this.add("itemGroup.mynethersdelight", "My Nether's Delight");
+        this.add("mynethersdelight.itemGroup.main", "My Nether's Delight");
         this.add("effect.mynethersdelight.g_pungent", "Pungent");
         this.add("effect.mynethersdelight.b_pungent", "Pungent");
         this.add("mynethersdelight.jei.forgoting", "Forgoting");

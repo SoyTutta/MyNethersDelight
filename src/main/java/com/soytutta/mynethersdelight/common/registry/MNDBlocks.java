@@ -143,57 +143,57 @@ public class MNDBlocks {
         });
         // POWDERY_BLOCKS
         POWDERY_CABINET = BLOCKS.register("powdery_cabinet", () -> {
-            return new CabinetBlock(Properties.copy(ModBlocks.CRIMSON_CABINET.get()).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
+            return new CabinetBlock(Properties.copy(ModBlocks.BAMBOO_CABINET.get()).mapColor(MapColor.TERRACOTTA_GRAY));
         });
         BLOCK_OF_POWDERY_CANNON = BLOCKS.register("block_of_powdery_cannon", () -> {
-            return new StrippableBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS).mapColor(MapColor.TERRACOTTA_BLACK).sound(SoundType.BAMBOO_WOOD));
+            return new StrippableBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS).mapColor(MapColor.TERRACOTTA_BLACK));
         });
         BLOCK_OF_STRIPPED_POWDERY_CANNON = BLOCKS.register("block_of_stripped_powdery_cannon", () -> {
-            return new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
+            return new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS).mapColor(MapColor.TERRACOTTA_GRAY));
         });
         POWDERY_PLANKS = BLOCKS.register("powdery_planks", () -> {
-            return new Block(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
+            return new Block(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS).mapColor(MapColor.TERRACOTTA_GRAY));
         });
         POWDERY_PLANKS_STAIRS = BLOCKS.register("powdery_stairs", () -> {
-            return new StairBlock(Blocks.CRIMSON_PLANKS::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.CRIMSON_STAIRS).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
+            return new StairBlock(Blocks.BAMBOO_PLANKS::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.BAMBOO_STAIRS).mapColor(MapColor.TERRACOTTA_GRAY));
         });
         POWDERY_PLANKS_SLAB = BLOCKS.register("powdery_slab", () -> {
-            return new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SLAB).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
+            return new SlabBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_SLAB).mapColor(MapColor.TERRACOTTA_GRAY));
         });
         POWDERY_MOSAIC = BLOCKS.register("powdery_mosaic", () -> {
-            return new Block(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
+            return new Block(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS).mapColor(MapColor.TERRACOTTA_GRAY));
         });
         POWDERY_MOSAIC_STAIRS = BLOCKS.register("powdery_mosaic_stairs", () -> {
-            return new StairBlock(Blocks.CRIMSON_PLANKS::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.CRIMSON_STAIRS).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
+            return new StairBlock(Blocks.BAMBOO_PLANKS::defaultBlockState, BlockBehaviour.Properties.copy(Blocks.BAMBOO_STAIRS).mapColor(MapColor.TERRACOTTA_GRAY));
         });
         POWDERY_MOSAIC_SLAB = BLOCKS.register("powdery_mosaic_slab", () -> {
-            return new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SLAB).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
+            return new SlabBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_SLAB).mapColor(MapColor.TERRACOTTA_GRAY));
         });
         POWDERY_FENCE = BLOCKS.register("powdery_fence", () -> {
-            return new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE).mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD));
+            return new FenceBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_FENCE).mapColor(MapColor.TERRACOTTA_GRAY));
         });
         POWDERY_FENCE_GATE = BLOCKS.register("powdery_fence_gate", () -> {
-            return new FenceGateBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD).forceSolidOn().instrument(NoteBlockInstrument.BASS).strength(2.0F, 3.0F), WoodType.CRIMSON);
+            return new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_FENCE_GATE).mapColor(MapColor.TERRACOTTA_GRAY), WoodType.CRIMSON);
         });
         POWDERY_DOOR = BLOCKS.register("powdery_door", () -> {
-            return new DoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion().pushReaction(PushReaction.DESTROY), BlockSetType.CRIMSON);
+            return new DoorBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_DOOR).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.CRIMSON);
 
         });
         POWDERY_TRAPDOOR = BLOCKS.register("powdery_trapdoor", () -> {
-            return new TrapDoorBlock(BlockBehaviour.Properties.of().mapColor(MapColor.TERRACOTTA_GRAY).sound(SoundType.BAMBOO_WOOD).instrument(NoteBlockInstrument.BASS).strength(3.0F).noOcclusion(), BlockSetType.CRIMSON);
+            return new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_TRAPDOOR).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.CRIMSON);
         });
         POWDERY_BUTTON = BLOCKS.register("powdery_button", () -> {
             return new ButtonBlock(BlockBehaviour.Properties.copy(POWDERY_PLANKS.get()).noCollission().strength(0.5F).sound(SoundType.WOOD).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.OAK, 30, true);
 
         });
         POWDERY_PRESSURE_PLATE = BLOCKS.register("powdery_pressure_plate", () -> {
-            return new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.CRIMSON_PRESSURE_PLATE).sound(SoundType.BAMBOO_WOOD).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.CRIMSON);
+            return new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.BAMBOO_PRESSURE_PLATE).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.CRIMSON);
         });
         POWDERY_SIGN = BLOCKS.register("powdery_sign", () -> {
-            return new MNDStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SIGN).sound(SoundType.BAMBOO_WOOD), MNDWoodTypes.POWDERY_CANNON);
+            return new MNDStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_SIGN), MNDWoodTypes.POWDERY_CANNON);
         });
         POWDERY_WALL_SIGN = BLOCKS.register("powdery_wall_sign", () -> {
-            return new MNDWallSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_SIGN).sound(SoundType.BAMBOO_WOOD), MNDWoodTypes.POWDERY_CANNON);
+            return new MNDWallSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_WALL_SIGN), MNDWoodTypes.POWDERY_CANNON);
         });
     }
 
