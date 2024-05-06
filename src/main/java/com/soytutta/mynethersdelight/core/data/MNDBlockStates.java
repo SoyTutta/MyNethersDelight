@@ -17,7 +17,6 @@ import vectorwing.farmersdelight.common.block.CabinetBlock;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 
 public class MNDBlockStates extends BlockStateProvider {
-    private static final int DEFAULT_ANGLE_OFFSET = 180;
 
     public MNDBlockStates(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, "mynethersdelight", exFileHelper);
@@ -60,8 +59,25 @@ public class MNDBlockStates extends BlockStateProvider {
 
         this.signBlock(((StandingSignBlock) MNDBlocks.POWDERY_SIGN.get()), ((WallSignBlock) MNDBlocks.POWDERY_WALL_SIGN.get()),
                 blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
+        this.hangingSignBlock(MNDBlocks.POWDERY_HANGING_SIGN.get(), MNDBlocks.POWDERY_WALL_HANGING_SIGN.get(),
+                blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
+    }
+    public void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {
+        ModelFile sign = models().sign(name(signBlock), texture);
+        hangingSignBlock(signBlock, wallSignBlock, sign);
     }
 
+    public void hangingSignBlock(Block signBlock, Block wallSignBlock, ModelFile sign) {
+        simpleBlock(signBlock, sign);
+        simpleBlock(wallSignBlock, sign);
+    }
+    private String name(Block block) {
+        return key(block).getPath();
+    }
+
+    private ResourceLocation key(Block block) {
+        return ForgeRegistries.BLOCKS.getKey(block);
+    }
     private void blockItem(RegistryObject<Block> blockRegistryObject) {
         simpleBlockItem(blockRegistryObject.get(), new ModelFile.UncheckedModelFile(MyNethersDelight.MODID +
                 ":block/" + ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath()));

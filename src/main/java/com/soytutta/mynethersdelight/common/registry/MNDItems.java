@@ -48,6 +48,7 @@ public class MNDItems {
     public static final RegistryObject<Item> POWDERY_BUTTON;
     public static final RegistryObject<Item> POWDERY_PRESSURE_PLATE;
     public static final RegistryObject<Item> POWDERY_SIGN;
+    public static final RegistryObject<Item> POWDERY_HANGING_SIGN;
     // FUNGUS-Colony
     public static final RegistryObject<Item> WARPED_FUNGUS_COLONY;
     public static final RegistryObject<Item> CRIMSON_FUNGUS_COLONY;
@@ -200,6 +201,9 @@ public class MNDItems {
         });
         POWDERY_SIGN = ITEMS.register("powdery_sign", () -> {
             return new SignItem(basicItem(), MNDBlocks.POWDERY_SIGN.get(), MNDBlocks.POWDERY_WALL_SIGN.get());
+        });
+        POWDERY_HANGING_SIGN = ITEMS.register("powdery_hanging_sign", () -> {
+            return new SignItem(basicItem(), MNDBlocks.POWDERY_HANGING_SIGN.get(), MNDBlocks.POWDERY_WALL_HANGING_SIGN.get());
         });
         // FUNGUS-Colony
         WARPED_FUNGUS_COLONY = ITEMS.register("warped_fungus_colony", () -> {

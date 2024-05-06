@@ -41,11 +41,16 @@ public class MNDCreativeTab {
         event.accept(MNDItems.POWDERY_MOSAIC_STAIRS.get());
         event.accept(MNDItems.POWDERY_MOSAIC_SLAB.get());
 
+        event.accept(MNDItems.POWDERY_FENCE.get());
+        event.accept(MNDItems.POWDERY_FENCE_GATE.get());
+
         event.accept(MNDItems.POWDERY_DOOR.get());
         event.accept(MNDItems.POWDERY_TRAPDOOR.get());
         event.accept(MNDItems.POWDERY_PRESSURE_PLATE.get());
         event.accept(MNDItems.POWDERY_BUTTON.get());
         event.accept(MNDItems.POWDERY_SIGN.get());
+        event.accept(MNDItems.POWDERY_HANGING_SIGN.get());
+
         event.accept(MNDItems.CRIMSON_FUNGUS_COLONY.get());
         event.accept(MNDItems.WARPED_FUNGUS_COLONY.get());
 

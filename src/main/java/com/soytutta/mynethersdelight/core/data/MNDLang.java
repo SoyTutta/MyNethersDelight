@@ -27,6 +27,7 @@ public class MNDLang extends LanguageProvider {
         Set<RegistryObject<Item>> items = new HashSet<>(MNDItems.ITEMS.getEntries());
         blocks.remove(MNDBlocks.WALL_POWDERY_TORCH);
         blocks.remove(MNDBlocks.POWDERY_WALL_SIGN);
+        blocks.remove(MNDBlocks.POWDERY_WALL_HANGING_SIGN);
         blocks.forEach((b) -> {
             String name = (b.get()).getDescriptionId().replaceFirst("block.mynethersdelight.", "");
             name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("Of", "of");

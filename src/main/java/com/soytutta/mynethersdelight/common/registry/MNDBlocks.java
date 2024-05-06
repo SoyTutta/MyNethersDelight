@@ -69,6 +69,8 @@ public class MNDBlocks {
     public static final RegistryObject<Block> POWDERY_FENCE_GATE;
     public static final RegistryObject<Block> POWDERY_SIGN;
     public static final RegistryObject<Block> POWDERY_WALL_SIGN;
+    public static final RegistryObject<Block> POWDERY_HANGING_SIGN;
+    public static final RegistryObject<Block> POWDERY_WALL_HANGING_SIGN;
 
     public MNDBlocks() {
     }
@@ -194,6 +196,12 @@ public class MNDBlocks {
         });
         POWDERY_WALL_SIGN = BLOCKS.register("powdery_wall_sign", () -> {
             return new MNDWallSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_WALL_SIGN), MNDWoodTypes.POWDERY_CANNON);
+        });
+        POWDERY_HANGING_SIGN = BLOCKS.register("powdery_hanging_sign", () -> {
+            return new MNDHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_HANGING_SIGN), MNDWoodTypes.POWDERY_CANNON);
+        });
+        POWDERY_WALL_HANGING_SIGN = BLOCKS.register("powdery_wall_hanging_sign", () -> {
+            return new MNDWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_WALL_HANGING_SIGN), MNDWoodTypes.POWDERY_CANNON);
         });
     }
 

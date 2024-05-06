@@ -7,8 +7,8 @@
     },
     {
       "apply": {
-        "model": "mynethersdelight:block/powdery_fence_side",
-        "uvlock": true
+        "model": "mynethersdelight:block/powdery_fence_side_north",
+        "uvlock": false
       },
       "when": {
         "north": "true"
@@ -16,9 +16,17 @@
     },
     {
       "apply": {
-        "model": "mynethersdelight:block/powdery_fence_side",
-        "uvlock": true,
-        "y": 180
+        "model": "mynethersdelight:block/powdery_fence_side_east",
+        "uvlock": false
+      },
+      "when": {
+        "east": "true"
+      }
+    },
+    {
+      "apply": {
+        "model": "mynethersdelight:block/powdery_fence_side_south",
+        "uvlock": false
       },
       "when": {
         "south": "true"
@@ -26,22 +34,11 @@
     },
     {
       "apply": {
-        "model": "mynethersdelight:block/powdery_fence_side",
-        "uvlock": true,
-        "y": 270
+        "model": "mynethersdelight:block/powdery_fence_side_west",
+        "uvlock": false
       },
       "when": {
         "west": "true"
-      }
-    },
-    {
-      "apply": {
-        "model": "mynethersdelight:block/powdery_fence_side",
-        "uvlock": true,
-        "y": 90
-      },
-      "when": {
-        "east": "true"
       }
     }
   ]

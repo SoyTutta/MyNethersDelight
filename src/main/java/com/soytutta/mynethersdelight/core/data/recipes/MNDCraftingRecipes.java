@@ -155,7 +155,7 @@ public class MNDCraftingRecipes {
                 .group("wooden_button")
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_button"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_SIGN.get(),3)
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS,MNDBlocks.POWDERY_SIGN.get(),3)
                 .pattern("###")
                 .pattern("###")
                 .pattern(" X ")
@@ -163,6 +163,14 @@ public class MNDCraftingRecipes {
                 .group("wooden_sign")
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_sign"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS,MNDBlocks.POWDERY_HANGING_SIGN.get(),6)
+                .pattern("X X")
+                .pattern("###")
+                .pattern("###")
+                .define('#', MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get()).define('X', Items.CHAIN)
+                .group("wooden_hanging_sign")
+                .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get()))
+                .save(consumer, new ResourceLocation("mynethersdelight", "powdery_hanging_sign"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_FENCE.get(),3)
                 .pattern("#X#")
                 .pattern("#X#")
