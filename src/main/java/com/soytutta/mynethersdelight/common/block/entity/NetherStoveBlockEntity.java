@@ -122,11 +122,12 @@ public class NetherStoveBlockEntity extends SyncedBlockEntity {
             for(int i = 0; i < this.inventory.getSlots(); ++i) {
                 ItemStack stoveStack = this.inventory.getStackInSlot(i);
                 if (!stoveStack.isEmpty()) {
+                    int var10002 = this.cookingTimes[i]++;
                     if (this.cookingTimes[i] >= this.cookingTimesTotal[i]) {
-                        Container inventoryWrapper = new SimpleContainer(stoveStack);
+                        Container inventoryWrapper = new SimpleContainer(new ItemStack[]{stoveStack});
                         Optional<CampfireCookingRecipe> recipe = this.getMatchingRecipe(inventoryWrapper, i);
                         if (recipe.isPresent()) {
-                            ItemStack resultStack = recipe.get().getResultItem(level.registryAccess());
+                            ItemStack resultStack = ((CampfireCookingRecipe)recipe.get()).getResultItem(this.level.registryAccess());
                             if (!resultStack.isEmpty()) {
                                 ItemUtils.spawnItemEntity(this.level, resultStack.copy(), (double)this.worldPosition.getX() + 0.5, (double)this.worldPosition.getY() + 1.0, (double)this.worldPosition.getZ() + 0.5, this.level.random.nextGaussian() * 0.009999999776482582, 0.10000000149011612, this.level.random.nextGaussian() * 0.009999999776482582);
                             }
@@ -201,6 +202,8 @@ public class NetherStoveBlockEntity extends SyncedBlockEntity {
     }
 
     public Vec2 getStoveItemOffset(int index) {
+        float X_OFFSET = 0.3F;
+        float Y_OFFSET = 0.2F;
         Vec2[] OFFSETS = new Vec2[]{new Vec2(0.3F, 0.2F), new Vec2(0.0F, 0.2F), new Vec2(-0.3F, 0.2F), new Vec2(0.3F, -0.2F), new Vec2(0.0F, -0.2F), new Vec2(-0.3F, -0.2F)};
         return OFFSETS[index];
     }

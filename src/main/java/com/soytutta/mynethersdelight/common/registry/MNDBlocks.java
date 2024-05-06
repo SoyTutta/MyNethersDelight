@@ -18,15 +18,12 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.common.block.*;
-import vectorwing.farmersdelight.common.registry.ModBlocks;
 
 import java.util.function.ToIntFunction;
 
@@ -145,7 +142,7 @@ public class MNDBlocks {
         });
         // POWDERY_BLOCKS
         POWDERY_CABINET = BLOCKS.register("powdery_cabinet", () -> {
-            return new CabinetBlock(Properties.copy(ModBlocks.BAMBOO_CABINET.get()).mapColor(MapColor.TERRACOTTA_GRAY));
+            return new CabinetBlock(Properties.copy(Blocks.BARREL).sound(SoundType.BAMBOO_WOOD).mapColor(MapColor.TERRACOTTA_GRAY));
         });
         BLOCK_OF_POWDERY_CANNON = BLOCKS.register("block_of_powdery_cannon", () -> {
             return new StrippableBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS).mapColor(MapColor.TERRACOTTA_BLACK));
