@@ -289,7 +289,7 @@ public class MNDItems {
         });
         // THOPHY
         HOGLIN_TROPHY = ITEMS.register("hoglin_trophy", () -> {
-            return new BlockItem(MNDBlocks.HOGLIN_TROPHY.get(), basicItem().tab(CreativeModeTab.TAB_SEARCH).stacksTo(1));
+            return new BlockItem(MNDBlocks.HOGLIN_TROPHY.get(), basicItem().stacksTo(1));
         });
         WAXED_HOGLIN_TROPHY = ITEMS.register("waxed_hoglin_trophy", () -> {
             return new BlockItem(MNDBlocks.WAXED_HOGLIN_TROPHY.get(), basicItem().stacksTo(1));

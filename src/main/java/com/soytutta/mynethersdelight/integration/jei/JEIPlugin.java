@@ -49,6 +49,7 @@ public class JEIPlugin implements IModPlugin {
         new FDRecipes();
         registration.addRecipes(MNDRecipeTypes.FORGOTING, ImmutableList.of(new ForgotingDummy()));
         registration.addIngredientInfo(List.of( new ItemStack(MNDItems.BULLET_PEPPER.get()), new ItemStack(MNDItems.POWDER_CANNON.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.wild_powdery"));
+        registration.addIngredientInfo(List.of( new ItemStack(MNDItems.RESURGENT_SOIL_FARMLAND.get()), new ItemStack(MNDItems.RESURGENT_SOIL.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.r_soil"));
         registration.addIngredientInfo(List.of( new ItemStack(ModItems.BROWN_MUSHROOM_COLONY.get()), new ItemStack(ModItems.RED_MUSHROOM_COLONY.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.mushroom_colony"));
         registration.addIngredientInfo(List.of( new ItemStack(Items.NETHER_WART), new ItemStack(MNDItems.WARPED_FUNGUS_COLONY.get()), new ItemStack(MNDItems.CRIMSON_FUNGUS_COLONY.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.fungus_colony"));
         registration.addIngredientInfo(new ItemStack(MNDItems.STRIDER_ROCK.get()), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.strider_egg"));

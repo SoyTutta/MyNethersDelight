@@ -16,6 +16,7 @@ import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.NetherWartBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -53,7 +54,7 @@ public class LetiosCompostBlock extends Block {
         if (!worldIn.isClientSide) {
             float chance = 0.0F;
             boolean hasLava = false;
-            boolean isNetherBiome = false;
+            boolean isSoulBiome = false;
 
             for (BlockPos neighborPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
                 BlockState neighborState = worldIn.getBlockState(neighborPos);
@@ -61,6 +62,7 @@ public class LetiosCompostBlock extends Block {
                 if (neighborState.is(MNDTags.LETIOS_ACTIVATORS)) {
                     chance += 0.02F;
                 }
+
                 if (neighborState.is(MNDTags.LETIOS_FLAMES)) {
                     if (!neighborState.hasProperty(BlockStateProperties.LIT) || (neighborState.hasProperty(BlockStateProperties.LIT) && neighborState.getValue(BlockStateProperties.LIT))) {
                         chance += 0.02F;
@@ -71,13 +73,13 @@ public class LetiosCompostBlock extends Block {
                     hasLava = true;
                 }
 
-                if (worldIn.getBiome(pos) == BuiltinDimensionTypes.NETHER) {
-                    isNetherBiome = true;
+                if (worldIn.getBiome(pos).is(Biomes.SOUL_SAND_VALLEY)) {
+                    isSoulBiome = true;
                 }
             }
 
             chance += hasLava ? 0.3F : 0.0F;
-            chance += isNetherBiome ? 0.3F : 0.0F;
+            chance += isSoulBiome ? 0.3F : 0.0F;
             if (worldIn.getRandom().nextFloat() <= chance && worldIn.dimensionType().ultraWarm()) {
                 if (state.getValue(FORGOTING) == this.getMaxForgotingStage()) {
                     worldIn.setBlock(pos, MNDBlocks.RESURGENT_SOIL.get().defaultBlockState(), 3);
