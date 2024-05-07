@@ -49,7 +49,7 @@ public class StriderEggItem  extends DrinkableItem {
                 int remainingDuration = selectedEffect.getDuration();
                 int nourishDuration = remainingDuration / 10;
                 if (nourishDuration > 0) {
-                    MobEffectInstance regenerationEffect = new MobEffectInstance(ModEffects.NOURISHMENT.get(), nourishDuration, 0);
+                    MobEffectInstance regenerationEffect = new MobEffectInstance(ModEffects.NOURISHMENT.get(), nourishDuration * 3, 0);
                     consumer.addEffect(regenerationEffect);
                 }
             }

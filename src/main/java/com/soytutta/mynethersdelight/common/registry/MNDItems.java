@@ -200,10 +200,10 @@ public class MNDItems {
             return new BlockItem(MNDBlocks.POWDERY_PRESSURE_PLATE.get(), basicItem());
         });
         POWDERY_SIGN = ITEMS.register("powdery_sign", () -> {
-            return new SignItem(basicItem(), MNDBlocks.POWDERY_SIGN.get(), MNDBlocks.POWDERY_WALL_SIGN.get());
+            return new SignItem(basicItem().stacksTo(16), MNDBlocks.POWDERY_SIGN.get(), MNDBlocks.POWDERY_WALL_SIGN.get());
         });
         POWDERY_HANGING_SIGN = ITEMS.register("powdery_hanging_sign", () -> {
-            return new SignItem(basicItem(), MNDBlocks.POWDERY_HANGING_SIGN.get(), MNDBlocks.POWDERY_WALL_HANGING_SIGN.get());
+            return new SignItem(basicItem().stacksTo(16), MNDBlocks.POWDERY_HANGING_SIGN.get(), MNDBlocks.POWDERY_WALL_HANGING_SIGN.get());
         });
         // FUNGUS-Colony
         WARPED_FUNGUS_COLONY = ITEMS.register("warped_fungus_colony", () -> {

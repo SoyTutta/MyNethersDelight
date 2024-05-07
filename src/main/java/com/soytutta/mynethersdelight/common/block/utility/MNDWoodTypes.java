@@ -1,11 +1,12 @@
 package com.soytutta.mynethersdelight.common.block.utility;
 
 import com.soytutta.mynethersdelight.MyNethersDelight;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
 public class MNDWoodTypes {
     public static final WoodType POWDERY_CANNON =
-            WoodType.register(new WoodType(MyNethersDelight.MODID + ":powdery_cannon", BlockSetType.CRIMSON));
+            WoodType.register(new WoodType(MyNethersDelight.MODID + ":powdery_cannon", BlockSetType.BAMBOO, SoundType.BAMBOO_WOOD, SoundType.BAMBOO_WOOD_HANGING_SIGN, SoundEvents.BAMBOO_WOOD_FENCE_GATE_CLOSE, SoundEvents.BAMBOO_WOOD_FENCE_GATE_OPEN));
 }

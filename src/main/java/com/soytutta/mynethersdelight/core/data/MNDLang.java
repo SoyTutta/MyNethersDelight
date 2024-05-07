@@ -54,6 +54,7 @@ public class MNDLang extends LanguageProvider {
         this.add("farmersdelight.tooltip.hot_cream", "Burning Effects");
         this.add("farmersdelight.tooltip.strider_feed.when_feeding", "When fed to a Strider");
 
+        this.add("mynethersdelight.jei.info.hot_cream", "It burns all active Effects converting them into Fire Resistance and Pungent.\n\nIf you serve it in a Cone it will only Burn one Effect!! Striders also prefer it served this way...");
         this.add("mynethersdelight.jei.info.strider_egg", "Wait... Are Striders Ovoviviparous? that's weird...\n\nAnyway, it's only obtainable by careful hunting.\nhard shell, it can only be eaten starry...");
         this.add("mynethersdelight.jei.info.hoglin_hide", "A great source of leather, it could also serve as a nice hunting trophy.\n\nIf you do not want to damage the leather, try to use something lighter than a Sword...");
         this.add("mynethersdelight.jei.info.r_soil", "Almost every plant or crop feels comfortable in this soil, if you want to moisten need fire instead of water.");

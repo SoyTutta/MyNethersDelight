@@ -66,6 +66,7 @@ public class MNDCreativeTab {
         event.accept(MNDItems.HOGLIN_LOIN.get());
         event.accept(MNDItems.HOGLIN_SAUSAGE.get());
         event.accept(MNDItems.ROASTED_SAUSAGE.get());
+        event.accept(MNDItems.HOTDOG.get());
         event.accept(MNDItems.SAUSAGE_AND_POTATOES.get());
         event.accept(MNDItems.BREAKFAST_SAMPLER.get());
         event.accept(MNDItems.COOKED_LOIN.get());
@@ -80,6 +81,9 @@ public class MNDCreativeTab {
         event.accept(MNDItems.HOT_WINGS.get());
         event.accept(MNDItems.SPICY_CURRY.get());
 
+        event.accept(MNDItems.HOT_CREAM.get());
+        event.accept(MNDItems.HOT_CREAM_CONE.get());
+
         event.accept(MNDItems.HOGLIN_HIDE.get());
         event.accept(MNDItems.RAW_STUFFED_HOGLIN.get());
         event.accept(MNDItems.ROAST_STUFFED_HOGLIN.get());
@@ -91,9 +95,6 @@ public class MNDCreativeTab {
         event.accept(MNDItems.HOGLIN_TROPHY.get());
         event.accept(MNDItems.WAXED_HOGLIN_TROPHY.get());
         event.accept(MNDItems.ZOGLIN_TROPHY.get());
-
-        event.accept(MNDItems.HOT_CREAM.get());
-        event.accept(MNDItems.HOT_CREAM_CONE.get());
     }
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {

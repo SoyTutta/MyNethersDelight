@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/custom_fence_post",
   "textures": {
-    "particle": "minecraft:block/powdery_fence_particle",
+    "particle": "mynethersdelight:block/powdery_fence_particle",
     "texture": "mynethersdelight:block/powdery_fence"
   }
 }

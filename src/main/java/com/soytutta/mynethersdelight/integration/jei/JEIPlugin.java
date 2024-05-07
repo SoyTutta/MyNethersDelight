@@ -50,6 +50,7 @@ public class JEIPlugin implements IModPlugin {
         registration.addIngredientInfo(List.of( new ItemStack(Items.NETHER_WART), new ItemStack(MNDItems.WARPED_FUNGUS_COLONY.get()), new ItemStack(MNDItems.CRIMSON_FUNGUS_COLONY.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.fungus_colony"));
         registration.addIngredientInfo(new ItemStack(MNDItems.STRIDER_ROCK.get()), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.strider_egg"));
         registration.addIngredientInfo(new ItemStack(MNDItems.HOGLIN_HIDE.get()), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.hoglin_hide"));
+        registration.addIngredientInfo(List.of( new ItemStack(MNDItems.HOT_CREAM_CONE.get()), new ItemStack(MNDItems.HOT_CREAM.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.hot_cream"));
         registration.addIngredientInfo(List.of( new ItemStack(MNDItems.ROAST_STUFFED_HOGLIN.get()), new ItemStack(MNDItems.ROAST_EAR.get()), new ItemStack(MNDItems.PLATE_OF_STUFFED_HOGLIN_SNOUT.get()), new ItemStack(MNDItems.PLATE_OF_STUFFED_HOGLIN_HAM.get()), new ItemStack(MNDItems.PLATE_OF_STUFFED_HOGLIN.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.plate_of_stuffed_hoglin"));
     }
 

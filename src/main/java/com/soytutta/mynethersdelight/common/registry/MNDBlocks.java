@@ -172,21 +172,21 @@ public class MNDBlocks {
             return new FenceBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_FENCE).mapColor(MapColor.TERRACOTTA_GRAY));
         });
         POWDERY_FENCE_GATE = BLOCKS.register("powdery_fence_gate", () -> {
-            return new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_FENCE_GATE).mapColor(MapColor.TERRACOTTA_GRAY), WoodType.CRIMSON);
+            return new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_FENCE_GATE).mapColor(MapColor.TERRACOTTA_GRAY), WoodType.BAMBOO);
         });
         POWDERY_DOOR = BLOCKS.register("powdery_door", () -> {
-            return new DoorBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_DOOR).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.CRIMSON);
+            return new DoorBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_DOOR).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.BAMBOO);
 
         });
         POWDERY_TRAPDOOR = BLOCKS.register("powdery_trapdoor", () -> {
-            return new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_TRAPDOOR).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.CRIMSON);
+            return new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_TRAPDOOR).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.BAMBOO);
         });
         POWDERY_BUTTON = BLOCKS.register("powdery_button", () -> {
-            return new ButtonBlock(BlockBehaviour.Properties.copy(POWDERY_PLANKS.get()).noCollission().strength(0.5F).sound(SoundType.WOOD).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.OAK, 30, true);
+            return new ButtonBlock(BlockBehaviour.Properties.copy(POWDERY_PLANKS.get()).noCollission().strength(0.5F).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.BAMBOO, 30, true);
 
         });
         POWDERY_PRESSURE_PLATE = BLOCKS.register("powdery_pressure_plate", () -> {
-            return new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.BAMBOO_PRESSURE_PLATE).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.CRIMSON);
+            return new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING, BlockBehaviour.Properties.copy(Blocks.BAMBOO_PRESSURE_PLATE).mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.BAMBOO);
         });
         POWDERY_SIGN = BLOCKS.register("powdery_sign", () -> {
             return new MNDStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_SIGN), MNDWoodTypes.POWDERY_CANNON);
