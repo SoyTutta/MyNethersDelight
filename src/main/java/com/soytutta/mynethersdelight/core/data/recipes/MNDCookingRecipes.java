@@ -41,7 +41,14 @@ public class MNDCookingRecipes {
                 .unlockedByAnyIngredient(Items.CRIMSON_FUNGUS, Items.WARPED_FUNGUS, MNDItems.STRIDER_SLICE.get(), MNDItems.MINCED_STRIDER.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .build(consumer, "mynethersdelight:cooking/strider_stew");
-
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.SPICY_NOODLE_SOUP.get(), 1, 200, 1.0F)
+                .addIngredient(MNDItems.GHASTA.get())
+                .addIngredient(ForgeTags.COOKED_EGGS)
+                .addIngredient(MNDTags.HOT_SPICE)
+                .addIngredient(ForgeTags.RAW_PORK)
+                .unlockedByAnyIngredient(MNDItems.GHASTA.get(), MNDItems.BULLET_PEPPER.get(), Items.PORKCHOP)
+                .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
+                .build(consumer, "mynethersdelight:cooking/spicy_noodle_soup");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.SPICY_HOGLIN_STEW.get(), 1, 200, 1.0F)
                 .addIngredient(MNDTags.LOIN_HOGLIN)
                 .addIngredient(Items.POTATO)
@@ -52,7 +59,13 @@ public class MNDCookingRecipes {
                 .build(consumer, "mynethersdelight:cooking/spicy_hoglin_stew");
     }
     private static void cookMeals(Consumer<FinishedRecipe> consumer) {
-
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.DEVILED_EGG.get(), 2, 400, 1.0F)
+                .addIngredient(MNDItems.BOILED_EGG.get())
+                .addIngredient(MNDTags.HOT_SPICE)
+                .addIngredient(ForgeTags.RAW_BACON)
+                .unlockedByAnyIngredient(MNDItems.STRIDER_EGG.get())
+                .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
+                .build(consumer, "mynethersdelight:cooking/boiled_egg");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.STRIDER_WITH_GRILLED_FUNGUS.get(), 1, 400, 1.0F)
                 .addIngredient(MNDTags.STRIDER_SLICE)
                 .addIngredient(Items.CRIMSON_FUNGUS, 1)
@@ -67,7 +80,7 @@ public class MNDCookingRecipes {
                 .addIngredient(MNDTags.MINCED_STRIDER)
                 .addIngredient(Items.CRIMSON_FUNGUS, 2)
                 .addIngredient(ForgeTags.MILK)
-                .addIngredient(ModItems.RAW_PASTA.get())
+                .addIngredient(ForgeTags.PASTA_RAW_PASTA)
                 .unlockedByAnyIngredient(MNDItems.MINCED_STRIDER.get(), Items.CRIMSON_FUNGUS)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .build(consumer, "mynethersdelight:cooking/crimson_stroganoff");

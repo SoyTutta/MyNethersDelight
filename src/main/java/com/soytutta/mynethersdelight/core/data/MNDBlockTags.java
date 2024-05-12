@@ -30,14 +30,27 @@ public class MNDBlockTags extends BlockTagsProvider {
     protected void registerBlockMineables() {
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(MNDBlocks.LETIOS_COMPOST.get(), MNDBlocks.RESURGENT_SOIL.get(), MNDBlocks.RESURGENT_SOIL_FARMLAND.get());
         this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(MNDBlocks.NETHER_BRICKS_CABINET.get(),MNDBlocks.NETHER_STOVE.get());
-        this.tag(BlockTags.MINEABLE_WITH_AXE).add(MNDBlocks.HOGLIN_TROPHY.get(),MNDBlocks.WAXED_HOGLIN_TROPHY.get(),MNDBlocks.ZOGLIN_TROPHY.get(),MNDBlocks.POWDERY_CANNON.get(),MNDBlocks.POWDERY_CANE.get(),MNDBlocks.POWDERY_CHUBBY_SAPLING.get(),MNDBlocks.BULLET_PEPPER.get(),MNDBlocks.BLOCK_OF_POWDERY_CANNON.get(),MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get(),MNDBlocks.POWDERY_PLANKS.get(),MNDBlocks.POWDERY_PLANKS_SLAB.get(),MNDBlocks.POWDERY_PLANKS_STAIRS.get(),MNDBlocks.POWDERY_MOSAIC.get(),MNDBlocks.POWDERY_MOSAIC_STAIRS.get(),MNDBlocks.POWDERY_MOSAIC_SLAB.get(),MNDBlocks.POWDERY_FENCE.get(),MNDBlocks.POWDERY_FENCE_GATE.get(),MNDBlocks.POWDERY_TRAPDOOR.get(),MNDBlocks.POWDERY_DOOR.get(),MNDBlocks.POWDERY_BUTTON.get(),MNDBlocks.POWDERY_PRESSURE_PLATE.get(),MNDBlocks.POWDERY_WALL_SIGN.get(),MNDBlocks.POWDERY_SIGN.get(),MNDBlocks.POWDERY_WALL_HANGING_SIGN.get(),MNDBlocks.POWDERY_HANGING_SIGN.get(),MNDBlocks.POWDERY_CABINET.get());
+        this.tag(BlockTags.MINEABLE_WITH_AXE).add(MNDBlocks.HOGLIN_TROPHY.get(),MNDBlocks.WAXED_HOGLIN_TROPHY.get(),MNDBlocks.ZOGLIN_TROPHY.get(),MNDBlocks.POWDERY_CANNON.get(),MNDBlocks.POWDERY_CANE.get(),MNDBlocks.POWDERY_CHUBBY_SAPLING.get(),MNDBlocks.BULLET_PEPPER.get(),MNDBlocks.BLOCK_OF_POWDERY_CANNON.get(),MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get(),MNDBlocks.POWDERY_MOSAIC.get(),MNDBlocks.POWDERY_MOSAIC_STAIRS.get(),MNDBlocks.POWDERY_MOSAIC_SLAB.get());
         this.tag(ModTags.MINEABLE_WITH_KNIFE).add(MNDBlocks.POWDERY_CANNON.get(),MNDBlocks.POWDERY_CANE.get(),MNDBlocks.POWDERY_CHUBBY_SAPLING.get(),MNDBlocks.BULLET_PEPPER.get());
     }
 
     protected void registerMinecraftTags() {
-        this.tag(BlockTags.BAMBOO_PLANTABLE_ON).add((Block)MNDBlocks.RESURGENT_SOIL.get(),MNDBlocks.POWDERY_CANNON.get());
-        this.tag(BlockTags.HOGLIN_REPELLENTS).add((Block)MNDBlocks.HOGLIN_TROPHY.get(),MNDBlocks.WAXED_HOGLIN_TROPHY.get(),MNDBlocks.ZOGLIN_TROPHY.get(), MNDBlocks.BULLET_PEPPER.get());
-        this.tag(BlockTags.PIGLIN_REPELLENTS).add((Block)MNDBlocks.ZOGLIN_TROPHY.get(), MNDBlocks.BULLET_PEPPER.get());
+        this.tag(BlockTags.PLANKS).add(MNDBlocks.POWDERY_PLANKS.get());
+        this.tag(BlockTags.WOODEN_SLABS).add(MNDBlocks.POWDERY_PLANKS_SLAB.get());
+        this.tag(BlockTags.WOODEN_STAIRS).add(MNDBlocks.POWDERY_PLANKS_STAIRS.get());
+        this.tag(BlockTags.WOODEN_FENCES).add(MNDBlocks.POWDERY_FENCE.get());
+        this.tag(BlockTags.FENCE_GATES).add(MNDBlocks.POWDERY_FENCE_GATE.get());
+        this.tag(BlockTags.WOODEN_DOORS).add(MNDBlocks.POWDERY_DOOR.get());
+        this.tag(BlockTags.WOODEN_TRAPDOORS).add(MNDBlocks.POWDERY_TRAPDOOR.get());
+        this.tag(BlockTags.WOODEN_PRESSURE_PLATES).add(MNDBlocks.POWDERY_PRESSURE_PLATE.get());
+        this.tag(BlockTags.WOODEN_BUTTONS).add(MNDBlocks.POWDERY_BUTTON.get());
+        this.tag(BlockTags.SIGNS).add(MNDBlocks.POWDERY_WALL_SIGN.get());
+        this.tag(BlockTags.STANDING_SIGNS).add(MNDBlocks.POWDERY_SIGN.get());
+        this.tag(BlockTags.WALL_HANGING_SIGNS).add(MNDBlocks.POWDERY_WALL_HANGING_SIGN.get());
+        this.tag(BlockTags.CEILING_HANGING_SIGNS).add(MNDBlocks.POWDERY_HANGING_SIGN.get());
+        this.tag(BlockTags.BAMBOO_PLANTABLE_ON).add(MNDBlocks.RESURGENT_SOIL.get(),MNDBlocks.POWDERY_CANNON.get());
+        this.tag(BlockTags.HOGLIN_REPELLENTS).add(MNDBlocks.HOGLIN_TROPHY.get(),MNDBlocks.WAXED_HOGLIN_TROPHY.get(),MNDBlocks.ZOGLIN_TROPHY.get(), MNDBlocks.BULLET_PEPPER.get());
+        this.tag(BlockTags.PIGLIN_REPELLENTS).add(MNDBlocks.ZOGLIN_TROPHY.get(), MNDBlocks.BULLET_PEPPER.get());
         this.tag(BlockTags.MUSHROOM_GROW_BLOCK).add(MNDBlocks.LETIOS_COMPOST.get(), MNDBlocks.RESURGENT_SOIL.get(), MNDBlocks.RESURGENT_SOIL_FARMLAND.get());
         this.tag(BlockTags.TALL_FLOWERS).add(MNDBlocks.POWDERY_CHUBBY_SAPLING.get(),MNDBlocks.POWDERY_CANE.get());
         this.tag(BlockTags.SMALL_FLOWERS).add(MNDBlocks.BULLET_PEPPER.get());

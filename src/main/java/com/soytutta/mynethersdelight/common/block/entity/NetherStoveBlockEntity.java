@@ -122,14 +122,16 @@ public class NetherStoveBlockEntity extends SyncedBlockEntity {
             for(int i = 0; i < this.inventory.getSlots(); ++i) {
                 ItemStack stoveStack = this.inventory.getStackInSlot(i);
                 if (!stoveStack.isEmpty()) {
-                    int var10002 = this.cookingTimes[i]++;
+                    ++cookingTimes[i];
                     if (this.cookingTimes[i] >= this.cookingTimesTotal[i]) {
-                        Container inventoryWrapper = new SimpleContainer(new ItemStack[]{stoveStack});
+                        Container inventoryWrapper = new SimpleContainer(stoveStack);
                         Optional<CampfireCookingRecipe> recipe = this.getMatchingRecipe(inventoryWrapper, i);
                         if (recipe.isPresent()) {
-                            ItemStack resultStack = ((CampfireCookingRecipe)recipe.get()).getResultItem(this.level.registryAccess());
+                            ItemStack resultStack = recipe.get().getResultItem(level.registryAccess());
                             if (!resultStack.isEmpty()) {
-                                ItemUtils.spawnItemEntity(this.level, resultStack.copy(), (double)this.worldPosition.getX() + 0.5, (double)this.worldPosition.getY() + 1.0, (double)this.worldPosition.getZ() + 0.5, this.level.random.nextGaussian() * 0.009999999776482582, 0.10000000149011612, this.level.random.nextGaussian() * 0.009999999776482582);
+                                ItemUtils.spawnItemEntity(level, resultStack.copy(),
+                                        worldPosition.getX() + 0.5, worldPosition.getY() + 1.0, worldPosition.getZ() + 0.5,
+                                        level.random.nextGaussian() * (double) 0.01F, 0.1F, level.random.nextGaussian() * (double) 0.01F);
                             }
                         }
 

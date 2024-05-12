@@ -1,6 +1,7 @@
 package com.soytutta.mynethersdelight.common.utility;
 
 import com.soytutta.mynethersdelight.common.registry.MNDEffects;
+import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -12,6 +13,13 @@ public class MNDFoodValues
         public static final FoodProperties STRIDER_EGG = (new FoodProperties.Builder())
                 .nutrition(3).saturationMod(0.3F)
                 .alwaysEat().build();
+        public static final FoodProperties BOILED_EGG = (new FoodProperties.Builder())
+                .nutrition(4).saturationMod(0.7F)
+                .fast().build();
+        public static final FoodProperties DEVILED_EGG = (new FoodProperties.Builder())
+                .nutrition(5).saturationMod(0.7F)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 200, 0), 1.0F)
+                .fast().build();
         public static final FoodProperties STRIDER_SLICE = (new FoodProperties.Builder())
                 .nutrition(4).saturationMod(0.7f)
                 .effect(() -> new MobEffectInstance(MobEffects.POISON, 200, 0), 0.15F)
@@ -75,7 +83,21 @@ public class MNDFoodValues
                 .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 2400, 0), 1.0F)
                 .build();
+        // SPICY
+        public static final FoodProperties GHASTA = (new FoodProperties.Builder())
+                .nutrition(2).saturationMod(0.3F)
+                .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F)
+                .build();
+        public static final FoodProperties GHAST_SALAD = (new FoodProperties.Builder())
+                .nutrition(6).saturationMod(0.7F)
+                .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 300, 0), 1.0F)
+                .build();
 
+        public static final FoodProperties SPICY_NOODLE_SOUP = (new FoodProperties.Builder())
+                .nutrition(14).saturationMod(0.75F)
+                .effect(() ->  new MobEffectInstance(ModEffects.COMFORT.get(), 6000, 0), 1.0F)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 1200, 1), 1.0F)
+                .build();
         // SPICY
         public static final FoodProperties BULLET_PEPPER = (new FoodProperties.Builder())
                 .nutrition(2).saturationMod(0.5f)

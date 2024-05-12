@@ -24,6 +24,7 @@ public class MNDSmeltingRecipes {  public MNDSmeltingRecipes() {
 }
 
     public static void register(Consumer<FinishedRecipe> consumer) {
+        foodSmeltingRecipes("boiled_egg", MNDItems.STRIDER_EGG.get(), MNDItems.BOILED_EGG.get(), 0.35F, consumer);
         foodSmeltingRecipes("hoglin_loin", MNDItems.HOGLIN_LOIN.get(), MNDItems.COOKED_LOIN.get(), 0.35F, consumer);
         foodSmeltingRecipes("hoglin_sausage", MNDItems.HOGLIN_SAUSAGE.get(), MNDItems.ROASTED_SAUSAGE.get(), 0.35F, consumer);
     }

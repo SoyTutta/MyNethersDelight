@@ -64,7 +64,10 @@ public class MNDItemTags extends ItemTagsProvider {
     }
 
     private void registerForgeTags() {
+        this.tag(ForgeTags.COOKED_EGGS).add(MNDItems.BOILED_EGG.get());
         this.tag(ForgeTags.EGGS).add(MNDItems.STRIDER_EGG.get());
+        this.tag(ForgeTags.PASTA_RAW_PASTA).add(MNDItems.GHASTA.get());
+        this.tag(ForgeTags.PASTA).add(MNDItems.GHASTA.get());
         this.tag(ForgeTags.RAW_FISHES).add(MNDItems.STRIDER_SLICE.get());
         this.tag(ForgeTags.RAW_PORK).add(MNDItems.HOGLIN_SAUSAGE.get());
     }
@@ -80,7 +83,7 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(ItemTags.WOODEN_SLABS).add(MNDItems.POWDERY_PLANKS_SLAB.get());
         this.tag(ItemTags.WOODEN_STAIRS).add(MNDItems.POWDERY_PLANKS_STAIRS.get());
         this.tag(ItemTags.WOODEN_FENCES).add(MNDItems.POWDERY_FENCE.get());
-        this.tag(ItemTags.NON_FLAMMABLE_WOOD).add(MNDItems.BLOCK_OF_POWDERY_CANNON.get(), MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
+        this.tag(ItemTags.NON_FLAMMABLE_WOOD).addTag(MNDTags.POWDERY_BLOCKS);
 
     }
 

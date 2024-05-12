@@ -2,6 +2,9 @@
   "replace": false,
   "entries": [
     "mynethersdelight:scavenging_strider_egg",
-    "mynethersdelight:scavenging_hoglin_hide"
+    "mynethersdelight:scavenging_hoglin_hide",
+    "mynethersdelight:scavenging_ghasta",
+    "mynethersdelight:scavenging_extra_ghasta0",
+    "mynethersdelight:scavenging_extra_ghasta1"
   ]
 }

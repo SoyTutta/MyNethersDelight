@@ -55,6 +55,8 @@ public class MNDItems {
     // STRIDER
     public static final RegistryObject<Item> STRIDER_ROCK;
     public static final RegistryObject<Item> STRIDER_EGG;
+    public static final RegistryObject<Item> BOILED_EGG;
+    public static final RegistryObject<Item> DEVILED_EGG;
     public static final RegistryObject<Item> STRIDER_SLICE;
     public static final RegistryObject<Item> MINCED_STRIDER;
     public static final RegistryObject<Item> BLEEDING_TARTAR;
@@ -73,6 +75,10 @@ public class MNDItems {
     public static final RegistryObject<Item> COOKED_LOIN;
     public static final RegistryObject<Item> BLUE_TENDERLOIN_STEAK;
     public static final RegistryObject<Item> FRIED_HOGLIN_CHOP;
+    // GHAST
+    public static final RegistryObject<Item> GHASTA;
+    public static final RegistryObject<Item> GHAST_SALAD;
+    public static final RegistryObject<Item> SPICY_NOODLE_SOUP;
     // SPICY
     public static final RegistryObject<Item> BULLET_PEPPER;
     public static final RegistryObject<Item> SPICY_SKEWER;
@@ -219,6 +225,12 @@ public class MNDItems {
         STRIDER_EGG = ITEMS.register("strider_egg", () -> {
             return new StriderEggItem(foodItem(MNDFoodValues.STRIDER_EGG).stacksTo(16));
         });
+        BOILED_EGG = ITEMS.register("boiled_egg", () -> {
+            return new ConsumableItem(foodItem(MNDFoodValues.BOILED_EGG));
+        });
+        DEVILED_EGG = ITEMS.register("deviled_egg", () -> {
+            return new ConsumableItem(foodItem(MNDFoodValues.DEVILED_EGG));
+        });
         STRIDER_SLICE = ITEMS.register("strider_slice", ()  -> {
             return new ConsumableItem(foodItem(MNDFoodValues.STRIDER_SLICE).fireResistant());
         });
@@ -266,6 +278,16 @@ public class MNDItems {
         });
         FRIED_HOGLIN_CHOP = ITEMS.register("fried_hoglin_chop", ()  -> {
             return new ConsumableItem(bowlFoodItem(MNDFoodValues.FRIED_HOGLIN_CHOP), true);
+        });
+        // GHAST
+        GHASTA = ITEMS.register("ghasta", () -> {
+            return new ConsumableItem(foodItem(MNDFoodValues.GHASTA));
+        });
+        GHAST_SALAD = ITEMS.register("ghast_salad", () -> {
+            return new ConsumableItem(bowlFoodItem(MNDFoodValues.GHAST_SALAD), true);
+        });
+        SPICY_NOODLE_SOUP = ITEMS.register("spicy_noodle_soup", () -> {
+            return new ConsumableItem(bowlFoodItem(MNDFoodValues.SPICY_NOODLE_SOUP), true);
         });
         // SPICY
         BULLET_PEPPER = ITEMS.register("bullet_pepper", () -> {

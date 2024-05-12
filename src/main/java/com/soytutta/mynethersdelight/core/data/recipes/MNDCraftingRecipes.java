@@ -337,6 +337,13 @@ public class MNDCraftingRecipes {
                 .requires(Items.BLAZE_ROD)
                 .unlockedBy("has_blaze_rod", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BLAZE_ROD))
                 .save(consumer, "mynethersdelight:crafting/spicy_skewer");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.GHAST_SALAD.get())
+                .requires(MNDItems.GHASTA.get())
+                .requires(ForgeTags.VEGETABLES)
+                .requires(ForgeTags.VEGETABLES_CARROT)
+                .requires(Items.BOWL)
+                .unlockedBy("has_blaze_rod", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BLAZE_ROD))
+                .save(consumer, "mynethersdelight:crafting/ghast_salad");
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDItems.RAW_STUFFED_HOGLIN.get())
                 .pattern("hwh")
                 .pattern("l#l")
