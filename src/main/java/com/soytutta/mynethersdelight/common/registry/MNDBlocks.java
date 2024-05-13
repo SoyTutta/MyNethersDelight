@@ -30,6 +30,7 @@ import java.util.function.ToIntFunction;
 public class MNDBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, "mynethersdelight");
 
+    public static final RegistryObject<Block> BULLET_PEPPER_CRATE;
     public static final RegistryObject<Block> NETHER_BRICKS_CABINET;
     public static final RegistryObject<Block> NETHER_STOVE;
     public static final RegistryObject<Block> LETIOS_COMPOST;
@@ -72,6 +73,9 @@ public class MNDBlocks {
     public MNDBlocks() {
     }
     static {
+        BULLET_PEPPER_CRATE = BLOCKS.register("bullet_pepper_crate", () -> {
+            return new Block(Properties.copy(Blocks.OAK_PLANKS).strength(2.0F, 3.0F).sound(SoundType.BAMBOO_WOOD).lightLevel((light) -> 15));
+        });
         NETHER_BRICKS_CABINET = BLOCKS.register("nether_bricks_cabinet", () -> {
             return new CabinetBlock(Properties.copy(Blocks.NETHER_BRICKS));
         });

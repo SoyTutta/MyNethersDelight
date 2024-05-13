@@ -30,6 +30,7 @@ public class MNDItems {
     public static final RegistryObject<Item> RESURGENT_SOIL;
     public static final RegistryObject<Item> RESURGENT_SOIL_FARMLAND;
     // POWDERY
+    public static final RegistryObject<Item> BULLET_PEPPER_CRATE;
     public static final RegistryObject<Item> POWDER_CANNON;
     public static final RegistryObject<Item> POWDERY_TORCH;
     public static final RegistryObject<Item> POWDERY_CABINET;
@@ -149,6 +150,9 @@ public class MNDItems {
             return new BlockItem(MNDBlocks.RESURGENT_SOIL_FARMLAND.get(), basicItem());
         });
         // POWDERY
+        BULLET_PEPPER_CRATE = ITEMS.register("bullet_pepper_crate", () -> {
+            return new BlockItem(MNDBlocks.BULLET_PEPPER_CRATE.get(), basicItem());
+        });
         POWDER_CANNON = ITEMS.register("powder_cannon", () -> {
             return new FuelBlockItem(MNDBlocks.POWDERY_CANNON.get(), basicItem(),500);
         });

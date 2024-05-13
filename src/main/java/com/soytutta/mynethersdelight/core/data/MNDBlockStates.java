@@ -37,6 +37,8 @@ public class MNDBlockStates extends BlockStateProvider {
         this.cabinetBlock(MNDBlocks.NETHER_BRICKS_CABINET.get(), "nether_bricks");
 
         // POWDERY
+        this.crateBlock(MNDBlocks.BULLET_PEPPER_CRATE.get(), "bullet_pepper");
+        this.blockItem(MNDBlocks.BULLET_PEPPER_CRATE);
         this.cabinetBlock(MNDBlocks.POWDERY_CABINET.get(), "powdery");
         this.logBlock(((RotatedPillarBlock) MNDBlocks.BLOCK_OF_POWDERY_CANNON.get()));
         this.blockItem(MNDBlocks.BLOCK_OF_POWDERY_CANNON);
@@ -71,6 +73,11 @@ public class MNDBlockStates extends BlockStateProvider {
         simpleBlock(signBlock, sign);
         simpleBlock(wallSignBlock, sign);
     }
+
+    public void crateBlock(Block block, String cropName) {
+        this.simpleBlock(block, this.models().cubeBottomTop(this.blockName(block), this.resourceBlock(cropName + "_crate_side"), this.resourceBlock(cropName + "_crate_bottom"), this.resourceBlock(cropName + "_crate_top")));
+    }
+
     private String name(Block block) {
         return key(block).getPath();
     }

@@ -75,6 +75,10 @@ public class MNDCraftingRecipes {
     }
 
     private static void recipesBlocks(Consumer<FinishedRecipe> consumer) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.BULLET_PEPPER_CRATE.get(), 1)
+                .requires(MNDItems.BULLET_PEPPER.get(),9)
+                .unlockedBy("has_pepper", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.BULLET_PEPPER.get()))
+                .save(consumer, new ResourceLocation("mynethersdelight", "bullet_papper_crate"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.BLOCK_OF_POWDERY_CANNON.get())
                 .pattern("###")
                 .pattern("###")
