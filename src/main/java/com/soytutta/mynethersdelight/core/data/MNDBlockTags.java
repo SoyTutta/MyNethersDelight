@@ -36,7 +36,9 @@ public class MNDBlockTags extends BlockTagsProvider {
 
     protected void registerMinecraftTags() {
         this.tag(BlockTags.PLANKS).add(MNDBlocks.POWDERY_PLANKS.get());
+        this.tag(BlockTags.SLABS).add(MNDBlocks.POWDERY_MOSAIC.get());
         this.tag(BlockTags.WOODEN_SLABS).add(MNDBlocks.POWDERY_PLANKS_SLAB.get());
+        this.tag(BlockTags.STAIRS).add(MNDBlocks.POWDERY_MOSAIC_STAIRS.get());
         this.tag(BlockTags.WOODEN_STAIRS).add(MNDBlocks.POWDERY_PLANKS_STAIRS.get());
         this.tag(BlockTags.WOODEN_FENCES).add(MNDBlocks.POWDERY_FENCE.get());
         this.tag(BlockTags.FENCE_GATES).add(MNDBlocks.POWDERY_FENCE_GATE.get());

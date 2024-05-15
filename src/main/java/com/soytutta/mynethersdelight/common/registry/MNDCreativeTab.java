@@ -25,11 +25,11 @@ public class MNDCreativeTab {
 
         event.accept(MNDItems.NETHER_BRICKS_CABINET.get());
         event.accept(MNDItems.NETHER_STOVE.get());
+        event.accept(MNDItems.BULLET_PEPPER_CRATE.get());
         event.accept(MNDItems.LETIOS_COMPOST.get());
         event.accept(MNDItems.RESURGENT_SOIL.get());
         event.accept(MNDItems.RESURGENT_SOIL_FARMLAND.get());
 
-        event.accept(MNDItems.BULLET_PEPPER_CRATE.get());
         event.accept(MNDItems.POWDER_CANNON.get());
         event.accept(MNDItems.POWDERY_TORCH.get());
         event.accept(MNDItems.BLOCK_OF_POWDERY_CANNON.get());

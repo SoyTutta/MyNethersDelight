@@ -20,12 +20,6 @@ import java.util.function.Consumer;
 
 
 public class MNDCookingRecipes {
-    public static final int FAST_COOKING = 100;
-    public static final int NORMAL_COOKING = 200;
-    public static final int SLOW_COOKING = 400;
-    public static final float SMALL_EXP = 0.35F;
-    public static final float MEDIUM_EXP = 1.0F;
-    public static final float LARGE_EXP = 2.0F;
     public MNDCookingRecipes() {
     }
     public static void register(Consumer<FinishedRecipe> consumer) {
@@ -35,7 +29,7 @@ public class MNDCookingRecipes {
     private static void cookMinecraftSoups(Consumer<FinishedRecipe> consumer) {
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.STRIDER_STEW.get(), 1, 400, 1.0F)
                 .addIngredient(MNDTags.STRIDER_MEATS)
-                .addIngredient(Items.WARPED_FUNGUS, 1)
+                .addIngredient(Ingredient.of(Items.WARPED_FUNGUS, Items.CRIMSON_FUNGUS))
                 .addIngredient(Ingredient.of(Items.WARPED_FUNGUS, Items.CRIMSON_FUNGUS, Items.RED_MUSHROOM, Items.BROWN_MUSHROOM))
                 .addIngredient(Ingredient.of(Items.WARPED_ROOTS, Items.CRIMSON_ROOTS, ModItems.STRAW.get()))
                 .unlockedByAnyIngredient(Items.CRIMSON_FUNGUS, Items.WARPED_FUNGUS, MNDItems.STRIDER_SLICE.get(), MNDItems.MINCED_STRIDER.get())
@@ -130,7 +124,7 @@ public class MNDCookingRecipes {
                 .unlockedByAnyIngredient(MNDItems.HOTDOG.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .build(consumer, "mynethersdelight:cooking/chilidog");
-        CookingPotRecipeBuilder.cookingPotRecipe((ItemLike)MNDItems.SAUSAGE_AND_POTATOES.get(), 1, 200, 0.35F)
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.SAUSAGE_AND_POTATOES.get(), 1, 200, 0.35F)
                 .addIngredient(ForgeTags.VEGETABLES_POTATO)
                 .addIngredient(MNDItems.HOGLIN_SAUSAGE.get(), 2)
                 .unlockedByAnyIngredient(MNDItems.HOGLIN_SAUSAGE.get())

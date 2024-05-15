@@ -21,14 +21,17 @@ public class MNDBlockEntityTypes {
     }
 
     static {
-        NETHER_STOVE = TILES.register("nether_stove", () -> {
-            return BlockEntityType.Builder.of(NetherStoveBlockEntity::new, new Block[]{MNDBlocks.NETHER_STOVE.get()}).build(null);
-        });
-        MND_SIGN = TILES.register("mnd_sign", () -> {
-            return BlockEntityType.Builder.of(MNDSignBlockEntity::new, MNDBlocks.POWDERY_SIGN.get(), MNDBlocks.POWDERY_WALL_SIGN.get()).build((null));
-        });
-        MND_HSIGN = TILES.register("mnd_hsign", () -> {
-            return BlockEntityType.Builder.of(MNDHangingSignBlockEntity::new, MNDBlocks.POWDERY_HANGING_SIGN.get(), MNDBlocks.POWDERY_WALL_HANGING_SIGN.get()).build((null));
-        });
+        NETHER_STOVE = TILES.register("nether_stove", () ->
+                BlockEntityType.Builder.of(NetherStoveBlockEntity::new,
+                        new Block[]{MNDBlocks.NETHER_STOVE.get()}).build(null)
+        );
+        MND_SIGN = TILES.register("mnd_sign", () ->
+                BlockEntityType.Builder.of(MNDSignBlockEntity::new,
+                        MNDBlocks.POWDERY_SIGN.get(), MNDBlocks.POWDERY_WALL_SIGN.get()).build((null))
+        );
+        MND_HSIGN = TILES.register("mnd_hsign", () ->
+                BlockEntityType.Builder.of(MNDHangingSignBlockEntity::new,
+                        MNDBlocks.POWDERY_HANGING_SIGN.get(), MNDBlocks.POWDERY_WALL_HANGING_SIGN.get()).build((null))
+        );
     }
 }
