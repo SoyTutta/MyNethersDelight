@@ -5,7 +5,6 @@ import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraftforge.common.data.BlockTagsProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
@@ -35,6 +34,7 @@ public class MNDBlockTags extends BlockTagsProvider {
     }
 
     protected void registerMinecraftTags() {
+        this.tag(BlockTags.FLOWER_POTS).add(MNDBlocks.POTTED_BULLET_PEPPER.get(),MNDBlocks.POTTED_POWDERY_CANNON.get());
         this.tag(BlockTags.PLANKS).add(MNDBlocks.POWDERY_PLANKS.get());
         this.tag(BlockTags.SLABS).add(MNDBlocks.POWDERY_MOSAIC.get());
         this.tag(BlockTags.WOODEN_SLABS).add(MNDBlocks.POWDERY_PLANKS_SLAB.get());

@@ -1,7 +1,5 @@
 package com.soytutta.mynethersdelight.common.tag;
 
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
@@ -10,9 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 public class MNDTags {
-    public static final TagKey<Item> NETHER_STOVE = modItemTag("nether_stove");
     public static final TagKey<Item> BLOCK_OF_POWDERY = modItemTag("block_of_powdery");
-    public static final TagKey<Item> POWDERY_BLOCKS = modItemTag("powdery_blocks");
 
     public static final TagKey<Block> LETIOS_ACTIVATORS = modBlockTag("letios_activators");
     public static final TagKey<Block> LETIOS_FLAMES = modBlockTag("letios_flames");

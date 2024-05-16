@@ -37,15 +37,10 @@ public class MNDItemTags extends ItemTagsProvider {
     }
 
     private void registerModTags() {
-        this.tag(MNDTags.NETHER_STOVE).add(MNDItems.NETHER_STOVE.get(),MNDItems.SOUL_NETHER_STOVE.get());
-
         this.tag(ModTags.WOODEN_CABINETS).add(MNDItems.POWDERY_CABINET.get());
         this.tag(ModTags.CABINETS).add(MNDItems.NETHER_BRICKS_CABINET.get());
 
         this.tag(MNDTags.BLOCK_OF_POWDERY).add(MNDItems.BLOCK_OF_POWDERY_CANNON.get(), MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
-        this.tag(MNDTags.POWDERY_BLOCKS).add(MNDItems.POWDERY_CABINET.get(),MNDItems.POWDERY_PLANKS.get(),MNDItems.POWDERY_PLANKS_STAIRS.get(),MNDItems.POWDERY_PLANKS_SLAB.get(),
-                MNDItems.POWDERY_MOSAIC.get(),MNDItems.POWDERY_MOSAIC_STAIRS.get(),MNDItems.POWDERY_MOSAIC_SLAB.get(),MNDItems.POWDERY_FENCE.get(),MNDItems.POWDERY_FENCE_GATE.get(),
-                MNDItems.POWDERY_DOOR.get(),MNDItems.POWDERY_TRAPDOOR.get(),  MNDItems.POWDERY_BUTTON.get(), MNDItems.POWDERY_PRESSURE_PLATE.get()).addTag(MNDTags.BLOCK_OF_POWDERY);
 
         this.tag(MNDTags.STOVE_SOUL_FUEL).addTag(ItemTags.SOUL_FIRE_BASE_BLOCKS);
         this.tag(MNDTags.STOVE_FIRE_FUEL).add(Items.BLAZE_ROD, Items.FIRE_CHARGE, Items.MAGMA_BLOCK, Items.MAGMA_CREAM).addTag(MNDTags.HOT_SPICE);
@@ -81,9 +76,17 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(ItemTags.WOODEN_TRAPDOORS).add(MNDItems.POWDERY_TRAPDOOR.get());
         this.tag(ItemTags.WOODEN_DOORS).add(MNDItems.POWDERY_DOOR.get());
         this.tag(ItemTags.WOODEN_SLABS).add(MNDItems.POWDERY_PLANKS_SLAB.get());
+        this.tag(ItemTags.SLABS).add(MNDItems.POWDERY_MOSAIC_SLAB.get());
         this.tag(ItemTags.WOODEN_STAIRS).add(MNDItems.POWDERY_PLANKS_STAIRS.get());
+        this.tag(ItemTags.STAIRS).add(MNDItems.POWDERY_MOSAIC_STAIRS.get());
         this.tag(ItemTags.WOODEN_FENCES).add(MNDItems.POWDERY_FENCE.get());
-        this.tag(ItemTags.NON_FLAMMABLE_WOOD).addTag(MNDTags.POWDERY_BLOCKS);
+        this.tag(ItemTags.SIGNS).add(MNDItems.POWDERY_SIGN.get());
+        this.tag(ItemTags.HANGING_SIGNS).add(MNDItems.POWDERY_HANGING_SIGN.get());
+
+        this.tag(ItemTags.NON_FLAMMABLE_WOOD).addTag(MNDTags.BLOCK_OF_POWDERY).add(MNDItems.POWDERY_PLANKS.get(),MNDItems.POWDERY_MOSAIC.get(),
+                MNDItems.POWDERY_PLANKS_SLAB.get(),MNDItems.POWDERY_MOSAIC_SLAB.get(),MNDItems.POWDERY_PLANKS_STAIRS.get(),MNDItems.POWDERY_MOSAIC_STAIRS.get(),
+                MNDItems.POWDERY_FENCE.get(),MNDItems.POWDERY_FENCE_GATE.get(),MNDItems.POWDERY_DOOR.get(),MNDItems.POWDERY_TRAPDOOR.get(),
+                MNDItems.POWDERY_PRESSURE_PLATE.get(),MNDItems.POWDERY_BUTTON.get(),MNDItems.POWDERY_SIGN.get(),MNDItems.POWDERY_HANGING_SIGN.get());
 
     }
 
