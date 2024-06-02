@@ -10,7 +10,6 @@ import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
-import net.minecraft.world.level.ItemLike;
 import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
@@ -131,16 +130,16 @@ public class MNDCookingRecipes {
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .build(consumer, "mynethersdelight:cooking/sausage_and_potatoes");
 
-        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.HOT_CREAM.get(), 1, 200, 1.0F,Items.LAVA_BUCKET)
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.HOT_CREAM.get(), 1, 200, 1.0F,Items.BUCKET)
                 .addIngredient(MNDTags.HOT_SPICE)
-                .addIngredient(Items.MAGMA_CREAM)
+                .addIngredient(ForgeTags.EGGS)
                 .addIngredient(MNDTags.BULLET_PEPPER)
                 .addIngredient(Items.MAGMA_CREAM)
-                .addIngredient(ForgeTags.EGGS)
+                .addIngredient(Items.LAVA_BUCKET)
                 .addIngredient(Items.MAGMA_CREAM)
 
                 .unlockedByAnyIngredient(Items.LAVA_BUCKET)
-                .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
+                .setRecipeBookTab(CookingPotRecipeBookTab.DRINKS)
                 .build(consumer, "mynethersdelight:cooking/hotcream");
         }
 }

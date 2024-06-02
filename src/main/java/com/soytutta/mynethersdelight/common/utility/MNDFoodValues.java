@@ -1,7 +1,6 @@
 package com.soytutta.mynethersdelight.common.utility;
 
 import com.soytutta.mynethersdelight.common.registry.MNDEffects;
-import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
@@ -46,6 +45,14 @@ public class MNDFoodValues
                 .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 600, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(ModEffects.COMFORT.get(), 2400, 0), 1.0F)
                 .build();
+        public static final FoodProperties STRIDERLOAF = (new FoodProperties.Builder())
+                .nutrition(5).saturationMod(1.25f)
+                .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1200, 0), 1.0F)
+                .build();
+        public static final FoodProperties COLD_STRIDERLOAF = (new FoodProperties.Builder())
+                .nutrition(11).saturationMod(0.1f)
+                .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 800, 0), 1.0F)
+                .build();
         // HOGLIN
         public static final FoodProperties HOGLIN_LOIN = (new FoodProperties.Builder())
                 .nutrition(4).saturationMod(0.35f)
@@ -83,20 +90,28 @@ public class MNDFoodValues
                 .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 2400, 0), 1.0F)
                 .build();
-        // SPICY
+        // GHASTA
         public static final FoodProperties GHASTA = (new FoodProperties.Builder())
                 .nutrition(2).saturationMod(0.3F)
                 .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F)
                 .build();
         public static final FoodProperties GHAST_SALAD = (new FoodProperties.Builder())
-                .nutrition(6).saturationMod(0.7F)
+                .nutrition(8).saturationMod(0.7F)
                 .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 300, 0), 1.0F)
                 .build();
-
         public static final FoodProperties SPICY_NOODLE_SOUP = (new FoodProperties.Builder())
                 .nutrition(14).saturationMod(0.75F)
                 .effect(() ->  new MobEffectInstance(ModEffects.COMFORT.get(), 6000, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 1200, 1), 1.0F)
+                .build();
+        public static final FoodProperties SPICY_COTTON = (new FoodProperties.Builder())
+                .nutrition(2).saturationMod(2F)
+                .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 300, 0), 1.0F)
+                .alwaysEat().build();
+        public static final FoodProperties GHASTA_WITH_CREAM = (new FoodProperties.Builder())
+                .nutrition(8).saturationMod(0.7F)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 1), 1.0F)
+                .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1200, 0), 1.0F)
                 .build();
         // SPICY
         public static final FoodProperties BULLET_PEPPER = (new FoodProperties.Builder())

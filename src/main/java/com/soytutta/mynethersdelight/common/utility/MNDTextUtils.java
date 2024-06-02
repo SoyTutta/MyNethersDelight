@@ -1,4 +1,5 @@
 package com.soytutta.mynethersdelight.common.utility;
+
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 

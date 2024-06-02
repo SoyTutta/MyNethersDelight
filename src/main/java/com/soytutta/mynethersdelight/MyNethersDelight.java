@@ -2,7 +2,6 @@ package com.soytutta.mynethersdelight;
 
 import com.soytutta.mynethersdelight.common.MNDCommonSetup;
 import com.soytutta.mynethersdelight.common.registry.*;
-import com.soytutta.mynethersdelight.core.data.worldgen.MNDConfiguredFeatures;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -19,6 +18,7 @@ public class MyNethersDelight
         MNDItems.ITEMS.register(modEventBus);
         MNDBlocks.BLOCKS.register(modEventBus);
         MNDEffects.EFFECTS.register(modEventBus);
+        MNDEnchantments.DEF_REG.register(modEventBus);
         MNDBlockEntityTypes.TILES.register(modEventBus);
         MNDEntityTypes.ENTITIES.register(modEventBus);
         MNDCreativeTab.TABS.register(modEventBus);

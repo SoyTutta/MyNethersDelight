@@ -17,6 +17,7 @@ public class MNDTags {
 
     public static final TagKey<Item> STOVE_SOUL_FUEL = modItemTag("stove_soul_fuel");
     public static final TagKey<Item> STOVE_FIRE_FUEL = modItemTag("stove_fire_fuel");
+    public static final TagKey<Item> BOILED_EGG_CANDIDATE = modItemTag("boiled_egg_candidate");
     public static final TagKey<Item> CURRY_MEATS = modItemTag("curry_meats");
     public static final TagKey<Item> HOT_SPICE = modItemTag("hot_spice");
     public static final TagKey<Item> BULLET_PEPPER = modItemTag("bullet_pepper");

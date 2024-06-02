@@ -64,6 +64,9 @@ public class MNDItems {
     public static final RegistryObject<Item> STRIDER_WITH_GRILLED_FUNGUS;
     public static final RegistryObject<Item> STRIDER_STEW;
     public static final RegistryObject<Item> CRIMSON_STROGANOFF;
+    public static final RegistryObject<Item> STRIDERLOAF_BLOCK;
+    public static final RegistryObject<Item> STRIDERLOAF;
+    public static final RegistryObject<Item> COLD_STRIDERLOAF;
     // HOGLIN
     public static final RegistryObject<Item> HOGLIN_LOIN;
     // HOGLIN-Sausage
@@ -80,6 +83,9 @@ public class MNDItems {
     public static final RegistryObject<Item> GHASTA;
     public static final RegistryObject<Item> GHAST_SALAD;
     public static final RegistryObject<Item> SPICY_NOODLE_SOUP;
+    public static final RegistryObject<Item> SPICY_COTTON;
+    public static final RegistryObject<Item> GHASTA_WITH_CREAM_BLOCK;
+    public static final RegistryObject<Item> GHASTA_WITH_CREAM;
     // SPICY
     public static final RegistryObject<Item> BULLET_PEPPER;
     public static final RegistryObject<Item> SPICY_SKEWER;
@@ -247,6 +253,15 @@ public class MNDItems {
         CRIMSON_STROGANOFF = ITEMS.register("crimson_stroganoff", ()  ->
                 new ConsumableItem(bowlFoodItem(MNDFoodValues.CRIMSON_STROGANOFF), true)
         );
+        STRIDERLOAF_BLOCK = ITEMS.register("striderloaf", ()  ->
+                new BlockItem(MNDBlocks.STRIDERLOAF_BLOCK.get(), basicItem().stacksTo(1))
+        );
+        STRIDERLOAF = ITEMS.register("plate_of_striderloaf", ()  ->
+                new ConsumableItem(bowlFoodItem(MNDFoodValues.STRIDERLOAF), true)
+        );
+        COLD_STRIDERLOAF = ITEMS.register("plate_of_cold_striderloaf", ()  ->
+                new ConsumableItem(bowlFoodItem(MNDFoodValues.COLD_STRIDERLOAF), true)
+        );
         // HOGLIN
         HOGLIN_LOIN = ITEMS.register("hoglin_loin", ()  ->
                 new ConsumableItem(foodItem(MNDFoodValues.HOGLIN_LOIN))
@@ -286,6 +301,15 @@ public class MNDItems {
         );
         SPICY_NOODLE_SOUP = ITEMS.register("spicy_noodle_soup", () ->
                 new ConsumableItem(bowlFoodItem(MNDFoodValues.SPICY_NOODLE_SOUP), true)
+        );
+        SPICY_COTTON = ITEMS.register("spicy_cotton", () ->
+                new ConsumableItem(foodItem(MNDFoodValues.SPICY_COTTON))
+        );
+        GHASTA_WITH_CREAM_BLOCK = ITEMS.register("ghasta_with_cream", () ->
+                new BlockItem(MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get(), basicItem().stacksTo(1))
+        );
+        GHASTA_WITH_CREAM = ITEMS.register("plate_of_ghasta_with_cream", () ->
+                new ConsumableItem(bowlFoodItem(MNDFoodValues.GHASTA_WITH_CREAM), true)
         );
         // SPICY
         BULLET_PEPPER = ITEMS.register("bullet_pepper", () ->

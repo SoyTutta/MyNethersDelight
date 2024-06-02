@@ -46,6 +46,7 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(MNDTags.STOVE_FIRE_FUEL).add(Items.BLAZE_ROD, Items.FIRE_CHARGE, Items.MAGMA_BLOCK, Items.MAGMA_CREAM).addTag(MNDTags.HOT_SPICE);
         this.tag(MNDTags.HOGLIN_WAXED).add(Items.NETHER_WART, Items.HONEYCOMB);
         this.tag(MNDTags.HOGLIN_CURE).add(Items.GHAST_TEAR);
+        this.tag(MNDTags.BOILED_EGG_CANDIDATE).add(MNDItems.STRIDER_EGG.get());
         this.tag(MNDTags.CURRY_MEATS).add(Items.CHICKEN,ModItems.CHICKEN_CUTS.get(),Items.BEEF,ModItems.MINCED_BEEF.get(),Items.MUTTON,ModItems.MUTTON_CHOPS.get(),
                 Items.PORKCHOP,ModItems.BACON.get(),ModItems.HAM.get(),MNDItems.HOGLIN_SAUSAGE.get(), MNDItems.HOGLIN_LOIN.get(),
                 MNDItems.MINCED_STRIDER.get());

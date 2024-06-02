@@ -63,7 +63,7 @@
   "item.mynethersdelight.plate_of_stuffed_hoglin_ham": "Plato de jamón asado",
   "item.mynethersdelight.plate_of_stuffed_hoglin_snout": "Plato de hocico relleno",
   "item.mynethersdelight.raw_stuffed_hoglin": "Hoglin relleno crudo",
-  "item.mynethersdelight.roast_ear": "Oreja adada",
+  "item.mynethersdelight.roast_ear": "Oreja asada",
   "item.mynethersdelight.roasted_sausage": "Salchicha asada",
   "item.mynethersdelight.sausage_and_potatoes": "Salchipapa",
   "item.mynethersdelight.spicy_curry": "Curry picante",
@@ -75,6 +75,12 @@
   "item.mynethersdelight.strider_slice": "Rebanada de lavagante",
   "item.mynethersdelight.strider_stew": "Estofado de lavagante",
   "item.mynethersdelight.strider_with_grilled_fungus": "Lavagante con hongos a la parrilla",
+  "item.mynethersdelight.striderloaf": "Pan de lavagante",
+  "item.mynethersdelight.plate_of_striderloaf": "Plato de pan de lavagante",
+  "item.mynethersdelight.plate_of_cold_striderloaf": "Plato de pan de lavagante frio",
+  "item.mynethersdelight.spicy_cotton": "Algodón picante",
+  "item.mynethersdelight.ghasta_with_cream": "Ghasta con crema",
+  "item.mynethersdelight.plate_of_ghasta_with_cream": "Plato de ghasta con crema",
   "mynethersdelight.block.feast.use_knife": "Necesitas un Cuchillo para comer esto.",
   "mynethersdelight.itemGroup.main": "My Nether's Delight",
   "mynethersdelight.jei.forgoting": "Olvido",
@@ -88,6 +94,8 @@
   "mynethersdelight.jei.info.mushroom_colony": "Algunos hongos forman colonias cuando están sobre el Suelo resurgente o Suelo rico.",
   "mynethersdelight.jei.info.plate_of_stuffed_hoglin": "Es sorprendente la cantidad de platos que se pueden obtener de un festín tan primitivo...",
   "mynethersdelight.jei.info.r_soil": "Casi todas las plantas o cultivos se sienten cómodos en este suelo, si desea preparar la tierra necesitas fuego en lugar de agua.",
-  "mynethersdelight.jei.info.strider_egg": "Espera... ¿Los Striders son Ovovivíparos? Eso es raro...\n\n\nDe todos modos, sólo se puede obtener mediante la caza cuidadosa.\nCaparazón duro, sólo se puede comer estrellado...",
-  "mynethersdelight.jei.info.wild_powdery": "Las Cañas Polvorientas son un cultivo invasor en los Bosques Carmesí.\n\nSus Frutos son explosivas al Contacto, talvez si Cortas el tallo rojo..."
+  "mynethersdelight.jei.info.strider_egg": "Espera... ¿Los Striders son Ovovivíparos? Eso es raro...\n\nDe todos modos, sólo se puede obtener mediante la caza cuidadosa.\nCaparazón duro, sólo se puede comer estrellado...",
+  "mynethersdelight.jei.info.wild_powdery": "Las Cañas Polvorientas son un cultivo invasor en los Bosques Carmesí.\n\nSus Frutos son explosivas al Contacto, talvez si Cortas el tallo rojo...",
+  "mynethersdelight.jei.info.plate_of_ghasta": "El Ghast sigue vivo?\nTomé una porción recientemente, pero volvió a crecer.",
+  "mynethersdelight.jei.info.plate_of_striderloaf": "Una vez frío, no es tan delicioso...\nPero es bastante saciante."
 }

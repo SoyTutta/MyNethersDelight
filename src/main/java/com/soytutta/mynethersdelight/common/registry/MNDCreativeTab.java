@@ -65,6 +65,9 @@ public class MNDCreativeTab {
         event.accept(MNDItems.STRIDER_WITH_GRILLED_FUNGUS.get());
         event.accept(MNDItems.STRIDER_STEW.get());
         event.accept(MNDItems.CRIMSON_STROGANOFF.get());
+        event.accept(MNDItems.STRIDERLOAF_BLOCK.get());
+        event.accept(MNDItems.STRIDERLOAF.get());
+        event.accept(MNDItems.COLD_STRIDERLOAF.get());
 
         event.accept(MNDItems.HOGLIN_LOIN.get());
         event.accept(MNDItems.HOGLIN_SAUSAGE.get());
@@ -79,6 +82,9 @@ public class MNDCreativeTab {
         event.accept(MNDItems.GHASTA.get());
         event.accept(MNDItems.GHAST_SALAD.get());
         event.accept(MNDItems.SPICY_NOODLE_SOUP.get());
+        event.accept(MNDItems.SPICY_COTTON.get());
+        event.accept(MNDItems.GHASTA_WITH_CREAM_BLOCK.get());
+        event.accept(MNDItems.GHASTA_WITH_CREAM.get());
 
         event.accept(MNDItems.BULLET_PEPPER.get());
         event.accept(MNDItems.SPICY_SKEWER.get());

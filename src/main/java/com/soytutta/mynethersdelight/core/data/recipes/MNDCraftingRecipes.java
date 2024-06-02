@@ -46,7 +46,7 @@ public class MNDCraftingRecipes {
                 .requires(Items.PAPER)
                 .unlockedBy("has_powder_cannon", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDER_CANNON.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "firework_alt"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,Blocks.TNT)
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE,Blocks.TNT)
                 .pattern("#s#")
                 .pattern("s#s")
                 .pattern("#s#")
@@ -75,11 +75,16 @@ public class MNDCraftingRecipes {
     }
 
     private static void recipesBlocks(Consumer<FinishedRecipe> consumer) {
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.BULLET_PEPPER_CRATE.get(), 1)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,MNDItems.BULLET_PEPPER_CRATE.get(), 1)
                 .requires(MNDItems.BULLET_PEPPER.get(),9)
                 .unlockedBy("has_pepper", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.BULLET_PEPPER.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "bullet_papper_crate"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.BLOCK_OF_POWDERY_CANNON.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.BULLET_PEPPER.get(),9)
+                .requires(MNDItems.BULLET_PEPPER_CRATE.get())
+                .unlockedBy("has_pepper", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.BULLET_PEPPER.get()))
+                .save(consumer, new ResourceLocation("mynethersdelight", "bullet_papper_crate_alt"));
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,MNDBlocks.BLOCK_OF_POWDERY_CANNON.get())
                 .pattern("###")
                 .pattern("###")
                 .pattern("###")
@@ -93,18 +98,18 @@ public class MNDCraftingRecipes {
                 .define('#', MNDItems.POWDERY_PLANKS.get()).define('X', MNDItems.POWDERY_PLANKS_SLAB.get())
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "block_of_powdery_cabinet"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.POWDERY_PLANKS.get(),4)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,MNDItems.POWDERY_PLANKS.get(),4)
                 .requires(MNDTags.BLOCK_OF_POWDERY)
                 .group("planks")
                 .unlockedBy("has_powder_cannon", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDER_CANNON.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_plank"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_PLANKS_SLAB.get(),6)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,MNDBlocks.POWDERY_PLANKS_SLAB.get(),6)
                 .pattern("###")
                 .define('#', MNDItems.POWDERY_PLANKS.get())
                 .group("wooden_slab")
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_slab"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_PLANKS_STAIRS.get(),4)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,MNDBlocks.POWDERY_PLANKS_STAIRS.get(),4)
                 .pattern("#  ")
                 .pattern("## ")
                 .pattern("###")
@@ -112,27 +117,27 @@ public class MNDCraftingRecipes {
                 .group("wooden_stairs")
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_stairs"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_MOSAIC.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,MNDBlocks.POWDERY_MOSAIC.get())
                 .pattern("#")
                 .pattern("#")
                 .define('#', MNDItems.POWDERY_PLANKS_SLAB.get())
-                .unlockedBy("has_powdery_mosaic", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
+                .unlockedBy("has_powdery_mosaic", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_MOSAIC.get(),MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_mosaic"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_MOSAIC_SLAB.get(),6)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,MNDBlocks.POWDERY_MOSAIC_SLAB.get(),6)
                 .pattern("###")
                 .define('#', MNDItems.POWDERY_MOSAIC.get())
                 .group("wooden_slab")
-                .unlockedBy("has_powdery_mosaic", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
+                .unlockedBy("has_powdery_mosaic", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_MOSAIC.get(),MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_mosaic_slab"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_MOSAIC_STAIRS.get(),4)
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,MNDBlocks.POWDERY_MOSAIC_STAIRS.get(),4)
                 .pattern("#  ")
                 .pattern("## ")
                 .pattern("###")
-                .define('#', MNDItems.POWDERY_PLANKS.get())
+                .define('#', MNDItems.POWDERY_MOSAIC.get())
                 .group("wooden_stairs")
-                .unlockedBy("has_powdery_mosaic", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
+                .unlockedBy("has_powdery_mosaic", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_MOSAIC.get(),MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_mosaic_stairs"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_DOOR.get(),3)
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE,MNDBlocks.POWDERY_DOOR.get(),3)
                 .pattern("##")
                 .pattern("##")
                 .pattern("##")
@@ -140,26 +145,26 @@ public class MNDCraftingRecipes {
                 .group("wooden_door")
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_door"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_TRAPDOOR.get(),2)
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE,MNDBlocks.POWDERY_TRAPDOOR.get(),2)
                 .pattern("###")
                 .pattern("###")
                 .define('#', MNDItems.POWDERY_PLANKS.get())
                 .group("wooden_trapdoor")
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_trapdoor"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_PRESSURE_PLATE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE,MNDBlocks.POWDERY_PRESSURE_PLATE.get())
                 .pattern("##")
                 .define('#', MNDItems.POWDERY_PLANKS.get())
                 .group("wooden_pressure_plate")
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_pressure_plate"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.POWDERY_BUTTON.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE,MNDItems.POWDERY_BUTTON.get())
                 .requires(MNDItems.POWDERY_PLANKS.get())
                 .group("nether_stove")
                 .group("wooden_button")
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_button"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS,MNDBlocks.POWDERY_SIGN.get(),3)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_SIGN.get(),3)
                 .pattern("###")
                 .pattern("###")
                 .pattern(" X ")
@@ -167,7 +172,7 @@ public class MNDCraftingRecipes {
                 .group("wooden_sign")
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_sign"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS,MNDBlocks.POWDERY_HANGING_SIGN.get(),6)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_HANGING_SIGN.get(),6)
                 .pattern("X X")
                 .pattern("###")
                 .pattern("###")
@@ -182,7 +187,7 @@ public class MNDCraftingRecipes {
                 .group("wooden_fence")
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_fence"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_FENCE_GATE.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE,MNDBlocks.POWDERY_FENCE_GATE.get())
                 .pattern("X#X")
                 .pattern("X#X")
                 .define('#', MNDItems.POWDERY_PLANKS.get()).define('X', Items.STICK)
@@ -195,7 +200,7 @@ public class MNDCraftingRecipes {
                 .define('#', MNDTags.POWDER_CANNON).define('P', MNDTags.BULLET_PEPPER)
                 .unlockedBy("has_powder_cannon", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDER_CANNON.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_torch"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.HOGLIN_TROPHY.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,MNDBlocks.HOGLIN_TROPHY.get())
                 .pattern("W#W")
                 .pattern("bBb")
                 .pattern("WGW")
@@ -205,19 +210,19 @@ public class MNDCraftingRecipes {
                 .group("nether_trophy")
                 .unlockedBy("has_hoglin_hide", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.HOGLIN_HIDE.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "hoglin_trophy"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.WAXED_HOGLIN_TROPHY.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,MNDItems.WAXED_HOGLIN_TROPHY.get())
                 .requires(MNDItems.HOGLIN_TROPHY.get())
                 .requires(Ingredient.of(MNDTags.HOGLIN_WAXED))
                 .group("nether_trophy")
                 .unlockedBy("has_hoglin_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.HOGLIN_TROPHY.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "waxed_hoglin_trophy"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.HOGLIN_TROPHY.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,MNDItems.HOGLIN_TROPHY.get())
                 .requires(MNDItems.ZOGLIN_TROPHY.get())
                 .requires(Ingredient.of(MNDTags.HOGLIN_CURE))
                 .group("nether_trophy")
                 .unlockedBy("has_zoglin_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.ZOGLIN_TROPHY.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "hoglin_trophy_cure"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.ZOGLIN_TROPHY.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,MNDBlocks.ZOGLIN_TROPHY.get())
                 .pattern("wZw")
                 .pattern("Z#Z")
                 .pattern("wZw")
@@ -276,7 +281,7 @@ public class MNDCraftingRecipes {
                 .unlockedBy("has_campfire", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.CAMPFIRE))
                 .save(consumer, new ResourceLocation("mynethersdelight", "soul_nethers_stove_alt"));
 
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.LETIOS_COMPOST.get(), 1)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,MNDItems.LETIOS_COMPOST.get(), 1)
                 .requires(Ingredient.of(Items.SOUL_SAND, Items.SOUL_SOIL))
                 .requires(Items.ROTTEN_FLESH,2)
                 .requires(Ingredient.of(Items.WARPED_ROOTS, Items.CRIMSON_ROOTS))
@@ -285,7 +290,7 @@ public class MNDCraftingRecipes {
                 .unlockedBy("has_rotten_flesh", InventoryChangeTrigger.TriggerInstance.hasItems(Items.ROTTEN_FLESH))
                 .unlockedBy("has_roots", InventoryChangeTrigger.TriggerInstance.hasItems(Items.CRIMSON_ROOTS,Items.WARPED_ROOTS))
                 .save(consumer, new ResourceLocation("mynethersdelight", "letios_compost_from_rotten_flesh"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.LETIOS_COMPOST.get(), 1)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,MNDItems.LETIOS_COMPOST.get(), 1)
                 .requires(Ingredient.of(Items.SOUL_SAND, Items.SOUL_SOIL))
                 .requires(Items.BONE_MEAL,2)
                 .requires(Ingredient.of(Items.WARPED_ROOTS, Items.CRIMSON_ROOTS))
@@ -307,6 +312,12 @@ public class MNDCraftingRecipes {
                 .requires(Items.BREAD)
                 .unlockedBy("has_sausage", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.HOGLIN_SAUSAGE.get()))
                 .save(consumer, "mynethersdelight:crafting/hotdog");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.STRIDERLOAF_BLOCK.get())
+                .requires(MNDTags.STRIDER_SLICE)
+                .requires(MNDTags.MINCED_STRIDER).requires(MNDTags.MINCED_STRIDER).requires(MNDTags.MINCED_STRIDER)
+                .requires(Items.BOWL)
+                .unlockedBy("has_minced_strider", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.MINCED_STRIDER.get()))
+                .save(consumer, "mynethersdelight:crafting/striderloaf");
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.BLUE_TENDERLOIN_STEAK.get())
                 .requires(Blocks.WARPED_FUNGUS)
@@ -334,11 +345,27 @@ public class MNDCraftingRecipes {
                 .unlockedBy("has_powder_cannon", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDER_CANNON.get(),MNDItems.HOT_CREAM.get(),MNDItems.HOT_CREAM_CONE.get()))
                 .save(consumer, "mynethersdelight:crafting/hotcream_cone");
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.SPICY_COTTON.get())
+                .requires(MNDItems.GHASTA.get())
+                .requires(Items.BLAZE_POWDER)
+                .requires(Items.BLAZE_ROD)
+                .requires(MNDItems.GHASTA.get())
+                .unlockedBy("has_blaze_rod", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BLAZE_ROD,MNDItems.GHASTA.get()))
+                .save(consumer, "mynethersdelight:crafting/spicy_cotton");
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDItems.GHASTA_WITH_CREAM_BLOCK.get())
+                .pattern("GGG")
+                .pattern("GT#")
+                .pattern("GBG")
+                .define('G', MNDItems.GHASTA.get()).define('T', Items.GHAST_TEAR)
+                .define('#', Items.MAGMA_CREAM).define('B', Items.BOWL)
+                .unlockedBy("has_ghasta", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHASTA.get()))
+                .save(consumer, new ResourceLocation("mynethersdelight", "ghasta_with_cream"));
+
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.SPICY_SKEWER.get())
                 .requires(MNDTags.STRIDER_MEATS)
                 .requires(MNDTags.BULLET_PEPPER)
-                .requires(MNDTags.BULLET_PEPPER)
                 .requires(Items.BLAZE_ROD)
+                .requires(MNDTags.BULLET_PEPPER)
                 .unlockedBy("has_blaze_rod", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BLAZE_ROD))
                 .save(consumer, "mynethersdelight:crafting/spicy_skewer");
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.GHAST_SALAD.get())

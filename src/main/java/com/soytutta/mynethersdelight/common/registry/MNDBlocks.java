@@ -30,9 +30,9 @@ import java.util.function.ToIntFunction;
 public class MNDBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, "mynethersdelight");
 
-    public static final RegistryObject<Block> BULLET_PEPPER_CRATE;
     public static final RegistryObject<Block> NETHER_BRICKS_CABINET;
     public static final RegistryObject<Block> NETHER_STOVE;
+    public static final RegistryObject<Block> BULLET_PEPPER_CRATE;
     public static final RegistryObject<Block> LETIOS_COMPOST;
     public static final RegistryObject<Block> RESURGENT_SOIL;
     public static final RegistryObject<Block> RESURGENT_SOIL_FARMLAND;
@@ -69,21 +69,24 @@ public class MNDBlocks {
     public static final RegistryObject<Block> POWDERY_WALL_SIGN;
     public static final RegistryObject<Block> POWDERY_HANGING_SIGN;
     public static final RegistryObject<Block> POWDERY_WALL_HANGING_SIGN;
+    public static final RegistryObject<Block> STRIDERLOAF_BLOCK;
+    public static final RegistryObject<Block> COLD_STRIDERLOAF_BLOCK;
+    public static final RegistryObject<Block> GHASTA_WITH_CREAM_BLOCK;
 
     public MNDBlocks() {
     }
     static {
-        BULLET_PEPPER_CRATE = BLOCKS.register("bullet_pepper_crate", () -> 
-                new PepperCrateBlock(Properties.copy(Blocks.OAK_PLANKS)
-                        .mapColor(MapColor.FIRE).strength(2.0F, 3.0F)
-                        .sound(SoundType.BAMBOO_WOOD).lightLevel((light) -> 15))
-        );
         NETHER_BRICKS_CABINET = BLOCKS.register("nether_bricks_cabinet", () -> 
                 new CabinetBlock(Properties.copy(Blocks.NETHER_BRICKS))
         );
         NETHER_STOVE = BLOCKS.register("nether_stove", () ->
                 new NetherStoveBlock(Properties.copy(Blocks.NETHER_BRICKS)
                         .lightLevel(litBlockEmission(13)))
+        );
+        BULLET_PEPPER_CRATE = BLOCKS.register("bullet_pepper_crate", () ->
+                new PepperCrateBlock(Properties.copy(Blocks.OAK_PLANKS)
+                        .mapColor(MapColor.FIRE).strength(2.0F, 3.0F)
+                        .sound(SoundType.BAMBOO_WOOD).lightLevel((light) -> 15))
         );
         LETIOS_COMPOST = BLOCKS.register("letios_compost", () ->
                 new LetiosCompostBlock(Properties.copy(Blocks.DIRT)
@@ -100,28 +103,12 @@ public class MNDBlocks {
                         .lightLevel(FlameBlockEmission(7)))
         );
         WARPED_FUNGUS_COLONY = BLOCKS.register("warped_fungus_colony", () ->
-                new MushroomColonyBlock(Properties.copy(Blocks.WARPED_FUNGUS),
+                new MushroomColonyBlock(Properties.copy(Blocks.BROWN_MUSHROOM).sound(SoundType.FUNGUS),
                         () -> Items.WARPED_FUNGUS)
         );
         CRIMSON_FUNGUS_COLONY = BLOCKS.register("crimson_fungus_colony", () ->
-                new MushroomColonyBlock(Properties.copy(Blocks.CRIMSON_FUNGUS),
+                new MushroomColonyBlock(Properties.copy(Blocks.RED_MUSHROOM).sound(SoundType.FUNGUS),
                         () -> Items.CRIMSON_FUNGUS)
-        );
-        STUFFED_HOGLIN = BLOCKS.register("stuffed_hoglin", () ->
-                new StuffedHoglinBlock(Properties.copy(Blocks.CAKE)
-                        .mapColor(MapColor.TERRACOTTA_PINK))
-        );
-        HOGLIN_TROPHY = BLOCKS.register("hoglin_trophy", () ->
-                new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD)
-                        .mapColor(MapColor.TERRACOTTA_PINK))
-        );
-        WAXED_HOGLIN_TROPHY = BLOCKS.register("waxed_hoglin_trophy", () ->
-                new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD)
-                        .mapColor(MapColor.TERRACOTTA_PINK))
-        );
-        ZOGLIN_TROPHY = BLOCKS.register("zoglin_trophy", () ->
-                new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD)
-                        .mapColor(MapColor.TERRACOTTA_GREEN))
         );
         POWDERY_CHUBBY_SAPLING = BLOCKS.register("powdery_chubby_sapling", () ->
                 new PowderyCannonSaplingBlock(Properties.copy(Blocks.BAMBOO_SAPLING)
@@ -240,6 +227,31 @@ public class MNDBlocks {
         POWDERY_WALL_HANGING_SIGN = BLOCKS.register("powdery_wall_hanging_sign", () ->
                 new MNDWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_WALL_HANGING_SIGN),
                         MNDWoodTypes.POWDERY_CANNON)
+        );
+        STRIDERLOAF_BLOCK = BLOCKS.register("striderloaf_block", () ->
+                new StriderloafBlock(Properties.copy(Blocks.CAKE), MNDItems.STRIDERLOAF, true)
+        );
+        COLD_STRIDERLOAF_BLOCK = BLOCKS.register("cold_striderloaf_block", () ->
+                new StriderloafBlock(Properties.copy(Blocks.CAKE).dropsLike(STRIDERLOAF_BLOCK.get()), MNDItems.COLD_STRIDERLOAF, true)
+        );
+        GHASTA_WITH_CREAM_BLOCK = BLOCKS.register("ghasta_with_cream_block", () ->
+                new GhastaWithCreamBlock(Properties.copy(Blocks.CAKE).lightLevel((light) ->  2), MNDItems.GHASTA_WITH_CREAM, true)
+        );
+        STUFFED_HOGLIN = BLOCKS.register("stuffed_hoglin", () ->
+                new StuffedHoglinBlock(Properties.copy(Blocks.CAKE)
+                        .mapColor(MapColor.TERRACOTTA_PINK))
+        );
+        HOGLIN_TROPHY = BLOCKS.register("hoglin_trophy", () ->
+                new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD)
+                        .mapColor(MapColor.TERRACOTTA_PINK))
+        );
+        WAXED_HOGLIN_TROPHY = BLOCKS.register("waxed_hoglin_trophy", () ->
+                new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD)
+                        .mapColor(MapColor.TERRACOTTA_PINK))
+        );
+        ZOGLIN_TROPHY = BLOCKS.register("zoglin_trophy", () ->
+                new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD)
+                        .mapColor(MapColor.TERRACOTTA_GREEN))
         );
     }
     private static ToIntFunction<BlockState> FlameBlockEmission(int lightValue) {

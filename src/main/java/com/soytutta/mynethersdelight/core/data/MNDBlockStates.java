@@ -1,9 +1,7 @@
 package com.soytutta.mynethersdelight.core.data;
 
 import com.soytutta.mynethersdelight.MyNethersDelight;
-import com.soytutta.mynethersdelight.common.block.NetherStoveBlock;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
-import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
@@ -14,6 +12,7 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.common.block.CabinetBlock;
+import vectorwing.farmersdelight.common.block.FeastBlock;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 
 public class MNDBlockStates extends BlockStateProvider {
@@ -58,12 +57,36 @@ public class MNDBlockStates extends BlockStateProvider {
         this.stairsBlock(((StairBlock) MNDBlocks.POWDERY_MOSAIC_STAIRS.get()), blockTexture(MNDBlocks.POWDERY_MOSAIC.get()));
         this.slabBlock(((SlabBlock) MNDBlocks.POWDERY_MOSAIC_SLAB.get()), blockTexture(MNDBlocks.POWDERY_MOSAIC.get()), blockTexture(MNDBlocks.POWDERY_MOSAIC.get()));
 
-
         this.signBlock(((StandingSignBlock) MNDBlocks.POWDERY_SIGN.get()), ((WallSignBlock) MNDBlocks.POWDERY_WALL_SIGN.get()),
                 blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
         this.hangingSignBlock(MNDBlocks.POWDERY_HANGING_SIGN.get(), MNDBlocks.POWDERY_WALL_HANGING_SIGN.get(),
                 blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
+
+        // FEAST
+        this.feastBlock((FeastBlock) MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get());
+        this.feastBlock((FeastBlock) MNDBlocks.STRIDERLOAF_BLOCK.get());
+        this.feastBlock((FeastBlock) MNDBlocks.COLD_STRIDERLOAF_BLOCK.get());
+
     }
+    public void feastBlock(FeastBlock block) {
+        this.getVariantBuilder(block).forAllStates((state) -> {
+            IntegerProperty servingsProperty = block.getServingsProperty();
+            int servings = state.getValue(servingsProperty);
+            String suffix = "_stage" + (block.getMaxServings() - servings);
+            if (servings == 0) {
+                suffix = block.hasLeftovers ? "_leftover" : "_stage" + (servingsProperty.getPossibleValues().toArray().length - 2);
+            }
+
+            ConfiguredModel.Builder var10000 = ConfiguredModel.builder();
+            String var10002 = this.blockName(block);
+            return var10000.modelFile(this.existingModel(var10002 + suffix)).rotationY(((int)(state.getValue(FeastBlock.FACING)).toYRot() + 180) % 360).build();
+        });
+    }
+
+    public ModelFile existingModel(String path) {
+        return new ModelFile.ExistingModelFile(this.resourceBlock(path), this.models().existingFileHelper);
+    }
+
     public void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {
         ModelFile sign = models().sign(name(signBlock), texture);
         hangingSignBlock(signBlock, wallSignBlock, sign);

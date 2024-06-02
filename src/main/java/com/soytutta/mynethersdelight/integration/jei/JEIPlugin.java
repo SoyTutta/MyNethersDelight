@@ -52,6 +52,8 @@ public class JEIPlugin implements IModPlugin {
         registration.addIngredientInfo(new ItemStack(MNDItems.HOGLIN_HIDE.get()), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.hoglin_hide"));
         registration.addIngredientInfo(List.of( new ItemStack(MNDItems.HOT_CREAM_CONE.get()), new ItemStack(MNDItems.HOT_CREAM.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.hot_cream"));
         registration.addIngredientInfo(List.of( new ItemStack(MNDItems.ROAST_STUFFED_HOGLIN.get()), new ItemStack(MNDItems.ROAST_EAR.get()), new ItemStack(MNDItems.PLATE_OF_STUFFED_HOGLIN_SNOUT.get()), new ItemStack(MNDItems.PLATE_OF_STUFFED_HOGLIN_HAM.get()), new ItemStack(MNDItems.PLATE_OF_STUFFED_HOGLIN.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.plate_of_stuffed_hoglin"));
+        registration.addIngredientInfo(List.of( new ItemStack(MNDItems.GHASTA_WITH_CREAM_BLOCK.get()), new ItemStack(MNDItems.GHASTA_WITH_CREAM.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.plate_of_ghasta"));
+        registration.addIngredientInfo(List.of( new ItemStack(MNDItems.STRIDERLOAF_BLOCK.get()), new ItemStack(MNDItems.STRIDERLOAF.get()), new ItemStack(MNDItems.COLD_STRIDERLOAF.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.plate_of_striderloaf"));
     }
 
 

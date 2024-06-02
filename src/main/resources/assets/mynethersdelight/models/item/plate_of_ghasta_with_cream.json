@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "mynethersdelight:item/ghasta_with_cream"
+  }
+}
