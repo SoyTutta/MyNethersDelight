@@ -10,6 +10,10 @@ import net.minecraft.world.level.block.Block;
 public class MNDTags {
     public static final TagKey<Item> BLOCK_OF_POWDERY = modItemTag("block_of_powdery");
 
+    public static final TagKey<Block> NOT_PROPAGATE_PLANT = modBlockTag("not_propagate_plant");
+    public static final TagKey<Block> ABOVE_PROPAGATE_PLANT = modBlockTag("above_propagate_plant");
+    public static final TagKey<Block> BELOW_PROPAGATE_PLANT = modBlockTag("below_propagate_plant");
+
     public static final TagKey<Block> LETIOS_ACTIVATORS = modBlockTag("letios_activators");
     public static final TagKey<Block> LETIOS_FLAMES = modBlockTag("letios_flames");
     public static final TagKey<Block> SHOWCASE_ACTIVATORS = modBlockTag("showcase_activators");

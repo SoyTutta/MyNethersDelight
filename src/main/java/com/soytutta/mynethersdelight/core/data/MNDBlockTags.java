@@ -72,9 +72,13 @@ public class MNDBlockTags extends BlockTagsProvider {
     }
 
     protected void registerModTags() {
+        this.tag(MNDTags.BELOW_PROPAGATE_PLANT).add(Blocks.SPORE_BLOSSOM,Blocks.HANGING_ROOTS,Blocks.GLOW_LICHEN);
+        this.tag(MNDTags.ABOVE_PROPAGATE_PLANT).add(Blocks.KELP,Blocks.LILY_PAD,Blocks.DEAD_BUSH,Blocks.GLOW_LICHEN).addTag(BlockTags.SAPLINGS).addTag(BlockTags.CROPS);
+
         this.tag(ModTags.HEAT_SOURCES).add(MNDBlocks.NETHER_STOVE.get(),MNDBlocks.BULLET_PEPPER_CRATE.get());
-        this.tag(ModTags.WILD_CROPS).add(MNDBlocks.POWDERY_CANE.get());
+        this.tag(ModTags.WILD_CROPS).add(MNDBlocks.BULLET_PEPPER.get());
         this.tag(ModTags.UNAFFECTED_BY_RICH_SOIL).add(MNDBlocks.WARPED_FUNGUS_COLONY.get(),MNDBlocks.CRIMSON_FUNGUS_COLONY.get());
+        this.tag(ModTags.MUSHROOM_COLONY_GROWABLE_ON).add(MNDBlocks.RESURGENT_SOIL.get());
 
         this.tag(MNDTags.SHOWCASE_ACTIVATORS).add(Blocks.WITHER_ROSE, Blocks.SOUL_SAND, MNDBlocks.LETIOS_COMPOST.get(), MNDBlocks.RESURGENT_SOIL.get(), Blocks.NETHER_WART, Blocks.CRIMSON_FUNGUS, MNDBlocks.CRIMSON_FUNGUS_COLONY.get(), Blocks.WARPED_FUNGUS, MNDBlocks.WARPED_FUNGUS_COLONY.get(), Blocks.RED_MUSHROOM, ModBlocks.RED_MUSHROOM_COLONY.get(), Blocks.BROWN_MUSHROOM, ModBlocks.BROWN_MUSHROOM_COLONY.get(), Blocks.TWISTING_VINES, Blocks.WEEPING_VINES, Blocks.BONE_BLOCK);
         this.tag(MNDTags.SHOWCASE_FLAMES).add(Blocks.MAGMA_BLOCK, Blocks.LANTERN, Blocks.TORCH, MNDBlocks.POWDERY_TORCH.get(), Blocks.SOUL_TORCH, Blocks.SOUL_LANTERN,Blocks.FURNACE,Blocks.SMOKER,Blocks.BLAST_FURNACE,ModBlocks.STOVE.get(),MNDBlocks.NETHER_STOVE.get()).addTag(net.minecraft.tags.BlockTags.CAMPFIRES).addTag(BlockTags.CANDLES);
