@@ -25,6 +25,8 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
@@ -141,7 +143,7 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
 
             if (!belowState.is(MNDTags.NOT_PROPAGATE_PLANT)) {
                 if (belowState.is(MNDTags.BELOW_PROPAGATE_PLANT)
-                        && MathUtils.RAND.nextFloat() <= (Configuration.RICH_SOIL_BOOST_CHANCE.get()) * 0.8F) {
+                        && MathUtils.RAND.nextFloat() <= (Configuration.RICH_SOIL_BOOST_CHANCE.get())) {
                     propagateBelowIfPossible(belowBlock, belowPos, level);
                 }
             }
@@ -207,7 +209,8 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
             BlockState targetState = level.getBlockState(plantPos);
 
             boolean canPropagate = (block instanceof LiquidBlockContainer && targetState.getBlock() == Blocks.WATER)
-                    || (!(block instanceof LiquidBlockContainer) && targetState.getBlock() == Blocks.AIR);
+                    || (!(block instanceof LiquidBlockContainer) && targetState.getBlock() == Blocks.AIR)
+                    || ((block instanceof SimpleWaterloggedBlock) && (targetState.getBlock() == Blocks.AIR || targetState.getBlock() == Blocks.WATER));
 
             if (canPropagate) {
                 placeBlock(block, level, plantPos);
@@ -250,7 +253,8 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
             BlockState targetState = level.getBlockState(plantPos);
 
             boolean canPropagate = (block instanceof LiquidBlockContainer && targetState.getBlock() == Blocks.WATER)
-                    || (!(block instanceof LiquidBlockContainer) && targetState.getBlock() == Blocks.AIR);
+                    || (!(block instanceof LiquidBlockContainer) && targetState.getBlock() == Blocks.AIR)
+                    || ((block instanceof SimpleWaterloggedBlock) && (targetState.getBlock() == Blocks.AIR || targetState.getBlock() == Blocks.WATER));
 
             if (canPropagate) {
                 placeBlock(block, level, plantPos);
@@ -268,6 +272,12 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
 
     private void placeBlock(Block block, ServerLevel level, BlockPos pos) {
         BlockState state = block.defaultBlockState();
+        if (block instanceof SimpleWaterloggedBlock) {
+            FluidState fluidState = level.getFluidState(pos);
+            if (fluidState.getType() == Fluids.WATER) {
+                state = state.setValue(BlockStateProperties.WATERLOGGED, true);
+            }
+        }
         if (block instanceof DoublePlantBlock) {
             ((DoublePlantBlock) block).placeAt(level, state, pos, 3);
         } else {

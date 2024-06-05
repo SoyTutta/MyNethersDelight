@@ -152,11 +152,11 @@ public class MNDBlocks {
                 new CabinetBlock(Properties.copy(Blocks.BARREL)
                     .sound(SoundType.BAMBOO_WOOD).mapColor(MapColor.TERRACOTTA_GRAY))
         );
-        BLOCK_OF_POWDERY_CANNON = BLOCKS.register("block_of_powdery_cannon", () ->
+        BLOCK_OF_POWDERY_CANNON = BLOCKS.register("powdery_block", () ->
                 new StrippableBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)
                         .mapColor(MapColor.TERRACOTTA_BLACK))
         );
-        BLOCK_OF_STRIPPED_POWDERY_CANNON = BLOCKS.register("block_of_stripped_powdery_cannon", () ->
+        BLOCK_OF_STRIPPED_POWDERY_CANNON = BLOCKS.register("stripped_powdery_block", () ->
                 new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)
                         .mapColor(MapColor.TERRACOTTA_GRAY))
         );

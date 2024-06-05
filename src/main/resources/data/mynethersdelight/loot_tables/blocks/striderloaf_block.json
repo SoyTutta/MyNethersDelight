@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mynethersdelight:striderloaf_block"
+          "name": "mynethersdelight:striderloaf"
         }
       ],
       "conditions": [

@@ -26,6 +26,8 @@ public class MNDLang extends LanguageProvider {
         Set<RegistryObject<Block>> blocks = new HashSet<>(MNDBlocks.BLOCKS.getEntries());
         Set<RegistryObject<Item>> items = new HashSet<>(MNDItems.ITEMS.getEntries());
         blocks.remove(MNDBlocks.LETIOS_COMPOST);
+        blocks.remove(MNDBlocks.BLOCK_OF_POWDERY_CANNON);
+        blocks.remove(MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON);
         blocks.remove(MNDBlocks.WALL_POWDERY_TORCH);
         blocks.remove(MNDBlocks.POWDERY_WALL_SIGN);
         blocks.remove(MNDBlocks.POWDERY_WALL_HANGING_SIGN);
@@ -43,6 +45,9 @@ public class MNDLang extends LanguageProvider {
             this.add(i.get().getDescriptionId(), name);
         });
         this.add("block.mynethersdelight.letios_compost", "Leteos Compost");
+        this.add("block.mynethersdelight.powdery_block", "Block of Powdery Cannon");
+        this.add("block.mynethersdelight.stripped_powdery_block", "Block of Stripped Powdery Cannon");
+
         this.add("mynethersdelight.itemGroup.main", "My Nether's Delight");
         this.add("effect.mynethersdelight.g_pungent", "Pungent");
         this.add("effect.mynethersdelight.b_pungent", "Pungent");

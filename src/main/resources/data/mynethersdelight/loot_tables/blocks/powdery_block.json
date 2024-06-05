@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mynethersdelight:block_of_powdery_cannon"
+          "name": "mynethersdelight:powdery_block"
         }
       ],
       "conditions": [

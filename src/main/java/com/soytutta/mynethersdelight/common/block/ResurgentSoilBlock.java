@@ -15,6 +15,9 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.*;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
@@ -222,7 +225,9 @@ public class ResurgentSoilBlock extends Block {
 
             boolean canPropagate = (block instanceof LiquidBlockContainer && targetState.getBlock() == Blocks.WATER)
                     || (!(block instanceof LiquidBlockContainer) && targetState.getBlock() == Blocks.AIR)
-                    || (block instanceof WitherRoseBlock && targetState.getBlock() instanceof FlowerBlock);
+                    || (block instanceof WitherRoseBlock && (targetState.getBlock() instanceof FlowerBlock
+                    || targetState.getBlock() instanceof FungusBlock || targetState.getBlock() instanceof MushroomBlock))
+                    || ((block instanceof SimpleWaterloggedBlock) && (targetState.getBlock() == Blocks.AIR || targetState.getBlock() == Blocks.WATER));
 
             if (canPropagate) {
                 placeBlock(block, level, plantPos);
@@ -232,8 +237,11 @@ public class ResurgentSoilBlock extends Block {
 
     private boolean canAboveBlockSurvive(Block block, BlockState newState, ServerLevel level, BlockPos newPos) {
         BlockState blockBelowState = level.getBlockState(newPos.below());
-        if (block instanceof WitherRoseBlock && (newState.getBlock() instanceof FlowerBlock &&
-                !(newState.getBlock() instanceof WitherRoseBlock))) {
+        if (block instanceof WitherRoseBlock
+                && ((newState.getBlock() instanceof FlowerBlock
+                || newState.getBlock() instanceof FungusBlock
+                || newState.getBlock() instanceof MushroomBlock)
+                && !(newState.getBlock() instanceof WitherRoseBlock))) {
             return true;  // Wither Rose can replace other FlowerBlocks
         } else if (block instanceof DoublePlantBlock &&
                 level.getBlockState(newPos.above()).getBlock() == Blocks.AIR) {
@@ -268,7 +276,8 @@ public class ResurgentSoilBlock extends Block {
             BlockState targetState = level.getBlockState(plantPos);
 
             boolean canPropagate = (block instanceof LiquidBlockContainer && targetState.getBlock() == Blocks.WATER)
-                    || (!(block instanceof LiquidBlockContainer) && targetState.getBlock() == Blocks.AIR);
+                    || (!(block instanceof LiquidBlockContainer) && targetState.getBlock() == Blocks.AIR)
+                    || ((block instanceof SimpleWaterloggedBlock) && (targetState.getBlock() == Blocks.AIR || targetState.getBlock() == Blocks.WATER));
 
             if (canPropagate) {
                 placeBlock(block, level, plantPos);
@@ -286,6 +295,12 @@ public class ResurgentSoilBlock extends Block {
 
     private void placeBlock(Block block, ServerLevel level, BlockPos pos) {
         BlockState state = block.defaultBlockState();
+        if (block instanceof SimpleWaterloggedBlock) {
+            FluidState fluidState = level.getFluidState(pos);
+            if (fluidState.getType() == Fluids.WATER) {
+                state = state.setValue(BlockStateProperties.WATERLOGGED, true);
+            }
+        }
         if (block instanceof PinkPetalsBlock) {
             Random random = new Random();
             Direction[] allowedDirections = {Direction.NORTH, Direction.SOUTH, Direction.WEST, Direction.EAST};

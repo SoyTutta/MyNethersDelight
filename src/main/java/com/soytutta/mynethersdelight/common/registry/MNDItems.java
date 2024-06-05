@@ -167,10 +167,10 @@ public class MNDItems {
         POWDERY_CABINET = ITEMS.register("powdery_cabinet", () ->
                 new BlockItem(MNDBlocks.POWDERY_CABINET.get(), basicItem())
         );
-        BLOCK_OF_POWDERY_CANNON = ITEMS.register("block_of_powdery_cannon", () ->
+        BLOCK_OF_POWDERY_CANNON = ITEMS.register("powdery_block", () ->
                 new BlockItem(MNDBlocks.BLOCK_OF_POWDERY_CANNON.get(), basicItem())
         );
-        BLOCK_OF_STRIPPED_POWDERY_CANNON = ITEMS.register("block_of_stripped_powdery_cannon", () ->
+        BLOCK_OF_STRIPPED_POWDERY_CANNON = ITEMS.register("stripped_powdery_block", () ->
                 new BlockItem(MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get(), basicItem())
         );
         POWDERY_PLANKS = ITEMS.register("powdery_planks", () ->

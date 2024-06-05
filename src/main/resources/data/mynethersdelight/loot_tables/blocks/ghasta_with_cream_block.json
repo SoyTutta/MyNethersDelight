@@ -7,7 +7,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mynethersdelight:ghasta_with_cream_block"
+          "name": "mynethersdelight:ghasta_with_cream"
         }
       ],
       "conditions": [

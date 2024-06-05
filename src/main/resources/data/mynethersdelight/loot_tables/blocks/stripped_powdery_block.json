@@ -6,7 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mynethersdelight:block_of_stripped_powdery_cannon"
+          "name": "mynethersdelight:stripped_powdery_block"
         }
       ],
       "conditions": [
