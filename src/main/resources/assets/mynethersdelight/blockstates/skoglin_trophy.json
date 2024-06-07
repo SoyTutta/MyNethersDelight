@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "mynethersdelight:block/skoglin_trophy",
+	"y": 90
+    },
+    "facing=north": {
+      "model": "mynethersdelight:block/skoglin_trophy"
+    },
+    "facing=south": {
+      "model": "mynethersdelight:block/skoglin_trophy",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "mynethersdelight:block/skoglin_trophy",
+      "y": 270
+    }
+  }
+}

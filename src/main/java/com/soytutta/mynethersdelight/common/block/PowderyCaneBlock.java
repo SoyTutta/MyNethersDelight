@@ -234,6 +234,11 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
     }
 
     @Override
+    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return false;
+    }
+
+    @Override
     public boolean isPathfindable(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull PathComputationType path) {
         return false;
     }

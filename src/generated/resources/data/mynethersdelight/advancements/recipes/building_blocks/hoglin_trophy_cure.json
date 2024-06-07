@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mynethersdelight:hoglin_trophy_cure"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "has_zoglin_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mynethersdelight:zoglin_trophy"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "has_zoglin_trophy",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mynethersdelight:hoglin_trophy_cure"
+    ]
+  },
+  "sends_telemetry_event": false
+}

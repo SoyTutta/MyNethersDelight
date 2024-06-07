@@ -1,6 +1,9 @@
 {
   "replace": false,
   "entries": [
+    "mynethersdelight:add_loot_piglin_bartering",
+    "mynethersdelight:add_loot_bastion_hoglin_stable",
+    "mynethersdelight:add_loot_bastion_treasure",
     "mynethersdelight:scavenging_strider_egg",
     "mynethersdelight:scavenging_hoglin_hide",
     "mynethersdelight:scavenging_ghasta",

@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "nether_stove",
+  "key": {
+    "#": {
+      "tag": "mynethersdelight:stove_soul_fuel"
+    },
+    "B": {
+      "item": "minecraft:polished_blackstone_bricks"
+    },
+    "C": {
+      "item": "minecraft:campfire"
+    },
+    "i": {
+      "tag": "forge:ingots/nether_brick"
+    }
+  },
+  "pattern": [
+    "iii",
+    "B#B",
+    "BCB"
+  ],
+  "result": {
+    "item": "mynethersdelight:nether_bricks_soul_stove"
+  },
+  "show_notification": true
+}

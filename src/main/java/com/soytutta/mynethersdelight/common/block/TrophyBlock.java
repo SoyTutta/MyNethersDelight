@@ -10,16 +10,13 @@ import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Holder;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -29,14 +26,11 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.ServerLevelAccessor;
-import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
-import net.minecraft.world.level.dimension.BuiltinDimensionTypes;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.BlockHitResult;
@@ -46,9 +40,8 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.ToolActions;
+import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
-import vectorwing.farmersdelight.common.utility.MathUtils;
 
 import java.util.Random;
 import java.util.stream.Stream;
@@ -190,6 +183,31 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.ZOMBIE_VILLAGER_CURE, ParticleTypes.CLOUD, secondParticle, secondSoundEvent, useSecondEffects);
             return InteractionResult.SUCCESS;
         }
+        else if (block == MNDBlocks.HOGLIN_TROPHY.get() && heldItem.is(ForgeTags.TOOLS_KNIVES)) {
+            secondParticle = ParticleTypes.CLOUD;
+            secondSoundEvent = SoundEvents.HOGLIN_HURT;
+            useSecondEffects = true;
+            processTrophyInteraction(level, pos, player, hand, MNDBlocks.SKOGLIN_TROPHY.get(), ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), ParticleTypes.DAMAGE_INDICATOR, secondParticle, secondSoundEvent, useSecondEffects);
+            int j = 1 + level.random.nextInt(2);
+            popResource(level, pos, new ItemStack(Items.LEATHER, j));
+            return InteractionResult.SUCCESS;
+        }
+        else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && heldItem.is(ForgeTags.TOOLS_KNIVES)) {
+            secondParticle = ParticleTypes.CLOUD;
+            secondSoundEvent = SoundEvents.ZOGLIN_HURT;
+            useSecondEffects = true;
+            processTrophyInteraction(level, pos, player, hand, MNDBlocks.SKOGLIN_TROPHY.get(), ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), ParticleTypes.DAMAGE_INDICATOR, secondParticle, secondSoundEvent, useSecondEffects);
+            int j = 1 + level.random.nextInt(2);
+            popResource(level, pos, new ItemStack(Items.ROTTEN_FLESH, j));
+            return InteractionResult.SUCCESS;
+        }
+        else if (block == MNDBlocks.SKOGLIN_TROPHY.get() && heldItem.is(MNDTags.HOGLIN_HIDE)) {
+            secondParticle = ParticleTypes.CLOUD;
+            secondSoundEvent = SoundEvents.HOGLIN_AMBIENT;
+            useSecondEffects = true;
+            processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.ARMOR_EQUIP_LEATHER, ParticleTypes.HAPPY_VILLAGER, secondParticle, secondSoundEvent, useSecondEffects);
+            return InteractionResult.SUCCESS;
+        }
         return InteractionResult.PASS;
     }
 
@@ -258,6 +276,11 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
                 level.addParticle(ParticleTypes.ENCHANTED_HIT, x, y, z, offsetX, offsetY, offsetZ);
             }
         }
+    }
+
+    @Override
+    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return false;
     }
 
     @Override

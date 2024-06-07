@@ -51,4 +51,9 @@ public class PowderyCannonSaplingBlock extends BambooSaplingBlock {
     protected void growBamboo(Level level, BlockPos pos) {
         level.setBlock(pos.above(), MNDBlocks.POWDERY_CANNON.get().defaultBlockState().setValue(BambooStalkBlock.LEAVES, BambooLeaves.SMALL), 3);
     }
+
+    @Override
+    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return false;
+    }
 }

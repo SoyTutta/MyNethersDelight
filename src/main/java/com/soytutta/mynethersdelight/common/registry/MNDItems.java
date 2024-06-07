@@ -17,7 +17,6 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 import vectorwing.farmersdelight.common.item.ConsumableItem;
-import vectorwing.farmersdelight.common.item.FuelBlockItem;
 import vectorwing.farmersdelight.common.item.MushroomColonyItem;
 
 public class MNDItems {
@@ -100,6 +99,7 @@ public class MNDItems {
     public static final RegistryObject<Item> HOGLIN_TROPHY;
     public static final RegistryObject<Item> WAXED_HOGLIN_TROPHY;
     public static final RegistryObject<Item> ZOGLIN_TROPHY;
+    public static final RegistryObject<Item> SKOGLIN_TROPHY;
     // STUFFED HOGLIN
     public static final RegistryObject<Item> HOGLIN_HIDE;
     public static final RegistryObject<Item> RAW_STUFFED_HOGLIN;
@@ -155,7 +155,7 @@ public class MNDItems {
                 new BlockItem(MNDBlocks.BULLET_PEPPER_CRATE.get(), basicItem())
         );
         POWDER_CANNON = ITEMS.register("powder_cannon", () ->
-                new FuelBlockItem(MNDBlocks.POWDERY_CANNON.get(), basicItem(),500)
+                new BlockItem(MNDBlocks.POWDERY_CANNON.get(), basicItem())
         );
         POWDERY_TORCH = ITEMS.register("powdery_torch", () ->
                 new StandingAndWallBlockItem(
@@ -340,13 +340,16 @@ public class MNDItems {
         );
         // THOPHY
         HOGLIN_TROPHY = ITEMS.register("hoglin_trophy", () ->
-                new BlockItem(MNDBlocks.HOGLIN_TROPHY.get(), basicItem().stacksTo(1))
+                new BlockItem(MNDBlocks.HOGLIN_TROPHY.get(), basicItem())
         );
         WAXED_HOGLIN_TROPHY = ITEMS.register("waxed_hoglin_trophy", () ->
-                new BlockItem(MNDBlocks.WAXED_HOGLIN_TROPHY.get(), basicItem().stacksTo(1))
+                new BlockItem(MNDBlocks.WAXED_HOGLIN_TROPHY.get(), basicItem())
         );
         ZOGLIN_TROPHY = ITEMS.register("zoglin_trophy", () ->
-                new BlockItem(MNDBlocks.ZOGLIN_TROPHY.get(), basicItem().stacksTo(1))
+                new BlockItem(MNDBlocks.ZOGLIN_TROPHY.get(), basicItem())
+        );
+        SKOGLIN_TROPHY = ITEMS.register("skoglin_trophy", () ->
+                new BlockItem(MNDBlocks.SKOGLIN_TROPHY.get(), basicItem())
         );
         // STUFFED HOGLIN
         HOGLIN_HIDE = ITEMS.register("hoglin_hide", () ->

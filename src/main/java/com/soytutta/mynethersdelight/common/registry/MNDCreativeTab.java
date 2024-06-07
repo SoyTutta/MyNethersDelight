@@ -9,7 +9,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.*;
 
-
 @Mod.EventBusSubscriber(modid = MyNethersDelight.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class MNDCreativeTab {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MyNethersDelight.MODID);
@@ -107,6 +106,7 @@ public class MNDCreativeTab {
         event.accept(MNDItems.HOGLIN_TROPHY.get());
         event.accept(MNDItems.WAXED_HOGLIN_TROPHY.get());
         event.accept(MNDItems.ZOGLIN_TROPHY.get());
+        event.accept(MNDItems.SKOGLIN_TROPHY.get());
     }
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {

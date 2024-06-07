@@ -257,6 +257,11 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
         return true;
     }
 
+    @Override
+    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return false;
+    }
+
     static {
         PART = BlockStateProperties.BED_PART;
         SERVINGS = IntegerProperty.create("servings", 0, 11);

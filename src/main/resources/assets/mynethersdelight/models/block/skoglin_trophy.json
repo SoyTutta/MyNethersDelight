@@ -1,0 +1,171 @@
+{
+	"credit": "Made with Blockbench/by:SoyTutta",
+	"render_type": "minecraft:cutout",
+	"texture_size": [48, 48],
+	"textures": {
+		"trophy_mounting": "mynethersdelight:block/trophy_mounting",
+		"particle": "mynethersdelight:block/trophy_mounting_back",
+		"trophy_mounting_back": "mynethersdelight:block/trophy_mounting_back",
+		"body": "mynethersdelight:block/skoglin_trophy_block"
+	},
+	"elements": [
+		{
+			"from": [2, 9.05025, -1.70711],
+			"to": [14, 14.05025, 13.29289],
+			"rotation": {"angle": -45, "axis": "x", "origin": [8, 12.25736, 12.15685]},
+			"faces": {
+				"north": {"uv": [5.66667, 8.33333, 1.66667, 6.66667], "rotation": 180, "texture": "#body"},
+				"east": {"uv": [0, 1.66667, 1.66667, 6.66667], "rotation": 270, "texture": "#body"},
+				"south": {"uv": [5.66667, 1.66667, 1.66667, 0], "texture": "#body"},
+				"west": {"uv": [5.66667, 1.66667, 7.33333, 6.66667], "rotation": 90, "texture": "#body"},
+				"up": {"uv": [1.66667, 1.66667, 5.66667, 6.66667], "rotation": 180, "texture": "#body"},
+				"down": {"uv": [11.33333, 1.66667, 7.33333, 6.66667], "texture": "#body"}
+			}
+		},
+		{
+			"from": [1, 2, 6],
+			"to": [3, 13, 8],
+			"rotation": {"angle": -45, "axis": "x", "origin": [1, 1.5, 5]},
+			"faces": {
+				"north": {"uv": [11.33333, 0, 12, 3.66667], "texture": "#body"},
+				"east": {"uv": [12, 0, 12.66667, 3.66667], "texture": "#body"},
+				"south": {"uv": [11.33333, 0, 12, 3.66667], "texture": "#body"},
+				"west": {"uv": [12, 0, 12.66667, 3.66667], "texture": "#body"},
+				"up": {"uv": [12, 3.66667, 12.66667, 4.33333], "texture": "#body"},
+				"down": {"uv": [11.33333, 3.66667, 12, 4.33333], "texture": "#body"}
+			}
+		},
+		{
+			"from": [13, 2, 6],
+			"to": [15, 13, 8],
+			"rotation": {"angle": -45, "axis": "x", "origin": [1, 1.5, 5]},
+			"faces": {
+				"north": {"uv": [11.33333, 0, 12, 3.66667], "texture": "#body"},
+				"east": {"uv": [12, 0, 12.66667, 3.66667], "texture": "#body"},
+				"south": {"uv": [11.33333, 0, 12, 3.66667], "texture": "#body"},
+				"west": {"uv": [12, 0, 12.66667, 3.66667], "texture": "#body"},
+				"up": {"uv": [12, 3.66667, 12.66667, 4.33333], "texture": "#body"},
+				"down": {"uv": [11.33333, 3.66667, 12, 4.33333], "texture": "#body"}
+			}
+		},
+		{
+			"from": [15, 4, 13],
+			"to": [15, 13, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [13, 4, 13]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 3], "texture": "#body"},
+				"east": {"uv": [5.66667, 7.33333, 6.33333, 10.66667], "texture": "#body"},
+				"south": {"uv": [0, 0, 0, 3], "texture": "#body"},
+				"west": {"uv": [11, 7.33333, 11.66667, 10.66667], "texture": "#body"},
+				"up": {"uv": [0, 0, 0, 0.66667], "texture": "#body"},
+				"down": {"uv": [0, 0, 0, 0.66667], "texture": "#body"}
+			}
+		},
+		{
+			"from": [1, 4, 13],
+			"to": [1, 13, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [-1, 4, 13]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 3], "texture": "#body"},
+				"east": {"uv": [5.66667, 7.33333, 6.33333, 10.66667], "texture": "#body"},
+				"south": {"uv": [0, 0, 0, 3], "texture": "#body"},
+				"west": {"uv": [11, 7.33333, 11.66667, 10.66667], "texture": "#body"},
+				"up": {"uv": [0, 0, 0, 0.66667], "texture": "#body"},
+				"down": {"uv": [0, 0, 0, 0.66667], "texture": "#body"}
+			}
+		},
+		{
+			"from": [1, 13, 13],
+			"to": [15, 13, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [13, 11, 13]},
+			"faces": {
+				"north": {"uv": [0, 0, 4.66667, 0], "texture": "#body"},
+				"east": {"uv": [0, 0, 0.66667, 0], "texture": "#body"},
+				"south": {"uv": [0, 0, 4.66667, 0], "texture": "#body"},
+				"west": {"uv": [0, 0, 0.66667, 0], "texture": "#body"},
+				"up": {"uv": [6.33333, 6.66667, 11, 7.33333], "texture": "#body"},
+				"down": {"uv": [6.33333, 6.66667, 11, 7.33333], "texture": "#body"}
+			}
+		},
+		{
+			"from": [1, 4, 13],
+			"to": [15, 4, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [13, 2, 13]},
+			"faces": {
+				"north": {"uv": [0, 0, 4.66667, 0], "texture": "#body"},
+				"east": {"uv": [0, 0, 0.66667, 0], "texture": "#body"},
+				"south": {"uv": [0, 0, 4.66667, 0], "texture": "#body"},
+				"west": {"uv": [0, 0, 0.66667, 0], "texture": "#body"},
+				"up": {"uv": [6.33333, 10.66667, 11, 10], "texture": "#body"},
+				"down": {"uv": [6.33333, 10, 11, 10.66667], "texture": "#body"}
+			}
+		},
+		{
+			"from": [1, 4, 13],
+			"to": [15, 13, 13],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 4, 13]},
+			"faces": {
+				"north": {"uv": [6.33333, 7.33333, 11, 10.66667], "texture": "#body"},
+				"east": {"uv": [0, 0, 0, 3], "texture": "#body"},
+				"south": {"uv": [6.33333, 7.33333, 11, 10.66667], "texture": "#body"},
+				"west": {"uv": [0, 0, 0, 3], "texture": "#body"},
+				"up": {"uv": [0, 0, 4.66667, 0], "texture": "#body"},
+				"down": {"uv": [0, 0, 4.66667, 0], "texture": "#body"}
+			}
+		},
+		{
+			"from": [0, 3, 15],
+			"to": [16, 15, 16],
+			"faces": {
+				"north": {"uv": [0, 0, 16, 12], "texture": "#trophy_mounting"},
+				"east": {"uv": [0, 0, 1, 12], "texture": "#trophy_mounting"},
+				"south": {"uv": [0, 0, 16, 12], "texture": "#trophy_mounting_back"},
+				"west": {"uv": [15, 0, 16, 12], "texture": "#trophy_mounting"},
+				"up": {"uv": [0, 0, 16, 1], "texture": "#trophy_mounting"},
+				"down": {"uv": [0, 11, 16, 12], "texture": "#trophy_mounting"}
+			}
+		},
+		{
+			"from": [1, 0, 15],
+			"to": [15, 3, 16],
+			"faces": {
+				"north": {"uv": [1, 12, 15, 16], "texture": "#trophy_mounting"},
+				"east": {"uv": [14, 12, 14.33333, 16], "texture": "#trophy_mounting"},
+				"south": {"uv": [1, 12, 15, 16], "texture": "#trophy_mounting_back"},
+				"west": {"uv": [1, 12, 1.33333, 16], "texture": "#trophy_mounting"},
+				"up": {"uv": [1, 12, 15, 12.33333], "texture": "#trophy_mounting"},
+				"down": {"uv": [1, 15.66667, 15, 16], "texture": "#trophy_mounting"}
+			}
+		}
+	],
+	"display": {
+		"head": {
+			"translation": [0, 0.5, -12.5]
+		},
+		"fixed": {
+			"translation": [0, 0, -4],
+			"scale": [0.7, 0.7, 0.7]
+		}
+	},
+	"groups": [
+		{
+			"name": "nether_trophy",
+			"origin": [0, 0, 0],
+			"color": 0,
+			"children": [
+				{
+					"name": "body",
+					"origin": [8, 8, 8],
+					"color": 0,
+					"children": [0, 1, 2, 3, 4, 5, 6, 7]
+				},
+				{
+					"name": "trophy_mounting",
+					"origin": [0, 0, 0],
+					"color": 0,
+					"children": [8, 9]
+				}
+			]
+		}
+	]
+}

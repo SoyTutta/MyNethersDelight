@@ -6,6 +6,7 @@
 package com.soytutta.mynethersdelight.core.data.recipes;
 
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
+import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
@@ -58,6 +59,24 @@ public class MNDCuttingRecipes {
                         Items.BLAZE_POWDER, 3)
                 .addResultWithChance(Items.BLAZE_POWDER, 0.25F, 1)
                 .build(consumer, "mynethersdelight:cutting/balze_rod");
+
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.HOGLIN_TROPHY.get()),
+                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        MNDItems.SKOGLIN_TROPHY.get())
+                .addResult(Items.LEATHER)
+                .addResultWithChance(Items.LEATHER, 0.5F, 2)
+                .build(consumer, "mynethersdelight:cutting/skoglin_trophy");
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.ZOGLIN_TROPHY.get()),
+                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        MNDItems.SKOGLIN_TROPHY.get())
+                .addResult(Items.ROTTEN_FLESH)
+                .addResultWithChance(Items.ROTTEN_FLESH, 0.5F, 2)
+                .build(consumer, "mynethersdelight:cutting/skoglin_trophy_alt");
+
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.WAXED_HOGLIN_TROPHY.get()),
+                        Ingredient.of(ForgeTags.TOOLS_AXES),
+                        MNDItems.HOGLIN_TROPHY.get())
+                .build(consumer, "mynethersdelight:cutting/hoglin_trophy");
     }
     private static void strippingWood(Consumer<FinishedRecipe> consumer) {
         stripLogForBark(consumer, MNDItems.BLOCK_OF_POWDERY_CANNON.get(), MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());

@@ -31,6 +31,9 @@ public class MNDLang extends LanguageProvider {
         blocks.remove(MNDBlocks.WALL_POWDERY_TORCH);
         blocks.remove(MNDBlocks.POWDERY_WALL_SIGN);
         blocks.remove(MNDBlocks.POWDERY_WALL_HANGING_SIGN);
+        blocks.remove(MNDBlocks.STRIDERLOAF_BLOCK);
+        blocks.remove(MNDBlocks.COLD_STRIDERLOAF_BLOCK);
+        blocks.remove(MNDBlocks.GHASTA_WITH_CREAM_BLOCK);
         blocks.forEach((b) -> {
             String name = (b.get()).getDescriptionId().replaceFirst("block.mynethersdelight.", "");
             name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("Of", "of");
@@ -47,6 +50,9 @@ public class MNDLang extends LanguageProvider {
         this.add("block.mynethersdelight.letios_compost", "Leteos Compost");
         this.add("block.mynethersdelight.powdery_block", "Block of Powdery Cannon");
         this.add("block.mynethersdelight.stripped_powdery_block", "Block of Stripped Powdery Cannon");
+        this.add("block.mynethersdelight.striderloaf_block", "Striderloaf");
+        this.add("block.mynethersdelight.cold_striderloaf_block", "Cold Striderloaf");
+        this.add("block.mynethersdelight.ghasta_with_cream_block", "Ghasta with Cream");
 
         this.add("mynethersdelight.itemGroup.main", "My Nether's Delight");
         this.add("effect.mynethersdelight.g_pungent", "Pungent");

@@ -1,0 +1,26 @@
+{
+  "type": "farmersdelight:cooking",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "tag": "mynethersdelight:loin_hoglin"
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "tag": "forge:milk"
+    },
+    {
+      "tag": "forge:eggs"
+    },
+    {
+      "tag": "mynethersdelight:bullet_pepper"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "item": "mynethersdelight:fried_hoglin_chop"
+  }
+}

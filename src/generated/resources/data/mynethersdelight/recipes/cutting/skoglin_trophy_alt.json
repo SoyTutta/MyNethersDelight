@@ -1,0 +1,24 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:zoglin_trophy"
+    }
+  ],
+  "result": [
+    {
+      "item": "mynethersdelight:skoglin_trophy"
+    },
+    {
+      "item": "minecraft:rotten_flesh"
+    },
+    {
+      "chance": 0.5,
+      "count": 2,
+      "item": "minecraft:rotten_flesh"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

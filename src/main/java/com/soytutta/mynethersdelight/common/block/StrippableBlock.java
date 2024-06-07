@@ -1,8 +1,11 @@
 package com.soytutta.mynethersdelight.common.block;
 
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.UseOnContext;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.common.ToolAction;
@@ -25,5 +28,10 @@ public class StrippableBlock extends RotatedPillarBlock {
             }
         }
         return super.getToolModifiedState(state, context, toolAction, simulate);
+    }
+
+    @Override
+    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return false;
     }
 }

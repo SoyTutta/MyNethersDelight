@@ -42,6 +42,7 @@ public class MNDBlocks {
     public static final RegistryObject<Block> HOGLIN_TROPHY;
     public static final RegistryObject<Block> WAXED_HOGLIN_TROPHY;
     public static final RegistryObject<Block> ZOGLIN_TROPHY;
+    public static final RegistryObject<Block> SKOGLIN_TROPHY;
     public static final RegistryObject<Block> POWDERY_CHUBBY_SAPLING;
     public static final RegistryObject<Block> POWDERY_CANNON;
     public static final RegistryObject<Block> POWDERY_CANE;
@@ -252,6 +253,10 @@ public class MNDBlocks {
         ZOGLIN_TROPHY = BLOCKS.register("zoglin_trophy", () ->
                 new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD)
                         .mapColor(MapColor.TERRACOTTA_GREEN))
+        );
+        SKOGLIN_TROPHY = BLOCKS.register("skoglin_trophy", () ->
+                new TrophyBlock(Properties.copy(Blocks.BONE_BLOCK)
+                        .mapColor(MapColor.TERRACOTTA_WHITE))
         );
     }
     private static ToIntFunction<BlockState> FlameBlockEmission(int lightValue) {

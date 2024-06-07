@@ -21,7 +21,6 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.*;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
-import vectorwing.farmersdelight.common.block.RiceBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.MathUtils;
@@ -83,15 +82,22 @@ public class ResurgentSoilBlock extends Block {
 
             if (!aboveState.is(MNDTags.NOT_PROPAGATE_PLANT)) {
                 if (aboveState.is(MNDTags.ABOVE_PROPAGATE_PLANT)
-                        && MathUtils.RAND.nextFloat() <= (Configuration.RICH_SOIL_BOOST_CHANCE.get()) * 0.8F) {
+                        && MathUtils.RAND.nextFloat() <= (Configuration.RICH_SOIL_BOOST_CHANCE.get() * 0.6F)) {
                     propagateAboveIfPossible(aboveBlock, abovePos, level);
+                    return;
                 }
 
-                if ((aboveBlock instanceof FlowerBlock
-                        || aboveBlock instanceof FungusBlock
-                        || aboveBlock instanceof MushroomBlock)
-                        && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get()) {
+                if (aboveBlock instanceof FlowerBlock
+                        && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get() * 0.8F) {
                     propagateAboveIfPossible(aboveBlock, abovePos, level);
+                    return;
+                }
+
+                if ((aboveBlock instanceof FungusBlock
+                        || aboveBlock instanceof MushroomBlock)
+                        && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get() * 0.4F) {
+                    propagateAboveIfPossible(aboveBlock, abovePos, level);
+                    return;
                 }
 
                 if (aboveBlock instanceof MushroomColonyBlock) {
@@ -101,6 +107,7 @@ public class ResurgentSoilBlock extends Block {
                             propagateAboveIfPossible(aboveBlock, abovePos, level);
                         }
                     }
+                    return;
                 }
 
                 if (aboveBlock instanceof NetherWartBlock) {
@@ -112,7 +119,9 @@ public class ResurgentSoilBlock extends Block {
                             propagateAboveIfPossible(aboveBlock, abovePos, level);
                         }
                     }
+                    return;
                 }
+
                 if (aboveBlock instanceof PinkPetalsBlock) {
                     int age = aboveState.getValue(PinkPetalsBlock.AMOUNT);
                     if (age != PinkPetalsBlock.MAX_FLOWERS) {
@@ -123,9 +132,16 @@ public class ResurgentSoilBlock extends Block {
                     return;
                 }
 
-                if ((aboveBlock instanceof DoublePlantBlock || aboveBlock instanceof RiceBlock)
-                    && MathUtils.RAND.nextFloat() <= (Configuration.RICH_SOIL_BOOST_CHANCE.get())) {
+                if ((aboveBlock instanceof DoublePlantBlock)
+                    && MathUtils.RAND.nextFloat() <= (Configuration.RICH_SOIL_BOOST_CHANCE.get() / 2)) {
                     propagateAboveIfPossible(aboveBlock, abovePos, level);
+                    return;
+                }
+
+                if ((aboveBlock instanceof BushBlock)
+                        && MathUtils.RAND.nextFloat() <= (Configuration.RICH_SOIL_BOOST_CHANCE.get() / 3)) {
+                    propagateAboveIfPossible(aboveBlock, abovePos, level);
+                    return;
                 }
             }
 
@@ -133,17 +149,18 @@ public class ResurgentSoilBlock extends Block {
                 if (belowState.is(MNDTags.BELOW_PROPAGATE_PLANT)
                     && MathUtils.RAND.nextFloat() <= (Configuration.RICH_SOIL_BOOST_CHANCE.get()) * 0.8F) {
                     propagateBelowIfPossible(belowBlock, belowPos, level);
+                    return;
                 }
             }
 
             if (!(belowBlock instanceof CaveVinesBlock || belowBlock instanceof CaveVinesPlantBlock)
                     && (belowBlock instanceof GrowingPlantHeadBlock || belowBlock instanceof GrowingPlantBodyBlock)
-                    && MathUtils.RAND.nextFloat() <= (Configuration.RICH_SOIL_BOOST_CHANCE.get() * 0.1F)) {
+                    && MathUtils.RAND.nextFloat() <= (Configuration.RICH_SOIL_BOOST_CHANCE.get() * 0.2F)) {
                 performBonemealIfPossible(belowBlock, pos.below(), belowState, level, 1);
             }
 
             if ((aboveBlock instanceof GrowingPlantHeadBlock || aboveBlock instanceof GrowingPlantBodyBlock)
-                    && MathUtils.RAND.nextFloat() <= (Configuration.RICH_SOIL_BOOST_CHANCE.get() * 0.1F)) {
+                    && MathUtils.RAND.nextFloat() <= (Configuration.RICH_SOIL_BOOST_CHANCE.get() * 0.2F)) {
                 performBonemealIfPossible(aboveBlock, pos.above(), aboveState, level, 1);
             }
 

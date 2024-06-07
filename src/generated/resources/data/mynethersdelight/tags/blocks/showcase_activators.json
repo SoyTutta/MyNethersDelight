@@ -1,0 +1,20 @@
+{
+  "values": [
+    "minecraft:wither_rose",
+    "minecraft:soul_sand",
+    "mynethersdelight:letios_compost",
+    "mynethersdelight:resurgent_soil",
+    "minecraft:nether_wart",
+    "minecraft:crimson_fungus",
+    "mynethersdelight:crimson_fungus_colony",
+    "minecraft:warped_fungus",
+    "mynethersdelight:warped_fungus_colony",
+    "minecraft:red_mushroom",
+    "farmersdelight:red_mushroom_colony",
+    "minecraft:brown_mushroom",
+    "farmersdelight:brown_mushroom_colony",
+    "minecraft:twisting_vines",
+    "minecraft:weeping_vines",
+    "minecraft:bone_block"
+  ]
+}

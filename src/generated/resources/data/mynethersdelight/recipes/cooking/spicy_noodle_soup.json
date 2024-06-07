@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cooking",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "item": "mynethersdelight:ghasta"
+    },
+    {
+      "tag": "forge:cooked_eggs"
+    },
+    {
+      "tag": "mynethersdelight:hot_spice"
+    },
+    {
+      "tag": "forge:raw_pork"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "item": "mynethersdelight:spicy_noodle_soup"
+  }
+}

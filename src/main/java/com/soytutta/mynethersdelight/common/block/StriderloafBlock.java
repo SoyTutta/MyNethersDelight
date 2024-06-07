@@ -23,6 +23,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.block.FeastBlock;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.function.Supplier;
 
@@ -37,6 +38,9 @@ public class StriderloafBlock extends FeastBlock {
     private static boolean hasLava(LevelReader level, BlockPos pos) {
         for (BlockPos nearbyPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
             if (level.getBlockState(nearbyPos).getFluidState().is(FluidTags.LAVA)) {
+                return true;
+            }
+            if (nearbyPos.equals(pos.below()) && level.getBlockState(nearbyPos).is(ModTags.HEAT_SOURCES)) {
                 return true;
             }
         }

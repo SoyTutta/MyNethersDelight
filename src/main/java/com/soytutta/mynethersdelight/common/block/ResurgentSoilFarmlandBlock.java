@@ -296,4 +296,9 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
         }
         public void fallOn(Level level, BlockState state, BlockPos pos, Entity entityIn, float fallDistance) {
     }
+
+    @Override
+    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return false;
+    }
 }

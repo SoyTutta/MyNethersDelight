@@ -138,9 +138,9 @@ public class MNDFoodValues
                 .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1200, 0), 1.0F)
                 .meat().build();
         public static final FoodProperties SPICY_CURRY = (new FoodProperties.Builder())
-                .nutrition(17).saturationMod(0.65f)
-                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 1200, 1), 1.0F)
-                .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 2400, 0), 1.0F)
+                .nutrition(15).saturationMod(0.65f)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 2400, 1), 1.0F)
+                .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1.0F)
                 .meat().build();
 
 

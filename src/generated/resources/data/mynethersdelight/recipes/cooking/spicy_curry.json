@@ -1,0 +1,29 @@
+{
+  "type": "farmersdelight:cooking",
+  "cookingtime": 200,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "tag": "mynethersdelight:curry_meats"
+    },
+    {
+      "tag": "forge:milk"
+    },
+    {
+      "tag": "mynethersdelight:hot_spice"
+    },
+    {
+      "tag": "forge:crops/rice"
+    },
+    {
+      "tag": "forge:vegetables/carrot"
+    },
+    {
+      "item": "farmersdelight:pumpkin_slice"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "item": "mynethersdelight:spicy_curry"
+  }
+}

@@ -230,6 +230,12 @@ public class MNDCraftingRecipes {
                 .group("nether_trophy")
                 .unlockedBy("has_hoglin_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.HOGLIN_TROPHY.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "zoglin_trophy"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,MNDItems.HOGLIN_TROPHY.get())
+                .requires(MNDItems.SKOGLIN_TROPHY.get())
+                .requires(Ingredient.of(MNDTags.HOGLIN_HIDE))
+                .group("nether_trophy")
+                .unlockedBy("has_skoglin_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.SKOGLIN_TROPHY.get()))
+                .save(consumer, new ResourceLocation("mynethersdelight", "skoglin_trophy"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.NETHER_STOVE.get())
                 .requires(MNDItems.SOUL_NETHER_STOVE.get())

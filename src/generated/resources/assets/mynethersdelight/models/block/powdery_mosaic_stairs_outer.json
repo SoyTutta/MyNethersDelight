@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/outer_stairs",
+  "textures": {
+    "bottom": "mynethersdelight:block/powdery_mosaic",
+    "side": "mynethersdelight:block/powdery_mosaic",
+    "top": "mynethersdelight:block/powdery_mosaic"
+  }
+}

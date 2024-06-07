@@ -38,15 +38,19 @@ public class PungentEffect extends MobEffect {
 
         if (isInFireCondition(entity) || entity.isInLava() || entity.isOnFire()) {
             if (BPungentEffect != null) {
-                entity.hurt(entity.damageSources().cactus(), 1.5f * (amplifier + 1));
+                if (entity.getHealth() > 2.0F) {
+                    entity.hurt(entity.damageSources().cactus(), 1.0f);
+                }
             } else if (GPungentEffect != null) {
-                entity.heal(0.10f * (amplifier + 1));
+                if (entity.getHealth() < entity.getMaxHealth()) {
+                    entity.heal(1.0F);
+                }
             }
             if (isInFireCondition(entity)) {
-                entity.setSecondsOnFire(1);
+                if (entity.getHealth() > 1.0F) { entity.setSecondsOnFire(5); }
+                else { entity.setSecondsOnFire(0); }
             }
         }
-
     }
 
     private void switchEffect(LivingEntity entity, MobEffectInstance currentEffect, MobEffect newEffect) {
@@ -87,6 +91,11 @@ public class PungentEffect extends MobEffect {
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
-        return true;
+        int i = 25 >> amplifier;
+        if (i > 0) {
+            return duration % i == 0;
+        } else {
+            return true;
+        }
     }
 }
