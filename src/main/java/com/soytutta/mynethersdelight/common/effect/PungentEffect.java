@@ -38,7 +38,7 @@ public class PungentEffect extends MobEffect {
 
         if (isInFireCondition(entity) || entity.isInLava() || entity.isOnFire()) {
             if (BPungentEffect != null) {
-                if (entity.getHealth() > 2.0F) {
+                if (entity.getHealth() > 8.0F - ((amplifier + 1) * 2)) {
                     entity.hurt(entity.damageSources().cactus(), 1.0f);
                 }
             } else if (GPungentEffect != null) {
@@ -47,7 +47,7 @@ public class PungentEffect extends MobEffect {
                 }
             }
             if (isInFireCondition(entity)) {
-                if (entity.getHealth() > 1.0F) { entity.setSecondsOnFire(5); }
+                if (entity.getHealth() > 8.0F - ((amplifier + 1) * 2)) { entity.setSecondsOnFire(5); }
                 else { entity.setSecondsOnFire(0); }
             }
         }

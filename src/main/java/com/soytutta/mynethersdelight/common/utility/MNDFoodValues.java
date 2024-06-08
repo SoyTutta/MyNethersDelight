@@ -150,11 +150,11 @@ public class MNDFoodValues
                 .alwaysEat().meat().fast().build();
         public static final FoodProperties PLATE_OF_STUFFED_HOGLIN_SNOUT = (new FoodProperties.Builder())
                 .nutrition(14).saturationMod(0.9f)
-                .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 4800, 0), 1.0F)
+                .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 6000, 0), 1.0F)
                 .build();
         public static final FoodProperties PLATE_OF_STUFFED_HOGLIN_HAM = (new FoodProperties.Builder())
                 .nutrition(12).saturationMod(0.75f)
-                .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 2400, 0), 1.0F)
+                .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1.0F)
                 .build();
         public static final FoodProperties PLATE_OF_STUFFED_HOGLIN = (new FoodProperties.Builder())
                 .nutrition(8).saturationMod(0.6f)

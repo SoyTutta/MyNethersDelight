@@ -1,13 +1,14 @@
 {
   "replace": false,
   "entries": [
+    "mynethersdelight:scavenging_hoglin_hide",
+    "mynethersdelight:remplace_hoglin_pork_loin",
+    "mynethersdelight:remplace_hoglin_cooked_pork_loin",
+    "mynethersdelight:scavenging_strider_slice",
+    "mynethersdelight:scavenging_strider_egg",
+    "mynethersdelight:scavenging_ghasta",
     "mynethersdelight:add_loot_piglin_bartering",
     "mynethersdelight:add_loot_bastion_hoglin_stable",
-    "mynethersdelight:add_loot_bastion_treasure",
-    "mynethersdelight:scavenging_strider_egg",
-    "mynethersdelight:scavenging_hoglin_hide",
-    "mynethersdelight:scavenging_ghasta",
-    "mynethersdelight:scavenging_extra_ghasta0",
-    "mynethersdelight:scavenging_extra_ghasta1"
+    "mynethersdelight:add_loot_bastion_treasure"
   ]
 }

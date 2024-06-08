@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:add_item",
+  "conditions": [
+    {
+      "condition": "minecraft:entity_properties",
+      "entity": "this",
+      "predicate": {
+        "type": "minecraft:strider"
+      }
+    },
+    {
+      "condition": "minecraft:random_chance_with_looting",
+      "chance": 0.75,
+      "looting_multiplier": 0.25
+    }
+  ],
+  "item": "mynethersdelight:strider_slice",
+  "count": {
+    "type": "minecraft:uniform",
+    "max": 4.0,
+    "min": 2.0
+  }
+}

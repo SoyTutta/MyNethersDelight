@@ -215,19 +215,19 @@ public class MNDBlocks {
         );
         POWDERY_SIGN = BLOCKS.register("powdery_sign", () ->
                 new MNDStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_SIGN),
-                        MNDWoodTypes.POWDERY_CANNON)
+                        MNDWoodTypes.POWDERY)
         );
         POWDERY_WALL_SIGN = BLOCKS.register("powdery_wall_sign", () ->
                 new MNDWallSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_WALL_SIGN),
-                        MNDWoodTypes.POWDERY_CANNON)
+                        MNDWoodTypes.POWDERY)
         );
         POWDERY_HANGING_SIGN = BLOCKS.register("powdery_hanging_sign", () ->
                 new MNDHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_HANGING_SIGN),
-                        MNDWoodTypes.POWDERY_CANNON)
+                        MNDWoodTypes.POWDERY)
         );
         POWDERY_WALL_HANGING_SIGN = BLOCKS.register("powdery_wall_hanging_sign", () ->
                 new MNDWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_WALL_HANGING_SIGN),
-                        MNDWoodTypes.POWDERY_CANNON)
+                        MNDWoodTypes.POWDERY)
         );
         STRIDERLOAF_BLOCK = BLOCKS.register("striderloaf_block", () ->
                 new StriderloafBlock(Properties.copy(Blocks.CAKE), MNDItems.STRIDERLOAF, true)
