@@ -16,14 +16,10 @@
       "condition": "minecraft:entity_properties",
       "entity": "this",
       "predicate": {
-        "type": "minecraft:strider"
+        "type": "minecraft:ghast"
       }
-    },
-    {
-      "condition": "minecraft:random_chance_with_looting",
-      "chance": 0.75,
-      "looting_multiplier": 0.5
     }
   ],
-  "item": "mynethersdelight:strider_rock"
+  "item": "mynethersdelight:ghasta",
+  "count": 6.0
 }

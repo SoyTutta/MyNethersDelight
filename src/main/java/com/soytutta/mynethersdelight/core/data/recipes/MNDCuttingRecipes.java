@@ -6,7 +6,6 @@
 package com.soytutta.mynethersdelight.core.data.recipes;
 
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
-import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.Items;
@@ -79,7 +78,7 @@ public class MNDCuttingRecipes {
                 .build(consumer, "mynethersdelight:cutting/hoglin_trophy");
     }
     private static void strippingWood(Consumer<FinishedRecipe> consumer) {
-        stripLogForBark(consumer, MNDItems.BLOCK_OF_POWDERY_CANNON.get(), MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
+        stripLogForBark(consumer, MNDItems.POWDERY_BLOCK.get(), MNDItems.STRIPPED_POWDERY_BLOCK.get());
     }
 
     private static void salvagingWoodenFurniture(Consumer<FinishedRecipe> consumer) {

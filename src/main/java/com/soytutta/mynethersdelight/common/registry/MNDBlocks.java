@@ -52,8 +52,8 @@ public class MNDBlocks {
     public static final RegistryObject<Block> POTTED_POWDERY_CANNON;
     public static final RegistryObject<Block> POTTED_BULLET_PEPPER;
     public static final RegistryObject<Block> POWDERY_CABINET;
-    public static final RegistryObject<Block> BLOCK_OF_POWDERY_CANNON;
-    public static final RegistryObject<Block> BLOCK_OF_STRIPPED_POWDERY_CANNON;
+    public static final RegistryObject<Block> POWDERY_BLOCK;
+    public static final RegistryObject<Block> STRIPPED_POWDERY_BLOCK;
     public static final RegistryObject<Block> POWDERY_PLANKS;
     public static final RegistryObject<Block> POWDERY_PLANKS_SLAB;
     public static final RegistryObject<Block> POWDERY_PLANKS_STAIRS;
@@ -153,11 +153,11 @@ public class MNDBlocks {
                 new CabinetBlock(Properties.copy(Blocks.BARREL)
                     .sound(SoundType.BAMBOO_WOOD).mapColor(MapColor.TERRACOTTA_GRAY))
         );
-        BLOCK_OF_POWDERY_CANNON = BLOCKS.register("powdery_block", () ->
+        POWDERY_BLOCK = BLOCKS.register("powdery_block", () ->
                 new StrippableBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)
                         .mapColor(MapColor.TERRACOTTA_BLACK))
         );
-        BLOCK_OF_STRIPPED_POWDERY_CANNON = BLOCKS.register("stripped_powdery_block", () ->
+        STRIPPED_POWDERY_BLOCK = BLOCKS.register("stripped_powdery_block", () ->
                 new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)
                         .mapColor(MapColor.TERRACOTTA_GRAY))
         );

@@ -10,8 +10,8 @@
     },
     {
       "condition": "minecraft:random_chance_with_looting",
-      "chance": 0.5,
-      "looting_multiplier": 0.1
+      "chance": 0.25,
+      "looting_multiplier": 0.25
     }
   ],
   "item": "mynethersdelight:ghasta"

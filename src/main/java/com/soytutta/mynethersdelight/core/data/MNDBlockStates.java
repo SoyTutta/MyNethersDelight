@@ -39,11 +39,11 @@ public class MNDBlockStates extends BlockStateProvider {
         this.crateBlock(MNDBlocks.BULLET_PEPPER_CRATE.get(), "bullet_pepper");
         this.blockItem(MNDBlocks.BULLET_PEPPER_CRATE);
         this.cabinetBlock(MNDBlocks.POWDERY_CABINET.get(), "powdery");
-        this.logBlock(((RotatedPillarBlock) MNDBlocks.BLOCK_OF_POWDERY_CANNON.get()));
-        this.blockItem(MNDBlocks.BLOCK_OF_POWDERY_CANNON);
+        this.logBlock(((RotatedPillarBlock) MNDBlocks.POWDERY_BLOCK.get()));
+        this.blockItem(MNDBlocks.POWDERY_BLOCK);
 
-        this.logBlock(((RotatedPillarBlock) MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get()));
-        this.blockItem(MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON);
+        this.logBlock(((RotatedPillarBlock) MNDBlocks.STRIPPED_POWDERY_BLOCK.get()));
+        this.blockItem(MNDBlocks.STRIPPED_POWDERY_BLOCK);
 
         this.simpleBlock(MNDBlocks.POWDERY_PLANKS.get());
         this.stairsBlock(((StairBlock) MNDBlocks.POWDERY_PLANKS_STAIRS.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
