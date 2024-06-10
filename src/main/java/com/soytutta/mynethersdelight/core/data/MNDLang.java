@@ -26,8 +26,8 @@ public class MNDLang extends LanguageProvider {
         Set<RegistryObject<Block>> blocks = new HashSet<>(MNDBlocks.BLOCKS.getEntries());
         Set<RegistryObject<Item>> items = new HashSet<>(MNDItems.ITEMS.getEntries());
         blocks.remove(MNDBlocks.LETIOS_COMPOST);
-        blocks.remove(MNDBlocks.POWDERY_BLOCK);
-        blocks.remove(MNDBlocks.STRIPPED_POWDERY_BLOCK);
+        blocks.remove(MNDBlocks.BLOCK_OF_POWDERY_CANNON);
+        blocks.remove(MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON);
         blocks.remove(MNDBlocks.WALL_POWDERY_TORCH);
         blocks.remove(MNDBlocks.POWDERY_WALL_SIGN);
         blocks.remove(MNDBlocks.POWDERY_WALL_HANGING_SIGN);

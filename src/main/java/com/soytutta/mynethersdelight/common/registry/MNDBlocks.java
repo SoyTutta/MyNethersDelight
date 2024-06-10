@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraftforge.registries.DeferredRegister;
@@ -52,8 +53,8 @@ public class MNDBlocks {
     public static final RegistryObject<Block> POTTED_POWDERY_CANNON;
     public static final RegistryObject<Block> POTTED_BULLET_PEPPER;
     public static final RegistryObject<Block> POWDERY_CABINET;
-    public static final RegistryObject<Block> POWDERY_BLOCK;
-    public static final RegistryObject<Block> STRIPPED_POWDERY_BLOCK;
+    public static final RegistryObject<Block> BLOCK_OF_POWDERY_CANNON;
+    public static final RegistryObject<Block> BLOCK_OF_STRIPPED_POWDERY_CANNON;
     public static final RegistryObject<Block> POWDERY_PLANKS;
     public static final RegistryObject<Block> POWDERY_PLANKS_SLAB;
     public static final RegistryObject<Block> POWDERY_PLANKS_STAIRS;
@@ -153,12 +154,14 @@ public class MNDBlocks {
                 new CabinetBlock(Properties.copy(Blocks.BARREL)
                     .sound(SoundType.BAMBOO_WOOD).mapColor(MapColor.TERRACOTTA_GRAY))
         );
-        POWDERY_BLOCK = BLOCKS.register("powdery_block", () ->
-                new StrippableBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)
+        BLOCK_OF_POWDERY_CANNON = BLOCKS.register("powdery_block", () ->
+                new RotatedPillarBlock(BlockBehaviour.Properties.of().sound(SoundType.BAMBOO_WOOD)
+                        .instrument(NoteBlockInstrument.BASS)
                         .mapColor(MapColor.TERRACOTTA_BLACK))
         );
-        STRIPPED_POWDERY_BLOCK = BLOCKS.register("stripped_powdery_block", () ->
-                new RotatedPillarBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)
+        BLOCK_OF_STRIPPED_POWDERY_CANNON = BLOCKS.register("stripped_powdery_block", () ->
+                new RotatedPillarBlock(BlockBehaviour.Properties.of().sound(SoundType.BAMBOO_WOOD)
+                        .instrument(NoteBlockInstrument.BASS)
                         .mapColor(MapColor.TERRACOTTA_GRAY))
         );
         POWDERY_PLANKS = BLOCKS.register("powdery_planks", () ->

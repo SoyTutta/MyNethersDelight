@@ -33,8 +33,8 @@ public class MNDItems {
     public static final RegistryObject<Item> POWDER_CANNON;
     public static final RegistryObject<Item> POWDERY_TORCH;
     public static final RegistryObject<Item> POWDERY_CABINET;
-    public static final RegistryObject<Item> POWDERY_BLOCK;
-    public static final RegistryObject<Item> STRIPPED_POWDERY_BLOCK;
+    public static final RegistryObject<Item> BLOCK_OF_POWDERY_CANNON;
+    public static final RegistryObject<Item> BLOCK_OF_STRIPPED_POWDERY_CANNON;
     public static final RegistryObject<Item> POWDERY_PLANKS;
     public static final RegistryObject<Item> POWDERY_PLANKS_STAIRS;
     public static final RegistryObject<Item> POWDERY_PLANKS_SLAB;
@@ -167,11 +167,11 @@ public class MNDItems {
         POWDERY_CABINET = ITEMS.register("powdery_cabinet", () ->
                 new BlockItem(MNDBlocks.POWDERY_CABINET.get(), basicItem())
         );
-        POWDERY_BLOCK = ITEMS.register("powdery_block", () ->
-                new BlockItem(MNDBlocks.POWDERY_BLOCK.get(), basicItem())
+        BLOCK_OF_POWDERY_CANNON = ITEMS.register("powdery_block", () ->
+                new BlockItem(MNDBlocks.BLOCK_OF_POWDERY_CANNON.get(), basicItem())
         );
-        STRIPPED_POWDERY_BLOCK = ITEMS.register("stripped_powdery_block", () ->
-                new BlockItem(MNDBlocks.STRIPPED_POWDERY_BLOCK.get(), basicItem())
+        BLOCK_OF_STRIPPED_POWDERY_CANNON = ITEMS.register("stripped_powdery_block", () ->
+                new BlockItem(MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get(), basicItem())
         );
         POWDERY_PLANKS = ITEMS.register("powdery_planks", () ->
                 new BlockItem(MNDBlocks.POWDERY_PLANKS.get(), basicItem())

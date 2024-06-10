@@ -78,7 +78,7 @@ public class MNDCuttingRecipes {
                 .build(consumer, "mynethersdelight:cutting/hoglin_trophy");
     }
     private static void strippingWood(Consumer<FinishedRecipe> consumer) {
-        stripLogForBark(consumer, MNDItems.POWDERY_BLOCK.get(), MNDItems.STRIPPED_POWDERY_BLOCK.get());
+        stripLogForBark(consumer, MNDItems.BLOCK_OF_POWDERY_CANNON.get(), MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
     }
 
     private static void salvagingWoodenFurniture(Consumer<FinishedRecipe> consumer) {

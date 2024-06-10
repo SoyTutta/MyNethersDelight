@@ -40,7 +40,7 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(ModTags.WOODEN_CABINETS).add(MNDItems.POWDERY_CABINET.get());
         this.tag(ModTags.CABINETS).add(MNDItems.NETHER_BRICKS_CABINET.get());
 
-        this.tag(MNDTags.BLOCK_OF_POWDERY).add(MNDItems.POWDERY_BLOCK.get(), MNDItems.STRIPPED_POWDERY_BLOCK.get());
+        this.tag(MNDTags.BLOCK_OF_POWDERY).add(MNDItems.BLOCK_OF_POWDERY_CANNON.get(), MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
 
         this.tag(MNDTags.STOVE_SOUL_FUEL).addTag(ItemTags.SOUL_FIRE_BASE_BLOCKS);
         this.tag(MNDTags.STOVE_FIRE_FUEL).add(Items.BLAZE_ROD, Items.FIRE_CHARGE, Items.MAGMA_BLOCK, Items.MAGMA_CREAM).addTag(MNDTags.HOT_SPICE);

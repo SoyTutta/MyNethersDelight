@@ -31,8 +31,8 @@ public class MNDCreativeTab {
 
         event.accept(MNDItems.POWDER_CANNON.get());
         event.accept(MNDItems.POWDERY_TORCH.get());
-        event.accept(MNDItems.POWDERY_BLOCK.get());
-        event.accept(MNDItems.STRIPPED_POWDERY_BLOCK.get());
+        event.accept(MNDItems.BLOCK_OF_POWDERY_CANNON.get());
+        event.accept(MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
         event.accept(MNDItems.POWDERY_CABINET.get());
         event.accept(MNDItems.POWDERY_PLANKS.get());
         event.accept(MNDItems.POWDERY_PLANKS_STAIRS.get());

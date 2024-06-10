@@ -4,9 +4,11 @@ import com.mojang.serialization.Codec;
 import com.soytutta.mynethersdelight.common.MNDCommonSetup;
 import com.soytutta.mynethersdelight.common.loot.RemplaceLootModifier;
 import com.soytutta.mynethersdelight.common.registry.*;
+import com.soytutta.mynethersdelight.integration.MNDEveryCompat;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
@@ -33,6 +35,9 @@ public class MyNethersDelight
         MNDBiomeFeatures.FEATURES.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         registerLootSerializers(modEventBus);
+        if (ModList.get().isLoaded("moonlight")) {
+            MNDEveryCompat.registerCompat();
+        }
     }
     void registerLootSerializers(IEventBus bus) {
         DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MyNethersDelight.MODID);

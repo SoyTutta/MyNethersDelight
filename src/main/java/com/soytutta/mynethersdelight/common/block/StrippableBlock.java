@@ -23,8 +23,8 @@ public class StrippableBlock extends RotatedPillarBlock {
             return null;
 
         if (ToolActions.AXE_STRIP == toolAction) {
-            if(this == MNDBlocks.POWDERY_BLOCK.get()){
-                return MNDBlocks.STRIPPED_POWDERY_BLOCK.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS));
+            if(this == MNDBlocks.BLOCK_OF_POWDERY_CANNON.get()){
+                return MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS));
             }
         }
         return super.getToolModifiedState(state, context, toolAction, simulate);
