@@ -104,9 +104,9 @@ public class MNDCreativeTab {
         event.accept(MNDItems.PLATE_OF_STUFFED_HOGLIN.get());
 
         event.accept(MNDItems.HOGLIN_TROPHY.get());
-        event.accept(MNDItems.WAXED_HOGLIN_TROPHY.get());
         event.accept(MNDItems.ZOGLIN_TROPHY.get());
         event.accept(MNDItems.SKOGLIN_TROPHY.get());
+        event.accept(MNDItems.WAXED_HOGLIN_TROPHY.get());
     }
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {

@@ -66,7 +66,7 @@ public class HotCreamItem extends DrinkableItem {
                 consumer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireResistanceSeconds * 3));
             }
             if (purgentSeconds > 0) {
-                consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT.get(), purgentSeconds * 3));
+                consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT.get(), purgentSeconds * 3,2));
             }
             removedEffects = true;
         }

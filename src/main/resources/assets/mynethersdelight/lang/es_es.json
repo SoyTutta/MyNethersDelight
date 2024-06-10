@@ -1,7 +1,7 @@
 {
   "block.mynethersdelight.powdery_block": "Bloque de cañon polvoriento",
   "block.mynethersdelight.stripped_powdery_block": "Bloque de cañon polvoriento pelado",
-  "block.mynethersdelight.bullet_pepper": "Piminto bala",
+  "block.mynethersdelight.bullet_pepper": "Pimiento bala",
   "block.mynethersdelight.bullet_pepper_crate": "Cajón de pimiento bala",
   "block.mynethersdelight.crimson_fungus_colony": "Colonia de hongo carmesí",
   "block.mynethersdelight.hoglin_trophy": "Trofeo de Hoglin",
@@ -71,8 +71,8 @@
   "item.mynethersdelight.spicy_hoglin_stew": "Estofado de hoglin picante",
   "item.mynethersdelight.spicy_noodle_soup": "Sopa de fideos picante",
   "item.mynethersdelight.spicy_skewer": "Brocheta picante",
-  "item.mynethersdelight.strider_egg": "Huevo de strider",
-  "item.mynethersdelight.strider_rock": "Roca de strider",
+  "item.mynethersdelight.strider_egg": "Huevo de lavagante",
+  "item.mynethersdelight.strider_rock": "Roca de lavagante",
   "item.mynethersdelight.strider_slice": "Rebanada de lavagante",
   "item.mynethersdelight.strider_stew": "Estofado de lavagante",
   "item.mynethersdelight.strider_with_grilled_fungus": "Lavagante con hongos a la parrilla",
@@ -98,5 +98,5 @@
   "mynethersdelight.jei.info.strider_egg": "Espera... ¿Los Striders son Ovovivíparos? Eso es raro...\n\nDe todos modos, sólo se puede obtener mediante la caza cuidadosa.\nCaparazón duro, sólo se puede comer estrellado...",
   "mynethersdelight.jei.info.wild_powdery": "Las Cañas Polvorientas son un cultivo invasor en los Bosques Carmesí.\n\nSus Frutos son explosivas al Contacto, talvez si Cortas el tallo rojo...",
   "mynethersdelight.jei.info.plate_of_ghasta": "El Ghast sigue vivo?\nTomé una porción recientemente, pero volvió a crecer.",
-  "mynethersdelight.jei.info.plate_of_striderloaf": "Una vez frío, no es tan delicioso...\nPero es bastante saciante."
+  "mynethersdelight.jei.info.plate_of_striderloaf": "Una vez frío, Se quita el apetito."
 }

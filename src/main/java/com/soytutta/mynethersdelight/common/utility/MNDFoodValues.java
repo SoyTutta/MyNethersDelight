@@ -169,7 +169,7 @@ public class MNDFoodValues
                 .alwaysEat().build();
         public static final FoodProperties HOT_CREAM = (new FoodProperties.Builder())
                 .nutrition(1).saturationMod(8.0f)
-                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 0), 1.0F)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 2), 1.0F)
                 .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 600, 0), 1.0F)
                 .alwaysEat().build();
     }
