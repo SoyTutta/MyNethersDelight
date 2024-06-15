@@ -118,7 +118,7 @@ public class MNDCookingRecipes {
 
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.CHILIDOG.get(), 1, 200, 0.35F,MNDItems.HOTDOG.get())
                 .addIngredient(MNDTags.HOT_SPICE)
-                .addIngredient(ForgeTags.RAW_BEEF)
+                .addIngredient(MNDTags.CHILI_MEATS)
                 .addIngredient(Items.NETHER_WART)
                 .unlockedByAnyIngredient(MNDItems.HOTDOG.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)

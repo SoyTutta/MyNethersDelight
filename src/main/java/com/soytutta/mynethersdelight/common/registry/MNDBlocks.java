@@ -102,7 +102,7 @@ public class MNDBlocks {
         RESURGENT_SOIL_FARMLAND = BLOCKS.register("resurgent_soil_farmland", () ->
                 new ResurgentSoilFarmlandBlock(Properties.copy(Blocks.FARMLAND)
                         .mapColor(MapColor.COLOR_BROWN).speedFactor(0.4F)
-                        .lightLevel(FlameBlockEmission(7)))
+                        .lightLevel(FlameBlockEmission(10)))
         );
         WARPED_FUNGUS_COLONY = BLOCKS.register("warped_fungus_colony", () ->
                 new MushroomColonyBlock(Properties.copy(Blocks.BROWN_MUSHROOM).sound(SoundType.FUNGUS),

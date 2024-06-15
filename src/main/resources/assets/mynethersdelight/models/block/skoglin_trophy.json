@@ -1,6 +1,6 @@
 {
 	"credit": "Made with Blockbench/by:SoyTutta",
-	"render_type": "minecraft:cutout",
+	"ambientocclusion": "false","render_type": "minecraft:cutout",
 	"texture_size": [48, 48],
 	"textures": {
 		"trophy_mounting": "mynethersdelight:block/trophy_mounting",

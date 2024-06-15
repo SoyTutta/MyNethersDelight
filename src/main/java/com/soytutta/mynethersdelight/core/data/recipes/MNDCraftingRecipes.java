@@ -160,7 +160,6 @@ public class MNDCraftingRecipes {
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_pressure_plate"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.REDSTONE,MNDItems.POWDERY_BUTTON.get())
                 .requires(MNDItems.POWDERY_PLANKS.get())
-                .group("nether_stove")
                 .group("wooden_button")
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "powdery_button"));
@@ -265,7 +264,7 @@ public class MNDCraftingRecipes {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.SOUL_NETHER_STOVE.get())
                 .requires(MNDItems.NETHER_STOVE.get())
                 .requires(Ingredient.of(MNDTags.STOVE_SOUL_FUEL))
-                .group("nether_stove")
+                .group("soul_nether_stove")
                 .unlockedBy("has_stove", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.NETHER_STOVE.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "soul_nethers_stove_alt0"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDItems.SOUL_NETHER_STOVE.get())
@@ -274,7 +273,7 @@ public class MNDCraftingRecipes {
                 .pattern("BCB")
                 .define('i', Tags.Items.INGOTS_NETHER_BRICK)
                 .define('B', Blocks.POLISHED_BLACKSTONE_BRICKS).define('C', Blocks.SOUL_CAMPFIRE)
-                .group("nether_stove")
+                .group("soul_nether_stove")
                 .unlockedBy("has_soul_campfire", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.SOUL_CAMPFIRE))
                 .save(consumer, new ResourceLocation("mynethersdelight", "soul_nethers_stove"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDItems.SOUL_NETHER_STOVE.get())
@@ -283,7 +282,7 @@ public class MNDCraftingRecipes {
                 .pattern("BCB")
                 .define('i', Tags.Items.INGOTS_NETHER_BRICK).define('#', MNDTags.STOVE_SOUL_FUEL)
                 .define('B', Blocks.POLISHED_BLACKSTONE_BRICKS).define('C', Blocks.CAMPFIRE)
-                .group("nether_stove")
+                .group("soul_nether_stove")
                 .unlockedBy("has_campfire", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.CAMPFIRE))
                 .save(consumer, new ResourceLocation("mynethersdelight", "soul_nethers_stove_alt"));
 

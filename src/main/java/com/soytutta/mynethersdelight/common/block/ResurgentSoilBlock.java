@@ -316,6 +316,8 @@ public class ResurgentSoilBlock extends Block {
             FluidState fluidState = level.getFluidState(pos);
             if (fluidState.getType() == Fluids.WATER) {
                 state = state.setValue(BlockStateProperties.WATERLOGGED, true);
+            } else {
+                state = state.setValue(BlockStateProperties.WATERLOGGED, false);
             }
         }
         if (block instanceof PinkPetalsBlock) {

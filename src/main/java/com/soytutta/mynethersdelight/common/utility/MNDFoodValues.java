@@ -62,7 +62,7 @@ public class MNDFoodValues
         public static final FoodProperties HOGLIN_SAUSAGE = (new FoodProperties.Builder())
                 .nutrition(2).saturationMod(0.25f)
                 .effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 300, 0), 0.4F)
-                .meat().build();
+                .fast().meat().build();
         public static final FoodProperties ROASTED_SAUSAGE = (new FoodProperties.Builder())
                 .nutrition(4).saturationMod(0.35f)
                 .meat().build();
