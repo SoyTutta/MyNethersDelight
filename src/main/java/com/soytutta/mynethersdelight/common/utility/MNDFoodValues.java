@@ -110,7 +110,7 @@ public class MNDFoodValues
                 .alwaysEat().build();
         public static final FoodProperties GHASTA_WITH_CREAM = (new FoodProperties.Builder())
                 .nutrition(8).saturationMod(0.7F)
-                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 1), 1.0F)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1200, 0), 1.0F)
                 .build();
         // SPICY
@@ -134,7 +134,7 @@ public class MNDFoodValues
                 .build();
         public static final FoodProperties HOT_WINGS = (new FoodProperties.Builder())
                 .nutrition(10).saturationMod(0.45f)
-                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 1200, 1), 1.0F)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 1200, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1200, 0), 1.0F)
                 .meat().build();
         public static final FoodProperties SPICY_CURRY = (new FoodProperties.Builder())

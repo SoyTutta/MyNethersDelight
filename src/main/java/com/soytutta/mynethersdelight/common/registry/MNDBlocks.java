@@ -165,45 +165,52 @@ public class MNDBlocks {
                         .mapColor(MapColor.TERRACOTTA_GRAY))
         );
         POWDERY_PLANKS = BLOCKS.register("powdery_planks", () ->
-                new Block(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)
+                new Block(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS)
+                        .sound(SoundType.BAMBOO_WOOD)
                         .mapColor(MapColor.TERRACOTTA_GRAY))
         );
         POWDERY_PLANKS_STAIRS = BLOCKS.register("powdery_stairs", () ->
                 new StairBlock(Blocks.BAMBOO_PLANKS::defaultBlockState,
-                        BlockBehaviour.Properties.copy(Blocks.BAMBOO_STAIRS)
+                        BlockBehaviour.Properties.copy(Blocks.CRIMSON_STAIRS)
+                        .sound(SoundType.BAMBOO_WOOD)
                         .mapColor(MapColor.TERRACOTTA_GRAY))
         );
         POWDERY_PLANKS_SLAB = BLOCKS.register("powdery_slab", () ->
-                new SlabBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_SLAB)
+                new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SLAB)
+                        .sound(SoundType.BAMBOO_WOOD)
                         .mapColor(MapColor.TERRACOTTA_GRAY))
         );
         POWDERY_MOSAIC = BLOCKS.register("powdery_mosaic", () ->
-                new Block(BlockBehaviour.Properties.copy(Blocks.BAMBOO_PLANKS)
+                new Block(BlockBehaviour.Properties.copy(Blocks.CRIMSON_PLANKS)
+                        .sound(SoundType.BAMBOO_WOOD)
                         .mapColor(MapColor.TERRACOTTA_GRAY))
         );
         POWDERY_MOSAIC_STAIRS = BLOCKS.register("powdery_mosaic_stairs", () ->
                 new StairBlock(Blocks.BAMBOO_PLANKS::defaultBlockState,
-                        BlockBehaviour.Properties.copy(Blocks.BAMBOO_STAIRS)
+                        BlockBehaviour.Properties.copy(Blocks.CRIMSON_STAIRS)
+                        .sound(SoundType.BAMBOO_WOOD)
                         .mapColor(MapColor.TERRACOTTA_GRAY))
         );
         POWDERY_MOSAIC_SLAB = BLOCKS.register("powdery_mosaic_slab", () ->
-                new SlabBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_SLAB)
+                new SlabBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SLAB)
+                        .sound(SoundType.BAMBOO_WOOD)
                         .mapColor(MapColor.TERRACOTTA_GRAY))
         );
         POWDERY_FENCE = BLOCKS.register("powdery_fence", () ->
-                new FenceBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_FENCE)
+                new FenceBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE)
+                        .sound(SoundType.BAMBOO_WOOD)
                         .mapColor(MapColor.TERRACOTTA_GRAY))
         );
         POWDERY_FENCE_GATE = BLOCKS.register("powdery_fence_gate", () ->
-                new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_FENCE_GATE)
+                new FenceGateBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_FENCE_GATE)
                         .mapColor(MapColor.TERRACOTTA_GRAY), WoodType.BAMBOO)
         );
         POWDERY_DOOR = BLOCKS.register("powdery_door", () ->
-                new DoorBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_DOOR)
+                new DoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_DOOR)
                         .mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.BAMBOO)
         );
         POWDERY_TRAPDOOR = BLOCKS.register("powdery_trapdoor", () ->
-                new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_TRAPDOOR)
+                new TrapDoorBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_TRAPDOOR)
                         .mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.BAMBOO)
         );
         POWDERY_BUTTON = BLOCKS.register("powdery_button", () ->
@@ -213,23 +220,23 @@ public class MNDBlocks {
         );
         POWDERY_PRESSURE_PLATE = BLOCKS.register("powdery_pressure_plate", () ->
                 new PressurePlateBlock(PressurePlateBlock.Sensitivity.EVERYTHING,
-                        BlockBehaviour.Properties.copy(Blocks.BAMBOO_PRESSURE_PLATE)
+                        BlockBehaviour.Properties.copy(Blocks.CRIMSON_PRESSURE_PLATE)
                         .mapColor(MapColor.TERRACOTTA_GRAY), BlockSetType.BAMBOO)
         );
         POWDERY_SIGN = BLOCKS.register("powdery_sign", () ->
-                new MNDStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_SIGN),
+                new MNDStandingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_SIGN),
                         MNDWoodTypes.POWDERY)
         );
         POWDERY_WALL_SIGN = BLOCKS.register("powdery_wall_sign", () ->
-                new MNDWallSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_WALL_SIGN),
+                new MNDWallSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_SIGN),
                         MNDWoodTypes.POWDERY)
         );
         POWDERY_HANGING_SIGN = BLOCKS.register("powdery_hanging_sign", () ->
-                new MNDHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_HANGING_SIGN),
+                new MNDHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_HANGING_SIGN),
                         MNDWoodTypes.POWDERY)
         );
         POWDERY_WALL_HANGING_SIGN = BLOCKS.register("powdery_wall_hanging_sign", () ->
-                new MNDWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.BAMBOO_WALL_HANGING_SIGN),
+                new MNDWallHangingSignBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_WALL_HANGING_SIGN),
                         MNDWoodTypes.POWDERY)
         );
         STRIDERLOAF_BLOCK = BLOCKS.register("striderloaf_block", () ->
@@ -246,15 +253,15 @@ public class MNDBlocks {
                         .mapColor(MapColor.TERRACOTTA_PINK))
         );
         HOGLIN_TROPHY = BLOCKS.register("hoglin_trophy", () ->
-                new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD)
+                new TrophyBlock(Properties.copy(Blocks.CRIMSON_PLANKS)
                         .mapColor(MapColor.TERRACOTTA_PINK))
         );
         WAXED_HOGLIN_TROPHY = BLOCKS.register("waxed_hoglin_trophy", () ->
-                new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD)
+                new TrophyBlock(Properties.copy(Blocks.CRIMSON_PLANKS)
                         .mapColor(MapColor.TERRACOTTA_PINK))
         );
         ZOGLIN_TROPHY = BLOCKS.register("zoglin_trophy", () ->
-                new TrophyBlock(Properties.copy(Blocks.MANGROVE_WOOD)
+                new TrophyBlock(Properties.copy(Blocks.CRIMSON_PLANKS)
                         .mapColor(MapColor.TERRACOTTA_GREEN))
         );
         SKOGLIN_TROPHY = BLOCKS.register("skoglin_trophy", () ->
