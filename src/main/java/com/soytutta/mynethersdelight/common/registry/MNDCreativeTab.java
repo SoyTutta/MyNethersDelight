@@ -90,7 +90,13 @@ public class MNDCreativeTab {
         event.accept(MNDItems.CHILIDOG.get());
         event.accept(MNDItems.SPICY_HOGLIN_STEW.get());
         event.accept(MNDItems.HOT_WINGS.get());
+        event.accept(MNDItems.HOT_WINGS_BUCKET.get());
         event.accept(MNDItems.SPICY_CURRY.get());
+
+        event.accept(MNDItems.ROCK_SOUP.get());
+        event.accept(MNDItems.BURNT_ROLL.get());
+        event.accept(MNDItems.MAGMA_CAKE.get());
+        event.accept(MNDItems.MAGMA_CAKE_SLICE.get());
 
         event.accept(MNDItems.HOT_CREAM.get());
         event.accept(MNDItems.HOT_CREAM_CONE.get());

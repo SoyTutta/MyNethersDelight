@@ -23,7 +23,7 @@ import net.minecraftforge.event.entity.living.MobEffectEvent;
 import vectorwing.farmersdelight.common.item.DrinkableItem;
 import vectorwing.farmersdelight.common.registry.ModEffects;
 
-public class StriderEggItem  extends DrinkableItem {
+public class StriderEggItem extends DrinkableItem {
 
     public StriderEggItem(Item.Properties properties) {
         super(properties, false, true);

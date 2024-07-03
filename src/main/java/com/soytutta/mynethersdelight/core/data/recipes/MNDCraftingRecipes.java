@@ -352,7 +352,7 @@ public class MNDCraftingRecipes {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.SPICY_COTTON.get())
                 .requires(MNDItems.GHASTA.get())
-                .requires(Items.BLAZE_POWDER)
+                .requires(MNDTags.HOT_SPICE)
                 .requires(Items.BLAZE_ROD)
                 .requires(MNDItems.GHASTA.get())
                 .unlockedBy("has_blaze_rod", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BLAZE_ROD,MNDItems.GHASTA.get()))
@@ -392,5 +392,34 @@ public class MNDCraftingRecipes {
                 .unlockedBy("has_hoglin_hide", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.HOGLIN_HIDE.get()))
                 .save(consumer, "mynethersdelight:crafting/raw_stuffed_hoglin");
 
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.HOT_WINGS_BUCKET.get())
+                .requires(MNDItems.HOT_WINGS.get(), 3)
+                .requires(Items.BUCKET)
+                .unlockedBy("has_hot_wings", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.HOT_WINGS_BUCKET.get()))
+                .save(consumer, "mynethersdelight:crafting/hot_wings_bucket");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.BURNT_ROLL.get())
+                .requires(Items.MAGMA_CREAM)
+                .requires(MNDTags.CURRY_MEATS)
+                .unlockedBy("has_magma_cream", InventoryChangeTrigger.TriggerInstance.hasItems(Items.MAGMA_CREAM))
+                .save(consumer, "mynethersdelight:crafting/burnt_roll");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.ROCK_SOUP.get())
+                .requires(Items.MAGMA_CREAM,2)
+                .requires(MNDItems.STRIDER_EGG.get(),2)
+                .requires(Items.BOWL)
+                .unlockedBy("has_magma_cream", InventoryChangeTrigger.TriggerInstance.hasItems(Items.MAGMA_CREAM))
+                .save(consumer, "mynethersdelight:crafting/rock_soup");
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDItems.MAGMA_CAKE.get())
+                .pattern("MMM")
+                .pattern("PHP")
+                .pattern("###")
+                .define('H', MNDItems.HOT_CREAM.get()).define('M', Items.MAGMA_CREAM)
+                .define('#', ModItems.STRAW.get()).define('P', Items.GUNPOWDER)
+                .unlockedBy("has_magma_cream", InventoryChangeTrigger.TriggerInstance.hasItems(Items.MAGMA_CREAM))
+                .save(consumer, new ResourceLocation("mynethersdelight", "magma_cake"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.MAGMA_CAKE.get())
+                .requires(MNDItems.MAGMA_CAKE_SLICE.get(),7)
+                .unlockedBy("has_magma_cream", InventoryChangeTrigger.TriggerInstance.hasItems(Items.MAGMA_CREAM))
+                .save(consumer, new ResourceLocation("mynethersdelight", "magma_cake_alt"));
     }
 }

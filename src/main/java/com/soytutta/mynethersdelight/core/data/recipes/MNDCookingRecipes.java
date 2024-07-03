@@ -141,5 +141,20 @@ public class MNDCookingRecipes {
                 .unlockedByAnyIngredient(Items.LAVA_BUCKET)
                 .setRecipeBookTab(CookingPotRecipeBookTab.DRINKS)
                 .build(consumer, "mynethersdelight:cooking/hotcream");
+
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.ROCK_SOUP.get(), 1, 100, 0.35F)
+                .addIngredient(Items.MAGMA_CREAM,2)
+                .addIngredient(MNDItems.STRIDER_ROCK.get(),2)
+
+                .unlockedByAnyIngredient(Items.MAGMA_CREAM)
+                .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
+                .build(consumer, "mynethersdelight:cooking/rock_soup");
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.BURNT_ROLL.get(), 2, 100, 0.35F)
+                .addIngredient(Items.MAGMA_CREAM,2)
+                .addIngredient(MNDTags.CURRY_MEATS)
+
+                .unlockedByAnyIngredient(Items.MAGMA_CREAM)
+                .setRecipeBookTab(CookingPotRecipeBookTab.MISC)
+                .build(consumer, "mynethersdelight:cooking/burn_roll");
         }
 }

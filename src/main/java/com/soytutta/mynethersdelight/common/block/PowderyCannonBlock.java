@@ -214,6 +214,7 @@ public class PowderyCannonBlock extends BambooStalkBlock {
         BlockPos blockpos = pos.below(2);
         BlockState blockstate1 = level.getBlockState(blockpos);
         BambooLeaves leaves = BambooLeaves.NONE;
+        int maxHeight = (level.dimension() == Level.NETHER) ? 16 : 8;
 
         if (height >= 1) {
             if (blockstate.is(MNDBlocks.POWDERY_CANNON.get()) && blockstate.getValue(LEAVES) != BambooLeaves.NONE) {
@@ -230,7 +231,8 @@ public class PowderyCannonBlock extends BambooStalkBlock {
         }
 
         int i = state.getValue(AGE) != 1 && !blockstate1.is(MNDBlocks.POWDERY_CANNON.get()) ? 0 : 1;
-        int j = (height < 5 || !(random.nextFloat() < 0.25F)) && height != 7 ? 0 : 1;
+        int MH = 1 + level.random.nextInt(3);
+        int j = (height < maxHeight || !(random.nextFloat() < 0.25F)) && height != (maxHeight - MH) ? 0 : 1;
         level.setBlock(pos.above(), this.defaultBlockState().setValue(AGE, i).setValue(LEAVES, leaves).setValue(STAGE, j), 3);
     }
 
@@ -254,8 +256,9 @@ public class PowderyCannonBlock extends BambooStalkBlock {
 
     @Override
     protected int getHeightAboveUpToMax(BlockGetter level, BlockPos pos) {
+        int maxHeight = (level instanceof Level && ((Level) level).dimension() == Level.NETHER) ? 16 : 8;
         int i;
-        for (i = 0; i < 8 && level.getBlockState(pos.above(i + 1)).is(MNDBlocks.POWDERY_CANNON.get()); ++i) {
+        for (i = 0; i < maxHeight && level.getBlockState(pos.above(i + 1)).is(MNDBlocks.POWDERY_CANNON.get()); ++i) {
         }
 
         return i;
@@ -263,8 +266,9 @@ public class PowderyCannonBlock extends BambooStalkBlock {
 
     @Override
     protected int getHeightBelowUpToMax(BlockGetter level, BlockPos pos) {
+        int maxHeight = (level instanceof Level && ((Level) level).dimension() == Level.NETHER) ? 16 : 8;
         int i;
-        for (i = 0; i <  8 && level.getBlockState(pos.below(i + 1)).is(MNDBlocks.POWDERY_CANNON.get()); ++i) {
+        for (i = 0; i < maxHeight && level.getBlockState(pos.below(i + 1)).is(MNDBlocks.POWDERY_CANNON.get()); ++i) {
         }
 
         return i;

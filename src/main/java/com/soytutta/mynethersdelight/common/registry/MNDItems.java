@@ -91,7 +91,13 @@ public class MNDItems {
     public static final RegistryObject<Item> CHILIDOG;
     public static final RegistryObject<Item> SPICY_HOGLIN_STEW;
     public static final RegistryObject<Item> HOT_WINGS;
+    public static final RegistryObject<Item> HOT_WINGS_BUCKET;
     public static final RegistryObject<Item> SPICY_CURRY;
+    // MAGMA CUBE
+    public static final RegistryObject<Item> ROCK_SOUP;
+    public static final RegistryObject<Item> BURNT_ROLL;
+    public static final RegistryObject<Item> MAGMA_CAKE;
+    public static final RegistryObject<Item> MAGMA_CAKE_SLICE;
     // LAVA
     public static final RegistryObject<Item> HOT_CREAM;
     public static final RegistryObject<Item> HOT_CREAM_CONE;
@@ -124,7 +130,7 @@ public class MNDItems {
         return (new Item.Properties()).food(food).craftRemainder(Items.BOWL).stacksTo(16);
     }
     public static Item.Properties bucketFoodItem(FoodProperties food) {
-        return (new Item.Properties()).food(food).craftRemainder(Items.BUCKET).stacksTo(16);
+        return (new Item.Properties()).food(food).craftRemainder(Items.BUCKET).stacksTo(3);
     }
 
     static {
@@ -320,7 +326,7 @@ public class MNDItems {
                 new ConsumableItem(foodItem(MNDFoodValues.SPICY_SKEWER))
         );
         CHILIDOG = ITEMS.register("chilidog", ()  ->
-                new ConsumableItem(foodItem(MNDFoodValues.CHILIDOG))
+                new ConsumableItem(foodItem(MNDFoodValues.CHILIDOG), true)
         );
         SPICY_HOGLIN_STEW = ITEMS.register("spicy_hoglin_stew", ()  ->
                 new ConsumableItem(bowlFoodItem(MNDFoodValues.SPICY_HOGLIN_STEW), true)
@@ -328,12 +334,28 @@ public class MNDItems {
         HOT_WINGS = ITEMS.register("hot_wings", ()  ->
                 new ConsumableItem(bowlFoodItem(MNDFoodValues.HOT_WINGS), true)
         );
+        HOT_WINGS_BUCKET = ITEMS.register("hot_wings_bucket", ()  ->
+                new ConsumableItem(bucketFoodItem(MNDFoodValues.HOT_WINGS_BUCKET), true)
+        );
         SPICY_CURRY = ITEMS.register("spicy_curry", ()  ->
                 new ConsumableItem(bowlFoodItem(MNDFoodValues.SPICY_CURRY), true)
         );
+        // MAGMA CUBE
+        ROCK_SOUP = ITEMS.register("rock_soup", ()  ->
+                new ConsumableItem(bowlFoodItem(MNDFoodValues.ROCK_SOUP), true)
+        );
+        BURNT_ROLL = ITEMS.register("burnt_roll", ()  ->
+                new ConsumableItem(foodItem(MNDFoodValues.BURNT_ROLL))
+        );
+        MAGMA_CAKE = ITEMS.register("magma_cake", () ->
+                new BlockItem(MNDBlocks.MAGMA_CAKE.get(), basicItem().stacksTo(1))
+        );
+        MAGMA_CAKE_SLICE = ITEMS.register("magma_cake_slice", ()  ->
+                new ConsumableItem(foodItem(MNDFoodValues.MAGMA_CAKE_SLICE).stacksTo(16))
+        );
         // LAVA
         HOT_CREAM = ITEMS.register("hot_cream", ()  ->
-                new HotCreamItem(bucketFoodItem(MNDFoodValues.HOT_CREAM).stacksTo(1))
+                new HotCreamItem(bucketFoodItem(MNDFoodValues.HOT_CREAM))
         );
         HOT_CREAM_CONE = ITEMS.register("hot_cream_cone", ()  ->
                 new HotCreamConeItem(foodItem(MNDFoodValues.HOT_CREAM_CONE).stacksTo(16))

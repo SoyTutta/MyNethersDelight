@@ -95,32 +95,39 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
         int age = state.getValue(AGE);
         BlockState blockBelow = world.getBlockState(pos.below());
         boolean isBlockBelowPowderyCane = blockBelow.is(MNDTags.POWDERY_CANE);
-        boolean isBlockBelowPerfectSoil = blockBelow.is(MNDBlocks.RESURGENT_SOIL.get()) || blockBelow.is(MNDBlocks.POWDERY_CANNON.get());;
-        boolean isBlockBelowPowderySoil = blockBelow.is(Blocks.CRIMSON_NYLIUM) || blockBelow.is(Blocks.GRAVEL);
+        boolean isBlockBelowPerfectSoil = blockBelow.is(MNDBlocks.RESURGENT_SOIL.get())
+                || blockBelow.is(MNDBlocks.POWDERY_CANNON.get());
+        boolean isBlockBelowPowderySoil = blockBelow.is(Blocks.CRIMSON_NYLIUM)
+                || blockBelow.is(Blocks.GRAVEL);
         boolean isBlockBelowLeave = blockBelow.hasProperty(LEAVE) && !blockBelow.getValue(LEAVE);
+        boolean maxHeight = true;
+        for (int i = 1; i <= 4; i++) {
+            if (!world.getBlockState(pos.below(i)).is(MNDBlocks.POWDERY_CANE.get())) {
+                maxHeight = false;
+                break;
+            }
+        }
 
         if (age == 2 && random.nextInt(2) == 0) {
             world.setBlock(pos, state.setValue(LIT, true), 2);
-        }
-        else if (age < 2 && ForgeHooks.onCropsGrowPre(world, pos, state, random.nextInt(3) == 0)) {
+        } else if (age < 2 && ForgeHooks.onCropsGrowPre(world, pos, state, random.nextInt(3) == 0)) {
             world.setBlock(pos, state.setValue(AGE, age + 1), 2);
             ForgeHooks.onCropsGrowPost(world, pos, state);
         }
-        else if (age != 2 && random.nextInt(8) == 0 && world.isEmptyBlock(pos.above()) && world.getRawBrightness(pos.above(), 0) >= 2 && isBlockBelowLeave) {
+
+        if (!maxHeight) {
+            if (age != 2 && random.nextInt(8) == 0 && world.isEmptyBlock(pos.above()) && isBlockBelowLeave) {
             this.growBamboo(world, pos);
-        }
-        else if (age <= 2 && (isBlockBelowPerfectSoil || isBlockBelowPowderyCane || isBlockBelowPowderySoil) && world.isEmptyBlock(pos.above())) {
-            if (isBlockBelowPerfectSoil) {
+            } else if (age <= 2 && (isBlockBelowPerfectSoil || isBlockBelowPowderyCane || isBlockBelowPowderySoil) && world.isEmptyBlock(pos.above())) {
+                if (isBlockBelowPerfectSoil) {
                 this.growBamboo(world, pos);
-            }
-            else if (isBlockBelowPowderyCane && isBlockBelowLeave && random.nextInt(60) == 0) {
+                } else if (isBlockBelowPowderyCane && isBlockBelowLeave && random.nextInt(30) == 0) {
                 this.growBamboo(world, pos);
-            }
-            else if (!isBlockBelowLeave && random.nextInt(1800) == 0) {
+                } else if (!isBlockBelowLeave && random.nextInt(300) == 0) {
                 this.growBamboo(world, pos);
-            }
-            else if (!isBlockBelowPowderySoil && random.nextInt(1200) == 0) {
+                } else if (!isBlockBelowPowderySoil && random.nextInt(1200) == 0) {
                 this.growBamboo(world, pos);
+                }
             }
         }
     }
@@ -217,6 +224,12 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
 
     @Override
     protected void growBamboo(Level level, BlockPos pos) {
-        level.setBlock(pos.above(), MNDBlocks.BULLET_PEPPER.get().defaultBlockState(), 3);
+        BlockState currentBlockState = level.getBlockState(pos);
+        boolean isLit = currentBlockState.getValue(PowderyFlowerBlock.LIT);
+        BlockState newBlockState = defaultBlockState();
+        if (isLit) {
+            newBlockState = MNDBlocks.BULLET_PEPPER.get().defaultBlockState().setValue(PowderyFlowerBlock.AGE, 2).setValue(PowderyFlowerBlock.LIT, true);
+        }
+        level.setBlock(pos.above(), newBlockState, 3);
     }
 }

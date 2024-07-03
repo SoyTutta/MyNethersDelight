@@ -30,6 +30,7 @@ public class MNDCuttingRecipes {
         strippingWood(consumer);
         salvagingWoodenFurniture(consumer);
         cuttingVegetables(consumer);
+        cuttingFoods(consumer);
     }
 
     private static void cuttingAnimalItems(Consumer<FinishedRecipe> consumer) {
@@ -109,7 +110,14 @@ public class MNDCuttingRecipes {
                         Ingredient.of(ForgeTags.TOOLS_KNIVES),
                         Items.WARPED_FUNGUS, 5)
                 .build(consumer, "mynethersdelight:cutting/warped_fungus");
-        }
+    }
+
+    private static void cuttingFoods(Consumer<FinishedRecipe> consumer) {
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.MAGMA_CAKE.get()),
+                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        MNDItems.MAGMA_CAKE_SLICE.get(), 7)
+                .build(consumer, "mynethersdelight:cutting/magma_cake");
+    }
 
     private static void stripLogForBark(Consumer<FinishedRecipe> consumer, ItemLike log, ItemLike strippedLog) {
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(log), new ToolActionIngredient(ToolActions.AXE_STRIP), strippedLog).addResult(ModItems.STRAW.get()).addSound(Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getKey(SoundEvents.AXE_STRIP)).toString()).build(consumer);

@@ -204,7 +204,6 @@ public class NetherStoveBlock extends BaseEntityBlock {
         if (isLit && !entity.fireImmune() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
             if (isSoul){ entity.hurt(ModDamageTypes.getSimpleDamageSource(level, ModDamageTypes.STOVE_BURN), 2.0F); } else { entity.hurt(ModDamageTypes.getSimpleDamageSource(level, ModDamageTypes.STOVE_BURN), 1.0F); }
         }
-
         super.stepOn(level, pos, state, entity);
     }
 

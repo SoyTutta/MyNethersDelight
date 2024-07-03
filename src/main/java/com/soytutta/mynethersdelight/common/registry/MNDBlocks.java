@@ -74,6 +74,7 @@ public class MNDBlocks {
     public static final RegistryObject<Block> STRIDERLOAF_BLOCK;
     public static final RegistryObject<Block> COLD_STRIDERLOAF_BLOCK;
     public static final RegistryObject<Block> GHASTA_WITH_CREAM_BLOCK;
+    public static final RegistryObject<Block> MAGMA_CAKE;
 
     public MNDBlocks() {
     }
@@ -246,7 +247,12 @@ public class MNDBlocks {
                 new StriderloafBlock(Properties.copy(Blocks.CAKE).dropsLike(STRIDERLOAF_BLOCK.get()), MNDItems.COLD_STRIDERLOAF, true)
         );
         GHASTA_WITH_CREAM_BLOCK = BLOCKS.register("ghasta_with_cream_block", () ->
-                new GhastaWithCreamBlock(Properties.copy(Blocks.CAKE).lightLevel((light) ->  2), MNDItems.GHASTA_WITH_CREAM, true)
+                new GhastaWithCreamBlock(Properties.copy(Blocks.CAKE).lightLevel((light) ->  3)
+                        , MNDItems.GHASTA_WITH_CREAM, true)
+        );
+        MAGMA_CAKE = BLOCKS.register("magma_cake", () ->
+                new MagmaCakeBlock (Block.Properties.copy(Blocks.CAKE).lightLevel((light) ->  9)
+                        , MNDItems.MAGMA_CAKE_SLICE)
         );
         STUFFED_HOGLIN = BLOCKS.register("stuffed_hoglin", () ->
                 new StuffedHoglinBlock(Properties.copy(Blocks.CAKE)

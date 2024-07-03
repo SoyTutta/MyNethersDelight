@@ -1,0 +1,17 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:magma_cake"
+    }
+  ],
+  "result": [
+    {
+      "count": 7,
+      "item": "mynethersdelight:magma_cake_slice"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

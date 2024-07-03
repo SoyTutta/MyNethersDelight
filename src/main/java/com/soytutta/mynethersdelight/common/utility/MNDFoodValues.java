@@ -87,36 +87,36 @@ public class MNDFoodValues
                 .build();
         public static final FoodProperties FRIED_HOGLIN_CHOP = (new FoodProperties.Builder())
                 .nutrition(12).saturationMod(0.9f)
-                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 0), 1.0F)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 1200, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 2400, 0), 1.0F)
                 .build();
         // GHASTA
         public static final FoodProperties GHASTA = (new FoodProperties.Builder())
-                .nutrition(2).saturationMod(0.3F)
+                .nutrition(3).saturationMod(1.0F)
                 .effect(() -> new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F)
                 .build();
         public static final FoodProperties GHAST_SALAD = (new FoodProperties.Builder())
-                .nutrition(8).saturationMod(0.7F)
+                .nutrition(8).saturationMod(0.85F)
                 .effect(() -> new MobEffectInstance(MobEffects.REGENERATION, 300, 0), 1.0F)
                 .build();
         public static final FoodProperties SPICY_NOODLE_SOUP = (new FoodProperties.Builder())
-                .nutrition(14).saturationMod(0.75F)
+                .nutrition(16).saturationMod(0.65F)
                 .effect(() ->  new MobEffectInstance(ModEffects.COMFORT.get(), 6000, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 1200, 1), 1.0F)
                 .build();
         public static final FoodProperties SPICY_COTTON = (new FoodProperties.Builder())
-                .nutrition(2).saturationMod(2F)
+                .nutrition(3).saturationMod(2.25F)
                 .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 300, 0), 1.0F)
                 .alwaysEat().build();
         public static final FoodProperties GHASTA_WITH_CREAM = (new FoodProperties.Builder())
-                .nutrition(8).saturationMod(0.7F)
+                .nutrition(8).saturationMod(0.9F)
                 .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1200, 0), 1.0F)
                 .build();
         // SPICY
         public static final FoodProperties BULLET_PEPPER = (new FoodProperties.Builder())
                 .nutrition(2).saturationMod(0.5f)
-                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 0), 1.0F)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 100, 2), 1.0F)
                 .alwaysEat().build();
         public static final FoodProperties SPICY_SKEWER = (new FoodProperties.Builder())
                 .nutrition(7).saturationMod(0.9f)
@@ -124,7 +124,7 @@ public class MNDFoodValues
                 .build();
         public static final FoodProperties CHILIDOG = (new FoodProperties.Builder())
                 .nutrition(13).saturationMod(0.45f)
-                .effect(() -> new MobEffectInstance(MNDEffects.GPUNGENT.get(), 600, 1), 1.0F)
+                .effect(() -> new MobEffectInstance(MNDEffects.GPUNGENT.get(), 600, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 300, 0), 1.0F)
                 .build();
         public static final FoodProperties SPICY_HOGLIN_STEW = (new FoodProperties.Builder())
@@ -133,16 +133,35 @@ public class MNDFoodValues
                 .effect(() -> new MobEffectInstance(ModEffects.COMFORT.get(), 2400, 0), 1.0F)
                 .build();
         public static final FoodProperties HOT_WINGS = (new FoodProperties.Builder())
-                .nutrition(10).saturationMod(0.45f)
+                .nutrition(6).saturationMod(0.45f)
                 .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 1200, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 1200, 0), 1.0F)
-                .meat().build();
+                .alwaysEat().fast().build();
+        public static final FoodProperties HOT_WINGS_BUCKET = (new FoodProperties.Builder())
+                .nutrition(18).saturationMod(0.45f)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 3600, 0), 1.0F)
+                .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 2400, 0), 1.0F)
+                .alwaysEat().build();
         public static final FoodProperties SPICY_CURRY = (new FoodProperties.Builder())
                 .nutrition(15).saturationMod(0.65f)
-                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 2400, 1), 1.0F)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 6000, 1), 1.0F)
                 .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT.get(), 3600, 0), 1.0F)
-                .meat().build();
-
+                .build();
+        // MAGMA CUBE
+        public static final FoodProperties ROCK_SOUP = (new FoodProperties.Builder())
+                .nutrition(7).saturationMod(0.75f)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 1200, 2), 1.0F)
+                .effect(() -> new MobEffectInstance(ModEffects.COMFORT.get(), 3600, 0), 1.0F)
+                .build();
+        public static final FoodProperties BURNT_ROLL = (new FoodProperties.Builder())
+                .nutrition(10).saturationMod(0.6f)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 1), 1.0F)
+                .alwaysEat().build();
+        public static final FoodProperties MAGMA_CAKE_SLICE = (new FoodProperties.Builder())
+                .nutrition(2).saturationMod(1.0f)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 300, 2), 1.0F)
+                .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 400, 0, false, false), 1.0F)
+                .alwaysEat().fast().build();
 
         // STUFFED HOGLIN
         public static final FoodProperties ROAST_EAR = (new FoodProperties.Builder())
