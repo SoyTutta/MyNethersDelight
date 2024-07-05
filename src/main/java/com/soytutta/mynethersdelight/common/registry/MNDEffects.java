@@ -5,6 +5,7 @@
 
 package com.soytutta.mynethersdelight.common.registry;
 
+import com.soytutta.mynethersdelight.common.effect.GoodPungentEffect;
 import com.soytutta.mynethersdelight.common.effect.PungentEffect;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraftforge.registries.DeferredRegister;
@@ -20,7 +21,7 @@ public class MNDEffects {
     }
 
     static {
-        GPUNGENT = EFFECTS.register("g_pungent", PungentEffect::new);
+        GPUNGENT = EFFECTS.register("g_pungent", GoodPungentEffect::new);
         BPUNGENT = EFFECTS.register("b_pungent", PungentEffect::new);
     }
 }

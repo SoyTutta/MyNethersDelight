@@ -16,9 +16,9 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.stream.StreamSupport;
 
-public class PungentEffect extends MobEffect {
-    public PungentEffect() {
-        super(MobEffectCategory.NEUTRAL, 0);
+public class GoodPungentEffect extends MobEffect {
+    public GoodPungentEffect() {
+        super(MobEffectCategory.BENEFICIAL, 0);
     }
 
     @Override
@@ -36,23 +36,17 @@ public class PungentEffect extends MobEffect {
         }
 
         if (isInFireCondition(entity) || entity.isInLava() || entity.isOnFire()) {
-            float minHealth = (amplifier >= 2) ? 2.0F :
-                    (amplifier == 1) ? (entity.getMaxHealth() / 2) :
-                            (entity.getMaxHealth() - (entity.getMaxHealth() / 4));
+            if (entity.getHealth() < entity.getMaxHealth()) {
 
-            if (entity.getHealth() > minHealth) {
-                entity.hurt(entity.damageSources().magic(), 1.0f);
-            }
-
-            if (isInFireCondition(entity)) {
-                if (entity.getHealth() > minHealth) {
+                entity.heal(2.0F);
+                if (entity.getHealth() < entity.getMaxHealth()) {
                     entity.setSecondsOnFire(3);
+                } else {
+                    entity.setSecondsOnFire(0);
+                    entity.clearFire();
                 }
-            } else if (entity.isOnFire()) {
-                entity.setSecondsOnFire(0);
-                entity.clearFire();
-            }
 
+            }
         }
     }
 
@@ -94,7 +88,7 @@ public class PungentEffect extends MobEffect {
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
-        int i = 25 >> amplifier;
+        int i = 40 >> amplifier;
         if (i > 0) {
             return duration % i == 0;
         } else {
