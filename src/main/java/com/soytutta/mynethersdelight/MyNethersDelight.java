@@ -5,6 +5,7 @@ import com.soytutta.mynethersdelight.common.MNDCommonSetup;
 import com.soytutta.mynethersdelight.common.loot.RemplaceLootModifier;
 import com.soytutta.mynethersdelight.common.registry.*;
 import com.soytutta.mynethersdelight.integration.MNDEveryCompat;
+import com.soytutta.mynethersdelight.integration.addonsdelight.MNDItemsMD;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -35,6 +36,9 @@ public class MyNethersDelight
         MNDBiomeFeatures.FEATURES.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         registerLootSerializers(modEventBus);
+        if (ModList.get().isLoaded("miners_delight")) {
+            MNDItemsMD.ITEMS.register(modEventBus);
+        }
         if (ModList.get().isLoaded("moonlight")) {
             MNDEveryCompat.registerCompat();
         }

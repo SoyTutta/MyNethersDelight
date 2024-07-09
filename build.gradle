@@ -130,10 +130,10 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
     implementation fg.deobf("curse.maven:farmers-delight-398521:${farmersdelight_version}")
+    implementation fg.deobf("curse.maven:miners-delight-plus-689630:5038950")
 
     // Run Only
     runtimeOnly fg.deobf("curse.maven:appleskin-248787:4770828")
-    runtimeOnly fg.deobf("curse.maven:miners-delight-plus-689630:5038950")
     // Every compat
     compileOnly fg.deobf("curse.maven:selene-499980:5409387")
     runtimeOnly fg.deobf("curse.maven:selene-499980:5409387")

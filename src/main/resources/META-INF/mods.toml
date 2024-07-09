@@ -5,7 +5,7 @@ license="MIT License"
 
 [[mods]]
 modId="mynethersdelight"
-version="1.20.1-1.6"
+version="1.20.1-1.7"
 displayName="My Nether's Delight"
 
 # updateJSONURL=""
@@ -36,4 +36,11 @@ modId="farmersdelight"
 mandatory=true
 versionRange="[1.2.3,)"
 ordering="NONE"
+side="BOTH"
+
+[[dependencies.mynethersdelight]]
+modId="miners_delight"
+mandatory=false
+versionRange="[1.2.3,)"
+ordering="AFTER"
 side="BOTH"

@@ -191,4 +191,25 @@ public class MNDFoodValues
                 .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 2), 1.0F)
                 .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 600, 0), 1.0F)
                 .alwaysEat().build();
+        // MD-CUPS
+        public static final FoodProperties STRIDER_STEW_CUP = (new FoodProperties.Builder())
+                .nutrition(4).saturationMod(0.6f)
+                .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 400, 0), 1.0F)
+                .effect(() -> new MobEffectInstance(ModEffects.COMFORT.get(), 600, 0), 1.0F)
+                .fast().build();
+        public static final FoodProperties SPICY_NOODLE_SOUP_CUP = (new FoodProperties.Builder())
+                .nutrition(8).saturationMod(0.65F)
+                .effect(() ->  new MobEffectInstance(ModEffects.COMFORT.get(), 3000, 0), 1.0F)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 1), 1.0F)
+                .fast().build();
+        public static final FoodProperties SPICY_HOGLIN_STEW_CUP = (new FoodProperties.Builder())
+                .nutrition(6).saturationMod(0.8f)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 1), 1.0F)
+                .effect(() -> new MobEffectInstance(ModEffects.COMFORT.get(), 1200, 0), 1.0F)
+                .fast().build();
+        public static final FoodProperties ROCK_SOUP_CUP = (new FoodProperties.Builder())
+                .nutrition(3).saturationMod(0.75f)
+                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 2), 1.0F)
+                .effect(() -> new MobEffectInstance(ModEffects.COMFORT.get(), 1800, 0), 1.0F)
+                .fast().build();
     }

@@ -75,6 +75,7 @@ public class MNDBlockTags extends BlockTagsProvider {
         this.tag(MNDTags.BELOW_PROPAGATE_PLANT).add(Blocks.SPORE_BLOSSOM,Blocks.HANGING_ROOTS,Blocks.GLOW_LICHEN);
         this.tag(MNDTags.ABOVE_PROPAGATE_PLANT).add(Blocks.KELP,Blocks.LILY_PAD,Blocks.DEAD_BUSH,Blocks.GLOW_LICHEN).addTag(BlockTags.SAPLINGS).addTag(BlockTags.CROPS);
 
+        this.tag(ModTags.TRAY_HEAT_SOURCES).add(MNDBlocks.MAGMA_CAKE.get());
         this.tag(ModTags.HEAT_SOURCES).add(MNDBlocks.NETHER_STOVE.get(),MNDBlocks.BULLET_PEPPER_CRATE.get());
         this.tag(ModTags.WILD_CROPS).add(MNDBlocks.BULLET_PEPPER.get());
         this.tag(ModTags.UNAFFECTED_BY_RICH_SOIL).add(MNDBlocks.WARPED_FUNGUS_COLONY.get(),MNDBlocks.CRIMSON_FUNGUS_COLONY.get());

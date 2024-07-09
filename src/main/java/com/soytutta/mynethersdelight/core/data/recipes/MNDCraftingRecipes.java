@@ -251,15 +251,6 @@ public class MNDCraftingRecipes {
                 .group("nether_stove")
                 .unlockedBy("has_campfire", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.CAMPFIRE))
                 .save(consumer, new ResourceLocation("mynethersdelight", "nethers_stove"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDItems.NETHER_STOVE.get())
-                .pattern("iii")
-                .pattern("B#B")
-                .pattern("BCB")
-                .define('i', Tags.Items.INGOTS_NETHER_BRICK).define('#', MNDTags.STOVE_FIRE_FUEL)
-                .define('B', Blocks.POLISHED_BLACKSTONE_BRICKS).define('C', Blocks.SOUL_CAMPFIRE)
-                .group("nether_stove")
-                .unlockedBy("has_soul_campfire", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.SOUL_CAMPFIRE))
-                .save(consumer, new ResourceLocation("mynethersdelight", "nethers_stove_alt"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.SOUL_NETHER_STOVE.get())
                 .requires(MNDItems.NETHER_STOVE.get())
@@ -276,15 +267,6 @@ public class MNDCraftingRecipes {
                 .group("soul_nether_stove")
                 .unlockedBy("has_soul_campfire", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.SOUL_CAMPFIRE))
                 .save(consumer, new ResourceLocation("mynethersdelight", "soul_nethers_stove"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDItems.SOUL_NETHER_STOVE.get())
-                .pattern("iii")
-                .pattern("B#B")
-                .pattern("BCB")
-                .define('i', Tags.Items.INGOTS_NETHER_BRICK).define('#', MNDTags.STOVE_SOUL_FUEL)
-                .define('B', Blocks.POLISHED_BLACKSTONE_BRICKS).define('C', Blocks.CAMPFIRE)
-                .group("soul_nether_stove")
-                .unlockedBy("has_campfire", InventoryChangeTrigger.TriggerInstance.hasItems(Blocks.CAMPFIRE))
-                .save(consumer, new ResourceLocation("mynethersdelight", "soul_nethers_stove_alt"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,MNDItems.LETIOS_COMPOST.get(), 1)
                 .requires(Ingredient.of(Items.SOUL_SAND, Items.SOUL_SOIL))

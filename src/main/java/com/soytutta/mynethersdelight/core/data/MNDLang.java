@@ -66,6 +66,7 @@ public class MNDLang extends LanguageProvider {
         this.add("farmersdelight.tooltip.strider_egg", "Nourished by 1 Harmful Effect");
         this.add("farmersdelight.tooltip.hot_cream", "Burning Effects");
         this.add("farmersdelight.tooltip.strider_feed.when_feeding", "When fed to a Strider");
+        this.add("farmersdelight.tooltip.magma_cake_slice", "Spicy frog Snack");
 
         this.add("mynethersdelight.jei.info.hot_cream", "It burns all active Effects converting them into Fire Resistance and Pungent.\n\nIf you serve it in a Cone it will only Burn one Effect!! Striders also prefer it served this way...");
         this.add("mynethersdelight.jei.info.strider_egg", "Wait... Are Striders Ovoviviparous? that's weird...\n\nAnyway, it's only obtainable by careful hunting.\nhard shell, it can only be eaten starry...");
@@ -77,7 +78,11 @@ public class MNDLang extends LanguageProvider {
         this.add("mynethersdelight.jei.info.plate_of_stuffed_hoglin", "It's astonishing how much Dishes can be obtained from such a Primitive Feast...");
         this.add("mynethersdelight.jei.info.plate_of_ghasta", "Is the ghast still alive?\nI took a portion recently, but it grew back.");
         this.add("mynethersdelight.jei.info.plate_of_striderloaf", "Once cooled, it takes away your appetite.");
-
+        /// Miners Delight Cups
+        this.add("item.miners_delight.strider_stew_cup", "Strider Stew Cup");
+        this.add("item.miners_delight.spicy_noodle_soup_cup", "Spicy Noodle Soup");
+        this.add("item.miners_delight.spicy_hoglin_stew_cup", "Spicy Hoglin Stew Cup");
+        this.add("item.miners_delight.rock_soup_cup", "Rock Soup Cup");
     }
 
     public String getName() {

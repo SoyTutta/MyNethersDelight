@@ -130,7 +130,7 @@ public class MNDCookingRecipes {
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .build(consumer, "mynethersdelight:cooking/sausage_and_potatoes");
 
-        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.HOT_CREAM.get(), 1, 200, 1.0F,Items.BUCKET)
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.HOT_CREAM.get(), 1, 50, 1.0F,Items.BUCKET)
                 .addIngredient(MNDTags.HOT_SPICE)
                 .addIngredient(ForgeTags.EGGS)
                 .addIngredient(MNDTags.BULLET_PEPPER)
@@ -142,14 +142,14 @@ public class MNDCookingRecipes {
                 .setRecipeBookTab(CookingPotRecipeBookTab.DRINKS)
                 .build(consumer, "mynethersdelight:cooking/hotcream");
 
-        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.ROCK_SOUP.get(), 1, 100, 0.35F)
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.ROCK_SOUP.get(), 1, 50, 0.35F)
                 .addIngredient(Items.MAGMA_CREAM,2)
                 .addIngredient(MNDItems.STRIDER_ROCK.get(),2)
 
                 .unlockedByAnyIngredient(Items.MAGMA_CREAM)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .build(consumer, "mynethersdelight:cooking/rock_soup");
-        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.BURNT_ROLL.get(), 2, 100, 0.35F)
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.BURNT_ROLL.get(), 2, 50, 0.35F)
                 .addIngredient(Items.MAGMA_CREAM,2)
                 .addIngredient(MNDTags.CURRY_MEATS)
 

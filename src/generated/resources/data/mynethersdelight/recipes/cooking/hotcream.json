@@ -3,7 +3,7 @@
   "container": {
     "item": "minecraft:bucket"
   },
-  "cookingtime": 200,
+  "cookingtime": 50,
   "experience": 1.0,
   "ingredients": [
     {

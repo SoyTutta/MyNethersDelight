@@ -350,8 +350,9 @@ public class MNDItems {
         MAGMA_CAKE = ITEMS.register("magma_cake", () ->
                 new BlockItem(MNDBlocks.MAGMA_CAKE.get(), basicItem().stacksTo(1))
         );
-        MAGMA_CAKE_SLICE = ITEMS.register("magma_cake_slice", ()  ->
-                new ConsumableItem(foodItem(MNDFoodValues.MAGMA_CAKE_SLICE).stacksTo(16))
+        MAGMA_CAKE_SLICE = ITEMS.register("magma_cake_slice",
+                () -> new ConsumableItem(foodItem(MNDFoodValues.MAGMA_CAKE_SLICE).stacksTo(16),
+                        false, true)
         );
         // LAVA
         HOT_CREAM = ITEMS.register("hot_cream", ()  ->

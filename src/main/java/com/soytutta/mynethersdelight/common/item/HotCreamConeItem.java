@@ -9,7 +9,6 @@ import javax.annotation.Nullable;
 import com.soytutta.mynethersdelight.common.registry.MNDEffects;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import net.minecraft.ChatFormatting;
-import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.sounds.SoundEvent;
@@ -167,14 +166,14 @@ public class HotCreamConeItem extends ConsumableItem {
                             entity.addEffect(new MobEffectInstance(effect));
                         }
 
-                        entity.level().playSound((Player) null, target.blockPosition(), SoundEvents.STRIDER_HAPPY,
+                        entity.level().playSound(null, target.blockPosition(), SoundEvents.STRIDER_HAPPY,
                                 SoundSource.PLAYERS, 0.8F, 0.8F);
 
                         for (int i = 0; i < 5; ++i) {
                             double d0 = MathUtils.RAND.nextGaussian() * 0.02;
                             double d1 = MathUtils.RAND.nextGaussian() * 0.02;
                             double d2 = MathUtils.RAND.nextGaussian() * 0.02;
-                            entity.level().addParticle((ParticleOptions) ModParticleTypes.STAR.get(),
+                            entity.level().addParticle(ModParticleTypes.STAR.get(),
                                     entity.getRandomX(1.0), entity.getRandomY() + 0.5, entity.getRandomZ(1.0), d0,
                                     d1, d2);
                         }
