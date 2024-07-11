@@ -62,7 +62,6 @@ public class MNDBlockTags extends BlockTagsProvider {
 
     protected void registerForgeTags() {
         this.tag(BlockTags.CROPS).add(MNDBlocks.POWDERY_CANNON.get(),MNDBlocks.POWDERY_CHUBBY_SAPLING.get(),MNDBlocks.POWDERY_CANE.get(),MNDBlocks.BULLET_PEPPER.get());
-        this.tag(BlockTags.SAND).add(MNDBlocks.RESURGENT_SOIL.get(), MNDBlocks.RESURGENT_SOIL_FARMLAND.get());
         this.tag(BlockTags.DIRT).add(MNDBlocks.RESURGENT_SOIL.get(), MNDBlocks.RESURGENT_SOIL_FARMLAND.get());
         this.tag(BlockTags.NYLIUM).add(MNDBlocks.LETIOS_COMPOST.get(), MNDBlocks.RESURGENT_SOIL.get(), MNDBlocks.RESURGENT_SOIL_FARMLAND.get());
         this.tag(BlockTags.MUSHROOM_GROW_BLOCK).add(MNDBlocks.LETIOS_COMPOST.get(), MNDBlocks.RESURGENT_SOIL.get(), MNDBlocks.RESURGENT_SOIL_FARMLAND.get());
