@@ -44,14 +44,43 @@ import java.util.function.Supplier;
 public class MagmaCakeBlock extends Block {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 6);
-    protected static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[]{
-            Block.box(1.0, 0.0, 1.0, 15.0, 8.0, 15.0),
-            Block.box(3.0, 0.0, 1.0, 15.0, 8.0, 15.0),
-            Block.box(5.0, 0.0, 1.0, 15.0, 8.0, 15.0),
-            Block.box(7.0, 0.0, 1.0, 15.0, 8.0, 15.0),
-            Block.box(9.0, 0.0, 1.0, 15.0, 8.0, 15.0),
-            Block.box(11.0, 0.0, 1.0, 15.0, 8.0, 15.0),
-            Block.box(13.0, 0.0, 1.0, 15.0, 8.0, 15.0)
+
+    protected static final VoxelShape[][] SHAPE_BY_BITE = new VoxelShape[][]{
+            {
+                    Block.box(1.0, 0.0, 1.0, 15.0, 8.0, 15.0),
+                    Block.box(1.0, 0.0, 1.0, 15.0, 8.0, 13.0),
+                    Block.box(1.0, 0.0, 1.0, 15.0, 8.0, 11.0),
+                    Block.box(1.0, 0.0, 1.0, 15.0, 8.0, 9.0),
+                    Block.box(1.0, 0.0, 1.0, 15.0, 8.0, 7.0),
+                    Block.box(1.0, 0.0, 1.0, 15.0, 8.0, 5.0),
+                    Block.box(1.0, 0.0, 1.0, 15.0, 8.0, 3.0)
+            },{
+                    Block.box(1.0, 0.0, 1.0, 15.0, 8.0, 15.0),
+                    Block.box(3.0, 0.0, 1.0, 15.0, 8.0, 15.0),
+                    Block.box(5.0, 0.0, 1.0, 15.0, 8.0, 15.0),
+                    Block.box(7.0, 0.0, 1.0, 15.0, 8.0, 15.0),
+                    Block.box(9.0, 0.0, 1.0, 15.0, 8.0, 15.0),
+                    Block.box(11.0, 0.0, 1.0, 15.0, 8.0, 15.0),
+                    Block.box(13.0, 0.0, 1.0, 15.0, 8.0, 15.0)
+            },
+            {
+                    Block.box(1.0, 0.0, 1.0, 15.0, 8.0, 15.0),
+                    Block.box(1.0, 0.0, 3.0, 15.0, 8.0, 15.0),
+                    Block.box(1.0, 0.0, 5.0, 15.0, 8.0, 15.0),
+                    Block.box(1.0, 0.0, 7.0, 15.0, 8.0, 15.0),
+                    Block.box(1.0, 0.0, 9.0, 15.0, 8.0, 15.0),
+                    Block.box(1.0, 0.0, 11.0, 15.0, 8.0, 15.0),
+                    Block.box(1.0, 0.0, 13.0, 15.0, 8.0, 15.0)
+            },
+            {
+                    Block.box(1.0, 0.0, 1.0, 15.0, 8.0, 15.0),
+                    Block.box(1.0, 0.0, 1.0, 13.0, 8.0, 15.0),
+                    Block.box(1.0, 0.0, 1.0, 11.0, 8.0, 15.0),
+                    Block.box(1.0, 0.0, 1.0, 9.0, 8.0, 15.0),
+                    Block.box(1.0, 0.0, 1.0, 7.0, 8.0, 15.0),
+                    Block.box(1.0, 0.0, 1.0, 5.0, 8.0, 15.0),
+                    Block.box(1.0, 0.0, 1.0, 3.0, 8.0, 15.0)
+            }
     };
 
     public final Supplier<Item> pieSlice;
@@ -72,12 +101,14 @@ public class MagmaCakeBlock extends Block {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return SHAPE_BY_BITE[state.getValue(BITES)];
+        int bites = state.getValue(BITES);
+        int direction = state.getValue(FACING).get2DDataValue();
+        return SHAPE_BY_BITE[direction][bites];
     }
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection());
+        return this.defaultBlockState().setValue(FACING, context.getHorizontalDirection().getOpposite());
     }
 
     @Override

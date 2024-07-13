@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:block/cake_slice6",
   "textures": {
-    "particle": "mynethersdelight:block/magma_cake",
+    "particle": "mynethersdelight:block/magma_cake_inner",
     "bottom": "mynethersdelight:block/magma_cake",
     "top": "mynethersdelight:block/magma_cake",
     "side": "mynethersdelight:block/magma_cake_side",

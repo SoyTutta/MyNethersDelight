@@ -159,8 +159,9 @@ public class MNDFoodValues
                 .alwaysEat().build();
         public static final FoodProperties MAGMA_CAKE_SLICE = (new FoodProperties.Builder())
                 .nutrition(2).saturationMod(1.0f)
-                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 300, 2), 1.0F)
+                .effect(() -> new MobEffectInstance(MNDEffects.GPUNGENT.get(), 400, 2), 1.0F)
                 .effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 400, 0, false, false), 1.0F)
+                .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0, false, false), 1.0F)
                 .alwaysEat().fast().build();
 
         // STUFFED HOGLIN
@@ -183,12 +184,12 @@ public class MNDFoodValues
         // LAVA
         public static final FoodProperties HOT_CREAM_CONE = (new FoodProperties.Builder())
                 .nutrition(4).saturationMod(1.0f)
-                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 200, 0), 1.0F)
+                .effect(() -> new MobEffectInstance(MNDEffects.GPUNGENT.get(), 200, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0), 1.0F)
                 .alwaysEat().build();
         public static final FoodProperties HOT_CREAM = (new FoodProperties.Builder())
                 .nutrition(1).saturationMod(8.0f)
-                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT.get(), 600, 2), 1.0F)
+                .effect(() -> new MobEffectInstance(MNDEffects.GPUNGENT.get(), 600, 2), 1.0F)
                 .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 600, 0), 1.0F)
                 .alwaysEat().build();
         // MD-CUPS

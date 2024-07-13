@@ -1,25 +1,109 @@
 {
 	"variants": {
-		"bites=0": {
+		"facing=west,bites=0": {
 			"model": "mynethersdelight:block/magma_cake"
 		},
-		"bites=1": {
+		"facing=west,bites=1": {
 			"model": "mynethersdelight:block/magma_cake_slice1"
 		},
-		"bites=2": {
+		"facing=west,bites=2": {
 			"model": "mynethersdelight:block/magma_cake_slice2"
 		},
-		"bites=3": {
+		"facing=west,bites=3": {
 			"model": "mynethersdelight:block/magma_cake_slice3"
 		},
-		"bites=4": {
+		"facing=west,bites=4": {
 			"model": "mynethersdelight:block/magma_cake_slice4"
 		},
-		"bites=5": {
+		"facing=west,bites=5": {
 			"model": "mynethersdelight:block/magma_cake_slice5"
 		},
-		"bites=6": {
+		"facing=west,bites=6": {
 			"model": "mynethersdelight:block/magma_cake_slice6"
+		},
+		"facing=north,bites=0": {
+			"model": "mynethersdelight:block/magma_cake",
+			"y": 90
+		},
+		"facing=north,bites=1": {
+			"model": "mynethersdelight:block/magma_cake_slice1",
+			"y": 90
+		},
+		"facing=north,bites=2": {
+			"model": "mynethersdelight:block/magma_cake_slice2",
+			"y": 90
+		},
+		"facing=north,bites=3": {
+			"model": "mynethersdelight:block/magma_cake_slice3",
+			"y": 90
+		},
+		"facing=north,bites=4": {
+			"model": "mynethersdelight:block/magma_cake_slice4",
+			"y": 90
+		},
+		"facing=north,bites=5": {
+			"model": "mynethersdelight:block/magma_cake_slice5",
+			"y": 90
+		},
+		"facing=north,bites=6": {
+			"model": "mynethersdelight:block/magma_cake_slice6",
+			"y": 90
+		},
+		"facing=east,bites=0": {
+			"model": "mynethersdelight:block/magma_cake",
+			"y": 180
+		},
+		"facing=east,bites=1": {
+			"model": "mynethersdelight:block/magma_cake_slice1",
+			"y": 180
+		},
+		"facing=east,bites=2": {
+			"model": "mynethersdelight:block/magma_cake_slice2",
+			"y": 180
+		},
+		"facing=east,bites=3": {
+			"model": "mynethersdelight:block/magma_cake_slice3",
+			"y": 180
+		},
+		"facing=east,bites=4": {
+			"model": "mynethersdelight:block/magma_cake_slice4",
+			"y": 180
+		},
+		"facing=east,bites=5": {
+			"model": "mynethersdelight:block/magma_cake_slice5",
+			"y": 180
+		},
+		"facing=east,bites=6": {
+			"model": "mynethersdelight:block/magma_cake_slice6",
+			"y": 180
+		},
+		"facing=south,bites=0": {
+			"model": "mynethersdelight:block/magma_cake",
+			"y": 270
+		},
+		"facing=south,bites=1": {
+			"model": "mynethersdelight:block/magma_cake_slice1",
+			"y": 270
+		},
+		"facing=south,bites=2": {
+			"model": "mynethersdelight:block/magma_cake_slice2",
+			"y": 270
+		},
+		"facing=south,bites=3": {
+			"model": "mynethersdelight:block/magma_cake_slice3",
+			"y": 270
+		},
+		"facing=south,bites=4": {
+			"model": "mynethersdelight:block/magma_cake_slice4",
+			"y": 270
+		},
+		"facing=south,bites=5": {
+			"model": "mynethersdelight:block/magma_cake_slice5",
+			"y": 270
+		},
+		"facing=south,bites=6": {
+			"model": "mynethersdelight:block/magma_cake_slice6",
+			"y": 270
 		}
 	}
 }

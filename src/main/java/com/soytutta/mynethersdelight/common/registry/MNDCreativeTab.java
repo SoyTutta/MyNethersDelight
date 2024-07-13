@@ -2,10 +2,12 @@ package com.soytutta.mynethersdelight.common.registry;
 
 import com.soytutta.mynethersdelight.MyNethersDelight;
 import com.soytutta.mynethersdelight.common.utility.MNDTextUtils;
+import com.soytutta.mynethersdelight.integration.addonsdelight.MNDItemsMD;
 import net.minecraft.core.registries.*;
 import net.minecraft.world.item.*;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.*;
 
@@ -54,6 +56,30 @@ public class MNDCreativeTab {
         event.accept(MNDItems.CRIMSON_FUNGUS_COLONY.get());
         event.accept(MNDItems.WARPED_FUNGUS_COLONY.get());
 
+        event.accept(MNDItems.HOGLIN_TROPHY.get());
+        event.accept(MNDItems.WAXED_HOGLIN_TROPHY.get());
+        event.accept(MNDItems.ZOGLIN_TROPHY.get());
+        event.accept(MNDItems.SKOGLIN_TROPHY.get());
+
+        event.accept(MNDItems.HOGLIN_HIDE.get());
+
+        event.accept(MNDItems.HOGLIN_LOIN.get());
+        event.accept(MNDItems.HOGLIN_SAUSAGE.get());
+        event.accept(MNDItems.ROASTED_SAUSAGE.get());
+        event.accept(MNDItems.HOTDOG.get());
+        event.accept(MNDItems.SAUSAGE_AND_POTATOES.get());
+        event.accept(MNDItems.BREAKFAST_SAMPLER.get());
+        event.accept(MNDItems.COOKED_LOIN.get());
+        event.accept(MNDItems.BLUE_TENDERLOIN_STEAK.get());
+        event.accept(MNDItems.FRIED_HOGLIN_CHOP.get());
+
+        event.accept(MNDItems.RAW_STUFFED_HOGLIN.get());
+        event.accept(MNDItems.ROAST_STUFFED_HOGLIN.get());
+        event.accept(MNDItems.ROAST_EAR.get());
+        event.accept(MNDItems.PLATE_OF_STUFFED_HOGLIN_SNOUT.get());
+        event.accept(MNDItems.PLATE_OF_STUFFED_HOGLIN_HAM.get());
+        event.accept(MNDItems.PLATE_OF_STUFFED_HOGLIN.get());
+
         event.accept(MNDItems.STRIDER_ROCK.get());
         event.accept(MNDItems.STRIDER_EGG.get());
         event.accept(MNDItems.BOILED_EGG.get());
@@ -67,16 +93,6 @@ public class MNDCreativeTab {
         event.accept(MNDItems.STRIDERLOAF_BLOCK.get());
         event.accept(MNDItems.STRIDERLOAF.get());
         event.accept(MNDItems.COLD_STRIDERLOAF.get());
-
-        event.accept(MNDItems.HOGLIN_LOIN.get());
-        event.accept(MNDItems.HOGLIN_SAUSAGE.get());
-        event.accept(MNDItems.ROASTED_SAUSAGE.get());
-        event.accept(MNDItems.HOTDOG.get());
-        event.accept(MNDItems.SAUSAGE_AND_POTATOES.get());
-        event.accept(MNDItems.BREAKFAST_SAMPLER.get());
-        event.accept(MNDItems.COOKED_LOIN.get());
-        event.accept(MNDItems.BLUE_TENDERLOIN_STEAK.get());
-        event.accept(MNDItems.FRIED_HOGLIN_CHOP.get());
 
         event.accept(MNDItems.GHASTA.get());
         event.accept(MNDItems.GHAST_SALAD.get());
@@ -101,18 +117,12 @@ public class MNDCreativeTab {
         event.accept(MNDItems.HOT_CREAM.get());
         event.accept(MNDItems.HOT_CREAM_CONE.get());
 
-        event.accept(MNDItems.HOGLIN_HIDE.get());
-        event.accept(MNDItems.RAW_STUFFED_HOGLIN.get());
-        event.accept(MNDItems.ROAST_STUFFED_HOGLIN.get());
-        event.accept(MNDItems.ROAST_EAR.get());
-        event.accept(MNDItems.PLATE_OF_STUFFED_HOGLIN_SNOUT.get());
-        event.accept(MNDItems.PLATE_OF_STUFFED_HOGLIN_HAM.get());
-        event.accept(MNDItems.PLATE_OF_STUFFED_HOGLIN.get());
-
-        event.accept(MNDItems.HOGLIN_TROPHY.get());
-        event.accept(MNDItems.ZOGLIN_TROPHY.get());
-        event.accept(MNDItems.SKOGLIN_TROPHY.get());
-        event.accept(MNDItems.WAXED_HOGLIN_TROPHY.get());
+        if (ModList.get().isLoaded("miners_delight")) {
+            event.accept(MNDItemsMD.SPICY_HOGLIN_STEW_CUP.get());
+            event.accept(MNDItemsMD.STRIDER_STEW_CUP.get());
+            event.accept(MNDItemsMD.SPICY_NOODLE_SOUP_CUP.get());
+            event.accept(MNDItemsMD.ROCK_SOUP_CUP.get());
+        }
     }
     @SubscribeEvent
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {

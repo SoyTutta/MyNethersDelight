@@ -28,6 +28,9 @@ public class MyNethersDelight
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(MNDCommonSetup::init);
         MNDItems.ITEMS.register(modEventBus);
+        if (ModList.get().isLoaded("miners_delight")) {
+            MNDItemsMD.ITEMS.register(modEventBus);
+        }
         MNDBlocks.BLOCKS.register(modEventBus);
         MNDEffects.EFFECTS.register(modEventBus);
         MNDBlockEntityTypes.TILES.register(modEventBus);
@@ -36,9 +39,6 @@ public class MyNethersDelight
         MNDBiomeFeatures.FEATURES.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         registerLootSerializers(modEventBus);
-        if (ModList.get().isLoaded("miners_delight")) {
-            MNDItemsMD.ITEMS.register(modEventBus);
-        }
         if (ModList.get().isLoaded("moonlight")) {
             MNDEveryCompat.registerCompat();
         }

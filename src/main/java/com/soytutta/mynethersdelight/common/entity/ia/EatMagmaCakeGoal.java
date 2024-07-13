@@ -5,6 +5,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Pose;
@@ -23,7 +25,7 @@ import java.util.List;
 
 
 public class EatMagmaCakeGoal extends Goal {
-    private static final int COOLDOWN_TICKS = 3;
+    private static final int COOLDOWN_TICKS = 5;
     private static final int TONGUE_ANIMATION_DURATION = 10;
     private static final SoundEvent TONGUE_SOUND = SoundEvents.FROG_EAT;
 
@@ -149,6 +151,7 @@ public class EatMagmaCakeGoal extends Goal {
                     MagmaCube magmacube = EntityType.MAGMA_CUBE.create(this.level);
                     if (magmacube != null) {
                         magmacube.setSize(1, true);
+                        magmacube.setHealth(1);
                         magmacube.setInvisible(true);
                         magmacube.setPos(this.frog.getX(), this.frog.getY(), this.frog.getZ());
                         this.level.addFreshEntity(magmacube);
@@ -159,6 +162,9 @@ public class EatMagmaCakeGoal extends Goal {
                         }
                     }
                 }
+
+                this.frog.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0));
+
                 int bites = state.getValue(MagmaCakeBlock.BITES);
                 if (bites < 6) {
                     this.level.setBlockAndUpdate(pos, state.setValue(MagmaCakeBlock.BITES, bites + 1));
@@ -203,6 +209,7 @@ public class EatMagmaCakeGoal extends Goal {
                         MagmaCube magmacube = EntityType.MAGMA_CUBE.create(this.level);
                         if (magmacube != null) {
                             magmacube.setSize(1, true);
+                            magmacube.setHealth(1);
                             magmacube.setInvisible(true);
                             magmacube.setPos(this.frog.getX(), this.frog.getY(), this.frog.getZ());
                             this.level.addFreshEntity(magmacube);
@@ -213,6 +220,8 @@ public class EatMagmaCakeGoal extends Goal {
                             }
                         }
                     }
+
+                    this.frog.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0));
                 }
             }
         }

@@ -6,7 +6,8 @@
         "items": [
           {
             "items": [
-              "mynethersdelight:strider_egg"
+              "mynethersdelight:strider_egg",
+              "mynethersdelight:boiled_egg"
             ]
           }
         ]
@@ -15,7 +16,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mynethersdelight:cooking/boiled_egg"
+        "recipe": "mynethersdelight:cooking/deviled_egg"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -28,7 +29,7 @@
   ],
   "rewards": {
     "recipes": [
-      "mynethersdelight:cooking/boiled_egg"
+      "mynethersdelight:cooking/deviled_egg"
     ]
   },
   "sends_telemetry_event": true

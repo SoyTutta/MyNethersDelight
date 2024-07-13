@@ -56,9 +56,9 @@ public class MNDCookingRecipes {
                 .addIngredient(MNDItems.BOILED_EGG.get())
                 .addIngredient(MNDTags.HOT_SPICE)
                 .addIngredient(ForgeTags.RAW_BACON)
-                .unlockedByAnyIngredient(MNDItems.STRIDER_EGG.get())
+                .unlockedByAnyIngredient(MNDItems.STRIDER_EGG.get(),MNDItems.BOILED_EGG.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(consumer, "mynethersdelight:cooking/boiled_egg");
+                .build(consumer, "mynethersdelight:cooking/deviled_egg");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.STRIDER_WITH_GRILLED_FUNGUS.get(), 1, 400, 1.0F)
                 .addIngredient(MNDTags.STRIDER_SLICE)
                 .addIngredient(Items.CRIMSON_FUNGUS, 1)

@@ -134,6 +134,7 @@ dependencies {
 
     // Run Only
     runtimeOnly fg.deobf("curse.maven:appleskin-248787:4770828")
+    runtimeOnly fg.deobf("curse.maven:jade-324717:5339264")
     // Every compat
     compileOnly fg.deobf("curse.maven:selene-499980:5409387")
     runtimeOnly fg.deobf("curse.maven:selene-499980:5409387")
