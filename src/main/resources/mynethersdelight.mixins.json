@@ -4,7 +4,8 @@
   "compatibilityLevel": "JAVA_17",
   "refmap": "mynethersdelight.refmap.json",
   "mixins": [
-    "FrogEntityMixin"
+    "FrogEntityMixin",
+    "amendments.InteractEventsMixin"
   ],
   "client": [
   ],

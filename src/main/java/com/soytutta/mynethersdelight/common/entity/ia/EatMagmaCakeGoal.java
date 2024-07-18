@@ -168,6 +168,9 @@ public class EatMagmaCakeGoal extends Goal {
                 int bites = state.getValue(MagmaCakeBlock.BITES);
                 if (bites < 6) {
                     this.level.setBlockAndUpdate(pos, state.setValue(MagmaCakeBlock.BITES, bites + 1));
+                } else if (state.getValue(MagmaCakeBlock.SECOND_CAKE)){
+                    this.level.setBlockAndUpdate(pos, state.setValue(MagmaCakeBlock.BITES, 0)
+                            .setValue(MagmaCakeBlock.SECOND_CAKE, false));
                 } else {
                     this.level.destroyBlock(pos, false);
                 }

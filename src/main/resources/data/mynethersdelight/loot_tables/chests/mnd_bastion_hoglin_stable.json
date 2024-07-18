@@ -124,6 +124,34 @@
           "weight": 1
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1.0,
+                "max": 3.0,
+                "type": "minecraft:uniform"
+              }
+            }
+          ],
+          "name": "minecraft:pumpkin_seeds"
+        },{
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "minecraft:carved_pumpkin"
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 15
+        }
+      ]
     }
   ]
 }

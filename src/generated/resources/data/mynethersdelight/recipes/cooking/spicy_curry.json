@@ -16,11 +16,16 @@
       "tag": "forge:crops/rice"
     },
     {
-      "tag": "forge:vegetables/carrot"
+      "tag": "forge:vegetables"
     },
-    {
-      "item": "farmersdelight:pumpkin_slice"
-    }
+    [
+      {
+        "item": "minecraft:pumpkin"
+      },
+      {
+        "item": "farmersdelight:pumpkin_slice"
+      }
+    ]
   ],
   "recipe_book_tab": "meals",
   "result": {

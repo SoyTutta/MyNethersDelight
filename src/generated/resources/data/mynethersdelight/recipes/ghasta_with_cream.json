@@ -9,7 +9,7 @@
       "item": "minecraft:bowl"
     },
     "G": {
-      "item": "mynethersdelight:ghasta"
+      "tag": "mynethersdelight:ghast_meats"
     },
     "T": {
       "item": "minecraft:ghast_tear"

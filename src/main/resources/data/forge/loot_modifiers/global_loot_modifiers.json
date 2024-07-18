@@ -14,8 +14,10 @@
     "mynethersdelight:scavenging_ghasta",
     "mynethersdelight:scavenging_extra_ghasta0",
     "mynethersdelight:scavenging_extra_ghasta1",
+    "mynethersdelight:scavenging_onion_from_ghast",
     "mynethersdelight:add_loot_piglin_bartering",
     "mynethersdelight:add_loot_bastion_hoglin_stable",
-    "mynethersdelight:add_loot_bastion_treasure"
+    "mynethersdelight:add_loot_bastion_treasure",
+    "mynethersdelight:slicing_magma_cake"
   ]
 }

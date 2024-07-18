@@ -58,6 +58,7 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(ModTags.CABBAGE_ROLL_INGREDIENTS).add( MNDItems.STRIDER_SLICE.get(), MNDItems.MINCED_STRIDER.get(), MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
         this.tag(ModTags.WOLF_PREY).add(MNDItems.MINCED_STRIDER.get(), MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
         this.tag(ModTags.WILD_CROPS_ITEM).add(MNDItems.BULLET_PEPPER.get(),MNDItems.POWDER_CANNON.get());
+        this.tag(MNDTags.GHAST_MEATS).add(MNDItems.GHASMATI.get(), MNDItems.GHASTA.get());
     }
 
     private void registerForgeTags() {
@@ -65,6 +66,9 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(ForgeTags.EGGS).add(MNDItems.STRIDER_EGG.get());
         this.tag(ForgeTags.PASTA_RAW_PASTA).add(MNDItems.GHASTA.get());
         this.tag(ForgeTags.PASTA).add(MNDItems.GHASTA.get());
+        this.tag(ForgeTags.DOUGH).add(MNDItems.GHAST_DOUGH.get());
+        this.tag(ForgeTags.CROPS_RICE).add(MNDItems.GHASMATI.get());
+        this.tag(ForgeTags.GRAIN_RICE).add(MNDItems.GHASMATI.get());
         this.tag(ForgeTags.RAW_FISHES).add(MNDItems.STRIDER_SLICE.get());
         this.tag(ForgeTags.RAW_PORK).add(MNDItems.HOGLIN_SAUSAGE.get());
     }

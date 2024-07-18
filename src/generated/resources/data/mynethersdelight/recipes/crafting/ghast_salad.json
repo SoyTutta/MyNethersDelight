@@ -3,7 +3,7 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "mynethersdelight:ghasta"
+      "tag": "mynethersdelight:ghast_meats"
     },
     {
       "tag": "forge:vegetables"

@@ -8,9 +8,14 @@
     {
       "item": "mynethersdelight:roasted_sausage"
     },
-    {
-      "item": "minecraft:honey_bottle"
-    },
+    [
+      {
+        "item": "minecraft:honey_bottle"
+      },
+      {
+        "item": "mynethersdelight:strider_egg"
+      }
+    ],
     {
       "tag": "forge:cooked_eggs"
     },
@@ -18,7 +23,7 @@
       "tag": "forge:cooked_eggs"
     },
     {
-      "item": "minecraft:bread"
+      "tag": "forge:bread"
     },
     {
       "item": "minecraft:bowl"

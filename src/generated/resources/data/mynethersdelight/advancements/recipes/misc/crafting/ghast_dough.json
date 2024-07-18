@@ -20,7 +20,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mynethersdelight:ghasta_with_cream"
+        "recipe": "mynethersdelight:crafting/ghast_dough"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -33,7 +33,7 @@
   ],
   "rewards": {
     "recipes": [
-      "mynethersdelight:ghasta_with_cream"
+      "mynethersdelight:crafting/ghast_dough"
     ]
   },
   "sends_telemetry_event": false

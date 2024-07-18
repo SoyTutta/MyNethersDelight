@@ -34,6 +34,11 @@ public class MNDCuttingRecipes {
     }
 
     private static void cuttingAnimalItems(Consumer<FinishedRecipe> consumer) {
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.GHASTA.get()),
+                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        MNDItems.GHASMATI.get())
+                .addResultWithChance(MNDItems.GHASMATI.get(), 0.05F)
+                .build(consumer, "mynethersdelight:cutting/ghasmati");
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.STRIDER_ROCK.get()),
                         Ingredient.of(ForgeTags.TOOLS_PICKAXES),
                         MNDItems.STRIDER_EGG.get())
@@ -91,7 +96,12 @@ public class MNDCuttingRecipes {
                         Ingredient.of(ForgeTags.TOOLS_KNIVES),
                         Items.SUGAR, 1)
                 .addResultWithChance(Items.SUGAR, 0.25F, 1)
-                .build(consumer, "mynethersdelight:cutting/sugar_cane");
+                .build(consumer, "farmersdelight:cutting/sugar_cane_alt");
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CARVED_PUMPKIN),
+                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        ModItems.PUMPKIN_SLICE.get(), 1)
+                .addResultWithChance(Items.PUMPKIN_SEEDS, 0.25F, 1)
+                .build(consumer, "farmersdelight:cutting/pumpkin_slice_alt");
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.POWDER_CANNON.get()),
                         Ingredient.of(ForgeTags.TOOLS_KNIVES),
                         Items.GUNPOWDER, 1)

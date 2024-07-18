@@ -13,6 +13,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 
@@ -24,6 +25,7 @@ public class MNDSmeltingRecipes {  public MNDSmeltingRecipes() {
 }
 
     public static void register(Consumer<FinishedRecipe> consumer) {
+        foodSmeltingRecipes("ghast_bread", Ingredient.of(MNDItems.GHAST_DOUGH.get()), Items.BREAD, 0.35F, consumer);
         foodSmeltingRecipes("boiled_egg", Ingredient.of(MNDTags.BOILED_EGG_CANDIDATE), MNDItems.BOILED_EGG.get(), 0.35F, consumer);
         foodSmeltingRecipes("hoglin_loin", Ingredient.of(MNDItems.HOGLIN_LOIN.get()), MNDItems.COOKED_LOIN.get(), 0.35F, consumer);
         foodSmeltingRecipes("hoglin_sausage", Ingredient.of(MNDItems.HOGLIN_SAUSAGE.get()), MNDItems.ROASTED_SAUSAGE.get(), 0.35F, consumer);

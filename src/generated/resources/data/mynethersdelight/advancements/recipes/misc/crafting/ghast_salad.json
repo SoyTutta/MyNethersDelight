@@ -1,12 +1,17 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_blaze_rod": {
+    "has_ghast": {
       "conditions": {
         "items": [
           {
             "items": [
-              "minecraft:blaze_rod"
+              "mynethersdelight:ghasmati"
+            ]
+          },
+          {
+            "items": [
+              "mynethersdelight:ghasta"
             ]
           }
         ]
@@ -22,7 +27,7 @@
   },
   "requirements": [
     [
-      "has_blaze_rod",
+      "has_ghast",
       "has_the_recipe"
     ]
   ],

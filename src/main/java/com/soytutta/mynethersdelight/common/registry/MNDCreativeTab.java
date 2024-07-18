@@ -95,6 +95,8 @@ public class MNDCreativeTab {
         event.accept(MNDItems.COLD_STRIDERLOAF.get());
 
         event.accept(MNDItems.GHASTA.get());
+        event.accept(MNDItems.GHASMATI.get());
+        event.accept(MNDItems.GHAST_DOUGH.get());
         event.accept(MNDItems.GHAST_SALAD.get());
         event.accept(MNDItems.SPICY_NOODLE_SOUP.get());
         event.accept(MNDItems.SPICY_COTTON.get());

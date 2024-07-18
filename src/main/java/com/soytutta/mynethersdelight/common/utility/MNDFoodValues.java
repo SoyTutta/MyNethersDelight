@@ -65,7 +65,7 @@ public class MNDFoodValues
                 .fast().meat().build();
         public static final FoodProperties ROASTED_SAUSAGE = (new FoodProperties.Builder())
                 .nutrition(4).saturationMod(0.35f)
-                .meat().build();
+                .fast().meat().build();
         public static final FoodProperties HOTDOG = (new FoodProperties.Builder())
                 .nutrition(8).saturationMod(0.45f)
                 .meat().build();

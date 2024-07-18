@@ -80,6 +80,8 @@ public class MNDItems {
     public static final RegistryObject<Item> FRIED_HOGLIN_CHOP;
     // GHAST
     public static final RegistryObject<Item> GHASTA;
+    public static final RegistryObject<Item> GHASMATI;
+    public static final RegistryObject<Item> GHAST_DOUGH;
     public static final RegistryObject<Item> GHAST_SALAD;
     public static final RegistryObject<Item> SPICY_NOODLE_SOUP;
     public static final RegistryObject<Item> SPICY_COTTON;
@@ -300,6 +302,12 @@ public class MNDItems {
         );
         // GHAST
         GHASTA = ITEMS.register("ghasta", () ->
+                new ConsumableItem(foodItem(MNDFoodValues.GHASTA))
+        );
+        GHASMATI = ITEMS.register("ghasmati", () ->
+                new Item(basicItem())
+        );
+        GHAST_DOUGH = ITEMS.register("ghast_dough", () ->
                 new ConsumableItem(foodItem(MNDFoodValues.GHASTA))
         );
         GHAST_SALAD = ITEMS.register("ghast_salad", () ->

@@ -26,6 +26,7 @@ public class MNDTags {
     public static final TagKey<Item> CURRY_MEATS = modItemTag("curry_meats");
     public static final TagKey<Item> HOT_SPICE = modItemTag("hot_spice");
     public static final TagKey<Item> BULLET_PEPPER = modItemTag("bullet_pepper");
+    public static final TagKey<Item> GHAST_MEATS = modItemTag("ghast_meats");
     public static final TagKey<Item> STRIDER_MEATS = modItemTag("strider_meats");
     public static final TagKey<Item> STRIDER_SLICE = modItemTag("strider_slice");
     public static final TagKey<Item> MINCED_STRIDER = modItemTag("minced_strider");

@@ -1,17 +1,12 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_ghast": {
+    "ghast_bread": {
       "conditions": {
         "items": [
           {
             "items": [
-              "mynethersdelight:ghasmati"
-            ]
-          },
-          {
-            "items": [
-              "mynethersdelight:ghasta"
+              "mynethersdelight:ghast_dough"
             ]
           }
         ]
@@ -20,20 +15,20 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mynethersdelight:ghasta_with_cream"
+        "recipe": "minecraft:bread"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
   },
   "requirements": [
     [
-      "has_ghast",
+      "ghast_bread",
       "has_the_recipe"
     ]
   ],
   "rewards": {
     "recipes": [
-      "mynethersdelight:ghasta_with_cream"
+      "minecraft:bread"
     ]
   },
   "sends_telemetry_event": false

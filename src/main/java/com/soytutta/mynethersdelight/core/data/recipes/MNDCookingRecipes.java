@@ -101,8 +101,8 @@ public class MNDCookingRecipes {
                 .addIngredient(ForgeTags.MILK)
                 .addIngredient(MNDTags.HOT_SPICE)
                 .addIngredient(ForgeTags.CROPS_RICE)
-                .addIngredient(ForgeTags.VEGETABLES_CARROT)
-                .addIngredient(ModItems.PUMPKIN_SLICE.get())
+                .addIngredient(ForgeTags.VEGETABLES)
+                .addIngredient(Ingredient.of(Items.PUMPKIN,ModItems.PUMPKIN_SLICE.get()))
                 .unlockedByAnyIngredient(MNDItems.BULLET_PEPPER.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .build(consumer, "mynethersdelight:cooking/spicy_curry");

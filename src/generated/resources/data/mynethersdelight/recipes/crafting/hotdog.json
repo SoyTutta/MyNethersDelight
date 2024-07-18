@@ -6,7 +6,7 @@
       "item": "mynethersdelight:roasted_sausage"
     },
     {
-      "item": "minecraft:bread"
+      "tag": "forge:bread"
     }
   ],
   "result": {

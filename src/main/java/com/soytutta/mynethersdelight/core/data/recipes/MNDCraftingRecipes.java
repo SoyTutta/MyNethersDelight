@@ -296,7 +296,7 @@ public class MNDCraftingRecipes {
                 .save(consumer, "mynethersdelight:crafting/bleeding_tartar");
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.HOTDOG.get())
                 .requires(MNDItems.ROASTED_SAUSAGE.get())
-                .requires(Items.BREAD)
+                .requires(ForgeTags.BREAD)
                 .unlockedBy("has_sausage", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.HOGLIN_SAUSAGE.get()))
                 .save(consumer, "mynethersdelight:crafting/hotdog");
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.STRIDERLOAF_BLOCK.get())
@@ -316,10 +316,10 @@ public class MNDCraftingRecipes {
                 .save(consumer, "mynethersdelight:crafting/blue_tenderloin_steak");
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.BREAKFAST_SAMPLER.get())
                 .requires(MNDItems.ROASTED_SAUSAGE.get(),2)
-                .requires(Items.HONEY_BOTTLE)
+                .requires(Ingredient.of(Items.HONEY_BOTTLE, MNDItems.STRIDER_EGG.get()))
                 .requires(ForgeTags.COOKED_EGGS)
                 .requires(ForgeTags.COOKED_EGGS)
-                .requires(Items.BREAD)
+                .requires(ForgeTags.BREAD)
                 .requires(Items.BOWL)
                 .unlockedBy("has_sausage", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.ROASTED_SAUSAGE.get()))
                 .save(consumer, "mynethersdelight:crafting/breakfast_sampler");
@@ -343,10 +343,25 @@ public class MNDCraftingRecipes {
                 .pattern("GGG")
                 .pattern("GT#")
                 .pattern("GBG")
-                .define('G', MNDItems.GHASTA.get()).define('T', Items.GHAST_TEAR)
+                .define('G', MNDTags.GHAST_MEATS).define('T', Items.GHAST_TEAR)
                 .define('#', Items.MAGMA_CREAM).define('B', Items.BOWL)
-                .unlockedBy("has_ghasta", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHASTA.get()))
+                .unlockedBy("has_ghast", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHASMATI.get(),MNDItems.GHASTA.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "ghasta_with_cream"));
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.GHAST_DOUGH.get(),2)
+                .requires(ForgeTags.EGGS)
+                .requires(MNDItems.GHASMATI.get(),2)
+                .requires(ForgeTags.EGGS)
+                .unlockedBy("has_ghast", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHASMATI.get(),MNDItems.GHASTA.get()))
+                .save(consumer, "mynethersdelight:crafting/ghast_dough");
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.GHAST_SALAD.get())
+                .requires(MNDTags.GHAST_MEATS)
+                .requires(ForgeTags.VEGETABLES)
+                .requires(ForgeTags.VEGETABLES_CARROT)
+                .requires(Items.BOWL)
+                .unlockedBy("has_ghast", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHASMATI.get(),MNDItems.GHASTA.get()))
+                .save(consumer, "mynethersdelight:crafting/ghast_salad");
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.SPICY_SKEWER.get())
                 .requires(MNDTags.STRIDER_MEATS)
@@ -355,13 +370,6 @@ public class MNDCraftingRecipes {
                 .requires(MNDTags.BULLET_PEPPER)
                 .unlockedBy("has_blaze_rod", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BLAZE_ROD))
                 .save(consumer, "mynethersdelight:crafting/spicy_skewer");
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.GHAST_SALAD.get())
-                .requires(MNDItems.GHASTA.get())
-                .requires(ForgeTags.VEGETABLES)
-                .requires(ForgeTags.VEGETABLES_CARROT)
-                .requires(Items.BOWL)
-                .unlockedBy("has_blaze_rod", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BLAZE_ROD))
-                .save(consumer, "mynethersdelight:crafting/ghast_salad");
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDItems.RAW_STUFFED_HOGLIN.get())
                 .pattern("hwh")
                 .pattern("l#l")

@@ -2,6 +2,7 @@ package com.soytutta.mynethersdelight;
 
 import com.mojang.serialization.Codec;
 import com.soytutta.mynethersdelight.common.MNDCommonSetup;
+import com.soytutta.mynethersdelight.common.loot.MNDPastrySlicingModifier;
 import com.soytutta.mynethersdelight.common.loot.RemplaceLootModifier;
 import com.soytutta.mynethersdelight.common.registry.*;
 import com.soytutta.mynethersdelight.integration.MNDEveryCompat;
@@ -46,6 +47,7 @@ public class MyNethersDelight
     void registerLootSerializers(IEventBus bus) {
         DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MyNethersDelight.MODID);
         RegistryObject<Codec<RemplaceLootModifier>> REMPLACE_ITEM = LOOT.register("remplace_item", RemplaceLootModifier.CODEC);
+        RegistryObject<Codec<MNDPastrySlicingModifier>> PASTRY_SLICING= LOOT.register("pastry_slicing", MNDPastrySlicingModifier.CODEC);
 
         LOOT.register(bus);
     }
