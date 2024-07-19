@@ -5,12 +5,7 @@ import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.animal.Rabbit;
-import net.minecraft.world.entity.animal.horse.Horse;
-import net.minecraft.world.entity.animal.horse.ZombieHorse;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.monster.Zoglin;
-import net.minecraft.world.entity.monster.Zombie;
 import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
@@ -23,8 +18,6 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class CommonEvent {
@@ -42,17 +35,15 @@ public class CommonEvent {
                 if (Hunter != null) {
                     Mob mobCopy = (Mob)mob.getType().create(mob.level());
                     if (mobCopy != null) {
+                        CompoundTag mobNBT = new CompoundTag();
+                        mob.save(mobNBT);
+                        mobCopy.load(mobNBT);
                         mob.addTag("prevent_drops");
                         mobCopy.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
                         mobCopy.setHealth(1);
                         mobCopy.setInvisible(true);
-
-                        mobCopy.getMainHandItem().setCount(mob.getMainHandItem().getCount());
-                        mobCopy.getOffhandItem().setCount(mob.getOffhandItem().getCount());
-                        for (EquipmentSlot slot : EquipmentSlot.values()) {
-                            if (slot.getType() == EquipmentSlot.Type.ARMOR) {
-                                mobCopy.setItemSlot(slot, mob.getItemBySlot(slot));
-                            }
+                        if (mob.isBaby()) {
+                            mobCopy.setBaby(false);
                         }
 
                         ItemStack knife = new ItemStack(ModItems.FLINT_KNIFE.get());
