@@ -2,6 +2,7 @@ package com.soytutta.mynethersdelight;
 
 import com.mojang.serialization.Codec;
 import com.soytutta.mynethersdelight.common.MNDCommonSetup;
+import com.soytutta.mynethersdelight.common.events.CommonEvent;
 import com.soytutta.mynethersdelight.common.loot.MNDPastrySlicingModifier;
 import com.soytutta.mynethersdelight.common.loot.RemplaceLootModifier;
 import com.soytutta.mynethersdelight.common.registry.*;
@@ -34,16 +35,19 @@ public class MyNethersDelight
         }
         MNDBlocks.BLOCKS.register(modEventBus);
         MNDEffects.EFFECTS.register(modEventBus);
+        MNDEnchantments.DEF_REG.register(modEventBus);
         MNDBlockEntityTypes.TILES.register(modEventBus);
         MNDEntityTypes.ENTITIES.register(modEventBus);
         MNDCreativeTab.TABS.register(modEventBus);
         MNDBiomeFeatures.FEATURES.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new CommonEvent());
         registerLootSerializers(modEventBus);
         if (ModList.get().isLoaded("moonlight")) {
             MNDEveryCompat.registerCompat();
         }
     }
+
     void registerLootSerializers(IEventBus bus) {
         DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MyNethersDelight.MODID);
         RegistryObject<Codec<RemplaceLootModifier>> REMPLACE_ITEM = LOOT.register("remplace_item", RemplaceLootModifier.CODEC);

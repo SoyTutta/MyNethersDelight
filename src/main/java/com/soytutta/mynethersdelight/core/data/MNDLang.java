@@ -56,7 +56,9 @@ public class MNDLang extends LanguageProvider {
 
         this.add("mynethersdelight.itemGroup.main", "My Nether's Delight");
         this.add("effect.mynethersdelight.g_pungent", "Pungent");
+        this.add("effect.mynethersdelight.g_pungent.desc", "Regenerate with heat");
         this.add("effect.mynethersdelight.b_pungent", "Pungent");
+        this.add("effect.mynethersdelight.b_pungent.desc", "Increases heat sensitivity and prevents burns when leaving the heat zone");
         this.add("mynethersdelight.jei.forgoting", "Forgoting");
         this.add("mynethersdelight.jei.forgoting.nether", "Will only forget in the nether");
         this.add("mynethersdelight.jei.forgoting.accelerators", "Sped up by adjacent activators (see below)");
@@ -78,6 +80,10 @@ public class MNDLang extends LanguageProvider {
         this.add("mynethersdelight.jei.info.plate_of_stuffed_hoglin", "It's astonishing how much Dishes can be obtained from such a Primitive Feast...");
         this.add("mynethersdelight.jei.info.plate_of_ghasta", "Is the ghast still alive?\nI took a portion recently, but it grew back.");
         this.add("mynethersdelight.jei.info.plate_of_striderloaf", "Once cooled, it takes away your appetite.");
+
+        this.add("enchantment.mynethersdelight.poaching", "Poaching");
+        this.add("enchantment.mynethersdelight.poaching.desc", "Responsible hunting can provide you with extra ingredients!!!\nBut be careful about choosing your target...");
+
         /// Miners Delight Cups
         this.add("item.miners_delight.strider_stew_cup", "Strider Stew Cup");
         this.add("item.miners_delight.spicy_noodle_soup_cup", "Spicy Noodle Soup");

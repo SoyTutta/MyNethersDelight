@@ -41,11 +41,6 @@ public class MNDCraftingRecipes {
                 .define('#', (Ingredient.of(Items.BAMBOO,MNDItems.POWDER_CANNON.get())))
                 .unlockedBy("has_powder_cannon", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDER_CANNON.get()))
                 .save(consumer, new ResourceLocation("mynethersdelight", "stick_alt"));
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,Items.FIREWORK_ROCKET)
-                .requires (MNDTags.POWDER_CANNON)
-                .requires(Items.PAPER)
-                .unlockedBy("has_powder_cannon", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDER_CANNON.get()))
-                .save(consumer, new ResourceLocation("mynethersdelight", "firework_alt"));
         ShapedRecipeBuilder.shaped(RecipeCategory.REDSTONE,Blocks.TNT)
                 .pattern("#s#")
                 .pattern("s#s")

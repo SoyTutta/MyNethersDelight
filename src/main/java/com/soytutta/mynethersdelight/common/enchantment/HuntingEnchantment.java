@@ -17,6 +17,24 @@ public class HuntingEnchantment extends Enchantment {
     }
 
     @Override
+    public boolean isTreasureOnly() {
+        return false;
+    }
+
+    @Override
+    public boolean isTradeable() {
+        return false;
+    }
+
+    @Override
+    public boolean isDiscoverable() {
+        return false;
+    }
+
+    @Override
+    public boolean isCurse() { return true; }
+
+    @Override
     public boolean checkCompatibility(Enchantment ench) {
         return super.checkCompatibility(ench) && ench != Enchantments.MOB_LOOTING;
     }

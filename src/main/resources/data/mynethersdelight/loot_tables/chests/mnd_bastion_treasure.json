@@ -23,6 +23,20 @@
           "weight": 15
         }
       ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "mynethersdelight:hunting_curse_book",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 15
+        }
+      ]
     }
   ]
 }

@@ -13,6 +13,6 @@ import net.minecraftforge.registries.RegistryObject;
 public class MNDEnchantments {
     public static final DeferredRegister<Enchantment> DEF_REG = DeferredRegister.create(ForgeRegistries.ENCHANTMENTS, MyNethersDelight.MODID);
     public static final EnchantmentCategory HUNTING_WEAPON = EnchantmentCategory.create("hunting_weapon",
-            (item -> item instanceof SwordItem || item instanceof AxeItem || item instanceof BowItem));
-    public static final RegistryObject<Enchantment> HUNTING = DEF_REG.register("hunting", () -> new HuntingEnchantment( Enchantment.Rarity.VERY_RARE, HUNTING_WEAPON, EquipmentSlot.MAINHAND));
+            (item -> item instanceof SwordItem || item instanceof AxeItem));
+    public static final RegistryObject<Enchantment> HUNTING = DEF_REG.register("poaching", () -> new HuntingEnchantment( Enchantment.Rarity.VERY_RARE, HUNTING_WEAPON, EquipmentSlot.MAINHAND));
 }

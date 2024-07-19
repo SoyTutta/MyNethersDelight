@@ -5,13 +5,13 @@ license="MIT License"
 
 [[mods]]
 modId="mynethersdelight"
-version="1.20.1-1.7"
+version="1.20.1-1.7.5"
 displayName="My Nether's Delight"
 
 # updateJSONURL=""
 logoFile="logo.png"
 logoBlur=false
-credits="Mpustovoi, Unroman, ChuijkYahus, SlimeSB, RaymondBlaze, SoyTutta;"
+credits="Mpustovoi, Unroman, ChuijkYahus, SlimeSB, RaymondBlaze, TCGhost, Sarinsa, Umpaz, SoyTutta;"
 authors="SoyTutta"
 description="A nether expansion for the Farmer's Delight mod!"
 itemIcon="mynethersdelight:nether_stove"

@@ -1,9 +1,11 @@
 package com.soytutta.mynethersdelight.common.tag;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
@@ -45,6 +47,7 @@ public class MNDTags {
     public static final TagKey<Item> POWDER_CANNON = modItemTag("powder_cannon");
     public static final TagKey<Block> POWDERY_CANNON_PLANTABLE_ON = modBlockTag("powdery_cannon_plantable_on");
     public static final TagKey<Block> POWDERY_CANE = modBlockTag("powdery_cane");
+    public static final TagKey<EntityType<?>> SPECIAL_HUNT = modEntityTag("special_hunt");
 
     public MNDTags() {}
 
@@ -53,6 +56,9 @@ public class MNDTags {
     }
     private static TagKey<Block> modBlockTag(String path) {
         return BlockTags.create(new ResourceLocation("mynethersdelight:" + path));
+    }
+    private static TagKey<EntityType<?>> modEntityTag(String path) {
+        return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("farmersdelight", path));
     }
 
 }
