@@ -8,6 +8,19 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "enchantments": [
+                "mynethersdelight:poaching"
+              ],
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:book",
+          "weight": 0.25
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
@@ -87,12 +100,7 @@
         {
           "type": "minecraft:item",
           "name": "mynethersdelight:hoglin_hide",
-          "weight": 0.05
-        },
-        {
-          "type": "minecraft:item",
-          "name": "mynethersdelight:hunting_curse_book",
-          "weight": 0.05
+          "weight": 0.5
         }
       ],
       "rolls": 1.0

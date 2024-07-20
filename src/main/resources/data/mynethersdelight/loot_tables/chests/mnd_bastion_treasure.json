@@ -25,11 +25,23 @@
       ]
     },
     {
-      "rolls": 1,
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "mynethersdelight:hunting_curse_book",
+          "functions": [
+            {
+              "enchantments": [
+                "mynethersdelight:poaching"
+              ],
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:book",
           "weight": 5
         },
         {
