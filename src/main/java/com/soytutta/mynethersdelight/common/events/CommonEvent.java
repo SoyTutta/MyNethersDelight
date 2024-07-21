@@ -3,11 +3,20 @@ package com.soytutta.mynethersdelight.common.events;
 import com.soytutta.mynethersdelight.common.registry.MNDEnchantments;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.monster.Zoglin;
-import net.minecraft.world.entity.monster.ZombieVillager;
-import net.minecraft.world.entity.monster.ZombifiedPiglin;
+import net.minecraft.world.entity.ambient.Bat;
+import net.minecraft.world.entity.animal.Animal;
+import net.minecraft.world.entity.animal.allay.Allay;
+import net.minecraft.world.entity.animal.frog.Frog;
+import net.minecraft.world.entity.monster.*;
+import net.minecraft.world.entity.monster.hoglin.HoglinBase;
+import net.minecraft.world.entity.monster.piglin.AbstractPiglin;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.ItemStack;
@@ -18,6 +27,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 
+import java.util.List;
 import java.util.Map;
 
 public class CommonEvent {
@@ -31,20 +41,165 @@ public class CommonEvent {
             if (directSource.getItemInHand(InteractionHand.MAIN_HAND).getEnchantmentLevel(MNDEnchantments.HUNTING.get()) > 0
                     && (mob.getMaxHealth() < 150.0F || mob.getType().is(MNDTags.SPECIAL_HUNT))
                     && event.getEntity().level().random.nextFloat() < 0.4F) {
+
+                Difficulty difficulty = event.getEntity().level().getDifficulty();
+                float failProbability = switch (difficulty) {
+                    default -> 0.1F;
+                    case PEACEFUL -> 0.0F;
+                    case EASY -> 0.2F;
+                    case NORMAL -> 0.3F;
+                    case HARD -> 0.4F;
+                };
+
+                CompoundTag mobNBT = new CompoundTag();
+                mob.save(mobNBT);
+
+                if (mob instanceof Slime) {
+                    if (((Slime) mob).getSize() != 1) {
+                        for (int i = 0; i < 2; i++) {
+                            Mob mobCopy = (Mob) mob.getType().create(mob.level());
+                            if (mobCopy != null) {
+                                ((Slime) mobCopy).setSize(((Slime) mob).getSize() - 1, true);
+                                mobCopy.moveTo(mob.getX() + i, mob.getY(), mob.getZ() + i, mob.getYRot(), mob.getXRot());
+                                mob.level().addFreshEntity(mobCopy);
+                            }
+                        }
+                        return;
+                    }
+                }
+
+                // FAILED HUNT
+                if (event.getEntity().level().random.nextFloat() < failProbability
+                        || (mob.isBaby() && event.getEntity().level().random.nextFloat() < 0.1F)) {
+                    mob.addTag("prevent_drops");
+                    mob.setInvisible(true);
+
+                    if (mob instanceof Spider
+                            && event.getEntity().level().random.nextFloat() < 0.4F) {
+                        CaveSpider caveSpider = EntityType.CAVE_SPIDER.create(mob.level());
+                        if (caveSpider != null) {
+                            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.ZOMBIE_VILLAGER_CONVERTED, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            caveSpider.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
+                            mob.level().addFreshEntity(caveSpider);
+
+                            caveSpider.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
+                        }
+                        return;
+                    }
+
+                    if ((mob instanceof Frog || mob instanceof Bat)
+                            && event.getEntity().level().random.nextFloat() < 0.3F) {
+                        Witch witch = EntityType.WITCH.create(mob.level());
+                        if (witch != null) {
+                            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            witch.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
+                            mob.level().addFreshEntity(witch);
+
+                            witch.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
+                        }
+                        return;
+                    }
+
+                    if (mob instanceof Allay) {
+                        Vex vex = EntityType.VEX.create(mob.level());
+                        if (vex != null) {
+                            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            vex.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
+                            mob.level().addFreshEntity(vex);
+
+                            vex.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
+                        }
+                        return;
+                    }
+
+                    if (mob instanceof Villager villager) {
+                        mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.ZOMBIE_VILLAGER_CONVERTED, SoundSource.PLAYERS, 1.0F, 1.0F);
+                        ZombieVillager zombieVillager = EntityType.ZOMBIE_VILLAGER.create(mob.level());
+                        if (zombieVillager != null) {
+                            if (mob.isBaby()) {
+                                zombieVillager.setBaby(true);
+                            }
+
+                            zombieVillager.setCanPickUpLoot(true);
+                            zombieVillager.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
+                            zombieVillager.setVillagerData(villager.getVillagerData());
+                            zombieVillager.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
+                            mob.level().addFreshEntity(zombieVillager);
+                            return;
+                        }
+                    }
+
+                    if (mob instanceof AbstractPiglin) {
+                        mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.PIGLIN_BRUTE_CONVERTED_TO_ZOMBIFIED, SoundSource.PLAYERS, 1.0F, 1.0F);
+                        ZombifiedPiglin zombifiedPiglin = EntityType.ZOMBIFIED_PIGLIN.create(mob.level());
+                        if (zombifiedPiglin != null) {
+                            if (mob.isBaby()) {
+                                zombifiedPiglin.setBaby(true);
+                            }
+
+                            for (EquipmentSlot slot : EquipmentSlot.values()) {
+                                zombifiedPiglin.setItemSlot(slot, mob.getItemBySlot(slot));
+                                mob.setItemSlot(slot, ItemStack.EMPTY);
+                            }
+
+                            zombifiedPiglin.setCanPickUpLoot(true);
+                            zombifiedPiglin.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
+                            zombifiedPiglin.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
+                            mob.level().addFreshEntity(zombifiedPiglin);
+                            return;
+                        }
+                    }
+
+                    if (mob instanceof HoglinBase) {
+                        mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.HOGLIN_CONVERTED_TO_ZOMBIFIED, SoundSource.PLAYERS, 1.0F, 1.0F);
+                        Zoglin zoglin = EntityType.ZOGLIN.create(mob.level());
+                        if (zoglin != null) {
+                            if (mob.isBaby()) {
+                                zoglin.setBaby(true);
+                            }
+
+                            zoglin.addEffect(new MobEffectInstance(MobEffects.CONFUSION, 200, 0));
+                            zoglin.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
+                            mob.level().addFreshEntity(zoglin);
+                            return;
+                        }
+                    }
+
+                    List<Mob> nearbyMobs = mob.level().getEntitiesOfClass(Mob.class, mob.getBoundingBox().inflate(15));
+                    for (Mob nearbyMob : nearbyMobs) {
+                        if (nearbyMob.getType() == mob.getType()) {
+                            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD.get(), SoundSource.PLAYERS, 1.0F, 1.0F);
+                            mob.setInvisible(false);
+
+                            if (mob instanceof NeutralMob || mob instanceof Enemy) {
+                                nearbyMob.setTarget(directSource);
+                            } else if (mob instanceof Animal) {
+                                double deltaX = nearbyMob.getX() - mob.getX();
+                                double deltaZ = nearbyMob.getZ() - mob.getZ();
+                                double distance = Math.sqrt(deltaX * deltaX + deltaZ * deltaZ);
+                                double targetX = nearbyMob.getX() + (15.0 * deltaX / distance);
+                                double targetZ = nearbyMob.getZ() + (15.0 * deltaZ / distance);
+                                nearbyMob.getNavigation().moveTo(targetX, nearbyMob.getY(), targetZ, 2.2);
+                            }
+                        }
+                    }
+                }
+
+                // SUCCESSFUL HUNT
                 PiglinBrute Hunter = EntityType.PIGLIN_BRUTE.create(mob.level());
                 if (Hunter != null) {
                     Mob mobCopy = (Mob)mob.getType().create(mob.level());
                     if (mobCopy != null) {
-                        CompoundTag mobNBT = new CompoundTag();
-                        mob.save(mobNBT);
                         mobCopy.load(mobNBT);
+                        for (EquipmentSlot slot : EquipmentSlot.values()) {
+                            mobCopy.setItemSlot(slot, mob.getItemBySlot(slot));
+                            mob.setItemSlot(slot, ItemStack.EMPTY);
+                        }
+
                         mob.addTag("prevent_drops");
                         mobCopy.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
-                        mobCopy.setHealth(1);
-                        mobCopy.setInvisible(true);
-                        if (mob.isBaby()) {
-                            mobCopy.setBaby(false);
-                        }
+
+                        mobCopy.setHealth(1); mobCopy.setInvisible(true);
 
                         ItemStack knife = new ItemStack(ModItems.FLINT_KNIFE.get());
                         ItemStack playerItem = directSource.getItemInHand(InteractionHand.MAIN_HAND);
@@ -52,54 +207,16 @@ public class CommonEvent {
 
                         enchantments.remove(MNDEnchantments.HUNTING.get());
                         EnchantmentHelper.setEnchantments(enchantments, knife);
-                        Hunter.setItemInHand(InteractionHand.MAIN_HAND, knife);
+
+                        if (mob.isBaby()) {
+                            mobCopy.setBaby(false);
+                        } else {
+                            Hunter.setItemInHand(InteractionHand.MAIN_HAND, knife);
+                        }
+
                         Hunter.doHurtTarget(mobCopy);
                     }
                     Hunter.remove(Entity.RemovalReason.DISCARDED);
-                }
-
-                if (mob.getType() == EntityType.VILLAGER && mob.getTags().contains("prevent_drops") &&
-                        (event.getEntity().level().random.nextFloat() < 0.25F || (mob.isBaby() && event.getEntity().level().random.nextFloat() < 0.25F))) {
-                    ZombieVillager zombieVillager = EntityType.ZOMBIE_VILLAGER.create(mob.level());
-                    if (zombieVillager != null) {
-                        mob.setInvisible(true);
-                        if (mob.isBaby()) {
-                            zombieVillager.setBaby(true);
-                        }
-
-                        if (mob instanceof Villager villager) {
-                            zombieVillager.setVillagerData(villager.getVillagerData());
-                        }
-
-                        zombieVillager.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
-                        mob.level().addFreshEntity(zombieVillager);
-                    }
-                }
-
-                if ((mob.getType() == EntityType.PIGLIN || mob.getType() == EntityType.PIGLIN_BRUTE) && (event.getEntity().level().random.nextFloat() < 0.25F
-                        || (mob.isBaby() && event.getEntity().level().random.nextFloat() < 0.25F))) {
-                    ZombifiedPiglin zombiefiedpiglin = EntityType.ZOMBIFIED_PIGLIN.create(mob.level());
-                    if (zombiefiedpiglin != null) {
-                        mob.setInvisible(true);
-                        if (mob.isBaby()) {
-                            zombiefiedpiglin.setBaby(true);
-                        }
-                        zombiefiedpiglin.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
-                        mob.level().addFreshEntity(zombiefiedpiglin);
-                    }
-                }
-
-                if (mob.getType() == EntityType.HOGLIN  && (event.getEntity().level().random.nextFloat() < 0.25F
-                        || (mob.isBaby() && event.getEntity().level().random.nextFloat() < 0.25F))) {
-                    Zoglin zoglin = EntityType.ZOGLIN.create(mob.level());
-                    if (zoglin != null) {
-                        mob.setInvisible(true);
-                        if (mob.isBaby()) {
-                            zoglin.setBaby(true);
-                        }
-                        zoglin.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
-                        mob.level().addFreshEntity(zoglin);
-                    }
                 }
             }
         }
