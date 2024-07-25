@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "planks",
+  "ingredients": [
+    {
+      "tag": "mynethersdelight:block_of_powdery"
+    }
+  ],
+  "result": {
+    "count": 4,
+    "item": "mynethersdelight:powdery_planks"
+  }
+}

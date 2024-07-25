@@ -1,0 +1,15 @@
+{
+  "values": [
+    "minecraft:magma_block",
+    "minecraft:gravel",
+    "minecraft:netherrack",
+    "minecraft:crimson_nylium",
+    "minecraft:warped_fungus",
+    "mynethersdelight:powdery_cannon",
+    "mynethersdelight:powdery_chubby_sapling",
+    "#minecraft:sand",
+    "#minecraft:dirt",
+    "#minecraft:base_stone_nether",
+    "#minecraft:soul_speed_blocks"
+  ]
+}

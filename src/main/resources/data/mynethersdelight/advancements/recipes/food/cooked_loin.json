@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mynethersdelight:cooked_loin"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hoglin_loin": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mynethersdelight:hoglin_loin"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "hoglin_loin",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mynethersdelight:cooked_loin"
+    ]
+  },
+  "sends_telemetry_event": false
+}

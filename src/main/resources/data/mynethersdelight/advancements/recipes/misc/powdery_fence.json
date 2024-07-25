@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_powdery_planks": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mynethersdelight:powdery_planks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mynethersdelight:powdery_fence"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_powdery_planks",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mynethersdelight:powdery_fence"
+    ]
+  },
+  "sends_telemetry_event": false
+}

@@ -1,15 +1,19 @@
 package com.soytutta.mynethersdelight.common.tag;
 
+import com.soytutta.mynethersdelight.MyNethersDelight;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 public class MNDTags {
-    public static final TagKey<Item> NETHER_STOVE = modItemTag("nether_stove");
     public static final TagKey<Item> BLOCK_OF_POWDERY = modItemTag("block_of_powdery");
-    public static final TagKey<Item> POWDERY_BLOCKS = modItemTag("powdery_blocks");
+
+    public static final TagKey<Block> NOT_PROPAGATE_PLANT = modBlockTag("not_propagate_plant");
+    public static final TagKey<Block> ABOVE_PROPAGATE_PLANT = modBlockTag("above_propagate_plant");
+    public static final TagKey<Block> BELOW_PROPAGATE_PLANT = modBlockTag("below_propagate_plant");
 
     public static final TagKey<Block> LETIOS_ACTIVATORS = modBlockTag("letios_activators");
     public static final TagKey<Block> LETIOS_FLAMES = modBlockTag("letios_flames");
@@ -18,9 +22,12 @@ public class MNDTags {
 
     public static final TagKey<Item> STOVE_SOUL_FUEL = modItemTag("stove_soul_fuel");
     public static final TagKey<Item> STOVE_FIRE_FUEL = modItemTag("stove_fire_fuel");
+    public static final TagKey<Item> BOILED_EGG_CANDIDATE = modItemTag("boiled_egg_candidate");
+    public static final TagKey<Item> CHILI_MEATS = modItemTag("chili_meats");
     public static final TagKey<Item> CURRY_MEATS = modItemTag("curry_meats");
     public static final TagKey<Item> HOT_SPICE = modItemTag("hot_spice");
     public static final TagKey<Item> BULLET_PEPPER = modItemTag("bullet_pepper");
+    public static final TagKey<Item> GHAST_MEATS = modItemTag("ghast_meats");
     public static final TagKey<Item> STRIDER_MEATS = modItemTag("strider_meats");
     public static final TagKey<Item> STRIDER_SLICE = modItemTag("strider_slice");
     public static final TagKey<Item> MINCED_STRIDER = modItemTag("minced_strider");
@@ -39,14 +46,17 @@ public class MNDTags {
     public static final TagKey<Item> POWDER_CANNON = modItemTag("powder_cannon");
     public static final TagKey<Block> POWDERY_CANNON_PLANTABLE_ON = modBlockTag("powdery_cannon_plantable_on");
     public static final TagKey<Block> POWDERY_CANE = modBlockTag("powdery_cane");
+    public static final TagKey<EntityType<?>> SPECIAL_HUNT = modEntityTag("special_hunt");
 
     public MNDTags() {}
 
     private static TagKey<Item> modItemTag(String path) {
-        return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation("mynethersdelight:" + path));
+        return TagKey.create(Registry.ITEM_REGISTRY, new ResourceLocation(MyNethersDelight.MODID, path));
     }
     private static TagKey<Block> modBlockTag(String path) {
-        return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation("mynethersdelight:" + path));
+        return TagKey.create(Registry.BLOCK_REGISTRY, new ResourceLocation(MyNethersDelight.MODID, path));
     }
-
+    private static TagKey<EntityType<?>> modEntityTag(String path) {
+        return TagKey.create(Registry.ENTITY_TYPE_REGISTRY, new ResourceLocation(MyNethersDelight.MODID, path));
+    }
 }

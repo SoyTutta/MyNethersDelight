@@ -1,0 +1,127 @@
+{
+	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"2": "mynethersdelight:block/ghasta_with_cream_block",
+		"3": "mynethersdelight:block/tray_ghasta_with_cream_block",
+		"particle": "farmersdelight:block/tray_bottom",
+		"bowl": "farmersdelight:block/tray_bottom"
+	},
+	"elements": [
+		{
+			"name": "base",
+			"from": [1, 0, 1],
+			"to": [15, 2, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 0, 1]},
+			"faces": {
+				"north": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
+				"east": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
+				"south": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
+				"west": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#3"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#bowl"}
+			}
+		},
+		{
+			"from": [2.75, 2.38158, 2.09133],
+			"to": [13.25, 13.88158, 12.59133],
+			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 5, 8]},
+			"faces": {
+				"north": {"uv": [5, 5, 10, 10.5], "texture": "#2"},
+				"east": {"uv": [0, 5, 5, 10.5], "texture": "#2"},
+				"south": {"uv": [11, 5, 16, 10.5], "texture": "#2"},
+				"west": {"uv": [5, 5, 0, 10.5], "texture": "#2"},
+				"up": {"uv": [5, 0, 10, 5], "texture": "#2"},
+				"down": {"uv": [0, 0, 5, 5], "texture": "#2"}
+			}
+		},
+		{
+			"from": [2.2, 3.7, 1.7],
+			"to": [14.8, 6.3, 14.3],
+			"rotation": {"angle": 22.5, "axis": "z", "origin": [8, 5, 9]},
+			"faces": {
+				"north": {"uv": [5, 15, 0, 16], "texture": "#2"},
+				"east": {"uv": [0.5, 13.5, 6.5, 14.5], "texture": "#2"},
+				"south": {"uv": [0, 15, 4.5, 16], "texture": "#2"},
+				"west": {"uv": [6, 13.5, 0.5, 14.5], "texture": "#2"},
+				"up": {"uv": [5.5, 16, 0.5, 10.5], "texture": "#2"},
+				"down": {"uv": [5.5, 16, 0.5, 10.5], "texture": "#2"}
+			}
+		},
+		{
+			"from": [1.19, 3.69, 1.69],
+			"to": [13.81, 6.31, 14.31],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [8, 5, 9]},
+			"faces": {
+				"north": {"uv": [0, 15, 5, 16], "texture": "#2"},
+				"east": {"uv": [1, 15, 7, 16], "texture": "#2"},
+				"south": {"uv": [2.5, 15, 7, 16], "texture": "#2"},
+				"west": {"uv": [6, 13.5, 0.5, 14.5], "texture": "#2"},
+				"up": {"uv": [6.5, 16, 1.5, 10.5], "texture": "#2"},
+				"down": {"uv": [5.5, 16, 0.5, 10.5], "texture": "#2"}
+			}
+		},
+		{
+			"from": [1, 2, 1.5],
+			"to": [15, 4, 14.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 5, 9]},
+			"faces": {
+				"north": {"uv": [0, 15, 7, 16], "texture": "#2"},
+				"east": {"uv": [0, 15, 7, 16], "texture": "#2"},
+				"south": {"uv": [0, 15, 7, 16], "texture": "#2"},
+				"west": {"uv": [0, 15, 7, 16], "texture": "#2"},
+				"up": {"uv": [0.5, 16, 6.5, 9], "texture": "#2"},
+				"down": {"uv": [0.5, 12.5, 6.5, 16], "texture": "#2"}
+			}
+		},
+		{
+			"from": [-1.25, 5.75, 0.75],
+			"to": [1.45, 8.45, 15.45],
+			"rotation": {"angle": 45, "axis": "z", "origin": [5, 10, 10]},
+			"faces": {
+				"north": {"uv": [5.5, 13, 6.5, 14], "texture": "#2"},
+				"east": {"uv": [0, 16, 7, 15], "texture": "#2"},
+				"south": {"uv": [5.5, 13, 6.5, 14], "texture": "#2"},
+				"west": {"uv": [0, 15, 7, 16], "texture": "#2"},
+				"up": {"uv": [7, 15, 0, 16], "rotation": 90, "texture": "#2"},
+				"down": {"uv": [0, 16, 7, 15], "rotation": 270, "texture": "#2"}
+			}
+		},
+		{
+			"from": [7.75, 5.75, 0.75],
+			"to": [10.45, 8.45, 15.45],
+			"rotation": {"angle": 45, "axis": "z", "origin": [14, 10, 10]},
+			"faces": {
+				"north": {"uv": [6.5, 14, 5.5, 13], "texture": "#2"},
+				"east": {"uv": [0, 16, 7, 15], "texture": "#2"},
+				"south": {"uv": [5.5, 13, 6.5, 14], "texture": "#2"},
+				"west": {"uv": [0, 15, 7, 16], "texture": "#2"},
+				"up": {"uv": [7, 15, 0, 16], "rotation": 90, "texture": "#2"},
+				"down": {"uv": [0, 16, 7, 15], "rotation": 270, "texture": "#2"}
+			}
+		},
+		{
+			"from": [6, 4, 0.9],
+			"to": [10, 8, 4.9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [6, 4, 1]},
+			"faces": {
+				"north": {"uv": [9, 14, 11, 16], "texture": "#2"},
+				"east": {"uv": [7, 14, 9, 16], "texture": "#2"},
+				"south": {"uv": [9, 14, 11, 16], "texture": "#2"},
+				"west": {"uv": [11, 14, 13, 16], "texture": "#2"},
+				"up": {"uv": [9, 12, 11, 14], "rotation": 180, "texture": "#2"},
+				"down": {"uv": [9, 14, 11, 16], "texture": "#2"}
+			}
+		}
+	],
+	"groups": [
+		0,
+		{
+			"name": "ghast",
+			"origin": [3, 2, 3],
+			"color": 0,
+			"children": [1, 2, 3, 4, 5, 6]
+		},
+		7
+	]
+}

@@ -17,18 +17,14 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
-import mezz.jei.api.recipe.RecipeType;
-import mezz.jei.api.recipe.category.IRecipeCategory;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.utility.TextUtils;
 import vectorwing.farmersdelight.integration.jei.FDRecipes;
 
 import java.util.List;
@@ -54,7 +50,10 @@ public class JEIPlugin implements IModPlugin {
         registration.addIngredientInfo(List.of( new ItemStack(Items.NETHER_WART), new ItemStack(MNDItems.WARPED_FUNGUS_COLONY.get()), new ItemStack(MNDItems.CRIMSON_FUNGUS_COLONY.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.fungus_colony"));
         registration.addIngredientInfo(new ItemStack(MNDItems.STRIDER_ROCK.get()), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.strider_egg"));
         registration.addIngredientInfo(new ItemStack(MNDItems.HOGLIN_HIDE.get()), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.hoglin_hide"));
+        registration.addIngredientInfo(List.of( new ItemStack(MNDItems.HOT_CREAM_CONE.get()), new ItemStack(MNDItems.HOT_CREAM.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.hot_cream"));
         registration.addIngredientInfo(List.of( new ItemStack(MNDItems.ROAST_STUFFED_HOGLIN.get()), new ItemStack(MNDItems.ROAST_EAR.get()), new ItemStack(MNDItems.PLATE_OF_STUFFED_HOGLIN_SNOUT.get()), new ItemStack(MNDItems.PLATE_OF_STUFFED_HOGLIN_HAM.get()), new ItemStack(MNDItems.PLATE_OF_STUFFED_HOGLIN.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.plate_of_stuffed_hoglin"));
+        registration.addIngredientInfo(List.of( new ItemStack(MNDItems.GHASTA_WITH_CREAM_BLOCK.get()), new ItemStack(MNDItems.GHASTA_WITH_CREAM.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.plate_of_ghasta"));
+        registration.addIngredientInfo(List.of( new ItemStack(MNDItems.STRIDERLOAF_BLOCK.get()), new ItemStack(MNDItems.STRIDERLOAF.get()), new ItemStack(MNDItems.COLD_STRIDERLOAF.get())), VanillaTypes.ITEM_STACK, MNDTextUtils.getTranslation("jei.info.plate_of_striderloaf"));
     }
 
 

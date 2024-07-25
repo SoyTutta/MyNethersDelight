@@ -12,6 +12,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.level.block.BambooBlock;
 import net.minecraft.world.level.block.state.properties.BambooLeaves;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
@@ -23,11 +24,9 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.BambooBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -216,6 +215,7 @@ public class PowderyCannonBlock extends BambooBlock {
         BlockPos blockpos = pos.below(2);
         BlockState blockstate1 = level.getBlockState(blockpos);
         BambooLeaves leaves = BambooLeaves.NONE;
+        int maxHeight = (level.dimension() == Level.NETHER) ? 16 : 8;
 
         if (height >= 1) {
             if (blockstate.is(MNDBlocks.POWDERY_CANNON.get()) && blockstate.getValue(LEAVES) != BambooLeaves.NONE) {
@@ -232,7 +232,8 @@ public class PowderyCannonBlock extends BambooBlock {
         }
 
         int i = state.getValue(AGE) != 1 && !blockstate1.is(MNDBlocks.POWDERY_CANNON.get()) ? 0 : 1;
-        int j = (height < 5 || !(random.nextFloat() < 0.25F)) && height != 7 ? 0 : 1;
+        int MH = 1 + level.random.nextInt(3);
+        int j = (height < maxHeight || !(random.nextFloat() < 0.25F)) && height != (maxHeight - MH) ? 0 : 1;
         level.setBlock(pos.above(), this.defaultBlockState().setValue(AGE, i).setValue(LEAVES, leaves).setValue(STAGE, j), 3);
     }
 
@@ -256,8 +257,9 @@ public class PowderyCannonBlock extends BambooBlock {
 
     @Override
     protected int getHeightAboveUpToMax(BlockGetter level, BlockPos pos) {
+        int maxHeight = (level instanceof Level && ((Level) level).dimension() == Level.NETHER) ? 16 : 8;
         int i;
-        for (i = 0; i < 8 && level.getBlockState(pos.above(i + 1)).is(MNDBlocks.POWDERY_CANNON.get()); ++i) {
+        for (i = 0; i < maxHeight && level.getBlockState(pos.above(i + 1)).is(MNDBlocks.POWDERY_CANNON.get()); ++i) {
         }
 
         return i;
@@ -265,10 +267,16 @@ public class PowderyCannonBlock extends BambooBlock {
 
     @Override
     protected int getHeightBelowUpToMax(BlockGetter level, BlockPos pos) {
+        int maxHeight = (level instanceof Level && ((Level) level).dimension() == Level.NETHER) ? 16 : 8;
         int i;
-        for (i = 0; i <  8 && level.getBlockState(pos.below(i + 1)).is(MNDBlocks.POWDERY_CANNON.get()); ++i) {
+        for (i = 0; i < maxHeight && level.getBlockState(pos.below(i + 1)).is(MNDBlocks.POWDERY_CANNON.get()); ++i) {
         }
 
         return i;
+    }
+
+    @Override
+    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return false;
     }
 }

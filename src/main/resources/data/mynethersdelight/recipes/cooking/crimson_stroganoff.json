@@ -1,0 +1,26 @@
+{
+  "type": "farmersdelight:cooking",
+  "cookingtime": 400,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "tag": "mynethersdelight:minced_strider"
+    },
+    {
+      "item": "minecraft:crimson_fungus"
+    },
+    {
+      "item": "minecraft:crimson_fungus"
+    },
+    {
+      "tag": "forge:milk"
+    },
+    {
+      "tag": "forge:pasta/raw_pasta"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "item": "mynethersdelight:crimson_stroganoff"
+  }
+}

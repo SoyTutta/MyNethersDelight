@@ -1,0 +1,32 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "item": "minecraft:bucket"
+  },
+  "cookingtime": 50,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "tag": "mynethersdelight:hot_spice"
+    },
+    {
+      "tag": "forge:eggs"
+    },
+    {
+      "tag": "mynethersdelight:bullet_pepper"
+    },
+    {
+      "item": "minecraft:magma_cream"
+    },
+    {
+      "item": "minecraft:lava_bucket"
+    },
+    {
+      "item": "minecraft:magma_cream"
+    }
+  ],
+  "recipe_book_tab": "drinks",
+  "result": {
+    "item": "mynethersdelight:hot_cream"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:carved_pumpkin"
+    }
+  ],
+  "result": [
+    {
+      "item": "farmersdelight:pumpkin_slice"
+    },
+    {
+      "chance": 0.25,
+      "item": "minecraft:pumpkin_seeds"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

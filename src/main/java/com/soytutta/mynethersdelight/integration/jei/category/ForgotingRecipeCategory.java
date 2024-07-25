@@ -34,11 +34,13 @@ import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
+import vectorwing.farmersdelight.FarmersDelight;
+
 // thanks Umpaz for letting me use this code <3
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> {
-    public static final ResourceLocation UID = new ResourceLocation("farmersdelight", "composition");
+    public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "composition");
     private static final int slotSize = 22;
     private final Component title = MNDTextUtils.getTranslation("jei.forgoting");
 

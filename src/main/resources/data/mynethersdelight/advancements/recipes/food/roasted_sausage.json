@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mynethersdelight:roasted_sausage"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hoglin_sausage": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mynethersdelight:hoglin_sausage"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "hoglin_sausage",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mynethersdelight:roasted_sausage"
+    ]
+  },
+  "sends_telemetry_event": false
+}

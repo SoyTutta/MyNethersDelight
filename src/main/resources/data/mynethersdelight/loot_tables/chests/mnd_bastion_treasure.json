@@ -1,0 +1,54 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "weight": 1,
+          "name": "mynethersdelight:skoglin_trophy"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 4,
+          "name": "mynethersdelight:hoglin_trophy"
+        },
+        {
+          "type": "minecraft:item",
+          "weight": 8,
+          "name": "mynethersdelight:zoglin_trophy"
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 15
+        }
+      ]
+    },
+    {
+      "rolls": {
+        "min": 1.0,
+        "max": 2.0,
+        "type": "minecraft:uniform"
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "enchantments": [
+                "mynethersdelight:poaching"
+              ],
+              "function": "minecraft:enchant_randomly"
+            }
+          ],
+          "name": "minecraft:book",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:empty",
+          "weight": 15
+        }
+      ]
+    }
+  ]
+}

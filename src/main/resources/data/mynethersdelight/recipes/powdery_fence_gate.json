@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "wooden_fence_gate",
+  "key": {
+    "#": {
+      "item": "mynethersdelight:powdery_planks"
+    },
+    "X": {
+      "item": "minecraft:stick"
+    }
+  },
+  "pattern": [
+    "X#X",
+    "X#X"
+  ],
+  "result": {
+    "item": "mynethersdelight:powdery_fence_gate"
+  },
+  "show_notification": true
+}

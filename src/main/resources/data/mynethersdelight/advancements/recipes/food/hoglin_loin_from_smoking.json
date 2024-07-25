@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mynethersdelight:hoglin_loin_from_smoking"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    },
+    "hoglin_loin": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mynethersdelight:hoglin_loin"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "requirements": [
+    [
+      "hoglin_loin",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mynethersdelight:hoglin_loin_from_smoking"
+    ]
+  },
+  "sends_telemetry_event": false
+}

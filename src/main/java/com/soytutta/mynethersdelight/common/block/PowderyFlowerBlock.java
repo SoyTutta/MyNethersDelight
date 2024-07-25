@@ -11,12 +11,10 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.BambooSaplingBlock;
@@ -26,12 +24,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.ToolActions;
 import vectorwing.farmersdelight.common.tag.ForgeTags;
 
 import java.util.Random;
@@ -100,32 +95,39 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
         int age = state.getValue(AGE);
         BlockState blockBelow = world.getBlockState(pos.below());
         boolean isBlockBelowPowderyCane = blockBelow.is(MNDTags.POWDERY_CANE);
-        boolean isBlockBelowPerfectSoil = blockBelow.is(MNDBlocks.RESURGENT_SOIL.get()) || blockBelow.is(MNDBlocks.POWDERY_CANNON.get());;
-        boolean isBlockBelowPowderySoil = blockBelow.is(Blocks.CRIMSON_NYLIUM) || blockBelow.is(Blocks.GRAVEL);
+        boolean isBlockBelowPerfectSoil = blockBelow.is(MNDBlocks.RESURGENT_SOIL.get())
+                || blockBelow.is(MNDBlocks.POWDERY_CANNON.get());
+        boolean isBlockBelowPowderySoil = blockBelow.is(Blocks.CRIMSON_NYLIUM)
+                || blockBelow.is(Blocks.GRAVEL);
         boolean isBlockBelowLeave = blockBelow.hasProperty(LEAVE) && !blockBelow.getValue(LEAVE);
+        boolean maxHeight = true;
+        for (int i = 1; i <= 4; i++) {
+            if (!world.getBlockState(pos.below(i)).is(MNDBlocks.POWDERY_CANE.get())) {
+                maxHeight = false;
+                break;
+            }
+        }
 
         if (age == 2 && random.nextInt(2) == 0) {
             world.setBlock(pos, state.setValue(LIT, true), 2);
-        }
-        else if (age < 2 && ForgeHooks.onCropsGrowPre(world, pos, state, random.nextInt(3) == 0)) {
+        } else if (age < 2 && ForgeHooks.onCropsGrowPre(world, pos, state, random.nextInt(3) == 0)) {
             world.setBlock(pos, state.setValue(AGE, age + 1), 2);
             ForgeHooks.onCropsGrowPost(world, pos, state);
         }
-        else if (age != 2 && random.nextInt(8) == 0 && world.isEmptyBlock(pos.above()) && world.getRawBrightness(pos.above(), 0) >= 2 && isBlockBelowLeave) {
+
+        if (!maxHeight) {
+            if (age != 2 && random.nextInt(8) == 0 && world.isEmptyBlock(pos.above()) && isBlockBelowLeave) {
             this.growBamboo(world, pos);
-        }
-        else if (age <= 2 && (isBlockBelowPerfectSoil || isBlockBelowPowderyCane || isBlockBelowPowderySoil) && world.isEmptyBlock(pos.above())) {
-            if (isBlockBelowPerfectSoil) {
+            } else if (age <= 2 && (isBlockBelowPerfectSoil || isBlockBelowPowderyCane || isBlockBelowPowderySoil) && world.isEmptyBlock(pos.above())) {
+                if (isBlockBelowPerfectSoil) {
                 this.growBamboo(world, pos);
-            }
-            else if (isBlockBelowPowderyCane && isBlockBelowLeave && random.nextInt(60) == 0) {
+                } else if (isBlockBelowPowderyCane && isBlockBelowLeave && random.nextInt(30) == 0) {
                 this.growBamboo(world, pos);
-            }
-            else if (!isBlockBelowLeave && random.nextInt(1800) == 0) {
+                } else if (!isBlockBelowLeave && random.nextInt(300) == 0) {
                 this.growBamboo(world, pos);
-            }
-            else if (!isBlockBelowPowderySoil && random.nextInt(1200) == 0) {
+                } else if (!isBlockBelowPowderySoil && random.nextInt(1200) == 0) {
                 this.growBamboo(world, pos);
+                }
             }
         }
     }
@@ -211,12 +213,23 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
     }
 
     @Override
+    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return false;
+    }
+
+    @Override
     public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
         return new ItemStack(MNDItems.BULLET_PEPPER.get());
     }
 
     @Override
     protected void growBamboo(Level level, BlockPos pos) {
-        level.setBlock(pos.above(), MNDBlocks.BULLET_PEPPER.get().defaultBlockState(), 3);
+        BlockState currentBlockState = level.getBlockState(pos);
+        boolean isLit = currentBlockState.getValue(PowderyFlowerBlock.LIT);
+        BlockState newBlockState = defaultBlockState();
+        if (isLit) {
+            newBlockState = MNDBlocks.BULLET_PEPPER.get().defaultBlockState().setValue(PowderyFlowerBlock.AGE, 2).setValue(PowderyFlowerBlock.LIT, true);
+        }
+        level.setBlock(pos.above(), newBlockState, 3);
     }
 }

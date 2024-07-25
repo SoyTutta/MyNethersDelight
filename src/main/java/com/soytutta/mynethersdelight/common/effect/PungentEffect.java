@@ -18,9 +18,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import java.util.stream.StreamSupport;
 
 public class PungentEffect extends MobEffect {
-
-    private static final DamageSource PUNGENT_DAMAGE = new DamageSource("mynethersdelight.pungent").bypassArmor();
-
     public PungentEffect() {
         super(MobEffectCategory.NEUTRAL, 0);
     }
@@ -40,16 +37,24 @@ public class PungentEffect extends MobEffect {
         }
 
         if (isInFireCondition(entity) || entity.isInLava() || entity.isOnFire()) {
-            if (BPungentEffect != null) {
-                entity.hurt(PUNGENT_DAMAGE, 1.5f * (amplifier + 1));
-            } else if (GPungentEffect != null) {
-                entity.heal(0.10f * (amplifier + 1));
-            }
-            if (isInFireCondition(entity)) {
-                entity.setSecondsOnFire(1);
-            }
-        }
+            float minHealth = (amplifier >= 2) ? 2.0F :
+                    (amplifier == 1) ? (entity.getMaxHealth() / 2) :
+                            (entity.getMaxHealth() - (entity.getMaxHealth() / 4));
 
+            if (entity.getHealth() > minHealth) {
+                entity.hurt(DamageSource.MAGIC,1);
+            }
+
+            if (isInFireCondition(entity)) {
+                if (entity.getHealth() > minHealth) {
+                    entity.setSecondsOnFire(3);
+                }
+            } else if (entity.isOnFire()) {
+                entity.setSecondsOnFire(0);
+                entity.clearFire();
+            }
+
+        }
     }
 
     private void switchEffect(LivingEntity entity, MobEffectInstance currentEffect, MobEffect newEffect) {
@@ -62,7 +67,6 @@ public class PungentEffect extends MobEffect {
     }
 
     private boolean isInFireCondition(LivingEntity entity) {
-        DamageSource lastDamageSource = entity.getLastDamageSource();
         Level world = entity.level;
         BlockPos entityPos = entity.blockPosition();
         boolean isOnFlame = false;
@@ -76,7 +80,8 @@ public class PungentEffect extends MobEffect {
                     BlockState blockState = world.getBlockState(pos);
 
                     if (blockState.is(MNDTags.LETIOS_FLAMES)) {
-                        if (!blockState.hasProperty(BlockStateProperties.LIT) || (blockState.hasProperty(BlockStateProperties.LIT) && blockState.getValue(BlockStateProperties.LIT))) {
+                        if (!blockState.hasProperty(BlockStateProperties.LIT) ||
+                                (blockState.hasProperty(BlockStateProperties.LIT) && blockState.getValue(BlockStateProperties.LIT))) {
                             isOnFlame = true;
                             break;
                         }
@@ -85,11 +90,16 @@ public class PungentEffect extends MobEffect {
             } if (isOnFlame) break;
         }
 
-        return isOnFlame || (lastDamageSource != null && lastDamageSource.isFire());
+        return isOnFlame;
     }
 
     @Override
     public boolean isDurationEffectTick(int duration, int amplifier) {
-        return true;
+        int i = 25 >> amplifier;
+        if (i > 0) {
+            return duration % i == 0;
+        } else {
+            return true;
+        }
     }
 }

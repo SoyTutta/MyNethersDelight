@@ -47,7 +47,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
-import net.minecraft.world.level.block.state.properties.Property;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -56,8 +55,9 @@ import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.MathUtils;
 
+import static vectorwing.farmersdelight.common.block.StoveBlock.STOVE_DAMAGE;
+
 public class NetherStoveBlock extends BaseEntityBlock {
-    public static final DamageSource STOVE_DAMAGE = (new DamageSource("farmersdelight.stove")).setIsFire();
     public static final BooleanProperty LIT = BlockStateProperties.LIT;;
     public static final BooleanProperty SOUL = BooleanProperty.create("soul");
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -204,7 +204,6 @@ public class NetherStoveBlock extends BaseEntityBlock {
         if (isLit && !entity.fireImmune() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
             if (isSoul){ entity.hurt(STOVE_DAMAGE, 2.0F); } else { entity.hurt(STOVE_DAMAGE, 1.0F); }
         }
-
         super.stepOn(level, pos, state, entity);
     }
 

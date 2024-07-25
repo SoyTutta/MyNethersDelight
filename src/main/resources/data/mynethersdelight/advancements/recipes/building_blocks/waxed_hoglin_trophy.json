@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_hoglin_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mynethersdelight:hoglin_trophy"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mynethersdelight:waxed_hoglin_trophy"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_hoglin_trophy",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mynethersdelight:waxed_hoglin_trophy"
+    ]
+  },
+  "sends_telemetry_event": false
+}

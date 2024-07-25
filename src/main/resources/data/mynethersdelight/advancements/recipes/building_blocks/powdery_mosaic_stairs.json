@@ -1,0 +1,40 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_powdery_mosaic": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "mynethersdelight:powdery_mosaic"
+            ]
+          },
+          {
+            "items": [
+              "mynethersdelight:powdery_planks"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mynethersdelight:powdery_mosaic_stairs"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_powdery_mosaic",
+      "has_the_recipe"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mynethersdelight:powdery_mosaic_stairs"
+    ]
+  },
+  "sends_telemetry_event": false
+}

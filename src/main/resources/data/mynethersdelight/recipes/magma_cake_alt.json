@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:magma_cake_slice"
+    },
+    {
+      "item": "mynethersdelight:magma_cake_slice"
+    },
+    {
+      "item": "mynethersdelight:magma_cake_slice"
+    },
+    {
+      "item": "mynethersdelight:magma_cake_slice"
+    },
+    {
+      "item": "mynethersdelight:magma_cake_slice"
+    },
+    {
+      "item": "mynethersdelight:magma_cake_slice"
+    },
+    {
+      "item": "mynethersdelight:magma_cake_slice"
+    }
+  ],
+  "result": {
+    "item": "mynethersdelight:magma_cake"
+  }
+}

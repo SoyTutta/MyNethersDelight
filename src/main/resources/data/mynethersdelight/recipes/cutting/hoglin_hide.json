@@ -1,0 +1,22 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:hoglin_hide"
+    }
+  ],
+  "result": [
+    {
+      "count": 4,
+      "item": "minecraft:leather"
+    },
+    {
+      "chance": 0.5,
+      "count": 2,
+      "item": "minecraft:leather"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

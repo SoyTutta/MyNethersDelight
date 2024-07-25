@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:magma_cream"
+    },
+    {
+      "tag": "mynethersdelight:curry_meats"
+    }
+  ],
+  "result": {
+    "item": "mynethersdelight:burnt_roll"
+  }
+}

@@ -2,7 +2,6 @@ package com.soytutta.mynethersdelight.common.registry;
 
 import com.soytutta.mynethersdelight.common.block.entity.MNDSignBlockEntity;
 import com.soytutta.mynethersdelight.common.block.entity.NetherStoveBlockEntity;
-import net.minecraft.world.item.SignItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.registries.DeferredRegister;
@@ -19,11 +18,13 @@ public class MNDBlockEntityTypes {
     }
 
     static {
-        NETHER_STOVE = TILES.register("nether_stove", () -> {
-            return BlockEntityType.Builder.of(NetherStoveBlockEntity::new, new Block[]{MNDBlocks.NETHER_STOVE.get()}).build(null);
-        });
-        MND_SIGN = TILES.register("mnd_sign", () -> {
-            return BlockEntityType.Builder.of(MNDSignBlockEntity::new, MNDBlocks.POWDERY_SIGN.get(), MNDBlocks.POWDERY_WALL_SIGN.get()).build((null));
-        });
+        NETHER_STOVE = TILES.register("nether_stove", () ->
+                BlockEntityType.Builder.of(NetherStoveBlockEntity::new,
+                        new Block[]{MNDBlocks.NETHER_STOVE.get()}).build(null)
+        );
+        MND_SIGN = TILES.register("mnd_sign", () ->
+                BlockEntityType.Builder.of(MNDSignBlockEntity::new,
+                        MNDBlocks.POWDERY_SIGN.get(), MNDBlocks.POWDERY_WALL_SIGN.get()).build((null))
+        );
     }
 }

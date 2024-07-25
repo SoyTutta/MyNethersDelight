@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "mynethersdelight:block/resurgent_soil"
+      },
+      {
+        "model": "mynethersdelight:block/resurgent_soil",
+        "y": 90
+      },
+      {
+        "model": "mynethersdelight:block/resurgent_soil",
+        "y": 180
+      },
+      {
+        "model": "mynethersdelight:block/resurgent_soil",
+        "y": 270
+      }
+    ]
+  }
+}

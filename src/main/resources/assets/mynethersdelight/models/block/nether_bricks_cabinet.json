@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/orientable",
+  "textures": {
+    "front": "mynethersdelight:block/nether_bricks_cabinet_front",
+    "side": "mynethersdelight:block/nether_bricks_cabinet_side",
+    "top": "mynethersdelight:block/nether_bricks_cabinet_top"
+  }
+}

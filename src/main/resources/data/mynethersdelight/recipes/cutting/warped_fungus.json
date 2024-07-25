@@ -1,0 +1,17 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:warped_fungus_colony"
+    }
+  ],
+  "result": [
+    {
+      "count": 5,
+      "item": "minecraft:warped_fungus"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

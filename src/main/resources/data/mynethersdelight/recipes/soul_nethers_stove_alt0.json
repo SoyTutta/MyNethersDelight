@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "soul_nether_stove",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:nether_bricks_stove"
+    },
+    {
+      "tag": "mynethersdelight:stove_soul_fuel"
+    }
+  ],
+  "result": {
+    "item": "mynethersdelight:nether_bricks_soul_stove"
+  }
+}

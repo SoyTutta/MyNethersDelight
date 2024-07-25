@@ -1,31 +1,21 @@
 package com.soytutta.mynethersdelight.common.item;
 
 import com.soytutta.mynethersdelight.common.registry.MNDEffects;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.entity.living.MobEffectEvent;
 import vectorwing.farmersdelight.common.item.DrinkableItem;
-import vectorwing.farmersdelight.common.registry.ModEffects;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 
 public class HotCreamItem extends DrinkableItem {
 
@@ -76,7 +66,7 @@ public class HotCreamItem extends DrinkableItem {
                 consumer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireResistanceSeconds * 3));
             }
             if (purgentSeconds > 0) {
-                consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT.get(), purgentSeconds * 3));
+                consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT.get(), purgentSeconds * 3,2));
             }
             removedEffects = true;
         }

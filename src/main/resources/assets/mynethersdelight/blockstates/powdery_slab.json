@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "mynethersdelight:block/powdery_slab"
+    },
+    "type=double": {
+      "model": "mynethersdelight:block/powdery_planks"
+    },
+    "type=top": {
+      "model": "mynethersdelight:block/powdery_slab_top"
+    }
+  }
+}

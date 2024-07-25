@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "wooden_hanging_sign",
+  "key": {
+    "#": {
+      "item": "mynethersdelight:stripped_powdery_block"
+    },
+    "X": {
+      "item": "minecraft:chain"
+    }
+  },
+  "pattern": [
+    "X X",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "item": "mynethersdelight:powdery_hanging_sign"
+  },
+  "show_notification": true
+}

@@ -1,0 +1,49 @@
+{
+	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"2": "mynethersdelight:block/ghasta_with_cream_block",
+		"3": "mynethersdelight:block/tray_ghasta_with_cream_block",
+		"particle": "farmersdelight:block/tray_bottom",
+		"bowl": "farmersdelight:block/tray_bottom"
+	},
+	"elements": [
+		{
+			"name": "base",
+			"from": [1, 0, 1],
+			"to": [15, 2, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 0, 1]},
+			"faces": {
+				"north": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
+				"east": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
+				"south": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
+				"west": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#3"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#bowl"}
+			}
+		},
+		{
+			"from": [5, 1, 7],
+			"to": [9, 5, 11],
+			"rotation": {"angle": 0, "axis": "y", "origin": [5.93076, 2.75, 9]},
+			"faces": {
+				"north": {"uv": [11, 14, 13, 16], "texture": "#2"},
+				"east": {"uv": [9, 14, 11, 16], "texture": "#2"},
+				"south": {"uv": [7, 14, 9, 16], "texture": "#2"},
+				"west": {"uv": [13, 14, 11, 16], "texture": "#2"},
+				"up": {"uv": [9, 12, 11, 14], "rotation": 270, "texture": "#2"},
+				"down": {"uv": [9, 14, 11, 16], "rotation": 270, "texture": "#2"}
+			}
+		}
+	],
+	"groups": [
+		0,
+		{
+			"name": "ghast",
+			"origin": [3, 2, 3],
+			"color": 0,
+			"children": []
+		},
+		1
+	]
+}
