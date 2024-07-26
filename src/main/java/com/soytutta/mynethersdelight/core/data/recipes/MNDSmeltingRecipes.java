@@ -40,7 +40,7 @@ public class MNDSmeltingRecipes {  public MNDSmeltingRecipes() {
 
         SimpleCookingRecipeBuilder.smelting(ingredient, RecipeCategory.FOOD, result, experience, 200)
                 .unlockedBy(name, InventoryChangeTrigger.TriggerInstance.hasItems(items))
-                .save(consumer);
+                .save(consumer, namePrefix + "_cooking");
         SimpleCookingRecipeBuilder.campfireCooking(ingredient, RecipeCategory.FOOD, result, experience, 600)
                 .unlockedBy(name, InventoryChangeTrigger.TriggerInstance.hasItems(items))
                 .save(consumer, namePrefix + "_from_campfire_cooking");
