@@ -6,9 +6,10 @@
 package com.soytutta.mynethersdelight.integration.jei.category;
 
 import com.google.common.collect.ImmutableList;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
@@ -29,18 +30,18 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.MethodsReturnNonnullByDefault;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.FarmersDelight;
 
 // thanks Umpaz for letting me use this code <3
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> {
-    public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "composition");
+    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "composition");
     private static final int slotSize = 22;
     private final Component title = MNDTextUtils.getTranslation("jei.forgoting");
 
@@ -51,7 +52,7 @@ public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> 
     private final ItemStack resurgentSoil;
 
     public ForgotingRecipeCategory(IGuiHelper helper) {
-        ResourceLocation backgroundImage = new ResourceLocation("mynethersdelight", "textures/gui/jei/composition.png");
+        ResourceLocation backgroundImage = ResourceLocation.fromNamespaceAndPath("mynethersdelight", "textures/gui/jei/composition.png");
         this.background = helper.createDrawable(backgroundImage, 0, 0, 118, 80);
         this.letiosCompost = new ItemStack(MNDBlocks.LETIOS_COMPOST.get());
         this.resurgentSoil = new ItemStack(MNDItems.RESURGENT_SOIL.get());
@@ -76,8 +77,10 @@ public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> 
     }
 
     public void setRecipe(IRecipeLayoutBuilder builder, ForgotingDummy recipe, IFocusGroup focusGroup) {
-        List<ItemStack> accelerators = ForgeRegistries.BLOCKS.tags().getTag(MNDTags.SHOWCASE_ACTIVATORS).stream().map(ItemStack::new).collect(Collectors.toList());
-        List<ItemStack> flames = ForgeRegistries.BLOCKS.tags().getTag(MNDTags.SHOWCASE_FLAMES).stream().map(ItemStack::new).collect(Collectors.toList());
+        List<ItemStack> accelerators = new ArrayList<>();
+        List<ItemStack> flames = new ArrayList<>();
+        BuiltInRegistries.BLOCK.getTag(MNDTags.SHOWCASE_ACTIVATORS).ifPresent(s -> s.forEach(f -> accelerators.add(new ItemStack(f.value()))));
+        BuiltInRegistries.BLOCK.getTag(MNDTags.SHOWCASE_FLAMES).ifPresent(s -> s.forEach(f -> flames.add(new ItemStack(f.value()))));
         builder.addSlot(RecipeIngredientRole.INPUT, 9, 26).addItemStack(this.letiosCompost);
         builder.addSlot(RecipeIngredientRole.OUTPUT, 93, 26).addItemStack(this.resurgentSoil);
         builder.addSlot(RecipeIngredientRole.RENDER_ONLY, 64, 54).addItemStacks(accelerators);

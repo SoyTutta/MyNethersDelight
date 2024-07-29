@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "mynethersdelight:powdery_planks"
+    },
+    "X": {
+      "item": "mynethersdelight:powdery_slab"
+    }
+  },
+  "pattern": [
+    "#X#",
+    "# #",
+    "#X#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "mynethersdelight:powdery_cabinet"
+  }
+}

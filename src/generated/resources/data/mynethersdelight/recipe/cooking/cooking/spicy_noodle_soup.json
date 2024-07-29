@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "item": "mynethersdelight:ghasta"
+    },
+    {
+      "tag": "c:foods/cooked_egg"
+    },
+    {
+      "tag": "mynethersdelight:hot_spice"
+    },
+    {
+      "tag": "c:foods/raw_pork"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "mynethersdelight:spicy_noodle_soup"
+  }
+}

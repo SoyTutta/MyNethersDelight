@@ -1,51 +1,45 @@
 package com.soytutta.mynethersdelight.core.data;
 
-import com.soytutta.mynethersdelight.MyNethersDelight;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraftforge.client.model.generators.*;
-import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
-import vectorwing.farmersdelight.common.block.CabinetBlock;
-import vectorwing.farmersdelight.common.block.FeastBlock;
-import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
+import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
+import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
+import vectorwing.farmersdelight.common.block.*;
 
 public class MNDBlockStates extends BlockStateProvider {
 
-    public MNDBlockStates(PackOutput output, ExistingFileHelper exFileHelper) {
-        super(output, "mynethersdelight", exFileHelper);
+    public MNDBlockStates(PackOutput output, ExistingFileHelper existingFileHelper) {
+        super(output, "mynethersdelight", existingFileHelper);
     }
 
     private String blockName(Block block) {
-        return ForgeRegistries.BLOCKS.getKey(block).getPath();
+        return BuiltInRegistries.BLOCK.getKey(block).getPath();
     }
 
     public ResourceLocation resourceBlock(String path) {
-        return new ResourceLocation("mynethersdelight", "block/" + path);
+        return ResourceLocation.fromNamespaceAndPath("mynethersdelight", "block/" + path);
     }
 
     protected void registerStatesAndModels() {
-        this.simpleBlock( MNDBlocks.RESURGENT_SOIL.get(), this.cubeRandomRotation(MNDBlocks.RESURGENT_SOIL.get(), ""));
+        this.simpleBlock(MNDBlocks.RESURGENT_SOIL.get(), cubeRandomRotation(MNDBlocks.RESURGENT_SOIL.get(), ""));
         this.stageBlock(MNDBlocks.CRIMSON_FUNGUS_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
         this.stageBlock(MNDBlocks.WARPED_FUNGUS_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
         this.cabinetBlock(MNDBlocks.NETHER_BRICKS_CABINET.get(), "nether_bricks");
 
         // POWDERY
         this.crateBlock(MNDBlocks.BULLET_PEPPER_CRATE.get(), "bullet_pepper");
-        this.blockItem(MNDBlocks.BULLET_PEPPER_CRATE);
         this.cabinetBlock(MNDBlocks.POWDERY_CABINET.get(), "powdery");
         this.logBlock(((RotatedPillarBlock) MNDBlocks.BLOCK_OF_POWDERY_CANNON.get()));
-        this.blockItem(MNDBlocks.BLOCK_OF_POWDERY_CANNON);
-
         this.logBlock(((RotatedPillarBlock) MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get()));
-        this.blockItem(MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON);
-
         this.simpleBlock(MNDBlocks.POWDERY_PLANKS.get());
+
         this.stairsBlock(((StairBlock) MNDBlocks.POWDERY_PLANKS_STAIRS.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
         this.slabBlock(((SlabBlock) MNDBlocks.POWDERY_PLANKS_SLAB.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
         this.doorBlockWithRenderType(((DoorBlock) MNDBlocks.POWDERY_DOOR.get()), modLoc("block/powdery_door_bottom"), modLoc("block/powdery_door_top"), "cutout");
@@ -68,6 +62,7 @@ public class MNDBlockStates extends BlockStateProvider {
         this.feastBlock((FeastBlock) MNDBlocks.COLD_STRIDERLOAF_BLOCK.get());
 
     }
+
     public void feastBlock(FeastBlock block) {
         this.getVariantBuilder(block).forAllStates((state) -> {
             IntegerProperty servingsProperty = block.getServingsProperty();
@@ -88,7 +83,7 @@ public class MNDBlockStates extends BlockStateProvider {
     }
 
     public void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {
-        ModelFile sign = models().sign(name(signBlock), texture);
+        ModelFile sign = models().sign(blockName(signBlock), texture);
         hangingSignBlock(signBlock, wallSignBlock, sign);
     }
 
@@ -99,18 +94,6 @@ public class MNDBlockStates extends BlockStateProvider {
 
     public void crateBlock(Block block, String cropName) {
         this.simpleBlock(block, this.models().cubeBottomTop(this.blockName(block), this.resourceBlock(cropName + "_crate_side"), this.resourceBlock(cropName + "_crate_bottom"), this.resourceBlock(cropName + "_crate_top")));
-    }
-
-    private String name(Block block) {
-        return key(block).getPath();
-    }
-
-    private ResourceLocation key(Block block) {
-        return ForgeRegistries.BLOCKS.getKey(block);
-    }
-    private void blockItem(RegistryObject<Block> blockRegistryObject) {
-        simpleBlockItem(blockRegistryObject.get(), new ModelFile.UncheckedModelFile(MyNethersDelight.MODID +
-                ":block/" + ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath()));
     }
 
     public ConfiguredModel[] cubeRandomRotation(Block block, String suffix) {

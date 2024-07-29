@@ -1,182 +1,167 @@
-buildscript {
-    repositories {
-        maven { url = 'https://files.minecraftforge.net' }
-        maven { url = 'https://maven.parchmentmc.org' }
-        maven {
-            url "https://repo.spongepowered.org/repository/maven-public/"
-            // content { includeGroup "org.spongepowered" }
-        }
-        mavenCentral()
-    }
-    dependencies {
-        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '5.1.+', changing: true
-        classpath group: 'org.spongepowered', name: 'mixingradle', version: '0.7-SNAPSHOT'
-        classpath 'org.parchmentmc:librarian:1.+'
-    }
-}
-apply plugin: 'net.minecraftforge.gradle'
-// Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
-apply plugin: 'org.parchmentmc.librarian.forgegradle'
-apply plugin: 'eclipse'
-apply plugin: 'maven-publish'
-apply plugin: "org.spongepowered.mixin"
-
-mixin {
-    add sourceSets.main, "mynethersdelight.refmap.json"
+plugins {
+    id 'java-library'
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.neoforged.moddev' version '1.0.0'
 }
 
-version = "${mc_version}-${mod_version}"
-group = mod_group // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = mod_id
-
-//sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
-
-minecraft {
-//    mappings channel: 'parchment', version: '2022.06.05-1.18.2'
-    mappings channel: 'official', version: "${mc_version}"
-    // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
-
-    accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
-
-    runs {
-        client {
-            workingDirectory project.file('run')
-            arg '-mixin.config=mynethersdelight.mixins.json'
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        server {
-            workingDirectory project.file('run')
-            arg "-mixin.config=mynethersdelight.mixins.json"
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
-
-        data {
-            workingDirectory project.file('run')
-
-            // Recommended logging data for a userdev environment
-            property 'forge.logging.markers', 'SCAN,REGISTRIES,REGISTRYDUMP'
-
-            // Recommended logging level for the console
-            property 'forge.logging.console.level', 'debug'
-
-            args '--mod', 'mynethersdelight', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
-            environment 'target', 'fmluserdevdata'
-
-            mods {
-                "${mod_id}" {
-                    source sourceSets.main
-                }
-            }
-        }
-    }
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
 }
 
-sourceSets.main.resources {
-    srcDirs += 'src/generated/resources'
-}
+version = "${minecraft_version}-${mod_version}"
+group = 'soytutta.mynethersdelight' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 
 repositories {
     maven {
-        // CraftTweaker and JEI
+        // JEI
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven {
+        // CraftTweaker
         name = "BlameJared"
-        url = "https://maven.blamejared.com/"
-        content {
-            includeGroup "com.blamejared"
-            includeGroup "mezz.jei"
+        url = "https://maven.blamejared.com"
+    }
+    maven { url "https://maven.ryanliptak.com/" }
+    maven { url = "https://api.modrinth.com/maven" }
+}
+
+base {
+    archivesName = 'FarmersDelight'
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+
+    // This line is optional. Access Transformers are automatically detected
+    // accessTransformers = project.files('src/main/resources/META-INF/accesstransformer.cfg')
+
+    runs {
+        client {
+            client()
+
+            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        server {
+            server()
+//            programArgument '--nogui'
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        // This run config launches GameTestServer and runs all registered gametests, then exits.
+        // By default, the server will crash when no gametests are provided.
+        // The gametest system is also enabled by default for other run configs under the /test command.
+        gameTestServer {
+            type = "gameTestServer"
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        data {
+            data()
+
+            // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
+            // gameDirectory = project.file('run-data')
+
+            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+
+        configureEach {
+            // Recommended logging data for a userdev environment
+            // The markers can be added/remove as needed separated by commas.
+            // "SCAN": For mods scan.
+            // "REGISTRIES": For firing of registry events.
+            // "REGISTRYDUMP": For getting the contents of all registries.
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+
+            // Recommended logging level for the console
+            // You can set various levels here.
+            // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+            logLevel = org.slf4j.event.Level.DEBUG
         }
     }
-    maven {
-        // JEI fallback
-        name = "Modmaven"
-        url = "https://modmaven.dev/"
-        content {
-            includeGroup "mezz.jei"
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
         }
     }
-    maven {
-        name = "Cursemaven"
-        url "https://www.cursemaven.com"
-        content {
-            includeGroup "curse.maven"
-        }
-    }
+}
+
+sourceSets.main.resources { srcDir 'src/generated/resources' }
+
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${mc_version}-${forge_version}"
-    implementation fg.deobf("curse.maven:farmers-delight-398521:${farmersdelight_version}")
-    implementation fg.deobf("curse.maven:miners-delight-plus-689630:5038950")
-    implementation fg.deobf("curse.maven:farmers-respite-551453:5541657")
-    implementation fg.deobf("curse.maven:amendments-896746:5467925")
-    // Run Only
-    runtimeOnly fg.deobf("curse.maven:appleskin-248787:4770828")
-    runtimeOnly fg.deobf("curse.maven:jade-324717:5339264")
-    // Every compat
-    compileOnly fg.deobf("curse.maven:selene-499980:5409387")
-    runtimeOnly fg.deobf("curse.maven:selene-499980:5409387")
-    runtimeOnly fg.deobf("curse.maven:every-compat-628539:5394212")
-
+    implementation "maven.modrinth:farmers-delight:${project.delight_version}"
     // compile against the JEI API but do not include it at runtime
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
-    compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
+    compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
+    compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     // at runtime, use the full JEI jar for Forge
-    runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
+    localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+    compileOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}:api"
+    runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
 
+    def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${minecraft_version}:${crafttweaker_version}"
+    compileOnly ctDep
+    runtimeOnly ctDep
 }
 
-jar {
-    manifest {
-        attributes([
-                "Specification-Title"     : "My Nether's Delight",
-                "Specification-Vendor"    : "SoyTutta",
-                "Specification-Version"   : "1", // We are version 1 of ourselves
-                "Implementation-Title"    : project.name,
-                "Implementation-Version"  : "${version}",
-                "Implementation-Vendor"   : "SoyTutta",
-                "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ"),
-                "MixinConfigs"            : "mynethersdelight.mixins.json"
-        ])
+tasks.withType(ProcessResources).configureEach {
+    var replaceProperties = [
+            minecraft_version      : minecraft_version,
+            minecraft_version_range: minecraft_version_range,
+            neo_version            : neo_version,
+            neo_version_range      : neo_version_range,
+            loader_version_range   : loader_version_range,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_license            : mod_license,
+            mod_version            : mod_version,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/neoforge.mods.toml']) {
+        expand replaceProperties
     }
 }
 
-jar.finalizedBy('reobfJar')
-
 publishing {
     publications {
-        mavenJava(MavenPublication) {
-            artifact jar
+        register('mavenJava', MavenPublication) {
+            from components.java
         }
     }
     repositories {
         maven {
-            url "file:///${project.projectDir}/mcmodsrepo"
+            url "file://${project.projectDir}/repo"
         }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
     }
 }

@@ -12,7 +12,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec2;
-import net.minecraftforge.items.ItemStackHandler;
+import net.neoforged.neoforge.items.ItemStackHandler;
 import vectorwing.farmersdelight.common.block.StoveBlock;
 
 public class NetherStoveRenderer  implements BlockEntityRenderer<NetherStoveBlockEntity> {
@@ -33,7 +33,7 @@ public class NetherStoveRenderer  implements BlockEntityRenderer<NetherStoveBloc
                 poseStack.mulPose(Axis.YP.rotationDegrees(f));
                 poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
                 Vec2 itemOffset = stoveEntity.getStoveItemOffset(i);
-                poseStack.translate((double)itemOffset.x, (double)itemOffset.y, 0.0);
+                poseStack.translate(itemOffset.x, itemOffset.y, 0.0);
                 poseStack.scale(0.375F, 0.375F, 0.375F);
                 if (stoveEntity.getLevel() != null) {
                     Minecraft.getInstance().getItemRenderer().renderStatic(stoveStack, ItemDisplayContext.FIXED, LevelRenderer.getLightColor(stoveEntity.getLevel(), stoveEntity.getBlockPos().above()), combinedOverlayIn, poseStack, buffer, stoveEntity.getLevel(), posLong + i);

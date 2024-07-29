@@ -11,7 +11,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 
 public class MNDWallHangingSignBlock extends WallHangingSignBlock {
     public MNDWallHangingSignBlock(Properties properties, WoodType woodType) {
-        super(properties, woodType);
+        super(woodType, properties);
     }
 
     @Override

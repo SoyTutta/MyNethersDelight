@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "nether_trophy",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:zoglin_trophy"
+    },
+    {
+      "tag": "mynethersdelight:hoglin_cure"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "mynethersdelight:hoglin_trophy"
+  }
+}

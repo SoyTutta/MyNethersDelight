@@ -7,6 +7,7 @@ package com.soytutta.mynethersdelight.common.block;
 import javax.annotation.Nullable;
 
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
+import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -20,6 +21,7 @@ import net.minecraft.tags.BiomeTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -38,10 +40,11 @@ import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.common.ItemAbilities;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 
 import java.util.Random;
 import java.util.stream.Stream;
@@ -151,17 +154,17 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
         Direction facing = currentState.getValue(FACING);
         worldIn.setBlock(pos, MNDBlocks.ZOGLIN_TROPHY.get().defaultBlockState().setValue(FACING, facing), 3);
 
-        for (int i = 0; i < 10; i++) {
-            double d0 = (double) pos.getX() + random.nextDouble();
-            double d1 = (double) pos.getY() + random.nextDouble();
-            double d2 = (double) pos.getZ() + random.nextDouble();
-            worldIn.sendParticles(ParticleTypes.ENTITY_EFFECT, d0, d1, d2, 1, 0.0D, 0.0D, 0.0D, 0.0D);
-        }
+//        for (int i = 0; i < 10; i++) {
+//            double d0 = (double) pos.getX() + random.nextDouble();
+//            double d1 = (double) pos.getY() + random.nextDouble();
+//            double d2 = (double) pos.getZ() + random.nextDouble();
+//            worldIn.sendParticles(ParticleTypes.ENTITY_EFFECT, d0, d1, d2, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+//        }
     }
 
     @Override
     @SuppressWarnings("deprecation")
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+    public ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         Block block = state.getBlock();
         ItemStack heldItem = player.getItemInHand(hand);
         ParticleOptions secondParticle = null;
@@ -170,57 +173,49 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
 
         if (block == MNDBlocks.HOGLIN_TROPHY.get() && (heldItem.is(MNDTags.HOGLIN_WAXED))) {
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.WAXED_HOGLIN_TROPHY.get(), SoundEvents.HONEYCOMB_WAX_ON, ParticleTypes.WAX_ON, secondParticle, secondSoundEvent, useSecondEffects);
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
-        else if (block == MNDBlocks.WAXED_HOGLIN_TROPHY.get() && heldItem.is(ForgeTags.TOOLS_AXES)) {
+        else if (block == MNDBlocks.WAXED_HOGLIN_TROPHY.get() && heldItem.canPerformAction(ItemAbilities.AXE_WAX_OFF)) {
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.HONEYCOMB_WAX_ON, ParticleTypes.WAX_OFF, secondParticle, secondSoundEvent, useSecondEffects);
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
         else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && heldItem.is(MNDTags.HOGLIN_CURE)) {
             secondParticle = ParticleTypes.ENCHANT;
             secondSoundEvent = SoundEvents.ENCHANTMENT_TABLE_USE;
             useSecondEffects = true;
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.ZOMBIE_VILLAGER_CURE, ParticleTypes.CLOUD, secondParticle, secondSoundEvent, useSecondEffects);
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
-        else if (block == MNDBlocks.HOGLIN_TROPHY.get() && heldItem.is(ForgeTags.TOOLS_KNIVES)) {
+        else if (block == MNDBlocks.HOGLIN_TROPHY.get() && heldItem.is(CommonTags.TOOLS_KNIFE)) {
             secondParticle = ParticleTypes.CLOUD;
             secondSoundEvent = SoundEvents.HOGLIN_HURT;
             useSecondEffects = true;
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.SKOGLIN_TROPHY.get(), ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), ParticleTypes.DAMAGE_INDICATOR, secondParticle, secondSoundEvent, useSecondEffects);
             int j = 1 + level.random.nextInt(2);
             popResource(level, pos, new ItemStack(Items.LEATHER, j));
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
-        else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && heldItem.is(ForgeTags.TOOLS_KNIVES)) {
+        else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && heldItem.is(CommonTags.TOOLS_KNIFE)) {
             secondParticle = ParticleTypes.CLOUD;
             secondSoundEvent = SoundEvents.ZOGLIN_HURT;
             useSecondEffects = true;
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.SKOGLIN_TROPHY.get(), ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), ParticleTypes.DAMAGE_INDICATOR, secondParticle, secondSoundEvent, useSecondEffects);
             int j = 1 + level.random.nextInt(2);
             popResource(level, pos, new ItemStack(Items.ROTTEN_FLESH, j));
-            return InteractionResult.SUCCESS;
+            return ItemInteractionResult.SUCCESS;
         }
-        else if (block == MNDBlocks.SKOGLIN_TROPHY.get() && heldItem.is(MNDTags.HOGLIN_HIDE)) {
+        else if (block == MNDBlocks.SKOGLIN_TROPHY.get() && heldItem.is(MNDItems.HOGLIN_HIDE.get())) {
             secondParticle = ParticleTypes.CLOUD;
             secondSoundEvent = SoundEvents.HOGLIN_AMBIENT;
             useSecondEffects = true;
-            processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.ARMOR_EQUIP_LEATHER, ParticleTypes.HAPPY_VILLAGER, secondParticle, secondSoundEvent, useSecondEffects);
-            return InteractionResult.SUCCESS;
+            processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.ARMOR_EQUIP_LEATHER.value(), ParticleTypes.HAPPY_VILLAGER, secondParticle, secondSoundEvent, useSecondEffects);
+            return ItemInteractionResult.SUCCESS;
         }
-        return InteractionResult.PASS;
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
     private void processTrophyInteraction(Level level, BlockPos pos, Player player, InteractionHand hand, Block trophyBlock, SoundEvent soundEvent, ParticleOptions particle, ParticleOptions secondParticle, SoundEvent secondSoundEvent, boolean useSecondEffects) {
         if (level.isClientSide()) return;
-
-        ItemStack heldItem = player.getItemInHand(hand);
-        if (heldItem.is(ForgeTags.TOOLS)) {
-            heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
-        } else if (!player.getAbilities().instabuild) {
-            heldItem.shrink(1);
-        }
-
         level.playSound(null, pos, soundEvent, SoundSource.BLOCKS, 0.8F, 0.8F);
         level.setBlockAndUpdate(pos, trophyBlock.defaultBlockState().setValue(FACING, level.getBlockState(pos).getValue(FACING)));
 

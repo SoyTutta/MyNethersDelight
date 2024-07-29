@@ -1,0 +1,31 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "count": 1,
+    "id": "minecraft:bowl"
+  },
+  "cookingtime": 700,
+  "experience": 2.0,
+  "ingredients": [
+    {
+      "tag": "mynethersdelight:hot_spice"
+    },
+    {
+      "item": "mynethersdelight:raw_stuffed_hoglin"
+    },
+    {
+      "item": "minecraft:crimson_fungus"
+    },
+    {
+      "item": "farmersdelight:nether_salad"
+    },
+    {
+      "item": "farmersdelight:nether_salad"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "mynethersdelight:roast_stuffed_hoglin"
+  }
+}

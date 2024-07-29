@@ -1,0 +1,20 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 0.35,
+  "ingredients": [
+    {
+      "tag": "c:crops/potato"
+    },
+    {
+      "item": "mynethersdelight:hoglin_sausage"
+    },
+    {
+      "item": "mynethersdelight:hoglin_sausage"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "mynethersdelight:sausage_and_potatoes"
+  }
+}

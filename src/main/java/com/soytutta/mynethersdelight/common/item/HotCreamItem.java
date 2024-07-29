@@ -1,6 +1,7 @@
 package com.soytutta.mynethersdelight.common.item;
 
 import com.soytutta.mynethersdelight.common.registry.MNDEffects;
+import net.minecraft.core.Holder;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;
@@ -11,6 +12,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.common.EffectCures;
 import vectorwing.farmersdelight.common.item.DrinkableItem;
 
 import java.util.ArrayList;
@@ -29,7 +31,7 @@ public class HotCreamItem extends DrinkableItem {
     }
 
     @Override
-    public int getUseDuration(ItemStack stack) {
+    public int getUseDuration(ItemStack stack, LivingEntity entity) {
         return 60;
     }
 
@@ -39,7 +41,7 @@ public class HotCreamItem extends DrinkableItem {
 
         if (!consumer.fireImmune()) {
             consumer.setRemainingFireTicks(consumer.getRemainingFireTicks() + 2);
-            consumer.setSecondsOnFire(30);
+            consumer.setRemainingFireTicks(30);
         }
 
         Iterator<MobEffectInstance> iterator = consumer.getActiveEffects().iterator();
@@ -47,13 +49,13 @@ public class HotCreamItem extends DrinkableItem {
 
         while (iterator.hasNext()) {
             MobEffectInstance effectInstance = iterator.next();
-            if (effectInstance.isCurativeItem(new ItemStack(Items.MILK_BUCKET))) {
+            if (effectInstance.getCures().contains(EffectCures.MILK)) {
                 effectsToRemove.add(effectInstance);
             }
         }
 
         for (MobEffectInstance effectInstance : effectsToRemove) {
-            MobEffect effect = effectInstance.getEffect();
+            Holder<MobEffect> effect = effectInstance.getEffect();
             consumer.removeEffect(effect);
         }
 
@@ -66,7 +68,7 @@ public class HotCreamItem extends DrinkableItem {
                 consumer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireResistanceSeconds * 3));
             }
             if (purgentSeconds > 0) {
-                consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT.get(), purgentSeconds * 3,2));
+                consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT, purgentSeconds * 3,2));
             }
             removedEffects = true;
         }

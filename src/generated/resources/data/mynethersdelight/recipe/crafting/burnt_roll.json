@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "minecraft:magma_cream"
+    },
+    {
+      "tag": "c:foods/raw_meat"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "mynethersdelight:burnt_roll"
+  }
+}

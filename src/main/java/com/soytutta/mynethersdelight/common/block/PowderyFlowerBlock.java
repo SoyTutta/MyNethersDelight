@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,19 +23,20 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
-import net.minecraftforge.common.ForgeHooks;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
+import net.neoforged.neoforge.common.CommonHooks;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 
 import java.util.Random;
 
 import static com.soytutta.mynethersdelight.common.block.PowderyCaneBlock.LEAVE;
 
 public class PowderyFlowerBlock extends BambooSaplingBlock {
-    public static final BooleanProperty LIT = BooleanProperty.create("lit");
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final IntegerProperty PRESSURE = IntegerProperty.create("pressure", 0, 2);
     public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 2);
 
@@ -110,9 +112,9 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
 
         if (age == 2 && random.nextInt(2) == 0) {
             world.setBlock(pos, state.setValue(LIT, true), 2);
-        } else if (age < 2 && ForgeHooks.onCropsGrowPre(world, pos, state, random.nextInt(3) == 0)) {
+        } else if (age < 2 && CommonHooks.canCropGrow(world, pos, state, random.nextInt(3) == 0)) {
             world.setBlock(pos, state.setValue(AGE, age + 1), 2);
-            ForgeHooks.onCropsGrowPost(world, pos, state);
+            CommonHooks.fireCropGrowPost(world, pos, state);
         }
 
         if (!maxHeight) {
@@ -149,18 +151,19 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
     }
 
     @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide && state.getValue(PRESSURE) < 2 && !player.isCrouching()) {
             level.setBlock(pos, state.setValue(PRESSURE, state.getValue(PRESSURE) + 1), 2);
         }
         if (state.getValue(LIT)) {
             ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
-            if (!heldItem.is(ForgeTags.TOOLS_KNIVES) || !heldItem.is(net.minecraftforge.common.Tags.Items.SHEARS)) {
+            if (!heldItem.is(CommonTags.TOOLS_KNIFE) || !heldItem.is(net.neoforged.neoforge.common.Tags.Items.TOOLS_SHEAR)) {
                 int age = state.hasProperty(AGE) ? state.getValue(AGE) : 0;
                 explodeAndReset(level, pos, state, age);
             }
         }
         super.playerWillDestroy(level, pos, state, player);
+        return state;
     }
 
     @Override
@@ -195,21 +198,30 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
 
     @Override
     @SuppressWarnings("deprecation")
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult context) {
+    protected ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         int age = state.getValue(AGE);
 
         if ( age == 2 && state.getValue(LIT)) {
             ItemStack heldItem = player.getItemInHand(hand);
-            if (heldItem.is(ForgeTags.TOOLS_KNIVES) ||heldItem.is(net.minecraftforge.common.Tags.Items.SHEARS)) {
-                heldItem.hurtAndBreak(1, player, (action) -> { action.broadcastBreakEvent(hand); });
+            if (heldItem.is(CommonTags.TOOLS_KNIFE) || heldItem.is(net.neoforged.neoforge.common.Tags.Items.TOOLS_SHEAR)) {
+                heldItem.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
                 level.destroyBlock(pos, true);
                 Random random = new Random();
                 popResource(level, pos, new ItemStack(MNDItems.BULLET_PEPPER.get(), random.nextInt(100) < 25 ? 1 : 0));
-                return InteractionResult.sidedSuccess(level.isClientSide);
+                return ItemInteractionResult.sidedSuccess(level.isClientSide);
             }
         }
-        return super.use(state, level, pos, player, hand, context);
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (!level.isClientSide && state.getValue(PRESSURE) < 2) {
+            level.setBlock(pos, state.setValue(PRESSURE, state.getValue(PRESSURE) + 1), 2);
+            return InteractionResult.SUCCESS;
+        }
+
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -218,7 +230,7 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
     }
 
     @Override
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
         return new ItemStack(MNDItems.BULLET_PEPPER.get());
     }
 

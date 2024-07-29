@@ -3,6 +3,7 @@ package com.soytutta.mynethersdelight.common.effect;
 import com.soytutta.mynethersdelight.common.registry.MNDEffects;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Holder;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -10,11 +11,14 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.enchantment.Enchantments;
+import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 import java.util.stream.StreamSupport;
+
+import static net.minecraft.world.item.enchantment.EnchantmentHelper.getEnchantmentsForCrafting;
 
 public class GoodPungentEffect extends MobEffect {
     public GoodPungentEffect() {
@@ -22,17 +26,15 @@ public class GoodPungentEffect extends MobEffect {
     }
 
     @Override
-    public void applyEffectTick(LivingEntity entity, int amplifier) {
+    public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         MobEffectInstance fireResistanceEffect = entity.getEffect(MobEffects.FIRE_RESISTANCE);
-        MobEffectInstance BPungentEffect = entity.getEffect(MNDEffects.BPUNGENT.get());
-        MobEffectInstance GPungentEffect = entity.getEffect(MNDEffects.GPUNGENT.get());
-        boolean hasFireProtectionArmor = StreamSupport.stream(entity.getArmorSlots().spliterator(), false)
-                .anyMatch(item -> EnchantmentHelper.getEnchantments(item).containsKey(Enchantments.FIRE_PROTECTION));
+        MobEffectInstance BPungentEffect = entity.getEffect(MNDEffects.BPUNGENT);
+        MobEffectInstance GPungentEffect = entity.getEffect(MNDEffects.GPUNGENT);
 
-        if (entity.fireImmune() || fireResistanceEffect != null || hasFireProtectionArmor) {
-            switchEffect(entity, BPungentEffect, MNDEffects.GPUNGENT.get());
+        if (entity.fireImmune() || fireResistanceEffect != null) {
+            switchEffect(entity, BPungentEffect, MNDEffects.GPUNGENT.value());
         } else {
-            switchEffect(entity, GPungentEffect, MNDEffects.BPUNGENT.get());
+            switchEffect(entity, GPungentEffect, MNDEffects.BPUNGENT.value());
         }
 
         if (isInFireCondition(entity) || entity.isInLava() || entity.isOnFire()) {
@@ -40,14 +42,15 @@ public class GoodPungentEffect extends MobEffect {
 
                 entity.heal(2.0F);
                 if (entity.getHealth() < entity.getMaxHealth()) {
-                    entity.setSecondsOnFire(3);
+                    entity.setRemainingFireTicks(3);
                 } else {
-                    entity.setSecondsOnFire(0);
+                    entity.setRemainingFireTicks(0);
                     entity.clearFire();
                 }
 
             }
         }
+        return true;
     }
 
     private void switchEffect(LivingEntity entity, MobEffectInstance currentEffect, MobEffect newEffect) {
@@ -55,7 +58,7 @@ public class GoodPungentEffect extends MobEffect {
             int duration = currentEffect.getDuration();
             int level = currentEffect.getAmplifier();
             entity.removeEffect(currentEffect.getEffect());
-            entity.addEffect(new MobEffectInstance(newEffect, duration, level));
+            entity.addEffect(new MobEffectInstance((Holder<MobEffect>) newEffect, duration, level));
         }
     }
 
@@ -87,7 +90,7 @@ public class GoodPungentEffect extends MobEffect {
     }
 
     @Override
-    public boolean isDurationEffectTick(int duration, int amplifier) {
+    public boolean shouldApplyEffectTickThisTick(int duration, int amplifier) {
         int i = 40 >> amplifier;
         if (i > 0) {
             return duration % i == 0;

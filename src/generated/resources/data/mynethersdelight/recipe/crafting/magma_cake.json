@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "farmersdelight:straw"
+    },
+    "H": {
+      "item": "mynethersdelight:hot_cream"
+    },
+    "M": {
+      "item": "minecraft:magma_cream"
+    },
+    "P": {
+      "item": "minecraft:gunpowder"
+    }
+  },
+  "pattern": [
+    "MMM",
+    "PHP",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "mynethersdelight:magma_cake"
+  }
+}

@@ -13,6 +13,6 @@ public class CompatibilityTags {
     }
 
     private static TagKey<Item> externalItemTag(String modId, String path) {
-        return ItemTags.create(new ResourceLocation(modId, path));
+        return ItemTags.create(ResourceLocation.fromNamespaceAndPath(modId, path));
     }
 }

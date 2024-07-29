@@ -23,7 +23,6 @@ import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import java.util.EnumSet;
 import java.util.List;
 
-
 public class EatMagmaCakeGoal extends Goal {
     private static final int COOLDOWN_TICKS = 5;
     private static final int TONGUE_ANIMATION_DURATION = 10;

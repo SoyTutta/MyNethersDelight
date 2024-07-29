@@ -1,0 +1,37 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_any_ingredient": {
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "minecraft:crimson_fungus",
+              "minecraft:warped_fungus",
+              "mynethersdelight:strider_slice",
+              "mynethersdelight:minced_strider"
+            ]
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mynethersdelight:cooking/cooking/strider_and_grilled_fungus"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_any_ingredient"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mynethersdelight:cooking/cooking/strider_and_grilled_fungus"
+    ]
+  }
+}

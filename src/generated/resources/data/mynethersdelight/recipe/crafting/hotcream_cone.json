@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:hot_cream"
+    },
+    {
+      "item": "mynethersdelight:powder_cannon"
+    },
+    {
+      "item": "mynethersdelight:powder_cannon"
+    },
+    {
+      "item": "mynethersdelight:powder_cannon"
+    }
+  ],
+  "result": {
+    "count": 3,
+    "id": "mynethersdelight:hot_cream_cone"
+  }
+}

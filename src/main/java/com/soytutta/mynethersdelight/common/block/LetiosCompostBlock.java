@@ -22,9 +22,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.common.IPlantable;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
+import net.neoforged.neoforge.common.util.TriState;
 
 public class LetiosCompostBlock extends Block {
     public static IntegerProperty FORGOTING = IntegerProperty.create("forgoting", 0, 9);
@@ -110,10 +110,12 @@ public class LetiosCompostBlock extends Block {
             level.addParticle(ParticleTypes.SOUL, (double)pos.getX() + (double)random.nextFloat(), (double)pos.getY() + 1.1, (double)pos.getZ() + (double)random.nextFloat(), 0.0, 0.0, 0.0);
         }
     }
-    public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
-            if (plantable instanceof NetherWartBlock && facing == Direction.UP) {
-                return true;
-            }
-            return super.canSustainPlant(state, world, pos, facing, plantable);
+    @Override
+    public TriState canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, BlockState plantState) {
+        if (plantState.getBlock() instanceof NetherWartBlock) {
+            return TriState.TRUE;
         }
+        return TriState.DEFAULT;
     }
+}
+

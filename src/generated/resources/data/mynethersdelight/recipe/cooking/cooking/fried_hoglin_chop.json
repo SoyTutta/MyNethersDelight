@@ -1,0 +1,34 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "mynethersdelight:hoglin_loin"
+        },
+        {
+          "item": "mynethersdelight:hoglin_sausage"
+        }
+      ]
+    },
+    {
+      "item": "minecraft:wheat"
+    },
+    {
+      "tag": "c:foods/milk"
+    },
+    {
+      "tag": "c:eggs"
+    },
+    {
+      "item": "mynethersdelight:bullet_pepper"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "mynethersdelight:fried_hoglin_chop"
+  }
+}

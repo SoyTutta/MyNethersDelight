@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_powder_cannon": {
+      "conditions": {
+        "items": [
+          {
+            "items": "mynethersdelight:powder_cannon"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mynethersdelight:crafting/powdery_plank"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_powder_cannon"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mynethersdelight:crafting/powdery_plank"
+    ]
+  }
+}

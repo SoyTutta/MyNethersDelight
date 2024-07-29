@@ -1,0 +1,43 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "tag": "c:foods/raw_meat"
+    },
+    {
+      "tag": "c:foods/milk"
+    },
+    {
+      "tag": "mynethersdelight:hot_spice"
+    },
+    {
+      "tag": "c:crops/rice"
+    },
+    {
+      "type": "neoforge:difference",
+      "base": {
+        "tag": "c:foods/vegetable"
+      },
+      "subtracted": {
+        "item": "minecraft:melon_slice"
+      }
+    },
+    {
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "minecraft:pumpkin"
+        },
+        {
+          "item": "farmersdelight:pumpkin_slice"
+        }
+      ]
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "mynethersdelight:spicy_curry"
+  }
+}

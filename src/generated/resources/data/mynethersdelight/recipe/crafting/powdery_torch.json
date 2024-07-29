@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "mynethersdelight:powder_cannon"
+    },
+    "P": {
+      "item": "mynethersdelight:bullet_pepper"
+    }
+  },
+  "pattern": [
+    "P",
+    "#"
+  ],
+  "result": {
+    "count": 2,
+    "id": "mynethersdelight:powdery_torch"
+  }
+}

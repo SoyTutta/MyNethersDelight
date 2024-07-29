@@ -32,7 +32,7 @@ import java.util.List;
 @ParametersAreNonnullByDefault
 @JeiPlugin
 public class JEIPlugin implements IModPlugin {
-    private static final ResourceLocation ID = new ResourceLocation("mynethersdelight", "jei_plugin");
+    private static final ResourceLocation ID = ResourceLocation.fromNamespaceAndPath("mynethersdelight", "jei_plugin");
 
     public JEIPlugin() {
     }

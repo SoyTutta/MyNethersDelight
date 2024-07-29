@@ -1,6 +1,8 @@
 {
-    "pack": {
-        "description": "My Nether's Delight Resources",
-        "pack_format": 15
-    }
+  "pack": {
+    "description": {
+      "text": "${mod_id} resources"
+    },
+    "pack_format": 15
+  }
 }

@@ -1,0 +1,21 @@
+{
+  "type": "farmersdelight:cooking",
+  "cookingtime": 400,
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "item": "mynethersdelight:boiled_egg"
+    },
+    {
+      "tag": "mynethersdelight:hot_spice"
+    },
+    {
+      "tag": "c:foods/raw_bacon"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 2,
+    "id": "mynethersdelight:deviled_egg"
+  }
+}

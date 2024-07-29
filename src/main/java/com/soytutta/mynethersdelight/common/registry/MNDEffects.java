@@ -7,21 +7,13 @@ package com.soytutta.mynethersdelight.common.registry;
 
 import com.soytutta.mynethersdelight.common.effect.GoodPungentEffect;
 import com.soytutta.mynethersdelight.common.effect.PungentEffect;
+import net.minecraft.core.Holder;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.effect.MobEffect;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class MNDEffects {
-    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(ForgeRegistries.MOB_EFFECTS, "mynethersdelight");
-    public static final RegistryObject<MobEffect> GPUNGENT;
-    public static final RegistryObject<MobEffect> BPUNGENT;
-
-    public MNDEffects() {
-    }
-
-    static {
-        GPUNGENT = EFFECTS.register("g_pungent", GoodPungentEffect::new);
-        BPUNGENT = EFFECTS.register("b_pungent", PungentEffect::new);
-    }
+    public static final DeferredRegister<MobEffect> EFFECTS = DeferredRegister.create(Registries.MOB_EFFECT, "mynethersdelight");
+    public static final Holder<MobEffect> GPUNGENT = EFFECTS.register("g_pungent", GoodPungentEffect::new);
+    public static final Holder<MobEffect> BPUNGENT = EFFECTS.register("b_pungent", PungentEffect::new);
 }

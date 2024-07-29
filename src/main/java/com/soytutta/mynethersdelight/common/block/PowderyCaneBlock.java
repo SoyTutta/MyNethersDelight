@@ -3,6 +3,7 @@ package com.soytutta.mynethersdelight.common.block;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import com.mojang.serialization.MapCodec;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
@@ -14,7 +15,7 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,30 +23,28 @@ import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.block.state.properties.Property;
-import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.common.ForgeHooks;
-import net.minecraftforge.common.IPlantable;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
+import net.neoforged.neoforge.common.CommonHooks;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 
 import java.util.Random;
 
-public class PowderyCaneBlock extends BushBlock implements IPlantable, BonemealableBlock {
-    public static final BooleanProperty LIT = BooleanProperty.create("lit");
+public class PowderyCaneBlock extends BushBlock implements BonemealableBlock {
+    public static final MapCodec<PowderyCaneBlock> CODEC = simpleCodec(PowderyCaneBlock::new);
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final BooleanProperty BASE = BooleanProperty.create("base");
     public static final BooleanProperty LEAVE = BooleanProperty.create("leave");
     public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 2);
@@ -57,6 +56,11 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
         this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false).setValue(LEAVE, false).setValue(BASE, false).setValue(PRESSURE, 0).setValue(AGE, 0));
     }
 
+    @Override
+    protected MapCodec<? extends PowderyCaneBlock> codec() {
+        return CODEC;
+    }
+
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         builder.add(LIT, BASE, LEAVE, AGE, PRESSURE);
@@ -64,7 +68,7 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
 
     @Override
     @SuppressWarnings("deprecation")
-    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
         return new ItemStack(MNDItems.BULLET_PEPPER.get());
     }
 
@@ -133,9 +137,9 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
         int age = state.getValue(AGE);
         BlockState blockBelow = world.getBlockState(pos.below());
 
-        if (age < 2 && ForgeHooks.onCropsGrowPre(world, pos, state, random.nextInt(3) == 0) && (blockBelow.is(MNDBlocks.RESURGENT_SOIL.get()) || blockBelow.is(MNDBlocks.POWDERY_CANNON.get()))) {
+        if (age < 2 && CommonHooks.canCropGrow(world, pos, state, random.nextInt(3) == 0) && (blockBelow.is(MNDBlocks.RESURGENT_SOIL.get()) || blockBelow.is(MNDBlocks.POWDERY_CANNON.get()))) {
             world.setBlock(pos, state.setValue(AGE, age + 1), 2);
-            ForgeHooks.onCropsGrowPost(world, pos, state);
+            CommonHooks.fireCropGrowPost(world, pos, state);
         }
         else if (world.isEmptyBlock(pos.above())) {
             world.setBlockAndUpdate(pos.above(), MNDBlocks.BULLET_PEPPER.get().defaultBlockState());
@@ -161,18 +165,19 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
     }
 
     @Override
-    public void playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
         if (!level.isClientSide && state.getValue(PRESSURE) < 2 && !player.isCrouching()) {
             level.setBlock(pos, state.setValue(PRESSURE, state.getValue(PRESSURE) + 1), 2);
         }
         if (state.getValue(LIT)) {
             ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
-            if (!heldItem.is(ForgeTags.TOOLS_KNIVES) || !heldItem.is(net.minecraftforge.common.Tags.Items.SHEARS)) {
+            if (!heldItem.is(CommonTags.TOOLS_KNIFE) || !heldItem.is(net.neoforged.neoforge.common.Tags.Items.TOOLS_SHEAR)) {
                 int age = state.hasProperty(AGE) ? state.getValue(AGE) : 0;
                 explodeAndReset(level, pos, state, age);
             }
         }
         super.playerWillDestroy(level, pos, state, player);
+        return state;
     }
 
 
@@ -208,10 +213,10 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
 
     @Override
     @SuppressWarnings("deprecation")
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult context) {
+    protected ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         ItemStack heldItem = player.getItemInHand(hand);
 
-         if (heldItem.is(ForgeTags.TOOLS_KNIVES) || heldItem.is(net.minecraftforge.common.Tags.Items.SHEARS)) {
+        if (heldItem.is(CommonTags.TOOLS_KNIFE) || heldItem.is(net.neoforged.neoforge.common.Tags.Items.TOOLS_SHEAR)) {
              int age = state.getValue(AGE);
              if (state.getValue(LIT)) {
                  if (age > 0) {
@@ -220,17 +225,27 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
                  int j = 2 + level.random.nextInt(3);
                  popResource(level, pos, new ItemStack(MNDItems.BULLET_PEPPER.get(), j));
                  level.setBlock(pos, state.setValue(LIT, Boolean.FALSE), 2);
-                 heldItem.hurtAndBreak(1, player, (action) -> { action.broadcastBreakEvent(hand); });
+                 heldItem.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                  level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
              }
              else if (state.getValue(LEAVE)) {
                  level.setBlock(pos, state.setValue(LEAVE, Boolean.FALSE), 2);
-                 heldItem.hurtAndBreak(1, player, (action) -> { action.broadcastBreakEvent(hand); });
+                 heldItem.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                  level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
              }
-             return InteractionResult.sidedSuccess(level.isClientSide);
+             return ItemInteractionResult.sidedSuccess(level.isClientSide);
          }
-        return super.use(state, level, pos, player, hand, context);
+
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (!level.isClientSide && state.getValue(PRESSURE) < 2) {
+            level.setBlock(pos, state.setValue(PRESSURE, state.getValue(PRESSURE) + 1), 2);
+            return InteractionResult.SUCCESS;
+        }
+
+        return InteractionResult.PASS;
     }
 
     @Override
@@ -239,22 +254,12 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
     }
 
     @Override
-    public boolean isPathfindable(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull PathComputationType path) {
-        return false;
+    public PathType getBlockPathType(BlockState state, BlockGetter world, BlockPos pos, @Nullable Mob entity) {
+        return state.getValue(LIT) ? PathType.DAMAGE_FIRE : PathType.DAMAGE_OTHER;
     }
 
     @Override
-    public BlockPathTypes getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
-        return BlockPathTypes.DAMAGE_OTHER;
-    }
-
-    @Override
-    public BlockPathTypes getAdjacentBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, BlockPathTypes originalType) {
-        return BlockPathTypes.DANGER_OTHER;
-    }
-
-    @Override
-    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClientSide) {
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
         return false;
     }
 

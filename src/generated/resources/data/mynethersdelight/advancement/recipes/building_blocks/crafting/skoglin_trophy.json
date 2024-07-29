@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_skoglin_trophy": {
+      "conditions": {
+        "items": [
+          {
+            "items": "mynethersdelight:skoglin_trophy"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mynethersdelight:crafting/skoglin_trophy"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_skoglin_trophy"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mynethersdelight:crafting/skoglin_trophy"
+    ]
+  }
+}

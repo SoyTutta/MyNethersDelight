@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_minced_strider": {
+      "conditions": {
+        "items": [
+          {
+            "items": "mynethersdelight:minced_strider"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mynethersdelight:crafting/striderloaf"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_minced_strider"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mynethersdelight:crafting/striderloaf"
+    ]
+  }
+}

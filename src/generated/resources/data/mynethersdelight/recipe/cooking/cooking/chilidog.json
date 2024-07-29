@@ -1,0 +1,24 @@
+{
+  "type": "farmersdelight:cooking",
+  "container": {
+    "count": 1,
+    "id": "mynethersdelight:hotdog"
+  },
+  "experience": 0.35,
+  "ingredients": [
+    {
+      "tag": "mynethersdelight:hot_spice"
+    },
+    {
+      "tag": "c:foods/raw_meat"
+    },
+    {
+      "item": "minecraft:nether_wart"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "id": "mynethersdelight:chilidog"
+  }
+}

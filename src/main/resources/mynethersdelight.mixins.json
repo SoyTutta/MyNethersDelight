@@ -5,8 +5,7 @@
   "refmap": "mynethersdelight.refmap.json",
   "mixins": [
     "FrogEntityMixin",
-    "amendments.InteractEventsMixin",
-    "FireworkRocketRecipeMixin"
+    "amendments.InteractEventsMixin"
   ],
   "client": [
   ],

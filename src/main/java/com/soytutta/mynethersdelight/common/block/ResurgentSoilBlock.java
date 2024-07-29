@@ -16,9 +16,13 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.*;
+import net.neoforged.neoforge.common.CommonHooks;
+import net.neoforged.neoforge.common.ItemAbilities;
+import net.neoforged.neoforge.common.ItemAbility;
+import net.neoforged.neoforge.common.util.TriState;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
@@ -177,10 +181,10 @@ public class ResurgentSoilBlock extends Block {
 
     private void performBonemealIfPossible(Block block, BlockPos position, BlockState state, ServerLevel level, int distance) {
         if (block instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get() / distance) {
-            if (growable.isValidBonemealTarget(level, position, state, false) && ForgeHooks.onCropsGrowPre(level, position, state, true)) {
+            if (growable.isValidBonemealTarget(level, position.above(),state) && CommonHooks.canCropGrow(level, position.above(), state, true)) {
                 growable.performBonemeal(level, level.random, position, state);
                 level.levelEvent(2005, position, 0);
-                ForgeHooks.onCropsGrowPost(level, position, state);
+                CommonHooks.fireCropGrowPost(level, position, state);
             } else {
                 BlockPos checkPos = position.above();
                 BlockState checkState = level.getBlockState(checkPos);
@@ -262,7 +266,8 @@ public class ResurgentSoilBlock extends Block {
             return true;  // Wither Rose can replace other FlowerBlocks
         } else if (block instanceof DoublePlantBlock &&
                 level.getBlockState(newPos.above()).getBlock() == Blocks.AIR) {
-            return ((DoublePlantBlock) block).canSurvive(block.defaultBlockState(), level, newPos);
+            return blockBelowState.getBlock() == ModBlocks.RICH_SOIL_FARMLAND.get()
+                    || blockBelowState.getBlock() == MNDBlocks.RESURGENT_SOIL_FARMLAND.get();
         } else  if (block instanceof NetherWartBlock) {
             return blockBelowState.getBlock() == Blocks.SOUL_SAND
                     || blockBelowState.getBlock() == MNDBlocks.RESURGENT_SOIL.get()
@@ -332,14 +337,20 @@ public class ResurgentSoilBlock extends Block {
         }
     }
 
+    @Override
     @Nullable
-    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ToolAction toolAction, boolean simulate) {
-        return toolAction.equals(ToolActions.HOE_TILL) && context.getLevel().getBlockState(context.getClickedPos().above()).isAir() ? MNDBlocks.RESURGENT_SOIL_FARMLAND.get().defaultBlockState() : null;
+    public BlockState getToolModifiedState(BlockState state, UseOnContext context, ItemAbility toolAction, boolean simulate) {
+        if (toolAction.equals(ItemAbilities.HOE_TILL) && context.getLevel().getBlockState(context.getClickedPos().above()).isAir()) {
+            return  MNDBlocks.RESURGENT_SOIL_FARMLAND.get().defaultBlockState();
+        }
+        return null;
     }
 
     @Override
-    public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
-        PlantType plantType = plantable.getPlantType(world, pos.relative(facing));
-        return plantType != PlantType.CROP;
+    public TriState canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, BlockState plantState) {
+        if (plantState.getBlock() instanceof NetherWartBlock) {
+            return TriState.TRUE;
+        }
+        return TriState.DEFAULT;
     }
 }

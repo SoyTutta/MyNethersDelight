@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "nether_trophy",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:hoglin_trophy"
+    },
+    {
+      "tag": "mynethersdelight:hoglin_waxed"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "mynethersdelight:waxed_hoglin_trophy"
+  }
+}
