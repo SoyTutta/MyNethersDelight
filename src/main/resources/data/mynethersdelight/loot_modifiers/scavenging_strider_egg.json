@@ -3,11 +3,11 @@
   "conditions": [
     {
       "condition": "minecraft:entity_properties",
-      "entity": "killer",
+     "entity": "attacker",
       "predicate": {
         "equipment": {
           "mainhand": {
-            "tag": "farmersdelight:tools/knives"
+            "items": "#farmersdelight:tools/knives"
           }
         }
       }
@@ -20,9 +20,14 @@
       }
     },
     {
-      "condition": "minecraft:random_chance_with_looting",
-      "chance": 0.75,
-      "looting_multiplier": 0.5
+      "condition": "minecraft:random_chance_with_enchanted_bonus",
+      "enchantment": "minecraft:looting",
+      "unenchanted_chance": 0.5,
+      "enchanted_chance": {
+        "type": "minecraft:linear",
+        "base": 0.5,
+        "per_level_above_first": 0.1
+      }
     }
   ],
   "item": "mynethersdelight:strider_rock"

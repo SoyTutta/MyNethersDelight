@@ -4,21 +4,15 @@ import com.soytutta.mynethersdelight.common.registry.MNDEffects;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.minecraft.world.item.enchantment.Enchantments;
-import net.minecraft.world.item.enchantment.ItemEnchantments;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-
-import java.util.stream.StreamSupport;
-
-import static net.minecraft.world.item.enchantment.EnchantmentHelper.getEnchantmentsForCrafting;
 
 public class GoodPungentEffect extends MobEffect {
     public GoodPungentEffect() {
@@ -58,7 +52,8 @@ public class GoodPungentEffect extends MobEffect {
             int duration = currentEffect.getDuration();
             int level = currentEffect.getAmplifier();
             entity.removeEffect(currentEffect.getEffect());
-            entity.addEffect(new MobEffectInstance((Holder<MobEffect>) newEffect, duration, level));
+            Holder<MobEffect> effectHolder = BuiltInRegistries.MOB_EFFECT.wrapAsHolder(newEffect);
+            entity.addEffect(new MobEffectInstance(effectHolder, duration, level));
         }
     }
 

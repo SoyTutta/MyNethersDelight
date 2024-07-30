@@ -7,8 +7,11 @@ package com.soytutta.mynethersdelight.common.item;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
+import com.soytutta.mynethersdelight.common.registry.MNDEffects;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.effect.MobEffect;
@@ -28,27 +31,28 @@ public class StriderEggItem extends DrinkableItem {
         super(properties, false, true);
     }
 
+    @Override
     public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
-        Iterator<MobEffectInstance> itr = consumer.getActiveEffects().iterator();
-        ArrayList<MobEffectInstance> harmfulEffects = new ArrayList<>();
+        List<MobEffectInstance> harmfulEffects = new ArrayList<>();
 
-        while (itr.hasNext()) {
-            MobEffectInstance selectedEffect = itr.next();
-            if ((selectedEffect.getEffect().value()).getCategory().equals(MobEffectCategory.HARMFUL) && selectedEffect.getCures().contains(EffectCures.MILK)) {
-                harmfulEffects.add(selectedEffect);
+        for (MobEffectInstance effectInstance : consumer.getActiveEffects()) {
+            if ((effectInstance.getEffect().value()).getCategory().equals(MobEffectCategory.HARMFUL)
+                    && effectInstance.getCures().contains(EffectCures.MILK)) {
+            harmfulEffects.add(effectInstance);
             }
         }
 
         if (!harmfulEffects.isEmpty()) {
             MobEffectInstance selectedEffect = harmfulEffects.get(level.random.nextInt(harmfulEffects.size()));
-            Holder<MobEffect> effect = selectedEffect.getEffect();
-            consumer.removeEffect(effect);
             int remainingDuration = selectedEffect.getDuration();
-            int nourishDuration = remainingDuration / 10;
+            int nourishDuration = remainingDuration / 2;
+
             if (nourishDuration > 0) {
-                MobEffectInstance regenerationEffect = new MobEffectInstance(ModEffects.NOURISHMENT, nourishDuration * 3, 0);
-                consumer.addEffect(regenerationEffect);
+                consumer.addEffect(new MobEffectInstance(ModEffects.NOURISHMENT, nourishDuration, 0));
+                level.playSound(null, consumer.blockPosition(), SoundEvents.CHISELED_BOOKSHELF_INSERT_ENCHANTED, consumer.getSoundSource(), 1.0F, 1.0F);
             }
+
+            consumer.removeEffect(selectedEffect.getEffect());
         }
     }
 

@@ -9,7 +9,6 @@ import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import com.soytutta.mynethersdelight.common.tag.MyCommonTags;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
@@ -19,8 +18,6 @@ import vectorwing.farmersdelight.client.recipebook.CookingPotRecipeBookTab;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.data.builder.CookingPotRecipeBuilder;
-
-import java.util.function.Consumer;
 
 
 public class MNDCookingRecipes {
@@ -43,7 +40,7 @@ public class MNDCookingRecipes {
                 .addIngredient(MNDItems.GHASTA.get())
                 .addIngredient(CommonTags.FOODS_COOKED_EGG)
                 .addIngredient(MNDTags.HOT_SPICE)
-                .addIngredient(CommonTags.FOODS_RAW_PORK)
+                .addIngredient(Ingredient.of(MNDItems.HOGLIN_SAUSAGE.get(), ModItems.BACON.get()))
                 .unlockedByAnyIngredient(MNDItems.GHASTA.get(), MNDItems.BULLET_PEPPER.get(), Items.PORKCHOP)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .build(output, "mynethersdelight:cooking/spicy_noodle_soup");

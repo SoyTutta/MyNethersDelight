@@ -4,6 +4,7 @@ import com.soytutta.mynethersdelight.common.registry.MNDEffects;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -57,7 +58,8 @@ public class PungentEffect extends MobEffect {
             int duration = currentEffect.getDuration();
             int level = currentEffect.getAmplifier();
             entity.removeEffect(currentEffect.getEffect());
-            entity.addEffect(new MobEffectInstance((Holder<MobEffect>)newEffect, duration, level));
+            Holder<MobEffect> effectHolder = BuiltInRegistries.MOB_EFFECT.wrapAsHolder(newEffect);
+            entity.addEffect(new MobEffectInstance(effectHolder, duration, level));
         }
     }
 
