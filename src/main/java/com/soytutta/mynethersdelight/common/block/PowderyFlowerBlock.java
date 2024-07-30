@@ -216,8 +216,9 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
     }
 
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (!level.isClientSide && state.getValue(PRESSURE) < 2) {
-            level.setBlock(pos, state.setValue(PRESSURE, state.getValue(PRESSURE) + 1), 2);
+        if (!level.isClientSide && state.getValue(LIT)) {
+            int age = state.hasProperty(AGE) ? state.getValue(AGE) : 0;
+            explodeAndReset(level, pos, state, age);
             return InteractionResult.SUCCESS;
         }
 

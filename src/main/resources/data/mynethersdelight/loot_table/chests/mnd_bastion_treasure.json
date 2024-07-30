@@ -35,10 +35,8 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "enchantments": [
-                "mynethersdelight:poaching"
-              ],
-              "function": "minecraft:enchant_randomly"
+              "function": "minecraft:enchant_randomly",
+              "options": "mynethersdelight:poaching"
             }
           ],
           "name": "minecraft:book",

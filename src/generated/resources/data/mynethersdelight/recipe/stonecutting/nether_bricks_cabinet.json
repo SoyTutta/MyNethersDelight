@@ -1,8 +1,10 @@
 {
   "type": "minecraft:stonecutting",
-  "count": 1,
   "ingredient": {
     "item": "minecraft:nether_bricks"
   },
-  "result": "mynethersdelight:nether_bricks_cabinet"
+  "result": {
+    "count": 1,
+    "id": "mynethersdelight:nether_bricks_cabinet"
+  }
 }

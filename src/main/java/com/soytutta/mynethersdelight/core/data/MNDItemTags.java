@@ -81,7 +81,7 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(ItemTags.SOUL_FIRE_BASE_BLOCKS).add(MNDItems.LETIOS_COMPOST.get(), MNDItems.RESURGENT_SOIL.get());
 
         this.tag(ItemTags.MEAT).addTag(MyCommonTags.FOODS_RAW_HOGLIN).addTag(MyCommonTags.FOODS_COOKED_HOGLIN).add(MNDItems.MINCED_STRIDER.get(), MNDItems.ROAST_EAR.get());
-        this.tag(ItemTags.FROG_FOOD).add(MNDItems.MAGMA_CAKE.get(), MNDItems.MAGMA_CAKE_SLICE.get(), MNDItems.ROCK_SOUP.get());
+        this.tag(ItemTags.FROG_FOOD).add(MNDItems.MAGMA_CAKE.get(), MNDItems.MAGMA_CAKE_SLICE.get());
         this.tag(ItemTags.HOGLIN_FOOD).add(MNDItems.BULLET_PEPPER.get());
         this.tag(ItemTags.STRIDER_FOOD).add(MNDItems.HOT_CREAM_CONE.get(), MNDItems.BULLET_PEPPER.get());
         this.tag(ItemTags.STRIDER_TEMPT_ITEMS).add(MNDItems.HOT_CREAM.get(), MNDItems.BULLET_PEPPER.get());

@@ -5,14 +5,18 @@
 
 package com.soytutta.mynethersdelight.common.registry;
 
+import com.soytutta.mynethersdelight.MyNethersDelight;
 import com.soytutta.mynethersdelight.common.item.*;
 import com.soytutta.mynethersdelight.common.utility.MNDFoodValues;
 import com.soytutta.mynethersdelight.common.block.NetherStoveBlock;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.common.item.ConsumableItem;

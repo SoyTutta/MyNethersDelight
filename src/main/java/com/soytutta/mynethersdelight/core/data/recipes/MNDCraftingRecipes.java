@@ -14,6 +14,7 @@ import net.minecraft.data.recipes.*;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.item.crafting.StonecutterRecipe;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
@@ -72,6 +73,9 @@ public class MNDCraftingRecipes {
     }
 
     private static void recipesBlocks(RecipeOutput output) {
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(Items.NETHER_BRICKS), RecipeCategory.BUILDING_BLOCKS, MNDItems.NETHER_BRICKS_CABINET.get())
+                .unlockedBy("has_nether_bricks", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NETHER_BRICKS))
+                .save(output,"mynethersdelight:stonecutting/nether_bricks_cabinet");
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,MNDItems.BULLET_PEPPER_CRATE.get(), 1)
                 .requires(MNDItems.BULLET_PEPPER.get(),9)
                 .unlockedBy("has_pepper", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.BULLET_PEPPER.get()))

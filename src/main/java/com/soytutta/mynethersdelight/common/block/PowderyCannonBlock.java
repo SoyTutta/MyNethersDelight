@@ -7,6 +7,9 @@ import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -25,12 +28,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.util.TriState;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 
 import javax.annotation.Nullable;
 
@@ -144,6 +149,20 @@ public class PowderyCannonBlock  extends Block implements BonemealableBlock {
         BlockPos posAbove = pos.above();
         BlockState stateAbove = world.getBlockState(posAbove);
 
+        if (world.getBlockState(posAbove).is(MNDTags.POWDERY_CANE)) {
+            if (world.getBlockState(posAbove).hasProperty(STAGE) && world.getBlockState(posAbove).getValue(STAGE) > 0) {
+                if (world.isEmptyBlock(posAbove.above())) {
+                    world.setBlock(posAbove.above(), MNDBlocks.BULLET_PEPPER.get().defaultBlockState(), 3);
+                }
+            }
+        } else if (state.getValue(STAGE) == 0 && world.isEmptyBlock(pos.above())) {
+            int height = this.getHeightBelowUpToMax(world, pos) + 1;
+            if (height < 8 && CommonHooks.canCropGrow(world, pos, state, random.nextInt(3) == 0)) {
+                this.growCannon(state, world, pos, random, height);
+                CommonHooks.fireCropGrowPost(world, pos, state);
+            }
+        }
+
         if (state.getValue(LEAVES) != BambooLeaves.NONE && !state.getValue(LIT) && random.nextInt(900) != 0) {
             world.setBlock(pos, state.setValue(LIT, true), 2);
             world.playSound(null, pos, SoundEvents.CROSSBOW_LOADING_MIDDLE.value(), SoundSource.BLOCKS, 0.5F, 0.25F);
@@ -152,19 +171,6 @@ public class PowderyCannonBlock  extends Block implements BonemealableBlock {
             world.setBlock(pos, state.setValue(LIT, false), 2);
             world.playSound(null, pos, SoundEvents.CROSSBOW_LOADING_MIDDLE.value(), SoundSource.BLOCKS, 0.5F, 0.25F);
             world.setBlock(posAbove, stateAbove.setValue(LIT, true), 2);
-        }
-        if (state.getValue(STAGE) == 0 && world.isEmptyBlock(pos.above()) && world.getRawBrightness(pos.above(), 0) >= 9) {
-            int height = this.getHeightBelowUpToMax(world, pos) + 1;
-            if (height < 8 && CommonHooks.canCropGrow(world, pos, state, random.nextInt(3) == 0)) {
-                this.growCannon(state, world, pos, random, height);
-                CommonHooks.fireCropGrowPost(world, pos, state);
-            }
-        } else if (world.getBlockState(posAbove).is(MNDTags.POWDERY_CANE)) {
-            if (world.getBlockState(posAbove).hasProperty(STAGE) && world.getBlockState(posAbove).getValue(STAGE) > 0) {
-                if (world.isEmptyBlock(posAbove.above())) {
-                    world.setBlock(posAbove.above(), MNDBlocks.BULLET_PEPPER.get().defaultBlockState(), 3);
-                }
-            }
         }
     }
 
@@ -311,6 +317,49 @@ public class PowderyCannonBlock  extends Block implements BonemealableBlock {
         }
 
         return i;
+    }
+
+    @Override
+    public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {
+        if (!level.isClientSide && state.getValue(PRESSURE) < 2 && !player.isCrouching()) {
+            int pressure = state.getValue(PRESSURE);
+            level.setBlock(pos, state.setValue(PRESSURE, pressure + 1), 2);
+        }
+        if (state.getValue(LIT)) {
+            ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
+            if (!heldItem.is(CommonTags.TOOLS_KNIFE) || !heldItem.is(net.neoforged.neoforge.common.Tags.Items.TOOLS_SHEAR)) {
+                explodeAndDestroy(level, pos, state);
+            }
+        }
+        super.playerWillDestroy(level, pos, state, player);
+        return state;
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    protected ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
+        if (state.getValue(LIT)) {
+            ItemStack heldItem = player.getItemInHand(hand);
+
+            if (heldItem.is(CommonTags.TOOLS_KNIFE) || heldItem.is(net.neoforged.neoforge.common.Tags.Items.TOOLS_SHEAR)) {
+                heldItem.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
+                int j = 3 + level.random.nextInt(6);
+                popResource(level, pos, new ItemStack(MNDItems.BULLET_PEPPER.get(), j));
+                level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+                level.setBlock(pos, state.setValue(LIT, Boolean.FALSE), 3);
+                return ItemInteractionResult.sidedSuccess(level.isClientSide);
+            }
+        }
+        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+    }
+
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (!level.isClientSide && state.getValue(LIT)) {
+            explodeAndDestroy(level, pos, state);
+            return InteractionResult.SUCCESS;
+        }
+
+        return InteractionResult.PASS;
     }
 
     @Override
