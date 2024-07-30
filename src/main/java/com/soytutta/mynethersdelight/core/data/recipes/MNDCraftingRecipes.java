@@ -33,6 +33,11 @@ public class MNDCraftingRecipes {
     }
 
     private static void recipesVanillaAlternatives(RecipeOutput output) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,Items.SUGAR)
+                .requires(MNDItems.STRIDER_EGG.get())
+                .unlockedBy("has_sugar", InventoryChangeTrigger.TriggerInstance.hasItems(Items.SUGAR,MNDItems.STRIDER_EGG.get()))
+                .save(output, "mynethersdelight:crafting/sugar_alt");
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,Items.STICK)
                 .pattern("#").pattern("#")
                 .define('#', (Ingredient.of(Items.BAMBOO,MNDItems.POWDER_CANNON.get())))

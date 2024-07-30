@@ -11,7 +11,7 @@ tasks.named('wrapper', Wrapper).configure {
 }
 
 version = "${minecraft_version}-${mod_version}"
-group = 'soytutta.mynethersdelight' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group = mod_group_id
 
 repositories {
     maven {
@@ -29,7 +29,7 @@ repositories {
 }
 
 base {
-    archivesName = 'FarmersDelight'
+    archivesName = 'MyNethersDelight'
 }
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(21)

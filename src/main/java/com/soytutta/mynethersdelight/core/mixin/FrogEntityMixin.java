@@ -4,11 +4,12 @@ import com.soytutta.mynethersdelight.common.entity.ia.EatMagmaCakeGoal;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.animal.frog.Frog;
-import net.minecraft.world.level.Level;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import java.util.logging.Level;
 
 @Mixin(Frog.class)
 public abstract class FrogEntityMixin {

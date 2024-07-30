@@ -19,7 +19,6 @@ import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.data.builder.CookingPotRecipeBuilder;
 
-
 public class MNDCookingRecipes {
     public MNDCookingRecipes() {
     }
@@ -40,7 +39,7 @@ public class MNDCookingRecipes {
                 .addIngredient(MNDItems.GHASTA.get())
                 .addIngredient(CommonTags.FOODS_COOKED_EGG)
                 .addIngredient(MNDTags.HOT_SPICE)
-                .addIngredient(Ingredient.of(MNDItems.HOGLIN_SAUSAGE.get(), ModItems.BACON.get()))
+                .addIngredient(CommonTags.FOODS_RAW_PORK)
                 .unlockedByAnyIngredient(MNDItems.GHASTA.get(), MNDItems.BULLET_PEPPER.get(), Items.PORKCHOP)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .build(output, "mynethersdelight:cooking/spicy_noodle_soup");
@@ -57,7 +56,7 @@ public class MNDCookingRecipes {
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.DEVILED_EGG.get(), 2, 400, 1.0F)
                 .addIngredient(MNDItems.BOILED_EGG.get())
                 .addIngredient(MNDTags.HOT_SPICE)
-                .addIngredient(CommonTags.FOODS_RAW_BACON)
+                .addIngredient(Ingredient.of(MNDItems.HOGLIN_SAUSAGE.get(), ModItems.BACON.get()))
                 .unlockedByAnyIngredient(MNDItems.STRIDER_EGG.get(),MNDItems.BOILED_EGG.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .build(output, "mynethersdelight:cooking/deviled_egg");

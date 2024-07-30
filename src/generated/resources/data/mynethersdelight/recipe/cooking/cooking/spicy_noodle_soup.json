@@ -12,15 +12,7 @@
       "tag": "mynethersdelight:hot_spice"
     },
     {
-      "type": "neoforge:compound",
-      "children": [
-        {
-          "item": "mynethersdelight:hoglin_sausage"
-        },
-        {
-          "item": "farmersdelight:bacon"
-        }
-      ]
+      "tag": "c:foods/raw_pork"
     }
   ],
   "recipe_book_tab": "meals",
