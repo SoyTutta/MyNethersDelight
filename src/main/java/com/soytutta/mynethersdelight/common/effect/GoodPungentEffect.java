@@ -4,6 +4,7 @@ import com.soytutta.mynethersdelight.common.registry.MNDEffects;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -16,7 +17,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class GoodPungentEffect extends MobEffect {
     public GoodPungentEffect() {
-        super(MobEffectCategory.BENEFICIAL, 0);
+        super(MobEffectCategory.BENEFICIAL, 0, ParticleTypes.DRIPPING_DRIPSTONE_LAVA);
     }
 
     @Override

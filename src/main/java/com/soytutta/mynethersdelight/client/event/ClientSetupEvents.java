@@ -29,16 +29,10 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
         value = {Dist.CLIENT}
 )
 public class ClientSetupEvents {
-    public ClientSetupEvents() {
-    }
-
-    @SubscribeEvent
-    public static void onEntityRendererRegister(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(MNDEntityTypes.STRIDER_ROCK.get(), ThrownItemRenderer::new);
-    }
 
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(MNDEntityTypes.STRIDER_ROCK.get(), ThrownItemRenderer::new);
         event.registerBlockEntityRenderer(MNDBlockEntityTypes.NETHER_STOVE.get(), NetherStoveRenderer::new);
     }
 

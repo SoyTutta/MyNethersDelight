@@ -20,7 +20,7 @@ public class MyNethersDelight
         if (FMLEnvironment.dist.isClient()) {
             modEventBus.addListener(ClientSetupEvents::init);
         }
-        modEventBus.addListener(MNDCommonSetup::init);
+
         MNDItems.ITEMS.register(modEventBus);
         MNDBlocks.BLOCKS.register(modEventBus);
         MNDEffects.EFFECTS.register(modEventBus);

@@ -4,6 +4,7 @@ import com.soytutta.mynethersdelight.common.registry.MNDEffects;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Holder;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.effect.MobEffect;
 import net.minecraft.world.effect.MobEffectCategory;
@@ -16,9 +17,8 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class PungentEffect extends MobEffect {
     public PungentEffect() {
-        super(MobEffectCategory.NEUTRAL, 0);
+        super(MobEffectCategory.BENEFICIAL, 0, ParticleTypes.ASH);
     }
-
     @Override
     public boolean applyEffectTick(LivingEntity entity, int amplifier) {
         MobEffectInstance fireResistanceEffect = entity.getEffect(MobEffects.FIRE_RESISTANCE);

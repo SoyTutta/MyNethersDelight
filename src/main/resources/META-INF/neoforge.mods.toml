@@ -14,6 +14,9 @@ credits="Mpustovoi, Unroman, ChuijkYahus, SlimeSB, RaymondBlaze, TCGhost, Sarins
 authors="${mod_authors}"
 description="${mod_description}"
 
+[[mixins]]
+config = "mynethersdelight.mixins.json"
+
 [[dependencies.${mod_id}]]
     modId="neoforge"
     type="required"
