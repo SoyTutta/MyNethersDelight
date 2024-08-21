@@ -2,7 +2,6 @@
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by FernFlower decompiler)
 //
-
 package com.soytutta.mynethersdelight.core.data;
 
 import java.util.HashSet;
@@ -25,6 +24,7 @@ public class MNDLang extends LanguageProvider {
         super(output, "mynethersdelight", "en_us");
     }
 
+    @Override
     protected void addTranslations() {
         Set<Supplier<Block>> blocks = MNDBlocks.BLOCKS.getEntries().stream()
                 .map(entry -> (Supplier<Block>) entry::get)
@@ -33,18 +33,21 @@ public class MNDLang extends LanguageProvider {
                 .map(entry -> (Supplier<Item>) entry::get)
                 .collect(Collectors.toSet());
 
-        blocks.remove(MNDBlocks.LETIOS_COMPOST);
-        blocks.remove(MNDBlocks.BLOCK_OF_POWDERY_CANNON);
-        blocks.remove(MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON);
-        blocks.remove(MNDBlocks.WALL_POWDERY_TORCH);
-        blocks.remove(MNDBlocks.POWDERY_WALL_SIGN);
-        blocks.remove(MNDBlocks.POWDERY_WALL_HANGING_SIGN);
-        blocks.remove(MNDBlocks.STRIDERLOAF_BLOCK);
-        blocks.remove(MNDBlocks.COLD_STRIDERLOAF_BLOCK);
-        blocks.remove(MNDBlocks.GHASTA_WITH_CREAM_BLOCK);
+        blocks.removeIf(block -> Set.of(
+                MNDBlocks.LETIOS_COMPOST.get(),
+                MNDBlocks.BLOCK_OF_POWDERY_CANNON.get(),
+                MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get(),
+                MNDBlocks.WALL_POWDERY_TORCH.get(),
+                MNDBlocks.POWDERY_WALL_SIGN.get(),
+                MNDBlocks.POWDERY_WALL_HANGING_SIGN.get(),
+                MNDBlocks.STRIDERLOAF_BLOCK.get(),
+                MNDBlocks.COLD_STRIDERLOAF_BLOCK.get(),
+                MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get(),
+                MNDBlocks.MAGMA_CAKE_BLOCK.get()
+        ).contains(block.get()));
 
         blocks.forEach((b) -> {
-            String descriptionId = (b.get()).getDescriptionId();
+            String descriptionId = b.get().getDescriptionId();
             if (addedKeys.add(descriptionId)) {
                 String name = descriptionId.replaceFirst("block.mynethersdelight.", "");
                 name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("Of", "of");
@@ -57,6 +60,8 @@ public class MNDLang extends LanguageProvider {
             String descriptionId = i.get().getDescriptionId();
             if (addedKeys.add(descriptionId)) {
                 String name = descriptionId.replaceFirst("item.mynethersdelight.", "");
+                name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("A", "a");
+                name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("On", "on");
                 name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("Of", "of");
                 name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("And", "and");
                 name = toTitleCase(this.correctBlockItemName(name), "_").replaceAll("With", "with");
@@ -68,55 +73,54 @@ public class MNDLang extends LanguageProvider {
     }
 
     private void addCustomTranslations() {
-        addNotPresent("block.mynethersdelight.letios_compost", "Leteos Compost");
-        addNotPresent("block.mynethersdelight.powdery_block", "Block of Powdery Cannon");
-        addNotPresent("block.mynethersdelight.stripped_powdery_block", "Block of Stripped Powdery Cannon");
-        addNotPresent("block.mynethersdelight.striderloaf_block", "Striderloaf");
-        addNotPresent("block.mynethersdelight.cold_striderloaf_block", "Cold Striderloaf");
-        addNotPresent("block.mynethersdelight.ghasta_with_cream_block", "Ghasta with Cream");
+        this.add("block.mynethersdelight.letios_compost", "Leteos Compost");
+        this.add("block.mynethersdelight.powdery_block", "Block of Powdery Cannon");
+        this.add("block.mynethersdelight.stripped_powdery_block", "Block of Stripped Powdery Cannon");
+        this.add("block.mynethersdelight.striderloaf_block", "Striderloaf");
+        this.add("block.mynethersdelight.cold_striderloaf_block", "Cold Striderloaf");
+        this.add("block.mynethersdelight.ghasta_with_cream_block", "Ghasta with Cream");
+        this.add("block.mynethersdelight.magma_cake_block", "Magma Cake");
 
-        addNotPresent("mynethersdelight.itemGroup.main", "My Nether's Delight");
-        addNotPresent("effect.mynethersdelight.g_pungent", "Pungent");
-        addNotPresent("effect.mynethersdelight.g_pungent.desc", "Regenerate with heat");
-        addNotPresent("effect.mynethersdelight.b_pungent", "Pungent");
-        addNotPresent("effect.mynethersdelight.b_pungent.desc", "Increases heat sensitivity and prevents burns when leaving the heat zone");
-        addNotPresent("mynethersdelight.jei.forgoting", "Forgoting");
-        addNotPresent("mynethersdelight.jei.forgoting.nether", "Will only forget in the nether");
-        addNotPresent("mynethersdelight.jei.forgoting.accelerators", "Sped up by adjacent activators (see below)");
-        addNotPresent("mynethersdelight.jei.forgoting.light", "Sped up by adjacent flames (see below)");
-        addNotPresent("mynethersdelight.jei.forgoting.fluid", "Sped up by adjacent lava");
-        addNotPresent("mynethersdelight.block.feast.use_knife", "You need a Knife to cut this.");
-        addNotPresent("farmersdelight.tooltip.strider_egg", "Nourished by 1 Harmful Effect");
-        addNotPresent("farmersdelight.tooltip.hot_cream", "Burning Effects");
-        addNotPresent("farmersdelight.tooltip.strider_feed.when_feeding", "When fed to a Strider");
-        addNotPresent("farmersdelight.tooltip.magma_cake_slice", "Spicy frog Snack");
+        this.add("mynethersdelight.itemGroup.main", "My Nether's Delight");
+        this.add("effect.mynethersdelight.g_pungent", "Pungent");
+        this.add("effect.mynethersdelight.g_pungent.desc", "Regenerate with heat");
+        this.add("effect.mynethersdelight.b_pungent", "Pungent");
+        this.add("effect.mynethersdelight.b_pungent.desc", "Increases heat sensitivity and prevents burns when leaving the heat zone");
+        this.add("mynethersdelight.jei.forgoting", "Forgoting");
+        this.add("mynethersdelight.jei.forgoting.nether", "Will only forget in the nether");
+        this.add("mynethersdelight.jei.forgoting.accelerators", "Sped up by adjacent activators (see below)");
+        this.add("mynethersdelight.jei.forgoting.light", "Sped up by adjacent flames (see below)");
+        this.add("mynethersdelight.jei.forgoting.fluid", "Sped up by adjacent lava");
+        this.add("mynethersdelight.block.feast.space_required", "You need more space to serve this.");
+        this.add("mynethersdelight.block.feast.use_knife", "You need a Knife to cut this.");
+        this.add("farmersdelight.tooltip.strider_egg", "Nourished by 1 Harmful Effect");
+        this.add("farmersdelight.tooltip.hot_cream", "Burning Effects");
+        this.add("farmersdelight.tooltip.strider_feed.when_feeding", "When fed to a Strider");
+        this.add("farmersdelight.tooltip.magma_cake_slice", "Spicy frog Snack");
 
-        addNotPresent("mynethersdelight.jei.info.hot_cream", "It burns all active Effects converting them into Fire Resistance and Pungent.\n\nIf you serve it in a Cone it will only Burn one Effect!! Striders also prefer it served this way...");
-        addNotPresent("mynethersdelight.jei.info.strider_egg", "Wait... Are Striders Ovoviviparous? that's weird...\n\nAnyway, it's only obtainable by careful hunting.\nhard shell, it can only be eaten starry...");
-        addNotPresent("mynethersdelight.jei.info.hoglin_hide", "A great source of leather, it could also serve as a nice hunting trophy.\n\nIf you do not want to damage the leather, try to use something lighter than a Sword...");
-        addNotPresent("mynethersdelight.jei.info.r_soil", "Almost every plant or crop feels comfortable in this soil, if you want to moisten need fire instead of water.");
-        addNotPresent("mynethersdelight.jei.info.mushroom_colony", "Some Mushrooms form colonies when they are on top of Rich Soil or Resurgent Soil.");
-        addNotPresent("mynethersdelight.jei.info.fungus_colony", "Some Nethers Fungus form colonies when they are on top of Resurgent Soil.");
-        addNotPresent("mynethersdelight.jei.info.wild_powdery", "Powdery Canes are an invasive crop in Crimson Forests.\n\nIts Berries are explosive on Contact, try Cutting the red stem...");
-        addNotPresent("mynethersdelight.jei.info.plate_of_stuffed_hoglin", "It's astonishing how much Dishes can be obtained from such a Primitive Feast...");
-        addNotPresent("mynethersdelight.jei.info.plate_of_ghasta", "Is the ghast still alive?\nI took a portion recently, but it grew back.");
-        addNotPresent("mynethersdelight.jei.info.plate_of_striderloaf", "Once cooled, it takes away your appetite.");
+        this.add("mynethersdelight.jei.info.hot_cream", "It burns all active Effects converting them into Fire Resistance and Pungent.\n\nIf you serve it in a Cone it will only Burn one Effect!! Striders also prefer it served this way...");
+        this.add("mynethersdelight.jei.info.strider_egg", "Wait... Are Striders Ovoviviparous? that's weird...\n\nAnyway, it's only obtainable by careful hunting.\nhard shell, it can only be eaten starry...");
+        this.add("mynethersdelight.jei.info.hoglin_hide", "A great source of leather, it could also serve as a nice hunting trophy.\n\nIf you do not want to damage the leather, try to use something lighter than a Sword...");
+        this.add("mynethersdelight.jei.info.r_soil", "Almost every plant or crop feels comfortable in this soil, if you want to moisten need fire instead of water.");
+        this.add("mynethersdelight.jei.info.mushroom_colony", "Some Mushrooms form colonies when they are on top of Rich Soil or Resurgent Soil.");
+        this.add("mynethersdelight.jei.info.fungus_colony", "Some Nethers Fungus form colonies when they are on top of Resurgent Soil.");
+        this.add("mynethersdelight.jei.info.wild_powdery", "Powdery Canes are an invasive crop in Crimson Forests.\n\nIts Berries are explosive on Contact, try Cutting the red stem...");
+        this.add("mynethersdelight.jei.info.plate_of_stuffed_hoglin", "It's astonishing how much Dishes can be obtained from such a Primitive Feast...");
+        this.add("mynethersdelight.jei.info.plate_of_ghasta", "Is the ghast still alive?\nI took a portion recently, but it grew back.");
+        this.add("mynethersdelight.jei.info.plate_of_striderloaf", "Once cooled, it takes away your appetite.");
 
-        addNotPresent("enchantment.mynethersdelight.poaching", "Poaching");
-        addNotPresent("enchantment.mynethersdelight.poaching.desc", "Responsible hunting can provide you with extra ingredients!!!\nBut be careful about choosing your target...");
+        this.add("enchantment.mynethersdelight.poaching", "Poaching");
+        this.add("enchantment.mynethersdelight.poaching.desc", "Responsible hunting can provide you with extra ingredients!!!\nBut be careful about choosing your target...");
 
-        addNotPresent("item.miners_delight.strider_stew_cup", "Strider Stew Cup");
-        addNotPresent("item.miners_delight.spicy_noodle_soup_cup", "Spicy Noodle Soup");
-        addNotPresent("item.miners_delight.spicy_hoglin_stew_cup", "Spicy Hoglin Stew Cup");
-        addNotPresent("item.miners_delight.rock_soup_cup", "Rock Soup Cup");
+        this.add("item.mynethersdelight.bullet_pepper", "Bullet Pepper");
+
+        this.add("item.miners_delight.strider_stew_cup", "Strider Stew Cup");
+        this.add("item.miners_delight.spicy_noodle_soup_cup", "Spicy Noodle Soup");
+        this.add("item.miners_delight.spicy_hoglin_stew_cup", "Spicy Hoglin Stew Cup");
+        this.add("item.miners_delight.rock_soup_cup", "Rock Soup Cup");
     }
 
-    private void addNotPresent(String key, String translation) {
-        if (addedKeys.add(key)) {
-            this.add(key, translation);
-        }
-    }
-
+    @Override
     public String getName() {
         return "Lang Entries";
     }

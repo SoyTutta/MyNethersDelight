@@ -169,6 +169,9 @@ public class MNDItems {
     public static final Supplier<Item> STRIDERLOAF = ITEMS.register("plate_of_striderloaf", ()  ->
             new ConsumableItem(bowlFoodItem(MNDFoodValues.STRIDERLOAF), true)
     );
+    public static final Supplier<Item> COLD_STRIDERLOAF_BLOCK = ITEMS.register("cold_striderloaf", ()  ->
+            new BlockItem(MNDBlocks.COLD_STRIDERLOAF_BLOCK.get(), basicItem().stacksTo(1))
+    );
     public static final Supplier<Item> COLD_STRIDERLOAF = ITEMS.register("plate_of_cold_striderloaf", ()  ->
             new ConsumableItem(bowlFoodItem(MNDFoodValues.COLD_STRIDERLOAF), true)
     );
@@ -198,6 +201,9 @@ public class MNDItems {
     );
     public static final Supplier<Item> BLUE_TENDERLOIN_STEAK = ITEMS.register("blue_tenderloin_steak", ()  ->
             new ConsumableItem(bowlFoodItem(MNDFoodValues.BLUE_TENDERLOIN_STEAK), true)
+    );
+    public static final Supplier<Item> RED_LOIN_STICK = ITEMS.register("red_loin_on_a_stick", ()  ->
+            new ConsumableItem(foodItem(MNDFoodValues.RED_LOIN_STICK))
     );
     public static final Supplier<Item> FRIED_HOGLIN_CHOP = ITEMS.register("fried_hoglin_chop", ()  ->
             new ConsumableItem(bowlFoodItem(MNDFoodValues.FRIED_HOGLIN_CHOP), true)
@@ -259,8 +265,8 @@ public class MNDItems {
     public static final Supplier<Item> BURNT_ROLL = ITEMS.register("burnt_roll", ()  ->
             new ConsumableItem(foodItem(MNDFoodValues.BURNT_ROLL))
     );
-    public static final Supplier<Item> MAGMA_CAKE = ITEMS.register("magma_cake", () ->
-            new BlockItem(MNDBlocks.MAGMA_CAKE.get(), basicItem().stacksTo(1))
+    public static final Supplier<Item> MAGMA_CAKE = ITEMS.register("magma_cake_block", () ->
+            new BlockItem(MNDBlocks.MAGMA_CAKE_BLOCK.get(), basicItem().stacksTo(1))
     );
     public static final Supplier<Item> MAGMA_CAKE_SLICE = ITEMS.register("magma_cake_slice",
             () -> new ConsumableItem(foodItem(MNDFoodValues.MAGMA_CAKE_SLICE).stacksTo(16),

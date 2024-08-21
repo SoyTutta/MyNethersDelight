@@ -5,6 +5,7 @@
 
 package com.soytutta.mynethersdelight.core.data.recipes;
 
+import com.soytutta.mynethersdelight.MyNethersDelight;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
@@ -24,9 +25,17 @@ public class MNDSmeltingRecipes {
 
     public static void register(RecipeOutput output) {
         foodSmeltingRecipes("boiled_egg", Ingredient.of(MNDTags.BOILED_EGG_CANDIDATE), MNDItems.BOILED_EGG.get(), 0.35F, output);
-        foodSmeltingRecipes("ghast_bread", Ingredient.of(MNDItems.GHAST_DOUGH.get()), Items.BREAD, 0.35F, output);
         foodSmeltingRecipes("hoglin_loin", Ingredient.of(MNDItems.HOGLIN_LOIN.get()), MNDItems.COOKED_LOIN.get(), 0.35F, output);
         foodSmeltingRecipes("hoglin_sausage", Ingredient.of(MNDItems.HOGLIN_SAUSAGE.get()), MNDItems.ROASTED_SAUSAGE.get(), 0.35F, output);
+
+        SimpleCookingRecipeBuilder.smelting(Ingredient.of(MNDItems.GHAST_DOUGH.get()), RecipeCategory.FOOD,
+                        Items.BREAD, 0.35F, 200)
+                .unlockedBy("has_dough", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHAST_DOUGH.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, "bread") + "_from_smelting");
+        SimpleCookingRecipeBuilder.smoking(Ingredient.of(MNDItems.GHAST_DOUGH.get()), RecipeCategory.FOOD,
+                        Items.BREAD, 0.35F, 100)
+                .unlockedBy("has_dough", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHAST_DOUGH.get()))
+                .save(output, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, "bread") + "_from_smoking");
     }
 
     private static void foodSmeltingRecipes(String name, Ingredient ingredient, ItemLike result, float experience, RecipeOutput output) {

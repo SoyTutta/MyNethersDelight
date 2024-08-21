@@ -1,5 +1,6 @@
 package com.soytutta.mynethersdelight.common.block;
 
+import com.mojang.serialization.MapCodec;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
@@ -18,9 +19,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.BambooSaplingBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -28,6 +29,9 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec3;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
 import vectorwing.farmersdelight.common.tag.CommonTags;
 
@@ -35,14 +39,20 @@ import java.util.Random;
 
 import static com.soytutta.mynethersdelight.common.block.PowderyCaneBlock.LEAVE;
 
-public class PowderyFlowerBlock extends BambooSaplingBlock {
+public class PowderyFlowerBlock extends Block implements BonemealableBlock {
+    public static final MapCodec<PowderyFlowerBlock> CODEC = simpleCodec(PowderyFlowerBlock::new);
+    protected static final VoxelShape SAPLING_SHAPE = Block.box(4.0, 0.0, 4.0, 12.0, 12.0, 12.0);
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
     public static final IntegerProperty PRESSURE = IntegerProperty.create("pressure", 0, 2);
-    public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 2);
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_2;
 
     public PowderyFlowerBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false).setValue(PRESSURE, 0).setValue(AGE, 0));
+    }
+
+    public MapCodec<PowderyFlowerBlock> codec() {
+        return CODEC;
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
@@ -54,6 +64,11 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockState blockBelow = level.getBlockState(pos.below());
         return blockBelow.is(MNDTags.POWDERY_CANNON_PLANTABLE_ON) || blockBelow.is(MNDTags.POWDERY_CANE);
+    }
+
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        Vec3 vec3 = state.getOffset(level, pos);
+        return SAPLING_SHAPE.move(vec3.x, vec3.y, vec3.z);
     }
 
     @Override
@@ -68,6 +83,8 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
         }
         if (isLit && age < 2) {
             level.setBlock(pos, state.setValue(LIT, false), 2);
+        } else if (isLit && direction == Direction.DOWN) {
+            explodeAndReset((Level) level, pos, state, age);
         }
         return super.updateShape(state, direction, offsetState, level, pos, offsetPos);
     }
@@ -119,16 +136,16 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
 
         if (!maxHeight) {
             if (age != 2 && random.nextInt(8) == 0 && world.isEmptyBlock(pos.above()) && isBlockBelowLeave) {
-            this.growBamboo(world, pos);
+            this.growBullet(world, pos);
             } else if (age <= 2 && (isBlockBelowPerfectSoil || isBlockBelowPowderyCane || isBlockBelowPowderySoil) && world.isEmptyBlock(pos.above())) {
                 if (isBlockBelowPerfectSoil) {
-                this.growBamboo(world, pos);
+                this.growBullet(world, pos);
                 } else if (isBlockBelowPowderyCane && isBlockBelowLeave && random.nextInt(30) == 0) {
-                this.growBamboo(world, pos);
+                this.growBullet(world, pos);
                 } else if (!isBlockBelowLeave && random.nextInt(300) == 0) {
-                this.growBamboo(world, pos);
+                this.growBullet(world, pos);
                 } else if (!isBlockBelowPowderySoil && random.nextInt(1200) == 0) {
-                this.growBamboo(world, pos);
+                this.growBullet(world, pos);
                 }
             }
         }
@@ -235,8 +252,7 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
         return new ItemStack(MNDItems.BULLET_PEPPER.get());
     }
 
-    @Override
-    protected void growBamboo(Level level, BlockPos pos) {
+    protected void growBullet(Level level, BlockPos pos) {
         BlockState currentBlockState = level.getBlockState(pos);
         boolean isLit = currentBlockState.getValue(PowderyFlowerBlock.LIT);
         BlockState newBlockState = defaultBlockState();
@@ -245,4 +261,17 @@ public class PowderyFlowerBlock extends BambooSaplingBlock {
         }
         level.setBlock(pos.above(), newBlockState, 3);
     }
+
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state) {
+        return level.getBlockState(pos.above()).isAir();
+    }
+
+    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
+        return true;
+    }
+
+    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+        this.growBullet(level, pos);
+    }
+
 }

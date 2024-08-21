@@ -153,12 +153,24 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
     }
 
     @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext p_49479_) {
-        Direction direction = p_49479_.getHorizontalDirection();
-        BlockPos blockpos = p_49479_.getClickedPos();
-        BlockPos blockpos1 = blockpos.relative(direction);
-        Level level = p_49479_.getLevel();
-        return level.getBlockState(blockpos1).canBeReplaced(p_49479_) && level.getWorldBorder().isWithinBounds(blockpos1) ? (BlockState)this.defaultBlockState().setValue(FACING, direction) : null;
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        Direction direction = context.getHorizontalDirection();
+        BlockPos clickedPos = context.getClickedPos();
+        BlockPos adjacentPos = clickedPos.relative(direction);
+        Level level = context.getLevel();
+
+        if (level.getBlockState(adjacentPos).canBeReplaced(context) && level.getWorldBorder().isWithinBounds(adjacentPos)) {
+            if (canSurvive(level.getBlockState(adjacentPos), level, adjacentPos) &&
+                    canSurvive(this.defaultBlockState(), level, clickedPos)) {
+                return this.defaultBlockState().setValue(FACING, direction);
+            }
+        }
+        Player player = context.getPlayer();
+        if (player != null) {
+            player.displayClientMessage(MNDTextUtils.getTranslation("block.feast.space_required"), true);
+        }
+        return null;
     }
 
     @Override

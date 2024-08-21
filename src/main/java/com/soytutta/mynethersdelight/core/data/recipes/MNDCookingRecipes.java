@@ -36,7 +36,7 @@ public class MNDCookingRecipes {
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .build(output, "mynethersdelight:cooking/strider_stew");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.SPICY_NOODLE_SOUP.get(), 1, 200, 1.0F)
-                .addIngredient(MNDItems.GHASTA.get())
+                .addIngredient(MyCommonTags.FOODS_RICE_PASTA)
                 .addIngredient(CommonTags.FOODS_COOKED_EGG)
                 .addIngredient(MNDTags.HOT_SPICE)
                 .addIngredient(CommonTags.FOODS_RAW_PORK)
@@ -119,7 +119,7 @@ public class MNDCookingRecipes {
 
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.CHILIDOG.get(), 1, 200, 0.35F,MNDItems.HOTDOG.get())
                 .addIngredient(MNDTags.HOT_SPICE)
-                .addIngredient(Tags.Items.FOODS_RAW_MEAT)
+                .addIngredient(Ingredient.of(MNDItems.MINCED_STRIDER.get(),ModItems.MINCED_BEEF.get()))
                 .addIngredient(Items.NETHER_WART)
                 .unlockedByAnyIngredient(MNDItems.HOTDOG.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)

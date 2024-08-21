@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "ghast_bread": {
+    "has_dough": {
       "conditions": {
         "items": [
           {
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mynethersdelight:ghast_bread_from_campfire_cooking"
+        "recipe": "mynethersdelight:bread_from_smoking"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "ghast_bread"
+      "has_dough"
     ]
   ],
   "rewards": {
     "recipes": [
-      "mynethersdelight:ghast_bread_from_campfire_cooking"
+      "mynethersdelight:bread_from_smoking"
     ]
   }
 }

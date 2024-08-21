@@ -63,6 +63,7 @@ public class MNDCreativeTab {
                     output.accept(MNDItems.BREAKFAST_SAMPLER.get());
                     output.accept(MNDItems.COOKED_LOIN.get());
                     output.accept(MNDItems.BLUE_TENDERLOIN_STEAK.get());
+                    output.accept(MNDItems.RED_LOIN_STICK.get());
                     output.accept(MNDItems.FRIED_HOGLIN_CHOP.get());
 
                     output.accept(MNDItems.RAW_STUFFED_HOGLIN.get());
@@ -84,6 +85,7 @@ public class MNDCreativeTab {
                     output.accept(MNDItems.CRIMSON_STROGANOFF.get());
                     output.accept(MNDItems.STRIDERLOAF_BLOCK.get());
                     output.accept(MNDItems.STRIDERLOAF.get());
+                    output.accept(MNDItems.COLD_STRIDERLOAF_BLOCK.get());
                     output.accept(MNDItems.COLD_STRIDERLOAF.get());
 
                     output.accept(MNDItems.GHASTA.get());

@@ -42,15 +42,15 @@ public class MNDItemTags extends ItemTagsProvider {
 
     private void registerCommonTags() {
         this.tag(MyCommonTags.FOODS_RAW_STRIDER).add(MNDItems.STRIDER_SLICE.get(), MNDItems.MINCED_STRIDER.get());
-        this.tag(MyCommonTags.FOODS_RAW_HOGLIN).add(MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get(), ModItems.HAM.get());
-        this.tag(MyCommonTags.FOODS_COOKED_HOGLIN).add(MNDItems.COOKED_LOIN.get(), MNDItems.ROASTED_SAUSAGE.get(), ModItems.SMOKED_HAM.get());
+        this.tag(MyCommonTags.FOODS_RAW_HOGLIN).add(MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
+        this.tag(MyCommonTags.FOODS_COOKED_HOGLIN).add(MNDItems.COOKED_LOIN.get(), MNDItems.ROASTED_SAUSAGE.get());
         this.tag(MyCommonTags.FOODS_RAW_SAUSAGE).add(MNDItems.HOGLIN_SAUSAGE.get());
         this.tag(MyCommonTags.FOODS_COOKED_SAUSAGE).add(MNDItems.ROASTED_SAUSAGE.get());
         this.tag(CommonTags.FOODS_RAW_PORK).add(MNDItems.HOGLIN_SAUSAGE.get());
         this.tag(CommonTags.FOODS_COOKED_PORK).add(MNDItems.ROASTED_SAUSAGE.get());
         this.tag(MyCommonTags.FOODS_BOILED_EGG).add(MNDItems.BOILED_EGG.get());
         this.tag(MyCommonTags.FOODS_RAW_GHAST).add(MNDItems.GHASTA.get(), MNDItems.GHASMATI.get());
-        this.tag(CommonTags.FOODS_PASTA).add(MNDItems.GHASTA.get()); this.tag(CommonTags.CROPS_RICE).add(MNDItems.GHASMATI.get());
+        this.tag(MyCommonTags.FOODS_RICE_PASTA).add(MNDItems.GHASTA.get());this.tag(CommonTags.FOODS_PASTA).add(MNDItems.GHASTA.get()); this.tag(CommonTags.CROPS_RICE).add(MNDItems.GHASMATI.get());
         this.tag(CommonTags.FOODS_DOUGH).add(MNDItems.GHAST_DOUGH.get());
         this.tag(CommonTags.FOODS_COOKED_EGG).addTag(MyCommonTags.FOODS_BOILED_EGG);
     }
@@ -81,7 +81,6 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(ItemTags.SOUL_FIRE_BASE_BLOCKS).add(MNDItems.LETIOS_COMPOST.get(), MNDItems.RESURGENT_SOIL.get());
 
         this.tag(ItemTags.MEAT).addTag(MyCommonTags.FOODS_RAW_HOGLIN).addTag(MyCommonTags.FOODS_COOKED_HOGLIN).add(MNDItems.MINCED_STRIDER.get(), MNDItems.ROAST_EAR.get());
-        this.tag(ItemTags.FROG_FOOD).add(MNDItems.MAGMA_CAKE.get(), MNDItems.MAGMA_CAKE_SLICE.get());
         this.tag(ItemTags.HOGLIN_FOOD).add(MNDItems.BULLET_PEPPER.get());
         this.tag(ItemTags.STRIDER_FOOD).add(MNDItems.HOT_CREAM_CONE.get(), MNDItems.BULLET_PEPPER.get());
         this.tag(ItemTags.STRIDER_TEMPT_ITEMS).add(MNDItems.HOT_CREAM.get(), MNDItems.BULLET_PEPPER.get());

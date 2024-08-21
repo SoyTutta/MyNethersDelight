@@ -1,6 +1,5 @@
 package com.soytutta.mynethersdelight.common.block;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import com.mojang.serialization.MapCodec;
@@ -30,7 +29,6 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
@@ -68,12 +66,6 @@ public class PowderyCaneBlock extends BushBlock implements BonemealableBlock {
 
     @Override
     @SuppressWarnings("deprecation")
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, LevelReader level, BlockPos pos, Player player) {
-        return new ItemStack(MNDItems.BULLET_PEPPER.get());
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         Vec3 vec3 = state.getOffset(worldIn, pos);
         return SHAPE.move(vec3.x, vec3.y, vec3.z);
@@ -100,6 +92,9 @@ public class PowderyCaneBlock extends BushBlock implements BonemealableBlock {
         }
         else if (blockBelow.is(MNDBlocks.POWDERY_CANE.get()) && !state.getValue(BASE) && !state.getValue(LEAVE)) {
             state = state.setValue(LEAVE, new Random().nextInt(100) < 85);
+        }
+        if (direction == Direction.DOWN && state.getValue(PRESSURE) < 2) {
+            level.setBlock(pos, state.setValue(PRESSURE, state.getValue(PRESSURE) + 1), 2);
         }
         return super.updateShape(state, direction, offsetState, level, pos, offsetPos);
     }
@@ -137,7 +132,9 @@ public class PowderyCaneBlock extends BushBlock implements BonemealableBlock {
         int age = state.getValue(AGE);
         BlockState blockBelow = world.getBlockState(pos.below());
 
-        if (age < 2 && CommonHooks.canCropGrow(world, pos, state, random.nextInt(3) == 0) && (blockBelow.is(MNDBlocks.RESURGENT_SOIL.get()) || blockBelow.is(MNDBlocks.POWDERY_CANNON.get()))) {
+        if (age < 2 && CommonHooks.canCropGrow(world, pos, state,
+                random.nextInt(world.dimension() == Level.NETHER ? 6 : 12) == 0)
+                && (blockBelow.is(MNDBlocks.RESURGENT_SOIL.get()) || blockBelow.is(MNDBlocks.POWDERY_CANNON.get()))) {
             world.setBlock(pos, state.setValue(AGE, age + 1), 2);
             CommonHooks.fireCropGrowPost(world, pos, state);
         }

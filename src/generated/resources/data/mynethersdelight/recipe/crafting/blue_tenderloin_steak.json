@@ -4,6 +4,9 @@
   "group": "blue_tenderloin_steak_group",
   "ingredients": [
     {
+      "item": "mynethersdelight:cooked_loin"
+    },
+    {
       "item": "minecraft:warped_fungus"
     },
     [
@@ -17,9 +20,6 @@
         "item": "farmersdelight:straw"
       }
     ],
-    {
-      "item": "mynethersdelight:cooked_loin"
-    },
     {
       "item": "minecraft:bowl"
     }

@@ -3,7 +3,7 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "item": "mynethersdelight:ghasta"
+      "tag": "c:foods/rice_pasta"
     },
     {
       "tag": "c:foods/cooked_egg"

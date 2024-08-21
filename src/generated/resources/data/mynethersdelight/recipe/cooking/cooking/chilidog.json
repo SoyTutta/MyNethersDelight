@@ -10,7 +10,15 @@
       "tag": "mynethersdelight:hot_spice"
     },
     {
-      "tag": "c:foods/raw_meat"
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "mynethersdelight:minced_strider"
+        },
+        {
+          "item": "farmersdelight:minced_beef"
+        }
+      ]
     },
     {
       "item": "minecraft:nether_wart"

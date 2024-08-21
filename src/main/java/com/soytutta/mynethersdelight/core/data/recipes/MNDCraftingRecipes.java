@@ -308,13 +308,20 @@ public class MNDCraftingRecipes {
                  .save(output, "mynethersdelight:crafting/striderloaf");
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.BLUE_TENDERLOIN_STEAK.get())
+                .requires(MNDItems.COOKED_LOIN.get())
                 .requires(Blocks.WARPED_FUNGUS)
                 .requires(Ingredient.of(Items.WARPED_FUNGUS, Items.WARPED_ROOTS, ModItems.STRAW.get()))
-                .requires(MNDItems.COOKED_LOIN.get())
                 .requires(Items.BOWL)
                 .unlockedBy("has_hoglin_loin", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.HOGLIN_LOIN.get()))
                 .group("blue_tenderloin_steak_group")
-                 .save(output, "mynethersdelight:crafting/blue_tenderloin_steak");
+                .save(output, "mynethersdelight:crafting/blue_tenderloin_steak");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.RED_LOIN_STICK.get())
+                .requires(MNDItems.COOKED_LOIN.get())
+                .requires(Blocks.CRIMSON_FUNGUS)
+                .requires(Ingredient.of(Items.CRIMSON_FUNGUS, Items.RED_MUSHROOM))
+                .requires(Items.STICK)
+                .unlockedBy("has_hoglin_loin", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.HOGLIN_LOIN.get()))
+                .save(output, "mynethersdelight:crafting/red_loin_on_a_stick");
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.BREAKFAST_SAMPLER.get())
                 .requires(MNDItems.ROASTED_SAUSAGE.get(),2)
                 .requires(Ingredient.of(Items.HONEY_BOTTLE, MNDItems.STRIDER_EGG.get()))

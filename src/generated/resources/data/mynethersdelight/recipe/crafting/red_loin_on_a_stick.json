@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:cooked_loin"
+    },
+    {
+      "item": "minecraft:crimson_fungus"
+    },
+    [
+      {
+        "item": "minecraft:crimson_fungus"
+      },
+      {
+        "item": "minecraft:red_mushroom"
+      }
+    ],
+    {
+      "item": "minecraft:stick"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "mynethersdelight:red_loin_on_a_stick"
+  }
+}

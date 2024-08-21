@@ -11,6 +11,7 @@ import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
@@ -18,9 +19,9 @@ import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BiomeTags;
+import net.minecraft.util.FastColor;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
@@ -46,7 +47,6 @@ import net.neoforged.neoforge.common.ItemAbilities;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.CommonTags;
 
-import java.util.Random;
 import java.util.stream.Stream;
 
 
@@ -154,12 +154,19 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
         Direction facing = currentState.getValue(FACING);
         worldIn.setBlock(pos, MNDBlocks.ZOGLIN_TROPHY.get().defaultBlockState().setValue(FACING, facing), 3);
 
-//        for (int i = 0; i < 10; i++) {
-//            double d0 = (double) pos.getX() + random.nextDouble();
-//            double d1 = (double) pos.getY() + random.nextDouble();
-//            double d2 = (double) pos.getZ() + random.nextDouble();
-//            worldIn.sendParticles(ParticleTypes.ENTITY_EFFECT, d0, d1, d2, 1, 0.0D, 0.0D, 0.0D, 0.0D);
-//        }
+        int color = 5578058;
+        int alpha = 255;
+
+        int argbColor = FastColor.ARGB32.color(alpha, color);
+        ParticleOptions particleData = ColorParticleOption.create(ParticleTypes.ENTITY_EFFECT, argbColor);
+
+        for (int i = 0; i < 10; i++) {
+            double d0 = (double) pos.getX() + random.nextDouble();
+            double d1 = (double) pos.getY() + random.nextDouble();
+            double d2 = (double) pos.getZ() + random.nextDouble();
+
+            worldIn.sendParticles(particleData, d0, d1, d2, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+        }
     }
 
     @Override

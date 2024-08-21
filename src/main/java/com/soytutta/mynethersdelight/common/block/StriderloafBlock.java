@@ -1,7 +1,6 @@
 package com.soytutta.mynethersdelight.common.block;
 
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
-import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
@@ -9,15 +8,12 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -52,17 +48,17 @@ public class StriderloafBlock extends FeastBlock {
         worldIn.playSound(null, pos, sound, SoundSource.BLOCKS, 0.25F, 0.25F);
     }
 
-    public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (!level.isClientSide) {
-            Block targetBlock = (state.getBlock() == MNDBlocks.COLD_STRIDERLOAF_BLOCK.get() && hasLava(level, pos)) ?
-                    MNDBlocks.STRIDERLOAF_BLOCK.get() : (state.getBlock() == MNDBlocks.STRIDERLOAF_BLOCK.get() && !hasLava(level, pos)) ?
+    public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
+        if (!worldIn.isClientSide) {
+            Block targetBlock = (state.getBlock() == MNDBlocks.COLD_STRIDERLOAF_BLOCK.get() && hasLava(worldIn, pos)) ?
+                    MNDBlocks.STRIDERLOAF_BLOCK.get() : (state.getBlock() == MNDBlocks.STRIDERLOAF_BLOCK.get() && !hasLava(worldIn, pos)) ?
                     MNDBlocks.COLD_STRIDERLOAF_BLOCK.get() : null;
             if (targetBlock != null) {
                 BlockState newState = targetBlock.defaultBlockState()
                         .setValue(FACING, state.getValue(FACING))
                         .setValue(SERVINGS, state.getValue(SERVINGS));
                 SoundEvent sound = (targetBlock == MNDBlocks.STRIDERLOAF_BLOCK.get()) ? SoundEvents.STRIDER_HAPPY : SoundEvents.STRIDER_HURT;
-                updateBlockState(level, pos, newState, sound);
+                updateBlockState(worldIn, pos, newState, sound);
             }
         }
     }
@@ -70,7 +66,7 @@ public class StriderloafBlock extends FeastBlock {
     @Override
     public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
         if (worldIn.getBlockState(fromPos).getFluidState().is(FluidTags.LAVA)) {
-            tick(state, (ServerLevel) worldIn, pos, null);
+            randomTick(state, (ServerLevel) worldIn, pos, null);
         }
     }
 
@@ -91,10 +87,6 @@ public class StriderloafBlock extends FeastBlock {
 
     public boolean isRandomlyTicking(BlockState state) {
         return true;
-    }
-
-    public ItemStack getCloneItemStack(BlockState state, HitResult target, BlockGetter level, BlockPos pos, Player player) {
-        return new ItemStack(MNDItems.STRIDERLOAF_BLOCK.get());
     }
 
     static {

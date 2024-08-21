@@ -194,13 +194,13 @@ public class MNDBlocks {
             new StriderloafBlock(Properties.ofFullCopy(Blocks.CAKE), MNDItems.STRIDERLOAF, true)
     );
     public static final Supplier<Block> COLD_STRIDERLOAF_BLOCK = BLOCKS.register("cold_striderloaf_block", () ->
-            new StriderloafBlock(Properties.ofFullCopy(Blocks.CAKE).dropsLike(STRIDERLOAF_BLOCK.get()), MNDItems.COLD_STRIDERLOAF, true)
+            new StriderloafBlock(Properties.ofFullCopy(Blocks.CAKE), MNDItems.COLD_STRIDERLOAF, true)
     );
     public static final Supplier<Block> GHASTA_WITH_CREAM_BLOCK = BLOCKS.register("ghasta_with_cream_block", () ->
             new GhastaWithCreamBlock(Properties.ofFullCopy(Blocks.CAKE).lightLevel((light) ->  3)
                     , MNDItems.GHASTA_WITH_CREAM, true)
     );
-    public static final Supplier<Block> MAGMA_CAKE = BLOCKS.register("magma_cake", () ->
+    public static final Supplier<Block> MAGMA_CAKE_BLOCK = BLOCKS.register("magma_cake_block", () ->
             new MagmaCakeBlock (Block.Properties.ofFullCopy(Blocks.CAKE).lightLevel((light) ->  9)
                     , MNDItems.MAGMA_CAKE_SLICE)
     );

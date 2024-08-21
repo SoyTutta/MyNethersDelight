@@ -85,6 +85,9 @@ public class MNDFoodValues
                 .effect(() -> new MobEffectInstance(MobEffects.CONFUSION, 300, 0), 1.0F)
                 .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 1200, 0), 1.0F)
                 .build();
+        public static final FoodProperties RED_LOIN_STICK = (new FoodProperties.Builder())
+                .nutrition(10).saturationModifier(0.7F)
+                .build();
         public static final FoodProperties FRIED_HOGLIN_CHOP = (new FoodProperties.Builder())
                 .nutrition(12).saturationModifier(0.9f)
                 .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT, 1200, 0), 1.0F)

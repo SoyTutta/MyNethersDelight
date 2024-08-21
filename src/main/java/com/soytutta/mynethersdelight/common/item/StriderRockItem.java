@@ -2,17 +2,23 @@ package com.soytutta.mynethersdelight.common.item;
 
 import com.soytutta.mynethersdelight.common.entity.StriderRockEntity;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Position;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ThrownEgg;
 import net.minecraft.world.item.EggItem;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileItem;
 import net.minecraft.world.level.Level;
 
-public class StriderRockItem extends EggItem {
+public class StriderRockItem extends Item implements ProjectileItem {
     public StriderRockItem(Properties properties) {
         super(properties);
     }
@@ -34,5 +40,12 @@ public class StriderRockItem extends EggItem {
         }
 
         return InteractionResultHolder.sidedSuccess(itemStack, level.isClientSide());
+    }
+
+    @Override
+    public Projectile asProjectile(Level level, Position pos, ItemStack stack, Direction direction) {
+        StriderRockEntity thrownEgg = new StriderRockEntity(level, pos.x(), pos.y(), pos.z());
+        thrownEgg.setItem(stack);
+        return thrownEgg;
     }
 }

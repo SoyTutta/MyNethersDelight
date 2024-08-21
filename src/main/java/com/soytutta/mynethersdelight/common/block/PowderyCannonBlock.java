@@ -39,7 +39,7 @@ import vectorwing.farmersdelight.common.tag.CommonTags;
 
 import javax.annotation.Nullable;
 
-public class PowderyCannonBlock  extends Block implements BonemealableBlock {
+public class PowderyCannonBlock extends Block implements BonemealableBlock {
     public static final MapCodec<PowderyCannonBlock> CODEC = simpleCodec(PowderyCannonBlock::new);
 
     protected static final VoxelShape SMALL_SHAPE = Block.box(5.0, 0.0, 5.0, 11.0, 16.0, 11.0);
@@ -126,7 +126,7 @@ public class PowderyCannonBlock  extends Block implements BonemealableBlock {
         boolean isLit = state.getValue(LIT);
         if (!state.canSurvive(level, pos)) {
             if (isLit) {
-                explodeAndDestroy(level, pos, state);
+                explodeAndReset(level, pos, state);
             }
             level.destroyBlock(pos, true);
         }
@@ -137,7 +137,7 @@ public class PowderyCannonBlock  extends Block implements BonemealableBlock {
             level.setBlock(posAbove, stateAbove.setValue(PRESSURE, stateAbove.getValue(PRESSURE) + 1), 2);
         }
         if (pressure == 2 && isLit) {
-            explodeAndDestroy(level, pos, state);
+            explodeAndReset(level, pos, state);
         }
     }
 
@@ -146,28 +146,37 @@ public class PowderyCannonBlock  extends Block implements BonemealableBlock {
     }
 
     public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
+        if (world.isClientSide) return;
+
         BlockPos posAbove = pos.above();
         BlockState stateAbove = world.getBlockState(posAbove);
 
-        if (world.getBlockState(posAbove).is(MNDTags.POWDERY_CANE)) {
-            if (world.getBlockState(posAbove).hasProperty(STAGE) && world.getBlockState(posAbove).getValue(STAGE) > 0) {
-                if (world.isEmptyBlock(posAbove.above())) {
-                    world.setBlock(posAbove.above(), MNDBlocks.BULLET_PEPPER.get().defaultBlockState(), 3);
-                }
-            }
-        } else if (state.getValue(STAGE) == 0 && world.isEmptyBlock(pos.above())) {
-            int height = this.getHeightBelowUpToMax(world, pos) + 1;
-            if (height < 8 && CommonHooks.canCropGrow(world, pos, state, random.nextInt(3) == 0)) {
-                this.growCannon(state, world, pos, random, height);
-                CommonHooks.fireCropGrowPost(world, pos, state);
-            }
+        int maxHeight = world.dimension() == Level.NETHER ? 8 : 16;
+        int height = this.getHeightBelowUpToMax(world, pos) + 1;
+
+        boolean canGrow = state.getValue(STAGE) == 0 && world.isEmptyBlock(posAbove);
+        boolean isLit = state.getValue(LIT);
+        boolean hasLeaves = state.getValue(LEAVES) != BambooLeaves.NONE;
+
+        if (canGrow && height < maxHeight && CommonHooks.canCropGrow(world, pos, state, random.nextInt(3) == 0)) {
+            this.growCannon(state, world, pos, random, height);
+            CommonHooks.fireCropGrowPost(world, pos, state);
         }
 
-        if (state.getValue(LEAVES) != BambooLeaves.NONE && !state.getValue(LIT) && random.nextInt(900) != 0) {
-            world.setBlock(pos, state.setValue(LIT, true), 2);
-            world.playSound(null, pos, SoundEvents.CROSSBOW_LOADING_MIDDLE.value(), SoundSource.BLOCKS, 0.5F, 0.25F);
-        }
-        else if (state.getValue(LIT) && stateAbove.is(MNDBlocks.POWDERY_CANNON.get()) && !stateAbove.getValue(LIT)) {
+        if (!isLit && hasLeaves) {
+            if ((height == maxHeight || state.getValue(STAGE) > 0) && world.isEmptyBlock(posAbove)) {
+                world.setBlock(posAbove, MNDBlocks.BULLET_PEPPER.get().defaultBlockState(), 3);
+            }
+
+            if (random.nextInt(world.dimension() == Level.NETHER ? 300 : 900) == 0) {
+                world.setBlock(pos, state.setValue(LIT, true), 2);
+                world.playSound(null, pos, SoundEvents.CROSSBOW_LOADING_MIDDLE.value(), SoundSource.BLOCKS, 0.5F, 0.25F);
+            }
+        } else if (isLit && stateAbove.is(MNDBlocks.POWDERY_CANNON.get()) && !stateAbove.getValue(LIT)) {
+            if ((height >= maxHeight - 2 || stateAbove.getValue(STAGE) > 0) && world.isEmptyBlock(posAbove.above())) {
+                world.setBlock(posAbove.above(), MNDBlocks.BULLET_PEPPER.get().defaultBlockState(), 3);
+            }
+
             world.setBlock(pos, state.setValue(LIT, false), 2);
             world.playSound(null, pos, SoundEvents.CROSSBOW_LOADING_MIDDLE.value(), SoundSource.BLOCKS, 0.5F, 0.25F);
             world.setBlock(posAbove, stateAbove.setValue(LIT, true), 2);
@@ -183,19 +192,22 @@ public class PowderyCannonBlock  extends Block implements BonemealableBlock {
         if (!state.canSurvive(level, pos)) {
             level.scheduleTick(pos, this, 1);
             if (state.getValue(LIT)) {
-                explodeAndDestroy((Level) level, pos, state);
+                explodeAndReset((Level) level, pos, state);
             }
             level.destroyBlock(pos, true);
         }
         if (state.getValue(PRESSURE) > 0) {
             level.scheduleTick(pos, this, 1);
         }
-        if (direction == Direction.UP && offsetState.is(MNDBlocks.POWDERY_CANNON.get()) && offsetState.getValue(AGE) > state.getValue(AGE)) {
-            level.setBlock(pos, state.cycle(AGE), 2);
+        if (direction == Direction.UP && offsetState.is(MNDBlocks.POWDERY_CANNON.get())) {
+            if (offsetState.getValue(AGE) > state.getValue(AGE)) {
+                level.setBlock(pos, state.cycle(AGE), 2);
+            }
         }
         if (state.getValue(LEAVES) == BambooLeaves.NONE) {
             return state.setValue(LIT, false);
         }
+
         return super.updateShape(state, direction, offsetState, level, pos, offsetPos);
     }
 
@@ -258,20 +270,12 @@ public class PowderyCannonBlock  extends Block implements BonemealableBlock {
         }
     }
 
-    public void wasExploded(Level level, BlockPos pos, Explosion explosion) {
-        BlockState state = level.getBlockState(pos);
+    private void explodeAndReset(Level level, BlockPos pos, BlockState state) {
         if (!level.isClientSide && state.hasProperty(LIT) && state.getValue(LIT)) {
-            explodeAndDestroy(level, pos, state);
-        }
-    }
-
-    private void explodeAndDestroy(Level level, BlockPos pos, BlockState state) {
         level.playSound(null, pos, SoundEvents.CREEPER_PRIMED, SoundSource.BLOCKS, 0.5F, 0.25F);
-        for (int i = 1; i <= 5; i++) {
-            level.explode(null, pos.getX(), pos.getY() + i, pos.getZ(), 1.0F, Level.ExplosionInteraction.TNT);
-        }
+        level.explode(null, pos.getX(), pos.getY(), pos.getZ(), 3.0F,  false, Level.ExplosionInteraction.NONE);
         level.setBlock(pos, state.setValue(LIT, false), 2);
-        level.destroyBlock(pos, true);
+        }
     }
 
     protected void growCannon(BlockState state, Level level, BlockPos pos, RandomSource random, int height) {
@@ -299,6 +303,9 @@ public class PowderyCannonBlock  extends Block implements BonemealableBlock {
         int MH = 1 + level.random.nextInt(3);
         int j = (height < maxHeight || !(random.nextFloat() < 0.25F)) && height != (maxHeight - MH) ? 0 : 1;
         level.setBlock(pos.above(), this.defaultBlockState().setValue(AGE, i).setValue(LEAVES, leaves).setValue(STAGE, j), 3);
+        if ((height >= maxHeight - MH || height == maxHeight) && level.isEmptyBlock(pos.above(2))) {
+            level.setBlock(pos.above(2), MNDBlocks.BULLET_PEPPER.get().defaultBlockState(), 3);
+        }
     }
 
     protected int getHeightAboveUpToMax(BlockGetter level, BlockPos pos) {
@@ -328,7 +335,7 @@ public class PowderyCannonBlock  extends Block implements BonemealableBlock {
         if (state.getValue(LIT)) {
             ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
             if (!heldItem.is(CommonTags.TOOLS_KNIFE) || !heldItem.is(net.neoforged.neoforge.common.Tags.Items.TOOLS_SHEAR)) {
-                explodeAndDestroy(level, pos, state);
+                explodeAndReset(level, pos, state);
             }
         }
         super.playerWillDestroy(level, pos, state, player);
@@ -355,7 +362,7 @@ public class PowderyCannonBlock  extends Block implements BonemealableBlock {
 
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!level.isClientSide && state.getValue(LIT)) {
-            explodeAndDestroy(level, pos, state);
+            explodeAndReset(level, pos, state);
             return InteractionResult.SUCCESS;
         }
 
