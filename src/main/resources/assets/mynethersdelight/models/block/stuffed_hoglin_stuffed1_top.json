@@ -6,13 +6,12 @@
 		"0": "mynethersdelight:block/stuffed_hoglin_tray",
 		"1": "mynethersdelight:block/stuffed_hoglin_block",
 		"particle": "farmersdelight:block/tray_bottom"
-
 	},
 	"elements": [
 		{
-			"from": [11, 5, 10],
-			"to": [11, 9, 15],
-			"rotation": {"angle": -45, "axis": "y", "origin": [11, 7, 12.5]},
+			"from": [11, 5, 12],
+			"to": [11, 9, 17],
+			"rotation": {"angle": -45, "axis": "y", "origin": [11, 7, 14.5]},
 			"faces": {
 				"north": {"uv": [0, 0, 0, 1], "texture": "#1"},
 				"east": {"uv": [11, 15, 12.25, 16], "texture": "#1"},
@@ -23,9 +22,9 @@
 			}
 		},
 		{
-			"from": [2, 6, 15],
-			"to": [6, 11, 15],
-			"rotation": {"angle": -45, "axis": "y", "origin": [7, 9.5, 13]},
+			"from": [2, 6, 17],
+			"to": [6, 11, 17],
+			"rotation": {"angle": -45, "axis": "y", "origin": [7, 9.5, 15]},
 			"faces": {
 				"north": {"uv": [8.5, 13.25, 7.5, 14.5], "texture": "#1"},
 				"east": {"uv": [0, 0, 0, 1.25], "texture": "#1"},
@@ -36,9 +35,9 @@
 			}
 		},
 		{
-			"from": [2.9, 4.9, 11.9],
-			"to": [8.1, 7.1, 16.1],
-			"rotation": {"angle": 0, "axis": "y", "origin": [0, 1, 21]},
+			"from": [2.9, 4.9, 13.9],
+			"to": [8.1, 7.1, 18.1],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 1, 23]},
 			"faces": {
 				"north": {"uv": [13.25, 14.25, 14.5, 14.75], "texture": "#1"},
 				"east": {"uv": [14, 12.25, 15, 12.75], "texture": "#1"},
@@ -49,9 +48,9 @@
 			}
 		},
 		{
-			"from": [3, 2, 10],
-			"to": [13, 5, 16],
-			"rotation": {"angle": 0, "axis": "y", "origin": [0, 1, 21]},
+			"from": [3, 2, 12],
+			"to": [13, 5, 18],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 1, 23]},
 			"faces": {
 				"north": {"uv": [12.5, 14.25, 15, 15], "texture": "#1"},
 				"east": {"uv": [11.5, 14.5, 13, 13.75], "texture": "#1"},
@@ -62,9 +61,9 @@
 			}
 		},
 		{
-			"from": [11, 5, 10],
-			"to": [11, 9, 15],
-			"rotation": {"angle": 45, "axis": "y", "origin": [11, 7, 12.5]},
+			"from": [11, 5, 12],
+			"to": [11, 9, 17],
+			"rotation": {"angle": 45, "axis": "y", "origin": [11, 7, 14.5]},
 			"faces": {
 				"north": {"uv": [0, 0, 0, 1], "texture": "#1"},
 				"east": {"uv": [11, 15, 12.25, 16], "texture": "#1"},

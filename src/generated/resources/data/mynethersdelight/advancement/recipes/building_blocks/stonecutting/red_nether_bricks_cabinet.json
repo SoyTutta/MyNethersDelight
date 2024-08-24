@@ -1,14 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_hot_wings": {
+    "has_nether_bricks": {
       "conditions": {
         "items": [
           {
-            "items": "mynethersdelight:hot_wings_bucket"
-          },
-          {
-            "items": "mynethersdelight:hot_wings"
+            "items": "minecraft:nether_bricks"
           }
         ]
       },
@@ -16,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mynethersdelight:crafting/hot_wings_bucket"
+        "recipe": "mynethersdelight:stonecutting/red_nether_bricks_cabinet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -24,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_hot_wings"
+      "has_nether_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
-      "mynethersdelight:crafting/hot_wings_bucket"
+      "mynethersdelight:stonecutting/red_nether_bricks_cabinet"
     ]
   }
 }

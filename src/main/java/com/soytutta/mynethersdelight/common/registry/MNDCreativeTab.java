@@ -4,8 +4,10 @@ import com.soytutta.mynethersdelight.MyNethersDelight;
 import com.soytutta.mynethersdelight.common.utility.MNDTextUtils;
 import net.minecraft.core.registries.*;
 import net.minecraft.world.item.*;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import vectorwing.farmersdelight.common.registry.ModItems;
 
 public class MNDCreativeTab {
     public static final DeferredRegister<CreativeModeTab> TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MyNethersDelight.MODID);
@@ -16,8 +18,11 @@ public class MNDCreativeTab {
                 .title(MNDTextUtils.getTranslation("itemGroup.main"))
                 .icon(MNDItems.NETHER_STOVE.get()::getDefaultInstance)
                 .displayItems((parameters, output) -> {
-                    output.accept(MNDItems.NETHER_BRICKS_CABINET.get());
                     output.accept(MNDItems.NETHER_STOVE.get());
+                    output.accept(MNDItems.RED_NETHER_BRICKS_CABINET.get());
+                    output.accept(MNDItems.NETHER_BRICKS_CABINET.get());
+                    output.accept(MNDItems.BLACKSTONE_BRICKS_CABINET.get());
+                    output.accept(MNDItems.POWDERY_CABINET.get());
                     output.accept(MNDItems.BULLET_PEPPER_CRATE.get());
                     output.accept(MNDItems.LETIOS_COMPOST.get());
                     output.accept(MNDItems.RESURGENT_SOIL.get());
@@ -27,7 +32,6 @@ public class MNDCreativeTab {
                     output.accept(MNDItems.POWDERY_TORCH.get());
                     output.accept(MNDItems.BLOCK_OF_POWDERY_CANNON.get());
                     output.accept(MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
-                    output.accept(MNDItems.POWDERY_CABINET.get());
                     output.accept(MNDItems.POWDERY_PLANKS.get());
                     output.accept(MNDItems.POWDERY_PLANKS_STAIRS.get());
                     output.accept(MNDItems.POWDERY_PLANKS_SLAB.get());
@@ -45,13 +49,18 @@ public class MNDCreativeTab {
                     output.accept(MNDItems.POWDERY_SIGN.get());
                     output.accept(MNDItems.POWDERY_HANGING_SIGN.get());
 
+                    if (ModList.get().isLoaded("farmersdelight")) {
+                        output.accept(ModItems.NETHERITE_KNIFE.get());
+                        output.accept(ModItems.GOLDEN_KNIFE.get());
+                    }
+
                     output.accept(MNDItems.CRIMSON_FUNGUS_COLONY.get());
                     output.accept(MNDItems.WARPED_FUNGUS_COLONY.get());
 
                     output.accept(MNDItems.HOGLIN_TROPHY.get());
-                    output.accept(MNDItems.WAXED_HOGLIN_TROPHY.get());
                     output.accept(MNDItems.ZOGLIN_TROPHY.get());
                     output.accept(MNDItems.SKOGLIN_TROPHY.get());
+                    output.accept(MNDItems.WAXED_HOGLIN_TROPHY.get());
 
                     output.accept(MNDItems.HOGLIN_HIDE.get());
 
@@ -84,8 +93,8 @@ public class MNDCreativeTab {
                     output.accept(MNDItems.STRIDER_STEW.get());
                     output.accept(MNDItems.CRIMSON_STROGANOFF.get());
                     output.accept(MNDItems.STRIDERLOAF_BLOCK.get());
-                    output.accept(MNDItems.STRIDERLOAF.get());
                     output.accept(MNDItems.COLD_STRIDERLOAF_BLOCK.get());
+                    output.accept(MNDItems.STRIDERLOAF.get());
                     output.accept(MNDItems.COLD_STRIDERLOAF.get());
 
                     output.accept(MNDItems.GHASTA.get());

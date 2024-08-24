@@ -1,14 +1,17 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_hot_wings": {
+    "has_powder_cannon": {
       "conditions": {
         "items": [
           {
-            "items": "mynethersdelight:hot_wings_bucket"
+            "items": "mynethersdelight:powder_cannon"
           },
           {
-            "items": "mynethersdelight:hot_wings"
+            "items": "mynethersdelight:hot_cream"
+          },
+          {
+            "items": "mynethersdelight:hot_cream_cone"
           }
         ]
       },
@@ -16,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mynethersdelight:crafting/hot_wings_bucket"
+        "recipe": "mynethersdelight:crafting/hotcream_bucket"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -24,12 +27,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_hot_wings"
+      "has_powder_cannon"
     ]
   ],
   "rewards": {
     "recipes": [
-      "mynethersdelight:crafting/hot_wings_bucket"
+      "mynethersdelight:crafting/hotcream_bucket"
     ]
   }
 }

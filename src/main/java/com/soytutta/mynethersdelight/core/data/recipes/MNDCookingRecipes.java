@@ -39,7 +39,7 @@ public class MNDCookingRecipes {
                 .addIngredient(MyCommonTags.FOODS_RICE_PASTA)
                 .addIngredient(CommonTags.FOODS_COOKED_EGG)
                 .addIngredient(MNDTags.HOT_SPICE)
-                .addIngredient(CommonTags.FOODS_RAW_PORK)
+                .addIngredient(MyCommonTags.FOODS_RAW_HOGLIN)
                 .unlockedByAnyIngredient(MNDItems.GHASTA.get(), MNDItems.BULLET_PEPPER.get(), Items.PORKCHOP)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .build(output, "mynethersdelight:cooking/spicy_noodle_soup");

@@ -41,6 +41,12 @@ public class MNDItems {
     public static final Supplier<Item> NETHER_BRICKS_CABINET = ITEMS.register("nether_bricks_cabinet", () ->
             new BlockItem(MNDBlocks.NETHER_BRICKS_CABINET.get(), basicItem())
     );
+    public static final Supplier<Item> RED_NETHER_BRICKS_CABINET = ITEMS.register("red_nether_bricks_cabinet", () ->
+            new BlockItem(MNDBlocks.RED_NETHER_BRICKS_CABINET.get(), basicItem())
+    );
+    public static final Supplier<Item> BLACKSTONE_BRICKS_CABINET = ITEMS.register("blackstone_bricks_cabinet", () ->
+            new BlockItem(MNDBlocks.BLACKSTONE_BRICKS_CABINET.get(), basicItem())
+    );
     public static final Supplier<Item> NETHER_STOVE = ITEMS.register("nether_bricks_stove", () -> new BlockItem(MNDBlocks.NETHER_STOVE.get(), basicItem())
             { protected boolean placeBlock(BlockPlaceContext context, BlockState state)
                 { return super.placeBlock(context, state.setValue(NetherStoveBlock.SOUL, false));}}
@@ -263,13 +269,13 @@ public class MNDItems {
             new ConsumableItem(bowlFoodItem(MNDFoodValues.ROCK_SOUP), true)
     );
     public static final Supplier<Item> BURNT_ROLL = ITEMS.register("burnt_roll", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.BURNT_ROLL))
+            new ConsumableItem(foodItem(MNDFoodValues.BURNT_ROLL).fireResistant())
     );
     public static final Supplier<Item> MAGMA_CAKE = ITEMS.register("magma_cake_block", () ->
-            new BlockItem(MNDBlocks.MAGMA_CAKE_BLOCK.get(), basicItem().stacksTo(1))
+            new BlockItem(MNDBlocks.MAGMA_CAKE_BLOCK.get(), basicItem().stacksTo(1).fireResistant())
     );
     public static final Supplier<Item> MAGMA_CAKE_SLICE = ITEMS.register("magma_cake_slice",
-            () -> new ConsumableItem(foodItem(MNDFoodValues.MAGMA_CAKE_SLICE).stacksTo(16),
+            () -> new ConsumableItem(foodItem(MNDFoodValues.MAGMA_CAKE_SLICE).stacksTo(16).fireResistant(),
                     false, true)
     );
     // LAVA

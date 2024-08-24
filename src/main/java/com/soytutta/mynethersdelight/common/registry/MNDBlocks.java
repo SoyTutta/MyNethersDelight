@@ -34,6 +34,12 @@ public class MNDBlocks {
     public static final Supplier<Block> NETHER_BRICKS_CABINET = BLOCKS.register("nether_bricks_cabinet", () ->
                 new CabinetBlock(Properties.ofFullCopy(Blocks.NETHER_BRICKS))
         );
+    public static final Supplier<Block> RED_NETHER_BRICKS_CABINET = BLOCKS.register("red_nether_bricks_cabinet", () ->
+            new CabinetBlock(Properties.ofFullCopy(Blocks.RED_NETHER_BRICKS))
+    );
+    public static final Supplier<Block> BLACKSTONE_BRICKS_CABINET = BLOCKS.register("blackstone_bricks_cabinet", () ->
+            new CabinetBlock(Properties.ofFullCopy(Blocks.POLISHED_BLACKSTONE_BRICKS))
+    );
     public static final Supplier<Block> NETHER_STOVE = BLOCKS.register("nether_stove", () ->
             new NetherStoveBlock(Properties.ofFullCopy(Blocks.NETHER_BRICKS)
                     .lightLevel(litBlockEmission(13)))

@@ -1,14 +1,17 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_hot_wings": {
+    "has_blackstone": {
       "conditions": {
         "items": [
           {
-            "items": "mynethersdelight:hot_wings_bucket"
+            "items": "minecraft:blackstone"
           },
           {
-            "items": "mynethersdelight:hot_wings"
+            "items": "minecraft:polished_blackstone"
+          },
+          {
+            "items": "minecraft:polished_blackstone_bricks"
           }
         ]
       },
@@ -16,7 +19,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mynethersdelight:crafting/hot_wings_bucket"
+        "recipe": "mynethersdelight:stonecutting/blackstone_bricks_cabinet"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -24,12 +27,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_hot_wings"
+      "has_blackstone"
     ]
   ],
   "rewards": {
     "recipes": [
-      "mynethersdelight:crafting/hot_wings_bucket"
+      "mynethersdelight:stonecutting/blackstone_bricks_cabinet"
     ]
   }
 }

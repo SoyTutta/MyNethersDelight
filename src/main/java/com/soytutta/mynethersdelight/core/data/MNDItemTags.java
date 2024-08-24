@@ -21,7 +21,6 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
-import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
@@ -46,8 +45,8 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(MyCommonTags.FOODS_COOKED_HOGLIN).add(MNDItems.COOKED_LOIN.get(), MNDItems.ROASTED_SAUSAGE.get());
         this.tag(MyCommonTags.FOODS_RAW_SAUSAGE).add(MNDItems.HOGLIN_SAUSAGE.get());
         this.tag(MyCommonTags.FOODS_COOKED_SAUSAGE).add(MNDItems.ROASTED_SAUSAGE.get());
-        this.tag(CommonTags.FOODS_RAW_PORK).add(MNDItems.HOGLIN_SAUSAGE.get());
-        this.tag(CommonTags.FOODS_COOKED_PORK).add(MNDItems.ROASTED_SAUSAGE.get());
+        this.tag(CommonTags.FOODS_RAW_PORK).addTag(MyCommonTags.FOODS_RAW_HOGLIN);
+        this.tag(CommonTags.FOODS_COOKED_PORK).addTag(MyCommonTags.FOODS_COOKED_HOGLIN);
         this.tag(MyCommonTags.FOODS_BOILED_EGG).add(MNDItems.BOILED_EGG.get());
         this.tag(MyCommonTags.FOODS_RAW_GHAST).add(MNDItems.GHASTA.get(), MNDItems.GHASMATI.get());
         this.tag(MyCommonTags.FOODS_RICE_PASTA).add(MNDItems.GHASTA.get());this.tag(CommonTags.FOODS_PASTA).add(MNDItems.GHASTA.get()); this.tag(CommonTags.CROPS_RICE).add(MNDItems.GHASMATI.get());
@@ -78,7 +77,7 @@ public class MNDItemTags extends ItemTagsProvider {
     }
 
     private void registerMinecraftTags() {
-        this.tag(ItemTags.SOUL_FIRE_BASE_BLOCKS).add(MNDItems.LETIOS_COMPOST.get(), MNDItems.RESURGENT_SOIL.get());
+        this.tag(ItemTags.SOUL_FIRE_BASE_BLOCKS).add(MNDItems.LETIOS_COMPOST.get(), MNDItems.RESURGENT_SOIL.get(), MNDItems.RESURGENT_SOIL_FARMLAND.get());
 
         this.tag(ItemTags.MEAT).addTag(MyCommonTags.FOODS_RAW_HOGLIN).addTag(MyCommonTags.FOODS_COOKED_HOGLIN).add(MNDItems.MINCED_STRIDER.get(), MNDItems.ROAST_EAR.get());
         this.tag(ItemTags.HOGLIN_FOOD).add(MNDItems.BULLET_PEPPER.get());
@@ -112,7 +111,7 @@ public class MNDItemTags extends ItemTagsProvider {
 
     public void registerCompatibilityTags() {
         this.tag(ModTags.WOODEN_CABINETS).add(MNDItems.POWDERY_CABINET.get());
-        this.tag(ModTags.CABINETS).add(MNDItems.NETHER_BRICKS_CABINET.get());
+        this.tag(ModTags.CABINETS).add(MNDItems.NETHER_BRICKS_CABINET.get(),MNDItems.RED_NETHER_BRICKS_CABINET.get(),MNDItems.BLACKSTONE_BRICKS_CABINET.get());
         this.tag(ModTags.CABBAGE_ROLL_INGREDIENTS).addTag(MyCommonTags.FOODS_RAW_HOGLIN).addTag(MyCommonTags.FOODS_RAW_STRIDER).addTag(MyCommonTags.FOODS_RAW_GHAST);
         this.tag(ModTags.WILD_CROPS_ITEM).add(MNDItems.BULLET_PEPPER.get(),MNDItems.POWDER_CANNON.get());
         this.tag(CompatibilityTags.HORROR_LASAGNA_MEATS).add(MNDItems.MINCED_STRIDER.get(), MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());

@@ -33,6 +33,9 @@ public class MNDBlockStates extends BlockStateProvider {
         this.stageBlock(MNDBlocks.WARPED_FUNGUS_COLONY.get(), MushroomColonyBlock.COLONY_AGE);
         this.cabinetBlock(MNDBlocks.NETHER_BRICKS_CABINET.get(), "nether_bricks");
 
+        this.cabinetBlock(MNDBlocks.RED_NETHER_BRICKS_CABINET.get(), "red_nether_bricks");
+
+
         // POWDERY
         this.crateBlock(MNDBlocks.BULLET_PEPPER_CRATE.get(), "bullet_pepper");
         this.cabinetBlock(MNDBlocks.POWDERY_CABINET.get(), "powdery");

@@ -16,7 +16,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "mynethersdelight:crafting/hot_wings_bucket"
+        "recipe": "mynethersdelight:crafting/hot_wings_bucket_alt"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -29,7 +29,7 @@
   ],
   "rewards": {
     "recipes": [
-      "mynethersdelight:crafting/hot_wings_bucket"
+      "mynethersdelight:crafting/hot_wings_bucket_alt"
     ]
   }
 }
