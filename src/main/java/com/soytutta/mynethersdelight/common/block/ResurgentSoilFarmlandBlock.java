@@ -64,14 +64,25 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
     }
 
     public static void turnToRichSoil(BlockState state, Level level, BlockPos pos) {
-        level.setBlockAndUpdate(pos, pushEntitiesUp(state, ((Block)MNDBlocks.RESURGENT_SOIL.get()).defaultBlockState(), level, pos));
+        level.setBlockAndUpdate(pos, pushEntitiesUp(state, MNDBlocks.RESURGENT_SOIL.get().defaultBlockState(), level, pos));
     }
 
+    @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        return !this.defaultBlockState().canSurvive(context.getLevel(), context.getClickedPos()) ? MNDBlocks.RESURGENT_SOIL.get().defaultBlockState() : super.getStateForPlacement(context);
+    }
+
+    @Override
+    public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+    }
+
+    @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockState aboveState = level.getBlockState(pos.above());
         return super.canSurvive(state, level, pos) || aboveState.getBlock().equals(Blocks.MELON) || aboveState.getBlock().equals(Blocks.PUMPKIN);
     }
 
+    @Override
     public boolean isFertile(BlockState state, BlockGetter world, BlockPos pos) {
         if (state.is(MNDBlocks.RESURGENT_SOIL_FARMLAND.get())) {
             return state.getValue(MOISTURE) > 0;
@@ -80,13 +91,14 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
         }
     }
 
+    @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
         if (!state.canSurvive(level, pos)) {
             turnToRichSoil(state, level, pos);
         }
     }
 
-
+    @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         int moisture = state.getValue(MOISTURE);
         if (!hasFireOrLava(level, pos) && !level.isRainingAt(pos.above())) {

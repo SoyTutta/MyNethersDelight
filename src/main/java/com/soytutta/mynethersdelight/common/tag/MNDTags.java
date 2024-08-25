@@ -13,6 +13,8 @@ import net.minecraft.world.level.block.Block;
 public class MNDTags {
     public static final TagKey<Item> BLOCK_OF_POWDERY = modItemTag("block_of_powdery");
 
+    public static final TagKey<Block> RESURGENT_SOIL_PLANT = modBlockTag("resurgent_soil_plant");
+
     public static final TagKey<Block> NOT_PROPAGATE_PLANT = modBlockTag("not_propagate_plant");
     public static final TagKey<Block> ABOVE_PROPAGATE_PLANT = modBlockTag("above_propagate_plant");
     public static final TagKey<Block> BELOW_PROPAGATE_PLANT = modBlockTag("below_propagate_plant");

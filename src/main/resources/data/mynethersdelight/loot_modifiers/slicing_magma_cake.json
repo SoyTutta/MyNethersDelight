@@ -1,5 +1,5 @@
 {
-  "type": "mynethersdelight:pastry_slicing",
+  "type": "mynethersdelight:especial_drop",
   "conditions": [
     {
       "condition": "minecraft:match_tool",
@@ -12,5 +12,5 @@
       "block": "mynethersdelight:magma_cake_block"
     }
   ],
-  "slice": "mynethersdelight:magma_cake_slice"
+  "drop": "mynethersdelight:magma_cake_slice"
 }

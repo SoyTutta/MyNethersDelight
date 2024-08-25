@@ -6,7 +6,6 @@
 		"0": "mynethersdelight:block/stuffed_hoglin_tray",
 		"1": "mynethersdelight:block/stuffed_hoglin_block",
 		"particle": "farmersdelight:block/tray_bottom"
-
 	},
 	"elements": [
 		{
@@ -203,6 +202,19 @@
 				"up": {"uv": [0, 0, 5.33333, 5.33333], "texture": "#0"},
 				"down": {"uv": [5.33333, 5.33333, 10.66667, 10.66667], "texture": "#0"}
 			}
+		},
+		{
+			"from": [2, 2, 2],
+			"to": [4, 4, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [3, 3, 7]},
+			"faces": {
+				"north": {"uv": [4.25, 8.75, 4.75, 9.25], "texture": "#1"},
+				"east": {"uv": [4.75, 8.75, 7.25, 9.25], "texture": "#1"},
+				"south": {"uv": [4.25, 8.75, 4.75, 9.25], "texture": "#1"},
+				"west": {"uv": [4.75, 8.75, 7.25, 9.25], "texture": "#1"},
+				"up": {"uv": [4.75, 8.75, 7.25, 9.25], "rotation": 270, "texture": "#1"},
+				"down": {"uv": [4.75, 8.75, 7.25, 9.25], "rotation": 90, "texture": "#1"}
+			}
 		}
 	],
 	"groups": [
@@ -236,6 +248,12 @@
 			"origin": [0, 0, 0],
 			"color": 0,
 			"children": [14]
+		},
+		{
+			"name": "bone",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [15]
 		}
 	]
 }

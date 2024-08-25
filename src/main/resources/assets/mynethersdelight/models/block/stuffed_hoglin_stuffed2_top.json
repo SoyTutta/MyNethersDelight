@@ -4,8 +4,8 @@
 	"texture_size": [64, 64],
 	"textures": {
 		"0": "mynethersdelight:block/stuffed_hoglin_tray",
+		"2": "mynethersdelight:block/stuffed_hoglin_block",
 		"particle": "farmersdelight:block/tray_bottom"
-
 	},
 	"elements": [
 		{
@@ -19,6 +19,32 @@
 				"west": {"uv": [10.66667, 11.33333, 5.33333, 12], "texture": "#0"},
 				"up": {"uv": [0, 0, 5.33333, 5.33333], "texture": "#0"},
 				"down": {"uv": [5.33333, 5.33333, 10.66667, 10.66667], "texture": "#0"}
+			}
+		},
+		{
+			"from": [2, 2, 2],
+			"to": [4, 4, 12],
+			"rotation": {"angle": 0, "axis": "y", "origin": [3, 3, 7]},
+			"faces": {
+				"north": {"uv": [4.25, 8.75, 4.75, 9.25], "texture": "#2"},
+				"east": {"uv": [4.75, 8.75, 7.25, 9.25], "texture": "#2"},
+				"south": {"uv": [4.25, 8.75, 4.75, 9.25], "texture": "#2"},
+				"west": {"uv": [4.75, 8.75, 7.25, 9.25], "texture": "#2"},
+				"up": {"uv": [4.75, 8.75, 7.25, 9.25], "rotation": 270, "texture": "#2"},
+				"down": {"uv": [4.75, 8.75, 7.25, 9.25], "rotation": 90, "texture": "#2"}
+			}
+		},
+		{
+			"from": [0, 3, 3],
+			"to": [10, 5, 5],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [5, 4, 4]},
+			"faces": {
+				"north": {"uv": [4.75, 8.75, 7.25, 9.25], "rotation": 180, "texture": "#2"},
+				"east": {"uv": [4.25, 8.75, 4.75, 9.25], "rotation": 180, "texture": "#2"},
+				"south": {"uv": [4.75, 8.75, 7.25, 9.25], "rotation": 180, "texture": "#2"},
+				"west": {"uv": [4.25, 8.75, 4.75, 9.25], "rotation": 180, "texture": "#2"},
+				"up": {"uv": [4.75, 8.75, 7.25, 9.25], "texture": "#2"},
+				"down": {"uv": [4.75, 8.75, 7.25, 9.25], "texture": "#2"}
 			}
 		}
 	],
@@ -53,6 +79,12 @@
 			"origin": [0, 0, 0],
 			"color": 0,
 			"children": [0]
+		},
+		{
+			"name": "bone",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [1, 2]
 		}
 	]
 }

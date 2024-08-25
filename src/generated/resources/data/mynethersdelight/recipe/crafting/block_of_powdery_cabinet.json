@@ -2,17 +2,17 @@
   "type": "minecraft:crafting_shaped",
   "category": "misc",
   "key": {
-    "#": {
-      "item": "mynethersdelight:powdery_planks"
+    "T": {
+      "item": "mynethersdelight:powdery_trapdoor"
     },
     "X": {
       "item": "mynethersdelight:powdery_slab"
     }
   },
   "pattern": [
-    "#X#",
-    "# #",
-    "#X#"
+    "XXX",
+    "T T",
+    "XXX"
   ],
   "result": {
     "count": 1,

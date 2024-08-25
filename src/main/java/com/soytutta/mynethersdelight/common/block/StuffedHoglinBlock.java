@@ -18,6 +18,7 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -34,6 +35,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.PushReaction;
+import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
@@ -41,6 +43,9 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.registry.ModSounds;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.TextUtils;
+
+import java.util.ArrayList;
+import java.util.List;
 
 // thanks Umpaz for letting me use this code <3
 public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
@@ -131,6 +136,27 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
     @SuppressWarnings("deprecation")
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         return level.getBlockState(pos.below()).isSolid();
+    }
+    @Override
+    public List<ItemStack> getDrops(BlockState state, LootParams.Builder lootParams) {
+        List<ItemStack> drops = new ArrayList<>(super.getDrops(state, lootParams));
+        if (!lootParams.getLevel().isClientSide) {
+            BedPart part = state.getValue(PART);
+            int serving = state.getValue(SERVINGS);
+
+            int bonemealCount = 0;
+            if (part == BedPart.HEAD) {
+                bonemealCount = (serving == 7) ? 1 : (serving <= 6) ? 2 : 0;
+            } else if (part == BedPart.FOOT) {
+                bonemealCount = (serving == 5) ? 1 : (serving <= 4) ? 2 : 0;
+            }
+
+
+            if (bonemealCount > 0) {
+                drops.add(new ItemStack(Items.BONE_MEAL, bonemealCount));
+            }
+        }
+        return drops;
     }
 
     public BlockState playerWillDestroy(Level level, BlockPos pos, BlockState state, Player player) {

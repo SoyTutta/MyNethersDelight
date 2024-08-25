@@ -9,6 +9,7 @@ import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
@@ -16,7 +17,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.CommonHooks;
@@ -79,7 +79,7 @@ public class ResurgentSoilBlock extends Block {
                     && MathUtils.RAND.nextFloat() <= (Configuration.RICH_SOIL_BOOST_CHANCE.get() / 15)) {
                 if (level.isEmptyBlock(pos.above(2))) {
                     level.setBlockAndUpdate(pos.above(), MNDBlocks.POWDERY_CANE.get().defaultBlockState().setValue(PowderyCaneBlock.BASE, true));
-                    level.setBlockAndUpdate(pos.above(2), MNDBlocks.BULLET_PEPPER.get().defaultBlockState().setValue(PowderyCaneBlock.LIT, true).setValue(PowderyCaneBlock.AGE, 2));
+                    level.setBlockAndUpdate(pos.above(2), MNDBlocks.BULLET_PEPPER.get().defaultBlockState().setValue(PowderyFlowerBlock.LIT, true).setValue(PowderyFlowerBlock.AGE, 2));
                     return;
                 }
             }
@@ -266,13 +266,13 @@ public class ResurgentSoilBlock extends Block {
             return true;  // Wither Rose can replace other FlowerBlocks
         } else if (block instanceof DoublePlantBlock &&
                 level.getBlockState(newPos.above()).getBlock() == Blocks.AIR) {
-            return blockBelowState.getBlock() == ModBlocks.RICH_SOIL_FARMLAND.get()
-                    || blockBelowState.getBlock() == MNDBlocks.RESURGENT_SOIL_FARMLAND.get();
-        } else  if (block instanceof NetherWartBlock) {
+            return blockBelowState.getBlock() == ModBlocks.RICH_SOIL.get()
+                    || blockBelowState.getBlock() == MNDBlocks.RESURGENT_SOIL.get();
+        } else if (block instanceof NetherWartBlock) {
             return blockBelowState.getBlock() == Blocks.SOUL_SAND
                     || blockBelowState.getBlock() == MNDBlocks.RESURGENT_SOIL.get()
                     || blockBelowState.getBlock() == MNDBlocks.RESURGENT_SOIL_FARMLAND.get();
-        } else  if (!(block instanceof WitherRoseBlock || block instanceof DoublePlantBlock)) {
+        } else if (!(block instanceof WitherRoseBlock || block instanceof DoublePlantBlock)) {
             return blockBelowState.getBlock() == ModBlocks.RICH_SOIL.get()
                     || blockBelowState.getBlock() == MNDBlocks.RESURGENT_SOIL.get();
         }
@@ -331,7 +331,7 @@ public class ResurgentSoilBlock extends Block {
             Direction randomDirection = allowedDirections[random.nextInt(allowedDirections.length)];
             level.setBlockAndUpdate(pos, state.setValue(FACING, randomDirection));
         } else if (block instanceof DoublePlantBlock) {
-            ((DoublePlantBlock) block).placeAt(level, state, pos, 3);
+            DoublePlantBlock.placeAt(level, state, pos, 3);
         } else {
             level.setBlockAndUpdate(pos, state);
         }
@@ -351,6 +351,11 @@ public class ResurgentSoilBlock extends Block {
         if (plantState.getBlock() instanceof NetherWartBlock) {
             return TriState.TRUE;
         }
+
+        if (plantState.is(MNDTags.RESURGENT_SOIL_PLANT) && !(plantState.getBlock() instanceof CropBlock || plantState.is(BlockTags.CROPS))) {
+            return TriState.TRUE;
+        }
+
         return TriState.DEFAULT;
     }
 }

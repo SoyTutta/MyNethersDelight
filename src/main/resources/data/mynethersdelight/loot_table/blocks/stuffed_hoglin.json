@@ -27,7 +27,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:bowl"
+          "name": "mynethersdelight:plate_of_stuffed_hoglin"
         }
       ],
       "conditions": [
@@ -42,9 +42,39 @@
           }
         },
         {
+          "condition": "minecraft:inverted",
+          "term": {
+            "condition": "minecraft:block_state_property",
+            "block": "mynethersdelight:stuffed_hoglin",
+            "properties": {
+              "servings": "0"
+            }
+          }
+        },
+        {
           "condition": "minecraft:block_state_property",
           "block": "mynethersdelight:stuffed_hoglin",
           "properties": {
+            "part": "head"
+          }
+        }
+      ]
+    },
+    {
+      "name": "pool3",
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bowl"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:block_state_property",
+          "block": "mynethersdelight:stuffed_hoglin",
+          "properties": {
+            "servings": "0",
             "part": "head"
           }
         }

@@ -1,0 +1,9 @@
+{
+  "values": [
+    "minecraft:cactus",
+    "#mynethersdelight:above_propagate_plant",
+    "#mynethersdelight:below_propagate_plant",
+    "#minecraft:mineable/hoe",
+    "#minecraft:sword_efficient"
+  ]
+}

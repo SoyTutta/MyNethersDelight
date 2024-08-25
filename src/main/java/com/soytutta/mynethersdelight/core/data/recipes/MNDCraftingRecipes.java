@@ -98,10 +98,10 @@ public class MNDCraftingRecipes {
                 .unlockedBy("has_powder_cannon", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDER_CANNON.get()))
                 .save(output, "mynethersdelight:crafting/block_of_powdery_cannon");
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDBlocks.POWDERY_CABINET.get())
-                .pattern("#X#")
-                .pattern("# #")
-                .pattern("#X#")
-                .define('#', MNDItems.POWDERY_PLANKS.get()).define('X', MNDItems.POWDERY_PLANKS_SLAB.get())
+                .pattern("XXX")
+                .pattern("T T")
+                .pattern("XXX")
+                .define('X', MNDItems.POWDERY_PLANKS_SLAB.get()).define('T', MNDItems.POWDERY_TRAPDOOR.get())
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(output, "mynethersdelight:crafting/block_of_powdery_cabinet");
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,MNDItems.POWDERY_PLANKS.get(),4)
