@@ -159,25 +159,25 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
                 }
             }
 
-            if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL) || aboveBlock instanceof TallFlowerBlock) {
-                return;
-            }
-
             performBonemealIfPossible(aboveBlock, pos.above(), aboveState, level, 1);
             performBonemealIfPossible(belowBlock, pos.below(), belowState, level, 1);
         }
     }
 
     private void performBonemealIfPossible(Block block, BlockPos position, BlockState state, ServerLevel level, int distance) {
+        if (state.is(ModTags.UNAFFECTED_BY_RICH_SOIL) || block instanceof TallFlowerBlock) {
+            return;
+        }
+
         if (block instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get() / distance) {
             if (growable.isValidBonemealTarget(level, position, state) && CommonHooks.canCropGrow(level, position, state, true)) {
                 growable.performBonemeal(level, level.random, position, state);
-                level.levelEvent(2005, position, 0);
                 CommonHooks.fireCropGrowPost(level, position, state);
             } else {
                 BlockPos checkPos = position.above();
                 BlockState checkState = level.getBlockState(checkPos);
                 Block checkBlock = checkState.getBlock();
+
                 while (checkBlock == block && distance <= 10) {
                     performBonemealIfPossible(checkBlock, checkPos, checkState, level, distance + 1);
                     distance++;
@@ -293,7 +293,7 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
             }
         }
         if (block instanceof DoublePlantBlock) {
-            ((DoublePlantBlock) block).placeAt(level, state, pos, 3);
+            DoublePlantBlock.placeAt(level, state, pos, 3);
         } else {
             level.setBlockAndUpdate(pos, state);
         }

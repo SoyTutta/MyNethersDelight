@@ -10,6 +10,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.BlockGetter;
@@ -142,7 +143,7 @@ public class ResurgentSoilBlock extends Block {
                     return;
                 }
 
-                if ((aboveBlock instanceof BushBlock)
+                if ((aboveBlock instanceof BushBlock && !(aboveBlock instanceof DoublePlantBlock))
                         && MathUtils.RAND.nextFloat() <= (Configuration.RICH_SOIL_BOOST_CHANCE.get() / 3)) {
                     propagateAboveIfPossible(aboveBlock, abovePos, level);
                     return;
@@ -168,10 +169,6 @@ public class ResurgentSoilBlock extends Block {
                 performBonemealIfPossible(aboveBlock, pos.above(), aboveState, level, 1);
             }
 
-            if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL) || aboveBlock instanceof TallFlowerBlock) {
-                return;
-            }
-
             performBonemealIfPossible(aboveBlock, pos.above(), aboveState, level, 1);
             performBonemealIfPossible(belowBlock, pos.below(), belowState, level, 1);
             growIfPossible(aboveState, abovePos, level, Blocks.SUGAR_CANE, 7);
@@ -180,10 +177,13 @@ public class ResurgentSoilBlock extends Block {
     }
 
     private void performBonemealIfPossible(Block block, BlockPos position, BlockState state, ServerLevel level, int distance) {
+        if (state.is(ModTags.UNAFFECTED_BY_RICH_SOIL) || block instanceof TallFlowerBlock) {
+            return;
+        }
+
         if (block instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get() / distance) {
             if (growable.isValidBonemealTarget(level, position.above(),state) && CommonHooks.canCropGrow(level, position.above(), state, true)) {
                 growable.performBonemeal(level, level.random, position, state);
-                level.levelEvent(2005, position, 0);
                 CommonHooks.fireCropGrowPost(level, position, state);
             } else {
                 BlockPos checkPos = position.above();
@@ -264,10 +264,13 @@ public class ResurgentSoilBlock extends Block {
                 || newState.getBlock() instanceof MushroomBlock)
                 && !(newState.getBlock() instanceof WitherRoseBlock))) {
             return true;  // Wither Rose can replace other FlowerBlocks
-        } else if (block instanceof DoublePlantBlock &&
-                level.getBlockState(newPos.above()).getBlock() == Blocks.AIR) {
-            return blockBelowState.getBlock() == ModBlocks.RICH_SOIL.get()
-                    || blockBelowState.getBlock() == MNDBlocks.RESURGENT_SOIL.get();
+        } else if (block instanceof DoublePlantBlock) {
+            BlockState doublePlantState = block.defaultBlockState();
+            if (!(block instanceof LiquidBlockContainer && !(block instanceof SimpleWaterloggedBlock)) && level.isEmptyBlock(newPos.above())) {
+                return doublePlantState.canSurvive(level, newPos);
+            } else if (level.getFluidState(newPos.above()).is(FluidTags.WATER) && level.getFluidState(newPos.above()).getAmount() == 8) {
+                return doublePlantState.canSurvive(level, newPos);
+            }
         } else if (block instanceof NetherWartBlock) {
             return blockBelowState.getBlock() == Blocks.SOUL_SAND
                     || blockBelowState.getBlock() == MNDBlocks.RESURGENT_SOIL.get()
