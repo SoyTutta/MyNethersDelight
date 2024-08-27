@@ -8,7 +8,10 @@ import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
@@ -169,8 +172,18 @@ public class ResurgentSoilBlock extends Block {
                 performBonemealIfPossible(aboveBlock, pos.above(), aboveState, level, 1);
             }
 
-            performBonemealIfPossible(aboveBlock, pos.above(), aboveState, level, 1);
-            performBonemealIfPossible(belowBlock, pos.below(), belowState, level, 1);
+            int BonemealChance = 1;
+            if (MathUtils.RAND.nextFloat() <= 0.2f) {
+                BonemealChance = 2;
+                if (MathUtils.RAND.nextFloat() <= 0.01f) {
+                    BonemealChance = 3;
+                }
+            }
+
+            for (int i = 0; i < MathUtils.RAND.nextInt(BonemealChance) + 1; i++) {
+                performBonemealIfPossible(aboveBlock, pos.above(), aboveState, level, 1);
+                performBonemealIfPossible(belowBlock, pos.below(), belowState, level, 1);
+            }
             growIfPossible(aboveState, abovePos, level, Blocks.SUGAR_CANE, 7);
             growIfPossible(aboveState, abovePos, level, Blocks.CACTUS, 7);
         }
@@ -185,6 +198,13 @@ public class ResurgentSoilBlock extends Block {
             if (growable.isValidBonemealTarget(level, position.above(),state) && CommonHooks.canCropGrow(level, position.above(), state, true)) {
                 growable.performBonemeal(level, level.random, position, state);
                 CommonHooks.fireCropGrowPost(level, position, state);
+                for (int i = 0; i < 3; i++) {
+                    double d0 = (double) position.getX() + level.getRandom().nextDouble();
+                    double d1 = (double) position.getY() + level.getRandom().nextDouble();
+                    double d2 = (double) position.getZ() + level.getRandom().nextDouble();
+                    level.sendParticles(ParticleTypes.SOUL, d0, d1, d2, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                    level.playSound(null, position, SoundEvents.SOUL_ESCAPE.value(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                }
             } else {
                 BlockPos checkPos = position.above();
                 BlockState checkState = level.getBlockState(checkPos);
@@ -221,6 +241,13 @@ public class ResurgentSoilBlock extends Block {
             }
             if (level.getBlockState(topPos.above()).isAir() && height < maxHeight) {
                 level.setBlockAndUpdate(topPos.above(), targetBlock.defaultBlockState());
+                for (int i = 0; i < 3; i++) {
+                    double d0 = (double) topPos.above().getX() + level.getRandom().nextDouble();
+                    double d1 = (double) topPos.above().getY() + level.getRandom().nextDouble();
+                    double d2 = (double) topPos.above().getZ() + level.getRandom().nextDouble();
+                    level.sendParticles(ParticleTypes.SOUL, d0, d1, d2, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+                    level.playSound(null, topPos.above(), SoundEvents.SOUL_ESCAPE.value(), SoundSource.BLOCKS, 1.0F, 1.0F);
+                }
             }
         }
     }
@@ -246,7 +273,7 @@ public class ResurgentSoilBlock extends Block {
 
             boolean canPropagate = (block instanceof LiquidBlockContainer && targetState.getBlock() == Blocks.WATER)
                     || (!(block instanceof LiquidBlockContainer) && targetState.getBlock() == Blocks.AIR)
-                    || (block instanceof WitherRoseBlock && (targetState.getBlock() instanceof FlowerBlock
+                    || (block instanceof WitherRoseBlock && (targetState.is(BlockTags.SMALL_FLOWERS)
                     || targetState.getBlock() instanceof FungusBlock || targetState.getBlock() instanceof MushroomBlock))
                     || ((block instanceof SimpleWaterloggedBlock) && (targetState.getBlock() == Blocks.AIR || targetState.getBlock() == Blocks.WATER));
 
@@ -259,7 +286,7 @@ public class ResurgentSoilBlock extends Block {
     private boolean canAboveBlockSurvive(Block block, BlockState newState, ServerLevel level, BlockPos newPos) {
         BlockState blockBelowState = level.getBlockState(newPos.below());
         if (block instanceof WitherRoseBlock
-                && ((newState.getBlock() instanceof FlowerBlock
+                && ((newState.is(BlockTags.SMALL_FLOWERS)
                 || newState.getBlock() instanceof FungusBlock
                 || newState.getBlock() instanceof MushroomBlock)
                 && !(newState.getBlock() instanceof WitherRoseBlock))) {
@@ -337,6 +364,13 @@ public class ResurgentSoilBlock extends Block {
             DoublePlantBlock.placeAt(level, state, pos, 3);
         } else {
             level.setBlockAndUpdate(pos, state);
+        }
+        for (int i = 0; i < 3; i++) {
+            double d0 = (double) pos.getX() + level.getRandom().nextDouble();
+            double d1 = (double) pos.getY() + level.getRandom().nextDouble();
+            double d2 = (double) pos.getZ() + level.getRandom().nextDouble();
+            level.sendParticles(ParticleTypes.SOUL, d0, d1, d2, 1, 0.0D, 0.0D, 0.0D, 0.0D);
+            level.playSound(null, pos, SoundEvents.SOUL_ESCAPE.value(), SoundSource.BLOCKS, 1.0F, 1.0F);
         }
     }
 
