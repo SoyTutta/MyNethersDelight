@@ -26,6 +26,7 @@
   "slots": [
     "mainhand"
   ],
+  "exclusive_set": "#mynethersdelight:poaching_exclusive",
   "supported_items": "#minecraft:enchantable/weapon",
   "weight": 1
 }
