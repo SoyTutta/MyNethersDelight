@@ -8,6 +8,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
 
 public class MNDTags {
@@ -38,6 +39,7 @@ public class MNDTags {
     public static final TagKey<Item> BOILED_EGG_CANDIDATE = modItemTag("boiled_egg_candidate");
     public static final TagKey<Item> HOT_SPICE = modItemTag("hot_spice");
     public static final TagKey<EntityType<?>> SPECIAL_HUNT = modEntityTag("special_hunt");
+    public static final TagKey<Enchantment> POACHING_ENCHANTMENT = TagKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, "poaching"));
 
 
     private static TagKey<Item> modItemTag(String path) {
