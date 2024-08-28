@@ -4,24 +4,13 @@
     "translate": "enchantment.mynethersdelight.poaching"
   },
   "effects": {
-    "minecraft:equipment_drops": [
+    "mynethersdelight:poaching": [
       {
-        "effect": {
-          "type": "minecraft:add",
-          "value": {
-            "type": "minecraft:linear",
-            "base": 0.01,
-            "per_level_above_first": 0.01
-          }
-        },
-        "enchanted": "attacker",
-        "requirements": {
-          "condition": "minecraft:entity_properties",
-          "entity": "attacker",
-          "predicate": {
-            "type": "minecraft:player"
-          }
-        }
+        "default_probability": 0.1,
+        "peaceful_probability": 0.0,
+        "easy_probability": 0.2,
+        "normal_probability": 0.3,
+        "hard_probability": 0.4
       }
     ]
   },

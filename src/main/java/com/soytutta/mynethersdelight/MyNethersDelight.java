@@ -29,5 +29,6 @@ public class MyNethersDelight
         MNDCreativeTab.TABS.register(modEventBus);
         MNDBiomeFeatures.FEATURES.register(modEventBus);
         MNDLootModifiers.LOOT_MODIFIERS.register(modEventBus);
+        MNDEnchantmentComponents.ENCHANTMENT_EFFECT_COMPONENTS.register(modEventBus);
     }
 }
