@@ -80,7 +80,7 @@ public class MNDCookingRecipes {
                 .build(output, "mynethersdelight:cooking/crimson_stroganoff");
 
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.FRIED_HOGLIN_CHOP.get(), 1, 200, 1.0F)
-                .addIngredient(Ingredient.of(MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get()))
+                .addIngredient(MNDItems.HOGLIN_LOIN.get())
                 .addIngredient(Items.WHEAT)
                 .addIngredient(CommonTags.FOODS_MILK)
                 .addIngredient(Tags.Items.EGGS)

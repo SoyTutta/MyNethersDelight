@@ -52,7 +52,6 @@ public class HotCreamConeItem extends ConsumableItem {
         boolean removedEffect = false;
 
         if (!consumer.fireImmune()) {
-            consumer.setRemainingFireTicks(consumer.getRemainingFireTicks() + 1);
             consumer.setRemainingFireTicks(10);
         }
 

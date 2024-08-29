@@ -46,9 +46,8 @@ public class CommonEvent {
                 && directSource.getItemInHand(InteractionHand.MAIN_HAND).is(net.minecraft.tags.ItemTags.WEAPON_ENCHANTABLE)) {
             if (EnchantmentHelper.has(directSource.getItemInHand(InteractionHand.MAIN_HAND), MNDEnchantmentComponents.POACHING.get())
                     && (mob.getMaxHealth() < 150.0F || mob.getType().is(MNDTags.SPECIAL_HUNT))
-                    && (event.getEntity().level().random.nextFloat() < 0.4F)
-                    || ((directSource.hasEffect(MobEffects.LUCK) || directSource.hasEffect(MobEffects.UNLUCK))
-                    && event.getEntity().level().random.nextFloat() < 0.6F)) {
+                    && (((directSource.hasEffect(MobEffects.LUCK) || directSource.hasEffect(MobEffects.UNLUCK)) && event.getEntity().level().random.nextFloat() < 0.6F)
+                    || (event.getEntity().level().random.nextFloat() < 0.4F))) {
 
                 PoachingData poachingData = EnchantmentHelper.pickHighestLevel(directSource.getItemInHand(InteractionHand.MAIN_HAND), MNDEnchantmentComponents.POACHING.get()).orElse(PoachingData.DEFAULT);
                 Difficulty difficulty = event.getEntity().level().getDifficulty();

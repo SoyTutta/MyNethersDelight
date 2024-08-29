@@ -3,15 +3,7 @@
   "experience": 1.0,
   "ingredients": [
     {
-      "type": "neoforge:compound",
-      "children": [
-        {
-          "item": "mynethersdelight:hoglin_loin"
-        },
-        {
-          "item": "mynethersdelight:hoglin_sausage"
-        }
-      ]
+      "item": "mynethersdelight:hoglin_loin"
     },
     {
       "item": "minecraft:wheat"

@@ -1,6 +1,8 @@
 package com.soytutta.mynethersdelight.common.entity.ia;
 
 import com.google.common.collect.Lists;
+import com.soytutta.mynethersdelight.common.registry.MNDItems;
+import com.soytutta.mynethersdelight.common.tag.MyCommonTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -18,7 +20,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import com.soytutta.mynethersdelight.common.block.MagmaCakeBlock;
-import com.soytutta.mynethersdelight.common.registry.MNDItems;
 
 import java.util.EnumSet;
 import java.util.List;
@@ -38,7 +39,7 @@ public class EatMagmaCakeGoal extends Goal {
     public EatMagmaCakeGoal(Frog frog) {
         this.frog = frog;
         this.level = frog.level();
-        this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK));
+        this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK, Flag.JUMP));
     }
 
     @Override
@@ -109,10 +110,8 @@ public class EatMagmaCakeGoal extends Goal {
         if (player != null && player.distanceToSqr(this.frog) <= 6.0 * 6.0) {
             ItemStack mainHand = player.getMainHandItem();
             ItemStack offHand = player.getOffhandItem();
-            if (mainHand.getItem() == MNDItems.MAGMA_CAKE.get() ||
-                    mainHand.getItem() == MNDItems.MAGMA_CAKE_SLICE.get() ||
-                    offHand.getItem() == MNDItems.MAGMA_CAKE.get() ||
-                    offHand.getItem() == MNDItems.MAGMA_CAKE_SLICE.get()) {
+            if (mainHand.is(MyCommonTags.FOODS_MAGMA_CUBE)||
+                    offHand.is(MyCommonTags.FOODS_MAGMA_CUBE)) {
                 double playerDistanceSq = frogPos.distSqr(player.blockPosition());
                 if (playerDistanceSq < minDistanceSq) {
                     minDistanceSq = playerDistanceSq;

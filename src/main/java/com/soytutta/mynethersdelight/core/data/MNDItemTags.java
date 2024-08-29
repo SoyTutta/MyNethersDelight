@@ -40,6 +40,7 @@ public class MNDItemTags extends ItemTagsProvider {
     }
 
     private void registerCommonTags() {
+        this.tag(MyCommonTags.FOODS_MAGMA_CUBE).add(MNDItems.MAGMA_CAKE.get(), MNDItems.MAGMA_CAKE_SLICE.get(), MNDItems.ROCK_SOUP.get(), MNDItems.BURNT_ROLL.get());
         this.tag(MyCommonTags.FOODS_RAW_STRIDER).add(MNDItems.STRIDER_SLICE.get(), MNDItems.MINCED_STRIDER.get());
         this.tag(MyCommonTags.FOODS_RAW_HOGLIN).add(MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
         this.tag(MyCommonTags.FOODS_COOKED_HOGLIN).add(MNDItems.COOKED_LOIN.get(), MNDItems.ROASTED_SAUSAGE.get());

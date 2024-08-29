@@ -39,7 +39,6 @@ public class HotCreamItem extends DrinkableItem {
         boolean removedEffects = false;
 
         if (!consumer.fireImmune()) {
-            consumer.setRemainingFireTicks(consumer.getRemainingFireTicks() + 2);
             consumer.setRemainingFireTicks(30);
         }
 

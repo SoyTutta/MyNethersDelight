@@ -10,7 +10,7 @@ displayName="${mod_name}"
 displayURL = "https://github.com/SoyTutta/MyNethersDelight"
 logoFile="logo.png"
 logoBlur = false
-credits="Mpustovoi, Unroman, ChuijkYahus, SlimeSB, RaymondBlaze, TCGhost, Sarinsa, Umpaz"
+credits="Mpustovoi, Unroman, ChuijkYahus, SlimeSB, RaymondBlaze, TCGhost, Sarinsa, Umpaz, UltrusBot"
 authors="${mod_authors}"
 description="${mod_description}"
 
