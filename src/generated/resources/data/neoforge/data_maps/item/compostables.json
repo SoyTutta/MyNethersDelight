@@ -1,0 +1,22 @@
+{
+  "values": {
+    "mynethersdelight:bullet_pepper": {
+      "chance": 0.3
+    },
+    "mynethersdelight:crimson_fungus_colony": {
+      "chance": 1.0
+    },
+    "mynethersdelight:ghasmati": {
+      "chance": 0.65
+    },
+    "mynethersdelight:ghasta": {
+      "chance": 1.0
+    },
+    "mynethersdelight:strider_egg": {
+      "chance": 0.3
+    },
+    "mynethersdelight:warped_fungus_colony": {
+      "chance": 1.0
+    }
+  }
+}

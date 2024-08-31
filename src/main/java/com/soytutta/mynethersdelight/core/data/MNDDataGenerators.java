@@ -8,7 +8,6 @@ package com.soytutta.mynethersdelight.core.data;
 import com.soytutta.mynethersdelight.MyNethersDelight;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -39,6 +38,7 @@ public class MNDDataGenerators {
         generator.addProvider(event.includeServer(), blockTags);
         generator.addProvider(event.includeServer(), new MNDItemTags(output, lookupProvider, blockTags.contentsGetter(), helper));
         generator.addProvider(event.includeServer(), new MNDRecipes(output, lookupProvider));
+        generator.addProvider(event.includeServer(), new MNDDataMaps(output, lookupProvider));
         generator.addProvider(event.includeClient(), new MNDLang(output));
 
         MNDBlockStates blockStates = new MNDBlockStates(output, helper);
