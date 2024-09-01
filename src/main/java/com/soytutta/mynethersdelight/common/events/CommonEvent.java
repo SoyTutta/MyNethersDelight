@@ -32,6 +32,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
 import vectorwing.farmersdelight.common.registry.ModItems;
+import vectorwing.farmersdelight.common.tag.ModTags;
 
 import java.util.List;
 
@@ -47,7 +48,8 @@ public class CommonEvent {
             if (EnchantmentHelper.has(directSource.getItemInHand(InteractionHand.MAIN_HAND), MNDEnchantmentComponents.POACHING.get())
                     && (mob.getMaxHealth() < 150.0F || mob.getType().is(MNDTags.SPECIAL_HUNT))
                     && (((directSource.hasEffect(MobEffects.LUCK) || directSource.hasEffect(MobEffects.UNLUCK)) && event.getEntity().level().random.nextFloat() < 0.6F)
-                    || (event.getEntity().level().random.nextFloat() < 0.4F))) {
+                    || directSource.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.KNIVES)
+                    || event.getEntity().level().random.nextFloat() < 0.4F)) {
 
                 PoachingData poachingData = EnchantmentHelper.pickHighestLevel(directSource.getItemInHand(InteractionHand.MAIN_HAND), MNDEnchantmentComponents.POACHING.get()).orElse(PoachingData.DEFAULT);
                 Difficulty difficulty = event.getEntity().level().getDifficulty();
@@ -82,13 +84,15 @@ public class CommonEvent {
 
                 // FAILED HUNT
                 if ((event.getEntity().level().random.nextFloat() < FailProbability
-                        || (mob.isBaby() && event.getEntity().level().random.nextFloat() < 0.2F))
+                        || (mob.isBaby() && event.getEntity().level().random.nextFloat() < 0.2F)
+                        || directSource.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.KNIVES))
                         && !mob.hasEffect(MobEffects.CONFUSION)) {
                     mob.setInvisible(true);
 
                     if (mob instanceof Horse horse
                             && (event.getEntity().level().random.nextFloat() < (FailProbability / 2)
-                            || (horse.isTamed() && event.getEntity().level().random.nextFloat() < FailProbability))){
+                            || (horse.isTamed() && event.getEntity().level().random.nextFloat() < FailProbability)
+                            || (directSource.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.KNIVES) && event.getEntity().level().random.nextFloat() < FailProbability))){
                         ZombieHorse zombieHorse = EntityType.ZOMBIE_HORSE.create(mob.level());
                         if (zombieHorse != null) {
                             zombieHorse.setTamed(true);
@@ -133,11 +137,13 @@ public class CommonEvent {
                     }
 
                     if ((mob instanceof Frog || mob instanceof Bat)
-                            && event.getEntity().level().random.nextFloat() < (FailProbability / 3)
-                            || (mob.level().getBiome(mob.blockPosition()).is(Biomes.SWAMP) && event.getEntity().level().random.nextFloat() < 0.2F)) {
+                            && (event.getEntity().level().random.nextFloat() < (FailProbability / 2)
+                            || (mob.level().getBiome(mob.blockPosition()).is(Biomes.SWAMP) && event.getEntity().level().random.nextFloat() < 0.3F)
+                            || (directSource.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.KNIVES) && event.getEntity().level().random.nextFloat() < 0.3F))) {
                         Witch witch = EntityType.WITCH.create(mob.level());
                         if (witch != null) {
-                            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.EVOKER_PREPARE_SUMMON, SoundSource.PLAYERS, 0.5F, 1.0F);
+                            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.WITCH_CELEBRATE, SoundSource.PLAYERS, 1.0F, 1.0F);
                             witch.moveTo(mob.getX(), mob.getY(), mob.getZ(), mob.getYRot(), mob.getXRot());
                             mob.level().addFreshEntity(witch);
 
@@ -214,7 +220,7 @@ public class CommonEvent {
                     List<Mob> nearbyMobs = mob.level().getEntitiesOfClass(Mob.class, mob.getBoundingBox().inflate(15));
                     for (Mob nearbyMob : nearbyMobs) {
                         if (nearbyMob.getType() == mob.getType()) {
-                            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.AMBIENT_SOUL_SAND_VALLEY_MOOD, SoundSource.PLAYERS, 1.0F, 1.0F);
+                            mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 0.5F, 1.0F);
                             mob.setInvisible(false);
 
                             if (mob instanceof NeutralMob || mob instanceof Enemy) {
@@ -249,11 +255,6 @@ public class CommonEvent {
 
                         ItemStack knife = new ItemStack(ModItems.FLINT_KNIFE.get());
                         ItemStack playerItem = directSource.getItemInHand(InteractionHand.MAIN_HAND);
-//                        Map<Enchantment, Integer> enchantments = EnchantmentHelper.getEnchantments(playerItem);
-//
-//
-//                        enchantments.remove(MNDEnchantments.HUNTING.get());
-//                        EnchantmentHelper.setEnchantments(enchantments, knife);
                         EnchantmentHelper.setEnchantments(knife, playerItem.getTagEnchantments());
 
                         EnchantmentHelper.updateEnchantments(knife, (enchantments) -> {

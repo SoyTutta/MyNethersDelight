@@ -13,6 +13,22 @@
             }
           ],
           "name": "minecraft:book",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:enchant_randomly",
+              "options": "mynethersdelight:poaching"
+            }
+          ],
+          "name": "minecraft:iron_sword",
+          "weight": 1
+        },
+        {
+          "type": "minecraft:item",
+          "name": "mynethersdelight:hoglin_hide",
           "weight": 2
         },
         {
@@ -22,23 +38,7 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
-              },
-              "function": "minecraft:set_count"
-            }
-          ],
-          "name": "mynethersdelight:hoglin_loin",
-          "weight": 15
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "add": false,
-              "count": {
-                "type": "minecraft:uniform",
-                "max": 2.0,
+                "max": 3.0,
                 "min": 1.0
               },
               "function": "minecraft:set_count"
@@ -54,14 +54,30 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 4.0,
+                "max": 6.0,
+                "min": 1.0
+              },
+              "function": "minecraft:set_count"
+            }
+          ],
+          "name": "mynethersdelight:ghasta",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "add": false,
+              "count": {
+                "type": "minecraft:uniform",
+                "max": 6.0,
                 "min": 2.0
               },
               "function": "minecraft:set_count"
             }
           ],
           "name": "mynethersdelight:strider_rock",
-          "weight": 3
+          "weight": 10
         },
         {
           "type": "minecraft:item",
@@ -77,7 +93,7 @@
             }
           ],
           "name": "mynethersdelight:bullet_pepper",
-          "weight": 4
+          "weight": 10
         },
         {
           "type": "minecraft:item",
@@ -86,19 +102,18 @@
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
-                "max": 2.0,
-                "min": 1.0
+                "max": 12.0,
+                "min": 4.0
               },
               "function": "minecraft:set_count"
             }
           ],
-          "name": "mynethersdelight:ghasta",
-          "weight": 3
+          "name": "mynethersdelight:hoglin_loin",
+          "weight": 25
         },
         {
-          "type": "minecraft:item",
-          "name": "mynethersdelight:hoglin_hide",
-          "weight": 1
+          "type": "minecraft:empty",
+          "weight": 65
         }
       ],
       "rolls": 1.0
