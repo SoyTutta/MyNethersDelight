@@ -218,7 +218,7 @@ public class MagmaCakeBlock extends Block {
         ItemUtils.spawnItemEntity(level, this.getPieSliceItem(), pos.getX() + 0.5, pos.getY() + 0.3, pos.getZ() + 0.5,
                 direction.getStepX() * 0.15, 0.05, direction.getStepZ() * 0.15);
         level.playSound(null, pos, SoundEvents.MAGMA_CUBE_SQUISH, SoundSource.PLAYERS, 0.8F, 0.8F);
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        return ItemInteractionResult.SUCCESS;
     }
 
     protected InteractionResult consumeBite(Level level, BlockPos pos, BlockState state, Player playerIn) {

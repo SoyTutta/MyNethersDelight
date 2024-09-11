@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "mynethersdelight:block/powdery_block_x"
+    },
+    "axis=y": {
+      "model": "mynethersdelight:block/powdery_block_y"
+    },
+    "axis=z": {
+      "model": "mynethersdelight:block/powdery_block_z"
+    }
+  }
+}

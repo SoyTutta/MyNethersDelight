@@ -1,5 +1,5 @@
 {
-  "parent": "minecraft:block/cube_column",
+  "parent": "minecraft:block/cube_column_uv_locked_x",
   "textures": {
     "end": "mynethersdelight:block/stripped_powdery_block_top",
     "side": "mynethersdelight:block/stripped_powdery_block"

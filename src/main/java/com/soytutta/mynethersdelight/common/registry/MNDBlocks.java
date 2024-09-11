@@ -50,16 +50,17 @@ public class MNDBlocks {
                     .sound(SoundType.BAMBOO_WOOD).lightLevel((light) -> 15))
     );
     public static final Supplier<Block> LETIOS_COMPOST = BLOCKS.register("letios_compost", () ->
-            new LetiosCompostBlock(Properties.ofFullCopy(Blocks.DIRT)
-                    .mapColor(MapColor.COLOR_BROWN).strength(1.2F).speedFactor(0.4F)
-                    .sound(SoundType.SOUL_SAND))
+            new LetiosCompostBlock(Properties.ofFullCopy(Blocks.SOUL_SOIL)
+                    .mapColor(MapColor.COLOR_BROWN).strength(1.2F).speedFactor(0.4F))
     );
     public static final Supplier<Block> RESURGENT_SOIL = BLOCKS.register("resurgent_soil", () ->
             new ResurgentSoilBlock(Properties.ofFullCopy(Blocks.SOUL_SOIL)
+                    .sound(SoundType.SOUL_SAND)
                     .mapColor(MapColor.COLOR_BROWN).speedFactor(0.4F).randomTicks())
     );
     public static final Supplier<Block> RESURGENT_SOIL_FARMLAND = BLOCKS.register("resurgent_soil_farmland", () ->
             new ResurgentSoilFarmlandBlock(Properties.ofFullCopy(Blocks.FARMLAND)
+                    .sound(SoundType.SOUL_SAND)
                     .mapColor(MapColor.COLOR_BROWN).speedFactor(0.4F)
                     .lightLevel(FlameBlockEmission(10)))
     );
@@ -114,12 +115,12 @@ public class MNDBlocks {
                 .sound(SoundType.BAMBOO_WOOD).mapColor(MapColor.TERRACOTTA_GRAY))
     );
     public static final Supplier<Block> BLOCK_OF_POWDERY_CANNON = BLOCKS.register("powdery_block", () ->
-            new RotatedPillarBlock(BlockBehaviour.Properties.of().sound(SoundType.BAMBOO_WOOD)
-                    .instrument(NoteBlockInstrument.BASS)
+            new StrippableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_STEM).sound(SoundType.BAMBOO_WOOD)
+                    .instrument(NoteBlockInstrument.BASS).explosionResistance(300.0F)
                     .mapColor(MapColor.TERRACOTTA_BLACK))
     );
     public static final Supplier<Block> BLOCK_OF_STRIPPED_POWDERY_CANNON = BLOCKS.register("stripped_powdery_block", () ->
-            new RotatedPillarBlock(BlockBehaviour.Properties.of().sound(SoundType.BAMBOO_WOOD)
+            new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_STEM).sound(SoundType.BAMBOO_WOOD)
                     .instrument(NoteBlockInstrument.BASS)
                     .mapColor(MapColor.TERRACOTTA_GRAY))
     );

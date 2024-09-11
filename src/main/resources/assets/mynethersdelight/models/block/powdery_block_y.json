@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_uv_locked_y",
+  "textures": {
+    "end": "mynethersdelight:block/powdery_block_top",
+    "side": "mynethersdelight:block/powdery_block"
+  }
+}
