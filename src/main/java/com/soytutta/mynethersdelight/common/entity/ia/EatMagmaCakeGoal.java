@@ -25,7 +25,7 @@ import java.util.List;
 
 
 public class EatMagmaCakeGoal extends Goal {
-    private static final int COOLDOWN_TICKS = 5;
+    private static final int COOLDOWN_TICKS = 100;
     private static final int TONGUE_ANIMATION_DURATION = 10;
     private static final SoundEvent TONGUE_SOUND = SoundEvents.FROG_EAT;
 
