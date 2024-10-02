@@ -3,7 +3,9 @@
   "package": "com.soytutta.mynethersdelight.core.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "FrogEntityMixin"
+    "FrogEntityMixin",
+    "KeepResurgentSoilGiantTreeMixin",
+    "KeepResurgentSoilTreeMixin"
   ],
   "client": [
   ],

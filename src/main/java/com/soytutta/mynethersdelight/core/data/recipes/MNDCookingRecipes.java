@@ -145,7 +145,7 @@ public class MNDCookingRecipes {
 
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.ROCK_SOUP.get(), 1, 50, 0.35F)
                 .addIngredient(Items.MAGMA_CREAM,2)
-                .addIngredient(MNDItems.STRIDER_ROCK.get(),2)
+                .addIngredient(Ingredient.of(MNDItems.STRIDER_ROCK.get(),MNDItems.STRIDER_EGG.get()),2)
 
                 .unlockedByAnyIngredient(Items.MAGMA_CREAM)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)

@@ -17,7 +17,7 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 
 public class GoodPungentEffect extends MobEffect {
     public GoodPungentEffect() {
-        super(MobEffectCategory.BENEFICIAL, 0, ParticleTypes.DRIPPING_DRIPSTONE_LAVA);
+        super(MobEffectCategory.BENEFICIAL, 0, ParticleTypes.ASH);
     }
 
     @Override

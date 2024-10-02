@@ -217,7 +217,7 @@ public class CommonEvent {
                         }
                     }
 
-                    List<Mob> nearbyMobs = mob.level().getEntitiesOfClass(Mob.class, mob.getBoundingBox().inflate(5));
+                    List<Mob> nearbyMobs = mob.level().getEntitiesOfClass(Mob.class, mob.getBoundingBox().inflate(10));
                     for (Mob nearbyMob : nearbyMobs) {
                         if (nearbyMob.getType() == mob.getType()) {
                             mob.level().playSound(null, mob.getX(), mob.getY(), mob.getZ(), SoundEvents.SOUL_ESCAPE, SoundSource.PLAYERS, 0.5F, 1.0F);
@@ -262,7 +262,7 @@ public class CommonEvent {
                         }
 
                         Hunter.doHurtTarget(mobCopy);
-                        mob.remove(Entity.RemovalReason.DISCARDED);
+                        mob.die(null);
                     }
                     Hunter.remove(Entity.RemovalReason.DISCARDED);
                 }

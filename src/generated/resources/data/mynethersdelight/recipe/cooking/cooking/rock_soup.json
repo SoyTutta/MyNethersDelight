@@ -10,10 +10,26 @@
       "item": "minecraft:magma_cream"
     },
     {
-      "item": "mynethersdelight:strider_rock"
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "mynethersdelight:strider_rock"
+        },
+        {
+          "item": "mynethersdelight:strider_egg"
+        }
+      ]
     },
     {
-      "item": "mynethersdelight:strider_rock"
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "mynethersdelight:strider_rock"
+        },
+        {
+          "item": "mynethersdelight:strider_egg"
+        }
+      ]
     }
   ],
   "recipe_book_tab": "meals",
