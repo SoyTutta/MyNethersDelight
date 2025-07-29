@@ -117,7 +117,8 @@ dependencies {
     runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
     runtimeOnly "maven.modrinth:brewin-and-chewin:${brewinandchewin_version}"
 
-    implementation "maven.modrinth:the-block-box:${theblockbox_version}"
+    implementation "maven.modrinth:miners-delight:${minersdelight_version}"
+    implementation "maven.modrinth:lodestonelib:1.7.1"
     implementation "maven.modrinth:tuttas-doors:${tuttasdoors_version}"
 
     def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${mod_minecraft}:${crafttweaker_version}"

@@ -75,34 +75,50 @@ public class MNDLang extends LanguageProvider {
         this.add("block.mynethersdelight.stripped_powdery_block", "Block of Stripped Powdery Cannon");
 
         this.add("mynethersdelight.itemGroup.main", "My Nether's Delight");
-        this.add("effect.mynethersdelight.g_pungent", "Pungent");
-        this.add("effect.mynethersdelight.g_pungent.desc", "Regenerate with heat");
-        this.add("effect.mynethersdelight.b_pungent", "Pungent");
-        this.add("effect.mynethersdelight.b_pungent.desc", "Increases heat sensitivity and prevents burns when leaving the heat zone");
-        this.add("mynethersdelight.jei.forgoting", "Forgoting");
+
+        this.add("effect.mynethersdelight.b_pungent", "Caustic Pungency");
+        this.add("effect.mynethersdelight.b_pungent.desc", "Induces combustion upon heat exposure; flames are automatically doused when at a safe distance.");
+
+        this.add("effect.mynethersdelight.g_pungent", "Invigorating Pungency");
+        this.add("effect.mynethersdelight.g_pungent.desc", "Provides natural regeneration while exposed to heat.");
+
+        this.add("mynethersdelight.jei.forgoting", "Forgetting");
         this.add("mynethersdelight.jei.forgoting.nether", "Will only forget in the nether");
         this.add("mynethersdelight.jei.forgoting.accelerators", "Sped up by adjacent activators (see below)");
         this.add("mynethersdelight.jei.forgoting.light", "Sped up by adjacent flames (see below)");
         this.add("mynethersdelight.jei.forgoting.fluid", "Sped up by adjacent lava");
+
         this.add("mynethersdelight.block.feast.space_required", "You need more space to serve this.");
         this.add("mynethersdelight.block.feast.use_knife", "You need a Knife to cut this.");
+
         this.add("farmersdelight.tooltip.strider_egg", "Nourished by 1 Harmful Effect");
         this.add("farmersdelight.tooltip.golden_egg", "Nourished by all harmful effects");
+
         this.add("farmersdelight.tooltip.enchanted_golden_egg", "Nourished by all harmful effects");
+
         this.add("farmersdelight.tooltip.hot_cream", "Burning Effects");
+
         this.add("farmersdelight.tooltip.strider_feed.when_feeding", "When fed to a Strider");
         this.add("farmersdelight.tooltip.magma_cake_slice", "Spicy frog Snack");
 
-        this.add("mynethersdelight.jei.info.hot_cream", "It burns all active Effects converting them into Fire Resistance and Pungent.\n\nIf you serve it in a Cone it will only Burn one Effect!! Striders also prefer it served this way...");
-        this.add("mynethersdelight.jei.info.strider_egg", "Wait... Are Striders Ovoviviparous? that's weird...\n\nAnyway, it's only obtainable by careful hunting.\nhard shell, it can only be eaten starry...");
-        this.add("mynethersdelight.jei.info.hoglin_hide", "A great source of leather, it could also serve as a nice hunting trophy.\n\nIf you do not want to damage the leather, try to use something lighter than a Sword...");
-        this.add("mynethersdelight.jei.info.r_soil", "Almost every plant or crop feels comfortable in this soil, if you want to moisten need fire instead of water.");
+        this.add("mynethersdelight.jei.info.hot_cream", "Burns away all active Effects, converting them into Fire Resistance and Invigorating Pungency.\n\nWhen served in a Cone, it will only convert one effect at a time. Striders also seem to prefer it this way.");
+
+        this.add("mynethersdelight.jei.info.strider_egg", "A peculiar find, suggesting Striders may be ovoviviparous.\n\nObtainable only through careful hunting.\nhard shell, it can only be eaten starry...");
+
+        this.add("mynethersdelight.jei.info.hoglin_hide", "A great source of leather which also serves as a nice hunting trophy.\n\nTo avoid damaging the hide, using something lighter than a Sword...");
+
+        this.add("mynethersdelight.jei.info.r_soil", "Most plants and crops grow well in this soil.\n\nUnlike other soils, it is moistened by fire instead of water.");
+
         this.add("mynethersdelight.jei.info.mushroom_colony", "Some Mushrooms form colonies when they are on top of Rich Soil or Resurgent Soil.");
         this.add("mynethersdelight.jei.info.fungus_colony", "Some Nethers Fungus form colonies when they are on top of Resurgent Soil.");
-        this.add("mynethersdelight.jei.info.wild_powdery", "Powdery Canes are an invasive crop in Crimson Forests.\n\nIts Berries are explosive on Contact, try Cutting the red stem...");
-        this.add("mynethersdelight.jei.info.plate_of_stuffed_hoglin", "It's astonishing how much Dishes can be obtained from such a Primitive Feast...");
-        this.add("mynethersdelight.jei.info.plate_of_ghasta", "Is the ghast still alive?\nI took a portion recently, but it grew back.");
-        this.add("mynethersdelight.jei.info.plate_of_striderloaf", "Once cooled, it takes away your appetite.");
+
+        this.add("mynethersdelight.jei.info.wild_powdery", "An invasive crop found in Crimson Forests. Its Berries are explosive on Contact, Try Cutting the red stem...");
+
+        this.add("mynethersdelight.jei.info.plate_of_stuffed_hoglin", "A large, shareable feast. Carve it to obtain several different hoglin-based servings.");
+
+        this.add("mynethersdelight.jei.info.plate_of_ghasta", "his strange feast appears to be alive.\n\n It will slowly regenerate portions over time, as long as its head remains on the plate.");
+
+        this.add("mynethersdelight.jei.info.plate_of_striderloaf", "Warm restores more hunger; cold grants lasting saturation.");
 
         this.add("enchantment.mynethersdelight.poaching", "Poaching");
         this.add("enchantment.mynethersdelight.poaching.desc", "Responsible hunting can provide you with extra ingredients!!!\nBut be careful about choosing your target...");
