@@ -4,10 +4,11 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.animal.Sheep;
+import net.minecraft.world.entity.animal.Wolf;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.ZombieVillager;
 import net.minecraft.world.entity.monster.Zoglin;
-import net.minecraft.world.entity.monster.ZombifiedPiglin;
 import net.minecraft.world.entity.npc.Villager;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.biome.Biomes;
@@ -32,37 +33,51 @@ public class PoachingFailureRegistry {
     public static void registerAll() {
         register(new PoachingFailureCase(EntityType.SPIDER, EntityType.CAVE_SPIDER, SoundEvents.ZOMBIE_VILLAGER_CONVERTED,
                 (mob, weapon) -> mob.level().random.nextFloat() < 0.4F,
-                CommonEvent::transferBasicMobData));
+                CommonEvent::transferDataAndMakeHostile));
+
+        register(new PoachingFailureCase(EntityType.SHEEP, EntityType.WOLF, SoundEvents.WOLF_HOWL,
+                (mob, weapon) -> !((Sheep) mob).isSheared() && mob.level().random.nextFloat() < 0.3F,
+                (original, newMob) -> {
+                    CommonEvent.transferDataAndMakeHostile(original, newMob);
+                    if (original.isBaby()) ((Wolf) newMob).setBaby(true);
+                }));
 
         register(new PoachingFailureCase(EntityType.FROG, EntityType.WITCH, SoundEvents.WITCH_CELEBRATE,
                 (mob, weapon) -> (mob.level().getBiome(mob.blockPosition()).is(Biomes.SWAMP) && mob.level().random.nextFloat() < 0.3F) || (weapon.is(ModTags.KNIVES) && mob.level().random.nextFloat() < 0.3F),
-                CommonEvent::transferBasicMobData));
+                CommonEvent::transferDataAndMakeHostile));
+
         register(new PoachingFailureCase(EntityType.BAT, EntityType.WITCH, SoundEvents.WITCH_CELEBRATE,
                 (mob, weapon) -> (mob.level().getBiome(mob.blockPosition()).is(Biomes.SWAMP) && mob.level().random.nextFloat() < 0.3F) || (weapon.is(ModTags.KNIVES) && mob.level().random.nextFloat() < 0.3F),
-                CommonEvent::transferBasicMobData));
+                CommonEvent::transferDataAndMakeHostile));
 
         register(new PoachingFailureCase(EntityType.ALLAY, EntityType.VEX, SoundEvents.EVOKER_PREPARE_SUMMON,
                 (mob, weapon) -> true,
-                CommonEvent::transferBasicMobData));
+                CommonEvent::transferDataAndMakeHostile));
 
         register(new PoachingFailureCase(EntityType.HOGLIN, EntityType.ZOGLIN, SoundEvents.HOGLIN_CONVERTED_TO_ZOMBIFIED,
                 (mob, weapon) -> true,
                 (original, newMob) -> {
-                    CommonEvent.transferBasicMobData(original, newMob);
+                    CommonEvent.transferDataAndMakeHostile(original, newMob);
                     if (original.isBaby()) ((Zoglin) newMob).setBaby(true);
                 }));
 
         register(new PoachingFailureCase(EntityType.HORSE, EntityType.ZOMBIE_HORSE, SoundEvents.ZOMBIE_VILLAGER_CONVERTED,
-                (mob, weapon) -> CommonEvent.shouldHorseTransform((AbstractHorse) mob, 0.4F, weapon), // Usamos la probabilidad base
-                (original, newMob) -> CommonEvent.transferFullHorseData((AbstractHorse) original, (AbstractHorse) newMob)));
+                (mob, weapon) -> CommonEvent.shouldHorseTransform((AbstractHorse) mob, 0.4F, weapon),
+                (original, newMob) -> {
+                    CommonEvent.transferFullHorseData((AbstractHorse) original, (AbstractHorse) newMob);
+                    if (original.isBaby()) ((AbstractHorse) newMob).setBaby(true);
+                }));
 
         register(new PoachingFailureCase(EntityType.ZOMBIE_HORSE, EntityType.SKELETON_HORSE, SoundEvents.ZOMBIE_INFECT,
                 (mob, weapon) -> CommonEvent.shouldHorseTransform((AbstractHorse) mob, 0.4F, weapon),
-                (original, newMob) -> CommonEvent.transferFullHorseData((AbstractHorse) original, (AbstractHorse) newMob)));
+                (original, newMob) -> {
+                    CommonEvent.transferFullHorseData((AbstractHorse) original, (AbstractHorse) newMob);
+                    if (original.isBaby()) ((AbstractHorse) newMob).setBaby(true);
+                }));
 
         register(new PoachingFailureCase(EntityType.ZOMBIE, EntityType.SKELETON, SoundEvents.ZOMBIE_INFECT,
                 (mob, weapon) -> !(mob instanceof ZombieVillager) && mob.level().random.nextFloat() < 0.3F,
-                CommonEvent::transferBasicMobData));
+                CommonEvent::transferDataAndMakeHostile));
 
         register(new PoachingFailureCase(EntityType.VILLAGER, EntityType.ZOMBIE_VILLAGER, SoundEvents.ZOMBIE_VILLAGER_CONVERTED,
                 (mob, weapon) -> true,
@@ -71,26 +86,33 @@ public class PoachingFailureRegistry {
                     ZombieVillager zombieVillager = (ZombieVillager) newMob;
                     CompoundTag nbt = new CompoundTag();
                     original.addAdditionalSaveData(nbt);
-                    nbt.remove("UUID");
-                    nbt.remove("Health");
+                    nbt.remove("UUID"); nbt.remove("Health");
                     newMob.readAdditionalSaveData(nbt);
                     zombieVillager.setVillagerData(villager.getVillagerData());
-                    if (original.isBaby()) {
-                        zombieVillager.setBaby(true);
-                    }
+                    if (original.isBaby()) zombieVillager.setBaby(true);
+
+                    CommonEvent.makeHostile(newMob, original.getLastHurtByMob());
+                }));
+
+        register(new PoachingFailureCase(EntityType.WOLF, EntityType.WOLF, SoundEvents.WOLF_GROWL,
+                (mob, weapon) -> ((Wolf) mob).isTame() && mob.level().random.nextFloat() < 0.5F,
+                (original, newMob) -> {
+                    CompoundTag nbt = new CompoundTag();
+                    original.addAdditionalSaveData(nbt);
+                    nbt.remove("UUID"); nbt.remove("Health");
+                    newMob.readAdditionalSaveData(nbt);
+                    CommonEvent.transferBasicMobData(original, newMob);
+                    ((Wolf) newMob).setTame(false, true);
+
+                    CommonEvent.makeHostile(newMob, original.getLastHurtByMob());
                 }));
 
         register(new PoachingFailureCase(EntityType.PIGLIN, EntityType.ZOMBIFIED_PIGLIN, SoundEvents.PIGLIN_BRUTE_CONVERTED_TO_ZOMBIFIED,
                 (mob, weapon) -> true,
-                (original, newMob) -> {
-                    CommonEvent.transferBasicMobData(original, newMob);
-                    if (original.isBaby()) ((ZombifiedPiglin) newMob).setBaby(true);
-                }));
+                CommonEvent::transferDataAndMakeHostile));
+
         register(new PoachingFailureCase(EntityType.PIGLIN_BRUTE, EntityType.ZOMBIFIED_PIGLIN, SoundEvents.PIGLIN_BRUTE_CONVERTED_TO_ZOMBIFIED,
                 (mob, weapon) -> true,
-                (original, newMob) -> {
-                    CommonEvent.transferBasicMobData(original, newMob);
-                    if (original.isBaby()) ((ZombifiedPiglin) newMob).setBaby(true);
-                }));
+                CommonEvent::transferDataAndMakeHostile));
     }
 }

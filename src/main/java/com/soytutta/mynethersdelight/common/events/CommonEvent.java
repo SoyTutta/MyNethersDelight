@@ -196,6 +196,23 @@ public class CommonEvent {
         }
     }
 
+    public static void makeHostile(Mob mobToAnger, LivingEntity target) {
+        if (target == null) {
+            return;
+        }
+        if (mobToAnger instanceof NeutralMob neutralMob) {
+            neutralMob.setPersistentAngerTarget(target.getUUID());
+            neutralMob.startPersistentAngerTimer();
+        }
+
+        mobToAnger.setTarget(target);
+    }
+
+    public static void transferDataAndMakeHostile(Mob original, Mob newMob) {
+        transferBasicMobData(original, newMob);
+        makeHostile(newMob, original.getLastHurtByMob());
+    }
+
     public static void transferFullHorseData(AbstractHorse original, AbstractHorse newHorse) {
         CompoundTag nbt = new CompoundTag();
         original.addAdditionalSaveData(nbt);
