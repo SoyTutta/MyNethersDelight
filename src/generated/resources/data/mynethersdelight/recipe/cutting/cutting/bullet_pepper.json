@@ -9,14 +9,14 @@
     {
       "item": {
         "count": 1,
-        "id": "minecraft:blaze_powder"
+        "id": "mynethersdelight:pepper_powder"
       }
     },
     {
       "chance": 0.25,
       "item": {
         "count": 1,
-        "id": "minecraft:blaze_powder"
+        "id": "mynethersdelight:pepper_powder"
       }
     }
   ],

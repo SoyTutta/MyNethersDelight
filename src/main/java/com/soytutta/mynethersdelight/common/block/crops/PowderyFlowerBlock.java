@@ -1,4 +1,4 @@
-package com.soytutta.mynethersdelight.common.block;
+package com.soytutta.mynethersdelight.common.block.crops;
 
 import com.mojang.serialization.MapCodec;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
@@ -37,7 +37,7 @@ import vectorwing.farmersdelight.common.tag.CommonTags;
 
 import java.util.Random;
 
-import static com.soytutta.mynethersdelight.common.block.PowderyCaneBlock.LEAVE;
+import static com.soytutta.mynethersdelight.common.block.crops.PowderyCaneBlock.LEAVE;
 
 public class PowderyFlowerBlock extends Block implements BonemealableBlock {
     public static final MapCodec<PowderyFlowerBlock> CODEC = simpleCodec(PowderyFlowerBlock::new);
@@ -224,8 +224,6 @@ public class PowderyFlowerBlock extends Block implements BonemealableBlock {
                 heldItem.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
                 level.destroyBlock(pos, true);
-                Random random = new Random();
-                popResource(level, pos, new ItemStack(MNDItems.BULLET_PEPPER.get(), random.nextInt(100) < 25 ? 1 : 0));
                 return ItemInteractionResult.sidedSuccess(level.isClientSide);
             }
         }

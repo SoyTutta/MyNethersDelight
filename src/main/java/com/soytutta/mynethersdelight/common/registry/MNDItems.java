@@ -272,7 +272,7 @@ public class MNDItems {
             new ConsumableItem(bowlFoodItem(MNDFoodValues.SIZZLING_PUDDING), false)
     );
     public static final Supplier<Item> TEAR_POPSICLE = ITEMS.register("tear_popsicle", () ->
-            new PopsicleItem(foodItem(MNDFoodValues.TEAR_POPSICLE))
+            new PopsicleItem(foodItem(MNDFoodValues.TEAR_POPSICLE).rarity(Rarity.RARE))
     );
     public static final Supplier<Item> GHASTA_WITH_CREAM_BLOCK = ITEMS.register("ghasta_with_cream", () ->
             new BlockItem(MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get(), basicItem().stacksTo(1))
@@ -301,6 +301,9 @@ public class MNDItems {
                     new Item.Properties()
                             .food(MNDFoodValues.BULLET_PEPPER)
             )
+    );
+    public static final Supplier<Item> PEPPER_POWDER = ITEMS.register("pepper_powder", () ->
+            new Item(basicItem())
     );
     public static final Supplier<Item> STUFFED_PEPPER = ITEMS.register("stuffed_pepper", ()  ->
             new ConsumableItem(foodItem(MNDFoodValues.STUFFED_PEPPER))
@@ -345,6 +348,9 @@ public class MNDItems {
             new HotCreamConeItem(foodItem(MNDFoodValues.HOT_CREAM_CONE).stacksTo(16))
     );
     // THOPHY
+    public static final Supplier<Item> GOLDEN_TROPHY = ITEMS.register("golden_trophy", () ->
+            new BlockItem(MNDBlocks.GOLDEN_TROPHY.get(), basicItem())
+    );
     public static final Supplier<Item> HOGLIN_TROPHY = ITEMS.register("hoglin_trophy", () ->
             new BlockItem(MNDBlocks.HOGLIN_TROPHY.get(), basicItem())
     );
@@ -365,7 +371,7 @@ public class MNDItems {
             new Item(basicItem().stacksTo(1))
     );
     public static final Supplier<Item> ROAST_STUFFED_HOGLIN = ITEMS.register("roast_stuffed_hoglin", () ->
-            new BlockItem(MNDBlocks.STUFFED_HOGLIN.get(),(basicItem().stacksTo(1)))
+            new StuffedHoglinBlockItem(MNDBlocks.STUFFED_HOGLIN.get(),(basicItem().stacksTo(1)))
     );
     public static final Supplier<Item> ROAST_EAR = ITEMS.register("roast_ear", ()  ->
             new ConsumableItem(foodItem(MNDFoodValues.ROAST_EAR))

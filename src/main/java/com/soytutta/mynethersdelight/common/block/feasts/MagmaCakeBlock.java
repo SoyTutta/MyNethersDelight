@@ -1,4 +1,4 @@
-package com.soytutta.mynethersdelight.common.block;
+package com.soytutta.mynethersdelight.common.block.feasts;
 
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import net.minecraft.core.BlockPos;

@@ -62,14 +62,14 @@ public class MNDCuttingRecipes {
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.HOGLIN_TROPHY.get()),
                         Ingredient.of(CommonTags.TOOLS_KNIFE),
                         MNDItems.SKOGLIN_TROPHY.get())
-                .addResult(Items.LEATHER)
-                .addResultWithChance(Items.LEATHER, 0.5F, 2)
+                .addResult(Items.LEATHER, 2)
+                .addResultWithChance(Items.LEATHER, 0.5F)
                 .build(output, "mynethersdelight:cutting/skoglin_trophy");
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.ZOGLIN_TROPHY.get()),
                         Ingredient.of(CommonTags.TOOLS_KNIFE),
                         MNDItems.SKOGLIN_TROPHY.get())
-                .addResult(Items.ROTTEN_FLESH)
-                .addResultWithChance(Items.ROTTEN_FLESH, 0.5F, 2)
+                .addResult(Items.ROTTEN_FLESH, 2)
+                .addResultWithChance(Items.ROTTEN_FLESH, 0.5F)
                 .build(output, "mynethersdelight:cutting/skoglin_trophy_alt");
 
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.WAXED_HOGLIN_TROPHY.get()), new ItemAbilityIngredient(ItemAbilities.AXE_WAX_OFF).toVanilla(),
@@ -92,13 +92,17 @@ public class MNDCuttingRecipes {
                 .build(output, "farmersdelight:cutting/pumpkin_slice_alt");
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.POWDER_CANNON.get()),
                         Ingredient.of(CommonTags.TOOLS_KNIFE),
-                        Items.GUNPOWDER, 1)
+                        Items.STICK, 1)
                 .addResultWithChance(Items.GUNPOWDER, 0.25F, 1)
-                .build(output, "mynethersdelight:cutting/gunpowder_cane");
+                .build(output, "mynethersdelight:cutting/gunpowder_and_stick_cannon");
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BAMBOO),
+                        Ingredient.of(CommonTags.TOOLS_KNIFE),
+                        Items.STICK, 1)
+                .build(output, "mynethersdelight:cutting/stick_bamboo");
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.BULLET_PEPPER.get()),
                         Ingredient.of(CommonTags.TOOLS_KNIFE),
-                        Items.BLAZE_POWDER, 1)
-                .addResultWithChance(Items.BLAZE_POWDER, 0.25F, 1)
+                        MNDItems.PEPPER_POWDER.get(), 1)
+                .addResultWithChance(MNDItems.PEPPER_POWDER.get(), 0.25F, 1)
                 .build(output, "mynethersdelight:cutting/bullet_pepper");
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.CRIMSON_FUNGUS_COLONY.get()),
                         Ingredient.of(CommonTags.TOOLS_KNIFE),

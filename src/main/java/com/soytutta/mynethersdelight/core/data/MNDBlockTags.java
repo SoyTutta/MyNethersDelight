@@ -28,8 +28,8 @@ public class MNDBlockTags extends BlockTagsProvider {
 
     protected void registerBlockMineables() {
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(MNDBlocks.LETIOS_COMPOST.get(), MNDBlocks.RESURGENT_SOIL.get(), MNDBlocks.RESURGENT_SOIL_FARMLAND.get());
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(MNDBlocks.NETHER_BRICKS_CABINET.get(),MNDBlocks.RED_NETHER_BRICKS_CABINET.get(),MNDBlocks.BLACKSTONE_BRICKS_CABINET.get(),MNDBlocks.NETHER_STOVE.get());
-        this.tag(BlockTags.MINEABLE_WITH_AXE).add(MNDBlocks.HOGLIN_TROPHY.get(),MNDBlocks.WAXED_HOGLIN_TROPHY.get(),MNDBlocks.ZOGLIN_TROPHY.get(),MNDBlocks.SKOGLIN_TROPHY.get(),MNDBlocks.POWDERY_CANNON.get(),MNDBlocks.POWDERY_CANE.get(),MNDBlocks.POWDERY_CHUBBY_SAPLING.get(),MNDBlocks.BULLET_PEPPER.get(),MNDBlocks.BLOCK_OF_POWDERY_CANNON.get(),MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get(),MNDBlocks.POWDERY_MOSAIC.get(),MNDBlocks.POWDERY_MOSAIC_STAIRS.get(),MNDBlocks.POWDERY_MOSAIC_SLAB.get(),MNDBlocks.BULLET_PEPPER_CRATE.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(MNDBlocks.NETHER_BRICKS_CABINET.get(),MNDBlocks.RED_NETHER_BRICKS_CABINET.get(),MNDBlocks.BLACKSTONE_BRICKS_CABINET.get(),MNDBlocks.NETHER_STOVE.get(),MNDBlocks.GOLDEN_TROPHY.get());
+        this.tag(BlockTags.MINEABLE_WITH_AXE).add(MNDBlocks.HOGLIN_TROPHY.get(),MNDBlocks.WAXED_HOGLIN_TROPHY.get(),MNDBlocks.ZOGLIN_TROPHY.get(),MNDBlocks.SKOGLIN_TROPHY.get(),MNDBlocks.GOLDEN_TROPHY.get(),MNDBlocks.POWDERY_CANNON.get(),MNDBlocks.POWDERY_CANE.get(),MNDBlocks.POWDERY_CHUBBY_SAPLING.get(),MNDBlocks.BULLET_PEPPER.get(),MNDBlocks.BLOCK_OF_POWDERY_CANNON.get(),MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get(),MNDBlocks.POWDERY_MOSAIC.get(),MNDBlocks.POWDERY_MOSAIC_STAIRS.get(),MNDBlocks.POWDERY_MOSAIC_SLAB.get(),MNDBlocks.BULLET_PEPPER_CRATE.get());
         this.tag(ModTags.MINEABLE_WITH_KNIFE).add(MNDBlocks.STUFFED_HOGLIN.get(),MNDBlocks.BREAD_LOAF_BLOCK.get(),MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get(),MNDBlocks.STRIDERLOAF_BLOCK.get(),MNDBlocks.MAGMA_CAKE_BLOCK.get(),MNDBlocks.POWDERY_CANNON.get(),MNDBlocks.POWDERY_CANE.get(),MNDBlocks.POWDERY_CHUBBY_SAPLING.get(),MNDBlocks.BULLET_PEPPER.get());
     }
 
@@ -53,6 +53,8 @@ public class MNDBlockTags extends BlockTagsProvider {
         this.tag(BlockTags.BAMBOO_PLANTABLE_ON).add(MNDBlocks.RESURGENT_SOIL.get(),MNDBlocks.POWDERY_CANNON.get());
         this.tag(BlockTags.HOGLIN_REPELLENTS).add(MNDBlocks.HOGLIN_TROPHY.get(),MNDBlocks.WAXED_HOGLIN_TROPHY.get(),MNDBlocks.ZOGLIN_TROPHY.get(), MNDBlocks.BULLET_PEPPER.get());
         this.tag(BlockTags.PIGLIN_REPELLENTS).add(MNDBlocks.ZOGLIN_TROPHY.get(), MNDBlocks.BULLET_PEPPER.get());
+        this.tag(BlockTags.GUARDED_BY_PIGLINS).add(MNDBlocks.GOLDEN_TROPHY.get());
+
         this.tag(BlockTags.MUSHROOM_GROW_BLOCK).add(MNDBlocks.LETIOS_COMPOST.get(), MNDBlocks.RESURGENT_SOIL.get(), MNDBlocks.RESURGENT_SOIL_FARMLAND.get());
         this.tag(BlockTags.TALL_FLOWERS).add(MNDBlocks.POWDERY_CHUBBY_SAPLING.get(),MNDBlocks.POWDERY_CANE.get());
         this.tag(BlockTags.SMALL_FLOWERS).add(MNDBlocks.BULLET_PEPPER.get());

@@ -72,13 +72,13 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(MNDTags.BLOCK_OF_POWDERY).add(MNDItems.BLOCK_OF_POWDERY_CANNON.get(), MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
 
         this.tag(MNDTags.STOVE_SOUL_FUEL).addTag(ItemTags.SOUL_FIRE_BASE_BLOCKS);
-        this.tag(MNDTags.STOVE_FIRE_FUEL).add(Items.BLAZE_ROD, Items.FIRE_CHARGE, Items.MAGMA_BLOCK, Items.MAGMA_CREAM).addTag(MNDTags.HOT_SPICE);
+        this.tag(MNDTags.STOVE_FIRE_FUEL).addTag(MNDTags.HOT_SPICE).add(Items.BLAZE_ROD, Items.FIRE_CHARGE, Items.MAGMA_CREAM, Items.MAGMA_BLOCK);
 
         this.tag(MNDTags.HOGLIN_WAXED).add(Items.NETHER_WART, Items.HONEYCOMB);
         this.tag(MNDTags.HOGLIN_CURE).add(Items.GHAST_TEAR);
 
         this.tag(MNDTags.BOILED_EGG_CANDIDATE).add(MNDItems.STRIDER_EGG.get());
-        this.tag(MNDTags.HOT_SPICE).add(Items.BLAZE_POWDER, MNDItems.BULLET_PEPPER.get());
+        this.tag(MNDTags.HOT_SPICE).add(MNDItems.BULLET_PEPPER.get(), MNDItems.PEPPER_POWDER.get(), Items.BLAZE_POWDER);
     }
 
     private void registerMinecraftTags() {
@@ -89,13 +89,13 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(ItemTags.MEAT).addTag(MyCommonTags.FOODS_RAW_HOGLIN).addTag(MyCommonTags.FOODS_COOKED_HOGLIN).add(MNDItems.MINCED_STRIDER.get(), MNDItems.ROAST_EAR.get());
         this.tag(ItemTags.HOGLIN_FOOD).add(MNDItems.BULLET_PEPPER.get());
         this.tag(ItemTags.STRIDER_FOOD).add(MNDItems.HOT_CREAM_CONE.get(), MNDItems.BULLET_PEPPER.get());
-        this.tag(ItemTags.STRIDER_TEMPT_ITEMS).add(MNDItems.HOT_CREAM.get(), MNDItems.BULLET_PEPPER.get());
+        this.tag(ItemTags.STRIDER_TEMPT_ITEMS).add(MNDItems.HOT_CREAM_CONE.get());
 
         this.tag(ItemTags.CAT_FOOD).addTag(MyCommonTags.FOODS_RAW_STRIDER).add(MNDItems.GHASMATI.get());
         this.tag(ItemTags.WOLF_FOOD).add(MNDItems.HOTDOG.get());
 
         this.tag(ItemTags.PIGLIN_FOOD).addTag(MNDTags.STUFFED_HOGLIN_ITEMS).addTag(MyCommonTags.FOODS_COOKED_HOGLIN).addTag(MyCommonTags.FOODS_RAW_HOGLIN);
-        this.tag(ItemTags.PIGLIN_LOVED).add(MNDItems.GOLDEN_EGG.get(), MNDItems.ENCHANTED_GOLDEN_EGG.get());
+        this.tag(ItemTags.PIGLIN_LOVED).add(MNDItems.GOLDEN_EGG.get(), MNDItems.ENCHANTED_GOLDEN_EGG.get(), MNDItems.GOLDEN_TROPHY.get());
 
         this.tag(ItemTags.PLANKS).add(MNDItems.POWDERY_PLANKS.get());
         this.tag(ItemTags.WOODEN_BUTTONS).add(MNDItems.POWDERY_BUTTON.get());

@@ -1,9 +1,9 @@
 {
   "values": [
+    "#mynethersdelight:hot_spice",
     "minecraft:blaze_rod",
     "minecraft:fire_charge",
-    "minecraft:magma_block",
     "minecraft:magma_cream",
-    "#mynethersdelight:hot_spice"
+    "minecraft:magma_block"
   ]
 }

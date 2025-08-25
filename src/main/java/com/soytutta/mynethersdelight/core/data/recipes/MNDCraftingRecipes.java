@@ -37,6 +37,10 @@ public class MNDCraftingRecipes {
                 .requires(MNDItems.STRIDER_EGG.get())
                 .unlockedBy("has_sugar", InventoryChangeTrigger.TriggerInstance.hasItems(Items.SUGAR,MNDItems.STRIDER_EGG.get()))
                 .save(output, "mynethersdelight:crafting/sugar_alt");
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,Items.BLAZE_POWDER,2)
+                .requires(Items.BLAZE_POWDER).requires(MNDItems.PEPPER_POWDER.get(),3)
+                .unlockedBy("has_blaze_powder", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BLAZE_POWDER,MNDItems.PEPPER_POWDER.get()))
+                .save(output, "mynethersdelight:crafting/blaze_powder_alt");
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC,Items.STICK)
                 .pattern("#").pattern("#")
@@ -205,6 +209,15 @@ public class MNDCraftingRecipes {
                 .define('#', MNDItems.POWDER_CANNON.get()).define('P', MNDItems.BULLET_PEPPER.get())
                 .unlockedBy("has_powder_cannon", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDER_CANNON.get()))
                 .save(output, "mynethersdelight:crafting/powdery_torch");
+        ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,MNDBlocks.GOLDEN_TROPHY.get(), 2)
+                .pattern("iGi")
+                .pattern("iBi")
+                .pattern("iSi")
+                .define('G', MNDItems.GOLDEN_TROPHY.get()).define('S', MNDItems.SKOGLIN_TROPHY.get())
+                .define('B', Blocks.GOLD_BLOCK).define('i', Items.GOLD_INGOT)
+                .group("nether_trophy")
+                .unlockedBy("has_golden_trophy", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GOLDEN_TROPHY.get()))
+                .save(output, "mynethersdelight:crafting/golden_trophy");
         ShapedRecipeBuilder.shaped(RecipeCategory.BUILDING_BLOCKS,MNDBlocks.HOGLIN_TROPHY.get())
                 .pattern("W#W")
                 .pattern("bBb")
@@ -411,7 +424,7 @@ public class MNDCraftingRecipes {
                 .requires(MNDItems.GHASMATI.get())
                 .requires(CommonTags.FOODS_MILK)
                 .requires(Tags.Items.EGGS)
-                .requires(Items.BLAZE_POWDER)
+                .requires(Ingredient.of(Items.BLAZE_POWDER, MNDItems.PEPPER_POWDER.get()))
                 .requires(Items.BOWL)
                 .unlockedBy("has_ghasmati", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHASMATI.get()))
                 .save(output, "mynethersdelight:crafting/sizzling_pudding");
@@ -500,7 +513,7 @@ public class MNDCraftingRecipes {
                 .pattern("PHP")
                 .pattern("###")
                 .define('H', MNDItems.HOT_CREAM.get()).define('M', Items.MAGMA_CREAM)
-                .define('#', ModItems.STRAW.get()).define('P', Items.GUNPOWDER)
+                .define('#', ModItems.STRAW.get()).define('P', MNDItems.PEPPER_POWDER.get())
                 .unlockedBy("has_magma_cream", InventoryChangeTrigger.TriggerInstance.hasItems(Items.MAGMA_CREAM))
                 .save(output, "mynethersdelight:crafting/magma_cake");
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.MAGMA_CAKE.get())

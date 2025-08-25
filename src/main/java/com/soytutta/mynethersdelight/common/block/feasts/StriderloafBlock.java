@@ -1,4 +1,4 @@
-package com.soytutta.mynethersdelight.common.block;
+package com.soytutta.mynethersdelight.common.block.feasts;
 
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import net.minecraft.core.BlockPos;
@@ -25,7 +25,7 @@ import java.util.function.Supplier;
 
 public class StriderloafBlock extends FeastBlock {
     protected static final VoxelShape PLATE_SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 2.0, 15.0);
-    protected static final VoxelShape ROAST_SHAPE;
+    protected static final VoxelShape ROAST_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(5, 2, 5, 11, 6, 11), BooleanOp.OR);
 
     public StriderloafBlock(Properties properties, Supplier<Item> servingItem, boolean hasLeftovers) {
         super(properties, servingItem, hasLeftovers);
@@ -87,9 +87,5 @@ public class StriderloafBlock extends FeastBlock {
 
     public boolean isRandomlyTicking(BlockState state) {
         return true;
-    }
-
-    static {
-        ROAST_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(5, 2, 5, 11, 6, 11), BooleanOp.OR);
     }
 }

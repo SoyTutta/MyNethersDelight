@@ -57,6 +57,7 @@ public class MNDCreativeTab {
                     output.accept(MNDItems.CRIMSON_FUNGUS_COLONY.get());
                     output.accept(MNDItems.WARPED_FUNGUS_COLONY.get());
 
+                    output.accept(MNDItems.GOLDEN_TROPHY.get());
                     output.accept(MNDItems.HOGLIN_TROPHY.get());
                     output.accept(MNDItems.ZOGLIN_TROPHY.get());
                     output.accept(MNDItems.SKOGLIN_TROPHY.get());
@@ -125,6 +126,7 @@ public class MNDCreativeTab {
                     output.accept(MNDItems.TOASTS.get());
 
                     output.accept(MNDItems.BULLET_PEPPER.get());
+                    output.accept(MNDItems.PEPPER_POWDER.get());
                     output.accept(MNDItems.STUFFED_PEPPER.get());
                     output.accept(MNDItems.SPICY_SKEWER.get());
                     output.accept(MNDItems.CHILIDOG.get());

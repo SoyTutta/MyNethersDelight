@@ -1,4 +1,4 @@
-package com.soytutta.mynethersdelight.common.block;
+package com.soytutta.mynethersdelight.common.block.feasts;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

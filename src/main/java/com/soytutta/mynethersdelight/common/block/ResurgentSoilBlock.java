@@ -4,6 +4,8 @@
 //
 package com.soytutta.mynethersdelight.common.block;
 
+import com.soytutta.mynethersdelight.common.block.crops.PowderyCaneBlock;
+import com.soytutta.mynethersdelight.common.block.crops.PowderyFlowerBlock;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.core.BlockPos;

@@ -1,0 +1,23 @@
+{
+  "type": "farmersdelight:cooking",
+  "experience": 1.0,
+  "ingredients": [
+    {
+      "tag": "mynethersdelight:boiled_egg_candidate"
+    },
+    {
+      "tag": "mynethersdelight:boiled_egg_candidate"
+    },
+    {
+      "tag": "mynethersdelight:boiled_egg_candidate"
+    },
+    {
+      "tag": "mynethersdelight:boiled_egg_candidate"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 4,
+    "id": "mynethersdelight:boiled_egg"
+  }
+}

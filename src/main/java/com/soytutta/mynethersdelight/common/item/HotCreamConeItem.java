@@ -69,9 +69,9 @@ public class HotCreamConeItem extends ConsumableItem {
                 } else {
                     consumer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 400));
                 } if (pungentDuration > 200) {
-                    consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT, pungentDuration * 3, 2));
+                    consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT, pungentDuration * 3, 2,false,false,true));
                 } else {
-                    consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT, 600, 2));
+                    consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT, 600, 2,false,false,true));
                 }
 
                 consumer.removeEffect(effectInstance.getEffect());
@@ -85,8 +85,8 @@ public class HotCreamConeItem extends ConsumableItem {
     }
 
     public static final List<MobEffectInstance> EFFECTS = Lists.newArrayList(
-            new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 3000, 1),
-            new MobEffectInstance(MNDEffects.GPUNGENT, 3000, 0));
+            new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200, 1),
+            new MobEffectInstance(MNDEffects.GPUNGENT, 1200, 0,false,false));
 
     @EventBusSubscriber(modid = MyNethersDelight.MODID, bus = EventBusSubscriber.Bus.GAME)
     public static class StriderFoodEvent
@@ -110,10 +110,10 @@ public class HotCreamConeItem extends ConsumableItem {
                         double xSpeed = MathUtils.RAND.nextGaussian() * 0.02D;
                         double ySpeed = MathUtils.RAND.nextGaussian() * 0.02D;
                         double zSpeed = MathUtils.RAND.nextGaussian() * 0.02D;
-                        strider.level().addParticle(ModParticleTypes.STAR.get(), strider.getRandomX(1.0D), strider.getRandomY() + 0.5D, strider.getRandomZ(1.0D), xSpeed, ySpeed, zSpeed);
+                        strider.level().addParticle(ModParticleTypes.STAR.get(), strider.getRandomX(0.75D), strider.getRandomY() + 0.5D, strider.getRandomZ(0.75D), xSpeed, ySpeed, zSpeed);
                     }
 
-                    if (itemStack.getCraftingRemainingItem() != ItemStack.EMPTY && !player.isCreative()) {
+                    if (!player.isCreative()) {
                         player.addItem(itemStack.getCraftingRemainingItem());
                         itemStack.shrink(1);
                     }

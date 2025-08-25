@@ -14,14 +14,14 @@
     },
     {
       "item": {
-        "count": 1,
+        "count": 2,
         "id": "minecraft:rotten_flesh"
       }
     },
     {
       "chance": 0.5,
       "item": {
-        "count": 2,
+        "count": 1,
         "id": "minecraft:rotten_flesh"
       }
     }

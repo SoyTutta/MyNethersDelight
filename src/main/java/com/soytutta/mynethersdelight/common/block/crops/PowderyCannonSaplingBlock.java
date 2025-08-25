@@ -1,4 +1,5 @@
-package com.soytutta.mynethersdelight.common.block;
+package com.soytutta.mynethersdelight.common.block.crops;
+
 import com.mojang.serialization.MapCodec;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;

@@ -19,7 +19,7 @@ import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import com.soytutta.mynethersdelight.common.block.MagmaCakeBlock;
+import com.soytutta.mynethersdelight.common.block.feasts.MagmaCakeBlock;
 
 import java.util.EnumSet;
 import java.util.List;

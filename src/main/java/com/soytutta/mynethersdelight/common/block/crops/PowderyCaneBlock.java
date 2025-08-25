@@ -1,4 +1,4 @@
-package com.soytutta.mynethersdelight.common.block;
+package com.soytutta.mynethersdelight.common.block.crops;
 
 import javax.annotation.Nullable;
 
@@ -31,7 +31,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -218,7 +217,7 @@ public class PowderyCaneBlock extends BushBlock implements BonemealableBlock {
                  if (age > 0) {
                     level.setBlock(pos, state.setValue(AGE, age - 1), 3);
                 }
-                 int j = 2 + level.random.nextInt(3);
+                 int j = 1 + level.random.nextInt(2);
                  popResource(level, pos, new ItemStack(MNDItems.BULLET_PEPPER.get(), j));
                  level.setBlock(pos, state.setValue(LIT, Boolean.FALSE), 2);
                  heldItem.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));

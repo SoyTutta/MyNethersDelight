@@ -1,0 +1,35 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_blaze_powder": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:blaze_powder"
+          },
+          {
+            "items": "mynethersdelight:pepper_powder"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "mynethersdelight:crafting/blaze_powder_alt"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_blaze_powder"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "mynethersdelight:crafting/blaze_powder_alt"
+    ]
+  }
+}

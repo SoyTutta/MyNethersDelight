@@ -48,7 +48,7 @@ public class StriderEggItem extends DrinkableItem {
             int nourishDuration = remainingDuration / 2;
 
             if (nourishDuration > 0) {
-                consumer.addEffect(new MobEffectInstance(ModEffects.NOURISHMENT, nourishDuration, 0));
+                consumer.addEffect(new MobEffectInstance(ModEffects.NOURISHMENT, nourishDuration, 0, false, false));
                 level.playSound(null, consumer.blockPosition(), SoundEvents.CHISELED_BOOKSHELF_INSERT_ENCHANTED, consumer.getSoundSource(), 1.0F, 1.0F);
             }
 

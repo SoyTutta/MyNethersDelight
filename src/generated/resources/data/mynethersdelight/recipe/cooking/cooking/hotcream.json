@@ -14,7 +14,15 @@
       "tag": "c:eggs"
     },
     {
-      "item": "mynethersdelight:bullet_pepper"
+      "type": "neoforge:compound",
+      "children": [
+        {
+          "item": "mynethersdelight:bullet_pepper"
+        },
+        {
+          "item": "mynethersdelight:pepper_powder"
+        }
+      ]
     },
     {
       "item": "minecraft:magma_cream"

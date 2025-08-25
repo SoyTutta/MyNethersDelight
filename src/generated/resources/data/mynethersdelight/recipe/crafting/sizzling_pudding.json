@@ -11,9 +11,14 @@
     {
       "tag": "c:eggs"
     },
-    {
-      "item": "minecraft:blaze_powder"
-    },
+    [
+      {
+        "item": "minecraft:blaze_powder"
+      },
+      {
+        "item": "mynethersdelight:pepper_powder"
+      }
+    ],
     {
       "item": "minecraft:bowl"
     }

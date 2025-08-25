@@ -62,9 +62,9 @@ public class HotCreamItem extends DrinkableItem {
             } else {
                 consumer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 400));
             } if (pungentDuration > 400) {
-                consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT, pungentDuration * 3, 2));
+                consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT, pungentDuration * 3, 2,false,false,true));
             } else {
-                consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT, 600, 2));
+                consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT, 600, 2,false,false,true));
             }
 
             Holder<MobEffect> effect = effectInstance.getEffect();
