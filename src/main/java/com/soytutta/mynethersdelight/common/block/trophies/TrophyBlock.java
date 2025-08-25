@@ -2,7 +2,7 @@
 // Source code recreated from a .class file by IntelliJ IDEA
 // (powered by FernFlower decompiler)
 //
-package com.soytutta.mynethersdelight.common.block;
+package com.soytutta.mynethersdelight.common.block.trophies;
 
 import javax.annotation.Nullable;
 
@@ -30,7 +30,6 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
@@ -49,72 +48,28 @@ import vectorwing.farmersdelight.common.tag.CommonTags;
 
 import java.util.stream.Stream;
 
+public class TrophyBlock extends AbstractTrophyBlock {
 
-public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
-    public static IntegerProperty ROTTING = IntegerProperty.create("rotting", 0, 2);
-    public static final DirectionProperty FACING;
-    public static final BooleanProperty WATERLOGGED;
-    protected static final VoxelShape EAST_AABB;
-    protected static final VoxelShape WEST_AABB;
-    protected static final VoxelShape SOUTH_AABB;
-    protected static final VoxelShape NORTH_AABB;
+    public static final IntegerProperty ROTTING = IntegerProperty.create("rotting", 0, 2);
 
-    static {
-        FACING = HorizontalDirectionalBlock.FACING;
-        WATERLOGGED = BlockStateProperties.WATERLOGGED;
-        NORTH_AABB = Stream.of(
-                Block.box(1, 0, 15, 15, 3, 16),
-                Block.box(0, 3, 15, 16, 15, 16),
-                Block.box(1, 4, 13, 15, 13, 15),
-                Block.box(2, 8, 9, 14, 12, 13),
-                Block.box(2, 6, 7, 14, 10, 11),
-                Block.box(2, 4, 5, 14, 8, 9),
-                Block.box(2, 2, 3, 14, 6, 7)
-        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-        EAST_AABB = Stream.of(
-                Block.box(0, 0, 1, 1, 3, 15),
-                Block.box(0, 3, 0, 1, 15, 16),
-                Block.box(1, 4, 1, 3, 13, 15),
-                Block.box(3, 8, 2, 7, 12, 14),
-                Block.box(5, 6, 2, 9, 10, 14),
-                Block.box(7, 4, 2, 11, 8, 14),
-                Block.box(9, 2, 2, 13, 6, 14)
-        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-        SOUTH_AABB = Stream.of(
-                Block.box(1, 0, 0, 15, 3, 1),
-                Block.box(0, 3, 0, 16, 15, 1),
-                Block.box(1, 4, 1, 15, 13, 3),
-                Block.box(2, 8, 3, 14, 12, 7),
-                Block.box(2, 6, 5, 14, 10, 9),
-                Block.box(2, 4, 7, 14, 8, 11),
-                Block.box(2, 2, 9, 14, 6, 13)
-        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
-        WEST_AABB = Stream.of(
-                Block.box(15, 0, 1, 16, 3, 15),
-                Block.box(15, 3, 0, 16, 15, 16),
-                Block.box(13, 4, 1, 15, 13, 15),
-                Block.box(9, 8, 2, 13, 12, 14),
-                Block.box(7, 6, 2, 11, 10, 14),
-                Block.box(5, 4, 2, 9, 8, 14),
-                Block.box(3, 2, 2, 7, 6, 14)
-        ).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+    protected static final VoxelShape NORTH_AABB = Stream.of(Block.box(1, 0, 15, 15, 3, 16), Block.box(0, 3, 15, 16, 15, 16), Block.box(1, 4, 13, 15, 13, 15), Block.box(2, 8, 9, 14, 12, 13), Block.box(2, 6, 7, 14, 10, 11), Block.box(2, 4, 5, 14, 8, 9), Block.box(2, 2, 3, 14, 6, 7)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+    protected static final VoxelShape SOUTH_AABB = Stream.of(Block.box(1, 0, 0, 15, 3, 1), Block.box(0, 3, 0, 16, 15, 1), Block.box(1, 4, 1, 15, 13, 3), Block.box(2, 8, 3, 14, 12, 7), Block.box(2, 6, 5, 14, 10, 9), Block.box(2, 4, 7, 14, 8, 11), Block.box(2, 2, 9, 14, 6, 13)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+    protected static final VoxelShape EAST_AABB = Stream.of(Block.box(0, 0, 1, 1, 3, 15), Block.box(0, 3, 0, 1, 15, 16), Block.box(1, 4, 1, 3, 13, 15), Block.box(3, 8, 2, 7, 12, 14), Block.box(5, 6, 2, 9, 10, 14), Block.box(7, 4, 2, 11, 8, 14), Block.box(9, 2, 2, 13, 6, 14)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+    protected static final VoxelShape WEST_AABB = Stream.of(Block.box(15, 0, 1, 16, 3, 15), Block.box(15, 3, 0, 16, 15, 16), Block.box(13, 4, 1, 15, 13, 15), Block.box(9, 8, 2, 13, 12, 14), Block.box(7, 6, 2, 11, 10, 14), Block.box(5, 4, 2, 9, 8, 14), Block.box(3, 2, 2, 7, 6, 14)).reduce((v1, v2) -> Shapes.join(v1, v2, BooleanOp.OR)).get();
+
+
+    public TrophyBlock(Properties properties, double pushStrength, double pushVerticalStrength) {
+        super(properties, pushStrength, pushVerticalStrength);
+        this.registerDefaultState(this.defaultBlockState().setValue(ROTTING, 0));
     }
-
-
-    public TrophyBlock(BlockBehaviour.Properties properties) {
-        super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false).setValue(ROTTING, 0));
-    }
-
 
     @Override
-    @SuppressWarnings("deprecation")
-    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext hit) {
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
         return switch (state.getValue(FACING)) {
-            case NORTH -> NORTH_AABB;
             case SOUTH -> SOUTH_AABB;
             case WEST -> WEST_AABB;
-            default -> EAST_AABB;
+            case EAST -> EAST_AABB;
+            default -> NORTH_AABB;
         };
     }
 
@@ -122,15 +77,16 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
         return 2;
     }
 
+    @Override
     public boolean isRandomlyTicking(BlockState state) {
-        return true;
+        return state.getValue(ROTTING) < getMaxRottingStage();
     }
 
     @Override
-    @SuppressWarnings("deprecation")
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
-        if (worldIn.isClientSide || state.getBlock() != MNDBlocks.HOGLIN_TROPHY.get()) return;
+        super.randomTick(state, worldIn, pos, random);
 
+        if (worldIn.isClientSide || state.getBlock() != MNDBlocks.HOGLIN_TROPHY.get()) return;
         if (worldIn.getBiome(pos).is(BiomeTags.IS_NETHER) || worldIn.dimensionType().ultraWarm()) return;
 
         int currentRotting = state.getValue(ROTTING);
@@ -183,7 +139,7 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
             return ItemInteractionResult.SUCCESS;
         }
         else if (block == MNDBlocks.WAXED_HOGLIN_TROPHY.get() && heldItem.canPerformAction(ItemAbilities.AXE_WAX_OFF)) {
-            processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.HONEYCOMB_WAX_ON, ParticleTypes.WAX_OFF, secondParticle, secondSoundEvent, useSecondEffects);
+            processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.AXE_WAX_OFF, ParticleTypes.WAX_OFF, secondParticle, secondSoundEvent, useSecondEffects);
             return ItemInteractionResult.SUCCESS;
         }
         else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && heldItem.is(MNDTags.HOGLIN_CURE)) {
@@ -223,10 +179,15 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
 
     private void processTrophyInteraction(Level level, BlockPos pos, Player player, InteractionHand hand, Block trophyBlock, SoundEvent soundEvent, ParticleOptions particle, ParticleOptions secondParticle, SoundEvent secondSoundEvent, boolean useSecondEffects) {
         if (level.isClientSide()) return;
-        level.playSound(null, pos, soundEvent, SoundSource.BLOCKS, 0.8F, 0.8F);
-        level.setBlockAndUpdate(pos, trophyBlock.defaultBlockState().setValue(FACING, level.getBlockState(pos).getValue(FACING)));
 
-        if (!level.isClientSide && level instanceof ServerLevel serverLevel) {
+        BlockState oldState = level.getBlockState(pos);
+        Direction facing = oldState.getValue(FACING);
+        boolean isWaterlogged = oldState.getValue(WATERLOGGED);
+
+        level.playSound(null, pos, soundEvent, SoundSource.BLOCKS, 0.8F, 0.8F);
+        level.setBlockAndUpdate(pos, trophyBlock.defaultBlockState().setValue(FACING, facing).setValue(WATERLOGGED, isWaterlogged));
+
+        if (level instanceof ServerLevel serverLevel) {
             for (int i = 0; i < 6; i++) {
                 double d0 = (double) pos.getX() + level.getRandom().nextDouble();
                 double d1 = (double) pos.getY() + level.getRandom().nextDouble();
@@ -281,30 +242,8 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return false;
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public BlockState rotate(BlockState state, Rotation facing) {
-        return state.setValue(FACING, facing.rotate(state.getValue(FACING)));
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public BlockState mirror(BlockState state, Mirror facing) {
-        return state.rotate(facing.getRotation(state.getValue(FACING)));
-    }
-
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED, ROTTING);
         super.createBlockStateDefinition(builder);
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public FluidState getFluidState(BlockState state) {
-        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+        builder.add(ROTTING);
     }
 }

@@ -6,9 +6,15 @@
 package com.soytutta.mynethersdelight.common.registry;
 
 import com.soytutta.mynethersdelight.common.block.*;
-import com.soytutta.mynethersdelight.common.block.PowderyCannonSaplingBlock;
+import com.soytutta.mynethersdelight.common.block.crops.PowderyCaneBlock;
+import com.soytutta.mynethersdelight.common.block.crops.PowderyCannonBlock;
+import com.soytutta.mynethersdelight.common.block.crops.PowderyCannonSaplingBlock;
 import com.soytutta.mynethersdelight.common.block.MNDStandingSignBlock;
 import com.soytutta.mynethersdelight.common.block.MNDWallSignBlock;
+import com.soytutta.mynethersdelight.common.block.crops.PowderyFlowerBlock;
+import com.soytutta.mynethersdelight.common.block.feasts.*;
+import com.soytutta.mynethersdelight.common.block.trophies.GoldenTrophyBlock;
+import com.soytutta.mynethersdelight.common.block.trophies.TrophyBlock;
 import com.soytutta.mynethersdelight.common.block.utility.MNDWoodTypes;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.Registries;
@@ -218,21 +224,25 @@ public class MNDBlocks {
             new StuffedHoglinBlock(Properties.ofFullCopy(Blocks.CAKE)
                     .mapColor(MapColor.TERRACOTTA_PINK))
     );
+    public static final Supplier<Block> GOLDEN_TROPHY = BLOCKS.register("golden_trophy", () ->
+            new GoldenTrophyBlock(Properties.of().mapColor(MapColor.GOLD).instrument(NoteBlockInstrument.BELL).strength(3.0F, 6.0F)
+                    .sound(SoundType.METAL), 1.2D, 0.57D)
+    );
     public static final Supplier<Block> HOGLIN_TROPHY = BLOCKS.register("hoglin_trophy", () ->
             new TrophyBlock(Properties.ofFullCopy(Blocks.CRIMSON_PLANKS)
-                    .mapColor(MapColor.TERRACOTTA_PINK))
+                    .mapColor(MapColor.TERRACOTTA_PINK), 0.5D, 0.24D)
     );
     public static final Supplier<Block> WAXED_HOGLIN_TROPHY = BLOCKS.register("waxed_hoglin_trophy", () ->
             new TrophyBlock(Properties.ofFullCopy(Blocks.CRIMSON_PLANKS)
-                    .mapColor(MapColor.TERRACOTTA_PINK))
+                    .mapColor(MapColor.TERRACOTTA_PINK), 0.5D, 0.24D)
     );
     public static final Supplier<Block> ZOGLIN_TROPHY = BLOCKS.register("zoglin_trophy", () ->
             new TrophyBlock(Properties.ofFullCopy(Blocks.CRIMSON_PLANKS)
-                    .mapColor(MapColor.TERRACOTTA_GREEN))
+                    .mapColor(MapColor.TERRACOTTA_GREEN), 0.7D, 0.33D)
     );
     public static final Supplier<Block> SKOGLIN_TROPHY = BLOCKS.register("skoglin_trophy", () ->
             new TrophyBlock(Properties.ofFullCopy(Blocks.BONE_BLOCK)
-                    .mapColor(MapColor.TERRACOTTA_WHITE))
+                    .mapColor(MapColor.TERRACOTTA_WHITE), 0.3D, 0.14D)
     );
 
     private static ToIntFunction<BlockState> FlameBlockEmission(int lightValue) {
