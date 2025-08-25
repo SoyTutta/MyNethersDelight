@@ -4,8 +4,13 @@
   "compatibilityLevel": "JAVA_21",
   "mixins": [
     "FrogEntityMixin",
+    "StriderEntityDataMixin",
+    "StriderLogicMixin",
+    "StriderVisualMixin",
     "KeepResurgentSoilGiantTreeMixin",
-    "KeepResurgentSoilTreeMixin"
+    "KeepResurgentSoilTreeMixin",
+    "LivingEntityMixin",
+    "MobMixin"
   ],
   "client": [
   ],
