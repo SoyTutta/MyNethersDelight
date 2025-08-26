@@ -37,3 +37,10 @@ config = "mynethersdelight.mixins.json"
     versionRange="1.21-1.2.4"
     ordering="AFTER"
     side="BOTH"
+
+[[dependencies.${mod_id}]]
+    modId="minersdelight"
+    type="optional"
+    versionRange="[1.4,)"
+    ordering="AFTER"
+    side="BOTH"

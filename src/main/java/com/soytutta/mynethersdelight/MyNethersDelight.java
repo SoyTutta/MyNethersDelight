@@ -3,7 +3,9 @@ package com.soytutta.mynethersdelight;
 import com.soytutta.mynethersdelight.client.event.ClientSetupEvents;
 import com.soytutta.mynethersdelight.common.MNDCommonSetup;
 import com.soytutta.mynethersdelight.common.registry.*;
+import com.soytutta.mynethersdelight.integration.MinerDelight.MDItems;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.fml.ModList;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.loading.FMLEnvironment;
 import org.apache.logging.log4j.LogManager;
@@ -22,6 +24,11 @@ public class MyNethersDelight
         }
 
         MNDItems.ITEMS.register(modEventBus);
+
+        if (ModList.get().isLoaded("minersdelight")) {
+            MDItems.ITEMS.register(modEventBus);
+        }
+
         MNDBlocks.BLOCKS.register(modEventBus);
         MNDEffects.EFFECTS.register(modEventBus);
         MNDBlockEntityTypes.TILES.register(modEventBus);

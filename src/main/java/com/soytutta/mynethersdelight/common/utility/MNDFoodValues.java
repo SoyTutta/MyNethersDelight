@@ -261,30 +261,4 @@ public class MNDFoodValues
                 .effect(() -> new MobEffectInstance(MNDEffects.GPUNGENT, 600, 2, false, false, true), 1.0F)
                 .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 600, 0), 1.0F)
                 .alwaysEdible().build();
-
-        // MD-CUPS
-        public static final FoodProperties STRIDER_STEW_CUP = (new FoodProperties.Builder())
-                .nutrition(4).saturationModifier(0.6f)
-                .effect(() -> new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 400, 0), 1.0F)
-                .effect(() -> new MobEffectInstance(ModEffects.COMFORT, 600, 0, false, false), 1.0F)
-                .fast().build();
-        public static final FoodProperties SPICY_NOODLE_SOUP_CUP = (new FoodProperties.Builder())
-                .nutrition(8).saturationModifier(0.65F)
-                .effect(() ->  new MobEffectInstance(ModEffects.COMFORT, 3000, 0, false, false), 1.0F)
-                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT, 600, 1, false, false, true), 1.0F)
-                .fast().build();
-        public static final FoodProperties SPICY_HOGLIN_STEW_CUP = (new FoodProperties.Builder())
-                .nutrition(6).saturationModifier(0.8f)
-                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT, 600, 1, false, false, true), 1.0F)
-                .effect(() -> new MobEffectInstance(ModEffects.COMFORT, 1200, 0, false, false), 1.0F)
-                .fast().build();
-        public static final FoodProperties ROCK_SOUP_CUP = (new FoodProperties.Builder())
-                .nutrition(3).saturationModifier(0.75f)
-                .effect(() -> new MobEffectInstance(MNDEffects.BPUNGENT, 600, 2, false, false, true), 1.0F)
-                .effect(() -> new MobEffectInstance(ModEffects.COMFORT, 1800, 0, false, false), 1.0F)
-                .fast().build();
-        public static final FoodProperties EGG_SOUP_CUP = (new FoodProperties.Builder())
-                .nutrition(5).saturationModifier(0.7F)
-                .effect(() ->  new MobEffectInstance(ModEffects.COMFORT, 600, 0, false, false), 1.0F)
-                .fast().build();
     }

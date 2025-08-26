@@ -1,0 +1,19 @@
+{
+  "values": {
+    "mynethersdelight:egg_soup": {
+      "cup_variant": "minersdelight:egg_soup_cup"
+    },
+    "mynethersdelight:rock_soup": {
+      "cup_variant": "minersdelight:rock_soup_cup"
+    },
+    "mynethersdelight:spicy_hoglin_stew": {
+      "cup_variant": "minersdelight:spicy_hoglin_stew_cup"
+    },
+    "mynethersdelight:spicy_noodle_soup": {
+      "cup_variant": "minersdelight:spicy_noodle_soup_cup"
+    },
+    "mynethersdelight:strider_stew": {
+      "cup_variant": "minersdelight:strider_stew_cup"
+    }
+  }
+}

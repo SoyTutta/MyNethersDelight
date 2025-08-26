@@ -115,10 +115,11 @@ public class MNDLang extends LanguageProvider {
 
         this.add("item.mynethersdelight.bullet_pepper", "Bullet Pepper");
 
-        this.add("item.miners_delight.strider_stew_cup", "Strider Stew Cup");
-        this.add("item.miners_delight.spicy_noodle_soup_cup", "Spicy Noodle Soup");
-        this.add("item.miners_delight.spicy_hoglin_stew_cup", "Spicy Hoglin Stew Cup");
-        this.add("item.miners_delight.rock_soup_cup", "Rock Soup Cup");
+        this.add("item.minersdelight.strider_stew_cup", "Strider Stew Cup");
+        this.add("item.minersdelight.spicy_noodle_soup_cup", "Spicy Noodle Soup");
+        this.add("item.minersdelight.spicy_hoglin_stew_cup", "Spicy Hoglin Stew Cup");
+        this.add("item.minersdelight.rock_soup_cup", "Rock Soup Cup");
+        this.add("item.minersdelight.egg_soup_cup", "Egg Soup Cup");
     }
 
     @Override
