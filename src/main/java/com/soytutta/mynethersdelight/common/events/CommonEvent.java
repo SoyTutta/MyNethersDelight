@@ -22,6 +22,8 @@ import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TieredItem;
+import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -55,7 +57,10 @@ public class CommonEvent {
                 || mob.level().random.nextFloat() < 0.4F)) {
 
             if (directSource instanceof ServerPlayer player && !player.isCreative()) {
-                weapon.hurtAndBreak(4, directSource, EquipmentSlot.MAINHAND);
+                if (!(weapon.getItem() instanceof TieredItem tiered && tiered.getTier() == Tiers.GOLD)) {
+                    int extraDamage = player.getRandom().nextInt(6) + 4;
+                    weapon.hurtAndBreak(extraDamage, player, EquipmentSlot.MAINHAND);
+                }
             }
 
             if (mob instanceof Slime slime && slime.getSize() > 1) {
@@ -169,12 +174,6 @@ public class CommonEvent {
         }
     }
 
-    public static boolean shouldHorseTransform(AbstractHorse horse, float probability, ItemStack weapon) {
-        return horse.level().random.nextFloat() < (probability / 2)
-                || (horse.isTamed() && horse.level().random.nextFloat() < probability)
-                || (weapon.is(ModTags.KNIVES) && horse.level().random.nextFloat() < probability);
-    }
-
     public static void transferBasicMobData(Mob original, Mob newMob) {
         if (original.hasCustomName()) {
             newMob.setCustomName(original.getCustomName());
@@ -194,6 +193,8 @@ public class CommonEvent {
         if (original.isNoAi()) {
             newMob.setNoAi(true);
         }
+
+        if (original.isBaby()) newMob.setBaby(true);
     }
 
     public static void makeHostile(Mob mobToAnger, LivingEntity target) {
@@ -216,8 +217,7 @@ public class CommonEvent {
     public static void transferFullHorseData(AbstractHorse original, AbstractHorse newHorse) {
         CompoundTag nbt = new CompoundTag();
         original.addAdditionalSaveData(nbt);
-        nbt.remove("UUID");
-        nbt.remove("Health");
+        nbt.remove("UUID"); nbt.remove("Health");
         newHorse.readAdditionalSaveData(nbt);
 
         transferBasicMobData(original, newHorse);
