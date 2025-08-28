@@ -26,12 +26,15 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.util.TriState;
 
+
 public class LetiosCompostBlock extends Block {
     public static IntegerProperty FORGOTING = IntegerProperty.create("forgoting", 0, 9);
+
     public LetiosCompostBlock(BlockBehaviour.Properties properties) {
         super(properties);
         this.registerDefaultState(super.defaultBlockState().setValue(FORGOTING, 0));
     }
+
     public boolean isRandomlyTicking(BlockState state) {
         return true;
     }
@@ -48,7 +51,7 @@ public class LetiosCompostBlock extends Block {
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         if (!worldIn.isClientSide) {
             float chance = 0.0F;
-            boolean hasLava = false;
+            boolean hasLeteosBooster = false;
             boolean isSoulBiome = false;
 
             for (BlockPos neighborPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
@@ -64,8 +67,8 @@ public class LetiosCompostBlock extends Block {
                     }
                 }
 
-                if (neighborState.getFluidState().is(FluidTags.LAVA)) {
-                    hasLava = true;
+                if (neighborState.getFluidState().is(MNDTags.LETEOS_BOOSTER)) {
+                    hasLeteosBooster = true;
                 }
 
                 if (worldIn.getBiome(pos).is(Biomes.SOUL_SAND_VALLEY)) {
@@ -73,7 +76,7 @@ public class LetiosCompostBlock extends Block {
                 }
             }
 
-            chance += hasLava ? 0.3F : 0.0F;
+            chance += hasLeteosBooster ? 0.3F : 0.0F;
             chance += isSoulBiome ? 0.3F : 0.0F;
             if (worldIn.getRandom().nextFloat() <= chance && worldIn.dimensionType().ultraWarm()) {
                 if (state.getValue(FORGOTING) == this.getMaxForgotingStage()) {
@@ -82,7 +85,6 @@ public class LetiosCompostBlock extends Block {
                     worldIn.setBlock(pos, state.setValue(FORGOTING, (Integer) state.getValue(FORGOTING) + 1), 3);
                 }
             }
-
         }
     }
 
@@ -106,10 +108,41 @@ public class LetiosCompostBlock extends Block {
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         super.animateTick(state, level, pos, random);
-        if (random.nextInt(10) == 0 && level.dimensionType().ultraWarm()) {
-            level.addParticle(ParticleTypes.SOUL, (double)pos.getX() + (double)random.nextFloat(), (double)pos.getY() + 1.1, (double)pos.getZ() + (double)random.nextFloat(), 0.0, 0.0, 0.0);
+
+        if (level.dimensionType().ultraWarm() && random.nextInt(10) == 0) {
+            if (hasActivatorNear(level, pos)) {
+                level.addParticle(ParticleTypes.SOUL, (double)pos.getX() + (double)random.nextFloat(), (double)pos.getY() + 1.1, (double)pos.getZ() + (double)random.nextFloat(), 0.0, 0.0, 0.0);
+            } else {
+                level.addParticle(ParticleTypes.MYCELIUM, (double)pos.getX() + (double)random.nextFloat(), (double)pos.getY() + 1.1, (double)pos.getZ() + (double)random.nextFloat(), 0.0, 0.0, 0.0);
+            }
         }
     }
+
+    private boolean hasActivatorNear(Level level, BlockPos centerPos) {
+        if (level.getBiome(centerPos).is(Biomes.SOUL_SAND_VALLEY)) {
+            return true;
+        }
+
+        for (BlockPos neighborPos : BlockPos.betweenClosed(centerPos.offset(-1, -1, -1), centerPos.offset(1, 1, 1))) {
+            BlockState neighborState = level.getBlockState(neighborPos);
+            if (neighborPos.equals(centerPos)) continue;
+
+            if (neighborState.is(MNDTags.LETIOS_ACTIVATORS)) {
+                return true;
+            }
+            if (neighborState.is(MNDTags.LETIOS_FLAMES)) {
+                if (!neighborState.hasProperty(BlockStateProperties.LIT) || (neighborState.hasProperty(BlockStateProperties.LIT) && neighborState.getValue(BlockStateProperties.LIT))) {
+                    return true;
+                }
+            }
+            if (neighborState.getFluidState().is(MNDTags.LETEOS_BOOSTER)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     @Override
     public TriState canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, BlockState plantState) {
         if (plantState.getBlock() instanceof NetherWartBlock) {
@@ -118,4 +151,3 @@ public class LetiosCompostBlock extends Block {
         return TriState.DEFAULT;
     }
 }
-

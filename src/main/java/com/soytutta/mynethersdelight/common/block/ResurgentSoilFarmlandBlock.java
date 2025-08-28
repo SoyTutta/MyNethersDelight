@@ -56,7 +56,7 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
             }
             nearbyPos = var2.next();
             BlockState state = level.getBlockState(nearbyPos);
-            if (state.getFluidState().is(FluidTags.LAVA)) {
+            if (state.getFluidState().is(MNDTags.LETEOS_BOOSTER)) {
                 int lightLevel = state.getLightEmission(level, nearbyPos);
                 int distance = pos.distManhattan(nearbyPos);
                 if (distance <= lightLevel) {

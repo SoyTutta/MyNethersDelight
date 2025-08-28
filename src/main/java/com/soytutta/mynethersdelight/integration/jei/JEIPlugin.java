@@ -55,7 +55,7 @@ public class JEIPlugin implements IModPlugin {
     public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
         registration.addRecipeCatalyst(new ItemStack(MNDItems.NETHER_STOVE.get()), RecipeTypes.CAMPFIRE_COOKING);
         registration.addRecipeCatalyst(new ItemStack(MNDItems.SOUL_NETHER_STOVE.get()), RecipeTypes.CAMPFIRE_COOKING);
-        registration.addRecipeCatalyst(new ItemStack((ItemLike) MNDBlocks.LETIOS_COMPOST.get()), MNDRecipeTypes.FORGOTING);
+        registration.addRecipeCatalyst(new ItemStack(MNDItems.LETIOS_COMPOST.get()), MNDRecipeTypes.FORGOTING);
 
     }
 

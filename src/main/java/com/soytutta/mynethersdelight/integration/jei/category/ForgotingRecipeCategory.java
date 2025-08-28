@@ -54,7 +54,7 @@ public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> 
     public ForgotingRecipeCategory(IGuiHelper helper) {
         ResourceLocation backgroundImage = ResourceLocation.fromNamespaceAndPath("mynethersdelight", "textures/gui/jei/composition.png");
         this.background = helper.createDrawable(backgroundImage, 0, 0, 118, 80);
-        this.letiosCompost = new ItemStack(MNDBlocks.LETIOS_COMPOST.get());
+        this.letiosCompost = new ItemStack(MNDItems.LETIOS_COMPOST.get());
         this.resurgentSoil = new ItemStack(MNDItems.RESURGENT_SOIL.get());
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, this.resurgentSoil);
         this.slotIcon = helper.createDrawable(backgroundImage, 119, 0, 22, 22);

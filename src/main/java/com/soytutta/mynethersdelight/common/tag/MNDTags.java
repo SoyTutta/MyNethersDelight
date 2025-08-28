@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 
 public class MNDTags {
     public static final TagKey<Item> BLOCK_OF_POWDERY = modItemTag("block_of_powdery");
@@ -41,6 +42,8 @@ public class MNDTags {
     public static final TagKey<EntityType<?>> SPECIAL_HUNT = modEntityTag("special_hunt");
     public static final TagKey<Enchantment> POACHING_ENCHANTMENT = TagKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, "poaching"));
 
+    public static final TagKey<Fluid> LETEOS_BOOSTER = modFluidTag("leteos_booster.json");
+
 
     private static TagKey<Item> modItemTag(String path) {
         return ItemTags.create(ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, path));
@@ -54,4 +57,7 @@ public class MNDTags {
         return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, path));
     }
 
+    private static TagKey<Fluid> modFluidTag(String path) {
+        return TagKey.create(Registries.FLUID, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, path));
+    }
 }
