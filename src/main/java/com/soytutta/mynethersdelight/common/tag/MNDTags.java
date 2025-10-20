@@ -42,7 +42,7 @@ public class MNDTags {
     public static final TagKey<EntityType<?>> SPECIAL_HUNT = modEntityTag("special_hunt");
     public static final TagKey<Enchantment> POACHING_ENCHANTMENT = TagKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, "poaching"));
 
-    public static final TagKey<Fluid> LETEOS_BOOSTER = modFluidTag("leteos_booster.json");
+    public static final TagKey<Fluid> LETEOS_BOOSTER = modFluidTag("leteos_booster");
 
 
     private static TagKey<Item> modItemTag(String path) {
