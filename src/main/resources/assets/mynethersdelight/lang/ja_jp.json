@@ -36,7 +36,7 @@
   "block.mynethersdelight.powdery_trapdoor": "爆竹のトラップドア",
   "block.mynethersdelight.red_nether_bricks_cabinet": "赤いネザーレンガの戸棚",
   "block.mynethersdelight.resurgent_soil": "蘇燃の土",
-  "block.mynethersdelight.resurgent_soil_farmland": "蘇燃の農地",
+  "block.mynethersdelight.resurgent_soil_farmland": "蘇燃の耕地",
   "block.mynethersdelight.skoglin_trophy": "スコグリンのトロフィー",
   "block.mynethersdelight.striderloaf_block": "ストライダーローフ",
   "block.mynethersdelight.stripped_powdery_block": "表皮を剥いだ爆竹ブロック",
@@ -136,8 +136,15 @@
   "mynethersdelight.jei.forgoting.light": "隣接する熱源(下記参照)で加速する",
   "mynethersdelight.jei.forgoting.nether": "ネザーでのみ除霊される",
   "mynethersdelight.jei.info.fungus_colony": "ネザーのキノコは蘇燃の土の上で群生する",
+  "mynethersdelight.jei.info.hoglin_hide": "豊富な革資源であり、かっこいいトロフィーにもなる。\n\n皮を傷つけたくなければ、剣よりも軽いもので切ってみてはどうだろうか…",
+
+  "mynethersdelight.jei.info.hot_cream": "すべてのエフェクトを火炎耐性と辛味に置き換える。\n\nコーンに乗せると1つのエフェクトのみ燃やす！ストライダーもコーンのほうが喜ぶだろう…",
+  "mynethersdelight.jei.info.plate_of_ghasta": "このガストは生きているのだろうか？\nガストの一部しか使っていないのに、本体が出来上がっている",
+  "mynethersdelight.jei.info.plate_of_striderloaf": "一度冷めると食欲がそがれてしまう",
   "mynethersdelight.jei.info.plate_of_stuffed_hoglin": "このような原始的なご馳走から大量の料理が手に入るなんて、誰が予想するだろうか…",
   "mynethersdelight.jei.info.r_soil": "ほとんどの植物や作物の栄養源になる。水の代わりに火を使うことでより栄養がいきわたる",
+
+  "mynethersdelight.jei.info.mushroom_colony": "キノコは肥沃な土や蘇燃の土の上で群生する",
   "mynethersdelight.jei.info.strider_egg": "待て…ストライダーは卵を産むのか？妙だな…\n\nとにかく、手に入れるには慎重に狩る必要がある。\n硬い殻で、このまま食べるのは現実的でない…",
-  "mynethersdelight.jei.info.wild_powdery": "真紅の森に自生する作物。\n\nその実に触れると爆発するので、赤い幹を切り落とそう"
+  "mynethersdelight.jei.info.wild_powdery": "真紅の森に自生する作物。\n\nその実に触れると爆発するので、赤い幹を切り落とそう。"
 }
