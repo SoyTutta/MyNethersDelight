@@ -12,11 +12,8 @@
               "condition": "minecraft:block_state_property",
               "block": "mynethersdelight:powdery_cane",
               "properties": {
-                "base": "false"
+                "age": "0"
               }
-            },
-            {
-              "condition": "minecraft:survives_explosion"
             }
           ]
         },
@@ -25,14 +22,14 @@
           "name": "mynethersdelight:powder_cannon",
           "conditions": [
             {
-              "condition": "minecraft:block_state_property",
-              "block": "mynethersdelight:powdery_cane",
-              "properties": {
-                "base": "true"
+              "condition": "minecraft:inverted",
+              "term": {
+                "condition": "minecraft:block_state_property",
+                "block": "mynethersdelight:powdery_cane",
+                "properties": {
+                  "age": "0"
+                }
               }
-            },
-            {
-              "condition": "minecraft:survives_explosion"
             }
           ]
         },

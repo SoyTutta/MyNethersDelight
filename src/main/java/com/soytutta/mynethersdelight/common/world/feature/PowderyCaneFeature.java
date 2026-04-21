@@ -9,6 +9,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BambooLeaves;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
@@ -30,7 +31,7 @@ public class PowderyCaneFeature extends Feature<NoneFeatureConfiguration> {
 
         int areaSize = 4;
 
-        int numFeatures = 8;
+        int numFeatures = 4;
 
         int centerX = areaSize / 2;
         int centerZ = areaSize / 2;
@@ -52,9 +53,9 @@ public class PowderyCaneFeature extends Feature<NoneFeatureConfiguration> {
     }
 
     private boolean placeSingleFeature(WorldGenLevel level, BlockPos pos, RandomSource rand, int maxHeight, BlockPos origin, int areaSize) {
-        BlockState powderyCaneBase = MNDBlocks.POWDERY_CANE.get().defaultBlockState().setValue(PowderyCaneBlock.BASE, true);
+        BlockState powderyCaneBase = MNDBlocks.POWDERY_CANE.get().defaultBlockState().setValue(PowderyCaneBlock.AGE, 1);
         BlockState powderyCane = MNDBlocks.POWDERY_CANE.get().defaultBlockState();
-        BlockState powderyCaneLeave = MNDBlocks.POWDERY_CANE.get().defaultBlockState().setValue(PowderyCaneBlock.LEAVE, true);
+        BlockState powderyCaneLeave = MNDBlocks.POWDERY_CANE.get().defaultBlockState().setValue(PowderyCaneBlock.LEAVES, BambooLeaves.SMALL);
         BlockState powderyFlower = MNDBlocks.BULLET_PEPPER.get().defaultBlockState().setValue(PowderyFlowerBlock.AGE, rand.nextInt(1));
         BlockState powderyFlowerLIT = MNDBlocks.BULLET_PEPPER.get().defaultBlockState().setValue(PowderyFlowerBlock.LIT, true).setValue(PowderyFlowerBlock.AGE, 2);
         HashMap<BlockPos, BlockState> blocks = new HashMap<>();

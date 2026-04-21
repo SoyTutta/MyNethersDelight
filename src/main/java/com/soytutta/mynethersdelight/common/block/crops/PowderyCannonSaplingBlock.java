@@ -57,7 +57,7 @@ public class PowderyCannonSaplingBlock extends Block implements BonemealableBloc
         if (!state.canSurvive(level, pos)) {
             return Blocks.AIR.defaultBlockState();
         } else {
-            if (direction == Direction.UP && offsetState.is(MNDBlocks.POWDERY_CANNON.get())) {
+            if (direction == Direction.UP && (offsetState.is(MNDBlocks.POWDERY_CANNON.get()) || offsetState.is(MNDBlocks.POWDERY_CANE.get()) || offsetState.is(MNDBlocks.BULLET_PEPPER.get()) || offsetState.is(Blocks.BAMBOO))) {
                 level.setBlock(pos, MNDBlocks.POWDERY_CANNON.get().defaultBlockState(), 2);
             }
 
