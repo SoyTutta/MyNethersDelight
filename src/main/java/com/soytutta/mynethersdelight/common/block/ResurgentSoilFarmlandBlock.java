@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.soytutta.mynethersdelight.common.block.crops.PowderyCaneBlock;
-import com.soytutta.mynethersdelight.common.block.crops.PowderyFlowerBlock;
 import com.soytutta.mynethersdelight.common.block.feasts.MagmaCakeBlock;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
@@ -35,7 +33,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.util.TriState;
 import vectorwing.farmersdelight.common.Configuration;
-import vectorwing.farmersdelight.common.block.TomatoVineBlock;
+import vectorwing.farmersdelight.common.block.TomatoBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.MathUtils;
@@ -161,7 +159,7 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
                     propagateAboveIfPossible(aboveBlock, abovePos, level);
                 }
 
-                if (aboveBlock instanceof TomatoVineBlock) {
+                if (aboveBlock instanceof TomatoBlock) {
                     propagateAboveIfPossible(ModBlocks.BUDDING_TOMATO_CROP.get(), abovePos, level);
                 }
 
@@ -230,7 +228,7 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
         BlockState state = level.getBlockState(position);
         Block block = state.getBlock();
 
-        if (state.isAir() || state.is(ModTags.UNAFFECTED_BY_RICH_SOIL) || block instanceof TallFlowerBlock) {
+        if (state.isAir() || state.is(ModTags.Blocks.UNAFFECTED_BY_RICH_SOIL) || block instanceof TallFlowerBlock) {
             return;
         }
 
@@ -251,7 +249,7 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
 
         BlockPos nextPos = position.relative(direction);
         BlockState nextState = level.getBlockState(nextPos);
-        if (nextState.is(block) || nextState.getBlock() instanceof GrowingPlantBlock || nextState.getBlock() instanceof GrowingPlantHeadBlock) {
+        if (nextState.is(block) || nextState.getBlock() instanceof GrowingPlantBlock || nextState.getBlock() instanceof GrowingPlantHeadBlock || nextState.getBlock() instanceof TomatoBlock) {
             performBonemealIfPossible(nextPos, level, distance + 1, direction);
         }
     }

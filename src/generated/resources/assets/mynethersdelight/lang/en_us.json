@@ -1,5 +1,8 @@
 {
   "block.mynethersdelight.blackstone_bricks_cabinet": "Blackstone Brick Cabinet",
+  "block.mynethersdelight.blazier.too_cold": "The temperature is too low or there isn't enough space for this.",
+  "block.mynethersdelight.blazier.too_hot": "The temperature is too high or there isn't enough space for this.",
+  "block.mynethersdelight.blazier_block": "Blazier",
   "block.mynethersdelight.bread_loaf_block": "Bread Loaf",
   "block.mynethersdelight.bullet_pepper": "Bullet Pepper",
   "block.mynethersdelight.bullet_pepper_crate": "Bullet Pepper Crate",
@@ -50,12 +53,6 @@
   "effect.mynethersdelight.g_pungent.desc": "Provides natural regeneration while exposed to heat.",
   "enchantment.mynethersdelight.poaching": "Curse of Poaching",
   "enchantment.mynethersdelight.poaching.desc": "Responsible hunting can provide you with extra ingredients!!!\nBut be careful about choosing your target...\n\nThe weapon will be penalty for each hunting attempt",
-  "farmersdelight.tooltip.enchanted_golden_egg": "Nourished by all harmful effects",
-  "farmersdelight.tooltip.golden_egg": "Nourished by all harmful effects",
-  "farmersdelight.tooltip.hot_cream": "Burning Effects",
-  "farmersdelight.tooltip.magma_cake_slice": "Spicy frog Snack",
-  "farmersdelight.tooltip.strider_egg": "Nourished by 1 Harmful Effect",
-  "farmersdelight.tooltip.strider_feed.when_feeding": "When fed to a Strider",
   "item.minersdelight.egg_soup_cup": "Egg Soup Cup",
   "item.minersdelight.rock_soup_cup": "Rock Soup Cup",
   "item.minersdelight.spicy_hoglin_stew_cup": "Spicy Hoglin Stew Cup",
@@ -139,5 +136,11 @@
   "mynethersdelight.jei.info.hoglin_hide": "A great source of leather which also serves as a nice hunting trophy.\n\nTo avoid damaging the hide, using something lighter than a Sword...",
   "mynethersdelight.jei.info.mushroom_colony": "Some Mushrooms form colonies when they are on top of Rich Soil or Resurgent Soil.",
   "mynethersdelight.jei.info.strider_egg": "A peculiar find, suggesting Striders may be ovoviviparous.\n\nObtainable only through careful hunting.\nhard shell, it can only be eaten starry...",
-  "mynethersdelight.jei.info.wild_powdery": "An invasive crop found in Crimson Forests. Its Berries are explosive on Contact, Try Cutting the red stem..."
+  "mynethersdelight.jei.info.wild_powdery": "An invasive crop found in Crimson Forests. Its Berries are explosive on Contact, Try Cutting the red stem...",
+  "tooltip.farmersdelight.enchanted_golden_egg": "Nourished by all harmful effects",
+  "tooltip.farmersdelight.golden_egg": "Nourished by all harmful effects",
+  "tooltip.farmersdelight.hot_cream": "Burning Effects",
+  "tooltip.farmersdelight.magma_cake_slice": "Spicy frog Snack",
+  "tooltip.farmersdelight.strider_egg": "Nourished by 1 Harmful Effect",
+  "tooltip.farmersdelight.strider_feed.when_feeding": "When fed to a Strider"
 }

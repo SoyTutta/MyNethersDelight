@@ -1,17 +1,18 @@
 {
+	"format_version": "1.21.11",
 	"credit": "Made with Blockbench",
 	"render_type": "minecraft:cutout",
 	"textures": {
 		"3": "mynethersdelight:block/striderloaf",
 		"4": "mynethersdelight:block/tray_striderloaf",
-		"particle": "farmersdelight:block/tray_bottom",
-		"bowl": "farmersdelight:block/tray_bottom"
+		"5": "mynethersdelight:block/nether_patter",
+		"particle": "mynethersdelight:block/nether_patter"
 	},
 	"elements": [
 		{
-			"from": [5, 2, 5],
-			"to": [11, 8, 14],
-			"rotation": {"angle": 45, "axis": "y", "origin": [7.75, 4, 8]},
+			"from": [5, 3, 5],
+			"to": [11, 9, 14],
+			"rotation": {"angle": 45, "axis": "y", "origin": [7.75, 5, 8]},
 			"faces": {
 				"north": {"uv": [0, 10, 6, 16], "texture": "#3"},
 				"east": {"uv": [10, 7, 16, 16], "rotation": 90, "texture": "#3"},
@@ -22,9 +23,9 @@
 			}
 		},
 		{
-			"from": [3, 2, 5],
-			"to": [6, 5, 8],
-			"rotation": {"angle": 45, "axis": "y", "origin": [7.75, 4, 8]},
+			"from": [3, 3, 5],
+			"to": [6, 6, 8],
+			"rotation": {"angle": 45, "axis": "y", "origin": [7.75, 5, 8]},
 			"faces": {
 				"north": {"uv": [16, 0, 13, 3], "texture": "#3"},
 				"east": {"uv": [13, 0, 16, 3], "texture": "#3"},
@@ -35,9 +36,9 @@
 			}
 		},
 		{
-			"from": [5, 1, 3],
-			"to": [7, 3, 5],
-			"rotation": {"angle": 45, "axis": "y", "origin": [8.75, 3, 8]},
+			"from": [5, 2, 3],
+			"to": [7, 4, 5],
+			"rotation": {"angle": 45, "axis": "y", "origin": [8.75, 4, 8]},
 			"faces": {
 				"north": {"uv": [10, 0, 12, 2], "texture": "#3"},
 				"east": {"uv": [11, 1, 13, 3], "texture": "#3"},
@@ -48,9 +49,9 @@
 			}
 		},
 		{
-			"from": [13, 4, 6],
-			"to": [13, 8, 9],
-			"rotation": {"angle": -22.5, "axis": "z", "origin": [11, 4, 7]},
+			"from": [13, 5, 6],
+			"to": [13, 9, 9],
+			"rotation": {"angle": -22.5, "axis": "z", "origin": [11, 5, 7]},
 			"faces": {
 				"north": {"uv": [0, 0, 0, 4], "texture": "#3"},
 				"east": {"uv": [3, 0, 0, 4], "texture": "#3"},
@@ -61,9 +62,9 @@
 			}
 		},
 		{
-			"from": [10, 2, 11],
-			"to": [12, 4, 13],
-			"rotation": {"angle": 45, "axis": "y", "origin": [7.75, 4, 8]},
+			"from": [10, 3, 11],
+			"to": [12, 5, 13],
+			"rotation": {"angle": 45, "axis": "y", "origin": [7.75, 5, 8]},
 			"faces": {
 				"north": {"uv": [10, 0, 12, 2], "texture": "#3"},
 				"east": {"uv": [16, 1, 14, 3], "texture": "#3"},
@@ -75,16 +76,39 @@
 		},
 		{
 			"name": "base",
-			"from": [1, 0, 1],
-			"to": [15, 2, 15],
-			"rotation": {"angle": 0, "axis": "y", "origin": [1, 0, 1]},
+			"from": [1, 1, 2],
+			"to": [15, 3, 14],
 			"faces": {
-				"north": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
-				"east": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
-				"south": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
-				"west": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
-				"up": {"uv": [1, 1, 15, 15], "texture": "#4"},
-				"down": {"uv": [1, 1, 15, 15], "texture": "#bowl"}
+				"north": {"uv": [0, 12, 14, 14], "texture": "#4"},
+				"east": {"uv": [14, 0, 16, 12], "rotation": 90, "texture": "#4"},
+				"south": {"uv": [0, 12, 14, 14], "texture": "#4"},
+				"west": {"uv": [14, 12, 16, 0], "rotation": 90, "texture": "#4"},
+				"up": {"uv": [0, 0, 14, 12], "texture": "#4"},
+				"down": {"uv": [0, 0, 14, 12], "texture": "#5"}
+			}
+		},
+		{
+			"name": "east_support",
+			"from": [11, 0, 2],
+			"to": [13, 1, 14],
+			"faces": {
+				"north": {"uv": [14, 15, 16, 16], "texture": "#4"},
+				"east": {"uv": [2, 15, 14, 16], "texture": "#4"},
+				"south": {"uv": [0, 15, 2, 16], "texture": "#4"},
+				"west": {"uv": [2, 15, 14, 16], "texture": "#4"},
+				"down": {"uv": [2, 14, 14, 16], "rotation": 90, "texture": "#4", "cullface": "down"}
+			}
+		},
+		{
+			"name": "west_support",
+			"from": [3, 0, 2],
+			"to": [5, 1, 14],
+			"faces": {
+				"north": {"uv": [14, 15, 16, 16], "texture": "#4"},
+				"east": {"uv": [2, 15, 14, 16], "texture": "#4"},
+				"south": {"uv": [0, 15, 2, 16], "texture": "#4"},
+				"west": {"uv": [2, 15, 14, 16], "texture": "#4"},
+				"down": {"uv": [2, 14, 14, 16], "rotation": 90, "texture": "#4", "cullface": "down"}
 			}
 		}
 	],
@@ -92,9 +116,12 @@
 		{
 			"name": "striderloaf",
 			"origin": [2, 2, 2],
+			"scope": 0,
 			"color": 0,
 			"children": [0, 1, 2, 3, 4]
 		},
-		5
+		5,
+		6,
+		7
 	]
 }

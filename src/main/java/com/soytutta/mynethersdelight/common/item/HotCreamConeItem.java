@@ -88,7 +88,7 @@ public class HotCreamConeItem extends ConsumableItem {
             new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200, 1),
             new MobEffectInstance(MNDEffects.GPUNGENT, 1200, 0,false,false));
 
-    @EventBusSubscriber(modid = MyNethersDelight.MODID, bus = EventBusSubscriber.Bus.GAME)
+    @EventBusSubscriber(modid = MyNethersDelight.MODID)
     public static class StriderFoodEvent
     {
         @SubscribeEvent
@@ -127,7 +127,7 @@ public class HotCreamConeItem extends ConsumableItem {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext context, List<Component> tooltip, TooltipFlag isAdvanced) {
-        if (!Configuration.FOOD_EFFECT_TOOLTIP.get()) {
+        if (!Configuration.ENABLE_FOOD_EFFECT_TOOLTIP.get()) {
             return;
         }
 

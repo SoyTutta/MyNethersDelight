@@ -15,6 +15,10 @@ group = mod_group_id
 
 repositories {
     maven {
+    name = "Greenhouse"
+    url = "https://maven.greenhouse.lgbt/snapshots"
+    }
+    maven {
         // JEI
         name = "Progwml6 maven"
         url = "https://dvs1.progwml6.com/files/maven/"
@@ -106,7 +110,7 @@ configurations {
 }
 
 dependencies {
-    implementation "maven.modrinth:farmers-delight:${project.delight_version}"
+    implementation "vectorwing.farmersdelight:FarmersDelight:1.21.1-1.3.0-rc2"
     // compile against the JEI API but do not include it at runtime
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
@@ -115,7 +119,7 @@ dependencies {
 
     compileOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}:api"
     runtimeOnly "squeek.appleskin:appleskin-neoforge:${appleskin_version}"
-    runtimeOnly "maven.modrinth:brewin-and-chewin:${brewinandchewin_version}"
+    // runtimeOnly "maven.modrinth:brewin-and-chewin:${brewinandchewin_version}"
 
     compileOnly "maven.modrinth:miners-delight:${minersdelight_version}"
     compileOnly "maven.modrinth:lodestonelib:1.7.1"

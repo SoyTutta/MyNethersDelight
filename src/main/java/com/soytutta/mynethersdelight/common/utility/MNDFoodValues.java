@@ -71,8 +71,8 @@ public class MNDFoodValues
                 .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 1200, 0, false, false), 1.0F)
                 .build();
         public static final FoodProperties COLD_STRIDERLOAF = (new FoodProperties.Builder())
-                .nutrition(11).saturationModifier(0.1f)
-                .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 800, 0, false, false), 1.0F)
+                .nutrition(9).saturationModifier(0.25f)
+                .effect(() -> new MobEffectInstance(ModEffects.NOURISHMENT, 600, 0, false, false), 1.0F)
                 .build();
         // HOGLIN
         public static final FoodProperties HOGLIN_LOIN = (new FoodProperties.Builder())

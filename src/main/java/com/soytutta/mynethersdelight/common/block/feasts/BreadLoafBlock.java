@@ -27,6 +27,7 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import vectorwing.farmersdelight.common.item.KnifeItem;
 import vectorwing.farmersdelight.common.tag.ModTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
@@ -70,7 +71,7 @@ public class BreadLoafBlock extends Block
 
     @Override
     public ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
-        if (heldStack.is(ModTags.KNIVES)) {
+        if (ItemUtils.isKnife(heldStack)) {
             return cutSlice(level, pos, state, player);
         }
 

@@ -18,6 +18,7 @@ public class MNDCreativeTab {
                 .title(MNDTextUtils.getTranslation("itemGroup.main"))
                 .icon(MNDItems.NETHER_STOVE.get()::getDefaultInstance)
                 .displayItems((parameters, output) -> {
+                    output.accept(MNDItems.BLAZIER.get());
                     output.accept(MNDItems.NETHER_STOVE.get());
                     output.accept(MNDItems.RED_NETHER_BRICKS_CABINET.get());
                     output.accept(MNDItems.NETHER_BRICKS_CABINET.get());

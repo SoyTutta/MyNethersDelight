@@ -1,0 +1,32 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:powder_cannon"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 1,
+        "id": "minecraft:stick"
+      }
+    },
+    {
+      "chance": 0.25,
+      "item": {
+        "count": 1,
+        "id": "minecraft:gunpowder"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "knife_dig"
+    },
+    {
+      "tag": "c:tools/knife"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:bullet_pepper"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 1,
+        "id": "mynethersdelight:pepper_powder"
+      }
+    },
+    {
+      "chance": 0.25,
+      "item": {
+        "count": 1,
+        "id": "mynethersdelight:pepper_powder"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "knife_dig"
+    },
+    {
+      "tag": "c:tools/knife"
+    }
+  ]
+}

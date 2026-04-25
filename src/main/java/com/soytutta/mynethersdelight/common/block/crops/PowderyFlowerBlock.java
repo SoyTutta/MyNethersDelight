@@ -33,7 +33,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.Tags;
-import vectorwing.farmersdelight.common.tag.CommonTags;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import static com.soytutta.mynethersdelight.common.block.utility.MNDBlockStateProperties.PRESSURE;
 
@@ -94,6 +94,7 @@ public class PowderyFlowerBlock extends BushBlock implements BonemealableBlock {
         builder.add(AGE, LIT, PRESSURE);
     }
 
+    @Override
     public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
         return false;
     }
@@ -184,7 +185,7 @@ public class PowderyFlowerBlock extends BushBlock implements BonemealableBlock {
         boolean flag = i == MAX_AGE;
         if (i > 1 && state.getValue(LIT)) {
             ItemStack heldItem = player.getItemInHand(hand);
-            if (heldItem.is(CommonTags.TOOLS_KNIFE) || heldItem.is(Tags.Items.TOOLS_SHEAR)) {
+            if (ItemUtils.isKnife(heldItem) || heldItem.is(Tags.Items.TOOLS_SHEAR)) {
                 int j = 1 + level.random.nextInt(2);
                 popResource(level, pos, new ItemStack(MNDItems.BULLET_PEPPER.get(), j + (flag ? 1 : 0)));
                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
@@ -212,7 +213,7 @@ public class PowderyFlowerBlock extends BushBlock implements BonemealableBlock {
 
         if (state.getValue(LIT)) {
             ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
-            if (!heldItem.is(CommonTags.TOOLS_KNIFE) && !heldItem.is(Tags.Items.TOOLS_SHEAR)) {
+            if (!ItemUtils.isKnife(heldItem) && !heldItem.is(Tags.Items.TOOLS_SHEAR)) {
                 explodeAndReset(level, pos, state);
                 return Blocks.AIR.defaultBlockState();
             }

@@ -1,0 +1,38 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:strider_slice"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 2,
+        "id": "mynethersdelight:minced_strider"
+      }
+    },
+    {
+      "item": {
+        "count": 1,
+        "id": "minecraft:string"
+      }
+    },
+    {
+      "chance": 0.5,
+      "item": {
+        "count": 2,
+        "id": "minecraft:string"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "knife_dig"
+    },
+    {
+      "tag": "c:tools/knife"
+    }
+  ]
+}

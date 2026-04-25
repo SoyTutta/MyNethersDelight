@@ -156,7 +156,7 @@ public class ResurgentSoilBlock extends Block {
         BlockState state = level.getBlockState(position);
         Block block = state.getBlock();
 
-        if (state.isAir() || state.is(ModTags.UNAFFECTED_BY_RICH_SOIL) || block instanceof TallFlowerBlock) {
+        if (state.isAir() || state.is(ModTags.Blocks.UNAFFECTED_BY_RICH_SOIL) || block instanceof TallFlowerBlock) {
             return;
         }
 

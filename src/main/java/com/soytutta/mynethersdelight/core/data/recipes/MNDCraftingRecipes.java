@@ -64,7 +64,7 @@ public class MNDCraftingRecipes {
                 .define('#',(Ingredient.of(ModItems.CANVAS.get(), Items.STRING)))
                 .unlockedBy("has_powder_cannon_or_canvas", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDER_CANNON.get(),ModItems.CANVAS.get()))
                 .save(output, "mynethersdelight:crafting/scaffolding_alt");
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,ModBlocks.BASKET.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,ModBlocks.BAMBOO_BASKET.get())
                 .pattern("B b")
                 .pattern("# #")
                 .pattern("b#B")
@@ -76,6 +76,14 @@ public class MNDCraftingRecipes {
     }
 
     private static void recipesBlocks(RecipeOutput output) {
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,MNDItems.BLAZIER.get())
+                .pattern("###")
+                .pattern("###")
+                .pattern("#b#")
+                .define('#', Items.BLAZE_ROD)
+                .define('b', Items.NETHER_BRICK)
+                .unlockedBy("has_gold_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BLAZE_ROD))
+                .save(output, "mynethersdelight:crafting/blazefire");
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(Items.NETHER_BRICKS), RecipeCategory.BUILDING_BLOCKS, MNDItems.NETHER_BRICKS_CABINET.get())
                 .unlockedBy("has_nether_bricks", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NETHER_BRICKS))
                 .save(output,"mynethersdelight:stonecutting/nether_bricks_cabinet");
@@ -367,8 +375,8 @@ public class MNDCraftingRecipes {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.BREAKFAST_SAMPLER.get())
                 .requires(MNDItems.ROASTED_SAUSAGE.get(),2)
                 .requires(Ingredient.of(Items.HONEY_BOTTLE, MNDItems.STRIDER_EGG.get()))
-                .requires(CommonTags.FOODS_COOKED_EGG)
-                .requires(CommonTags.FOODS_COOKED_EGG)
+                .requires(CommonTags.Items.FOODS_COOKED_EGG)
+                .requires(CommonTags.Items.FOODS_COOKED_EGG)
                 .requires(Tags.Items.FOODS_BREAD)
                 .requires(Items.BOWL)
                 .unlockedBy("has_sausage", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.ROASTED_SAUSAGE.get()))
@@ -384,8 +392,8 @@ public class MNDCraftingRecipes {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.STUFFED_PEPPER.get())
                 .requires(MNDItems.BULLET_PEPPER.get())
-                .requires(CommonTags.FOODS_COOKED_PORK)
-                .requires(CommonTags.FOODS_MILK)
+                .requires(CommonTags.Items.FOODS_COOKED_PORK)
+                .requires(Tags.Items.DRINKS_MILK)
                 .unlockedBy("has_pepper", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.BULLET_PEPPER.get()))
                 .save(output, "mynethersdelight:crafting/stuffed_pepper");
 
@@ -416,13 +424,13 @@ public class MNDCraftingRecipes {
                 .save(output, "mypersonaldelight:crafting/tear_popsicle");
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.DRIED_GHAST_WITH_MILK.get())
                 .requires(MNDItems.GHASMATI.get())
-                .requires(CommonTags.FOODS_MILK)
+                .requires(Tags.Items.DRINKS_MILK)
                 .requires(Items.BOWL)
                 .unlockedBy("has_ghasmati", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHASMATI.get()))
                 .save(output, "mynethersdelight:crafting/dried_ghast_with_milk");
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.SIZZLING_PUDDING.get())
                 .requires(MNDItems.GHASMATI.get())
-                .requires(CommonTags.FOODS_MILK)
+                .requires(Tags.Items.DRINKS_MILK)
                 .requires(Tags.Items.EGGS)
                 .requires(Ingredient.of(Items.BLAZE_POWDER, MNDItems.PEPPER_POWDER.get()))
                 .requires(Items.BOWL)
@@ -453,9 +461,9 @@ public class MNDCraftingRecipes {
                 .save(output, "mynethersdelight:crafting/ghast_dough");
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.GHAST_SOURDOUGH.get())
                 .requires(MNDItems.GHAST_DOUGH.get())
-                .requires(CommonTags.FOODS_DOUGH)
-                .requires(CommonTags.FOODS_DOUGH)
-                .requires(CommonTags.FOODS_DOUGH)
+                .requires(CommonTags.Items.FOODS_DOUGH)
+                .requires(CommonTags.Items.FOODS_DOUGH)
+                .requires(CommonTags.Items.FOODS_DOUGH)
                 .unlockedBy("has_ghast", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHASMATI.get(),MNDItems.GHASTA.get()))
                 .save(output, "mynethersdelight:crafting/ghast_sourdough");
 

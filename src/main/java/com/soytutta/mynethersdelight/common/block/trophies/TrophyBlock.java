@@ -44,7 +44,7 @@ import net.neoforged.api.distmarker.Dist;
 import net.neoforged.api.distmarker.OnlyIn;
 import net.neoforged.neoforge.common.ItemAbilities;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import vectorwing.farmersdelight.common.tag.CommonTags;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import java.util.stream.Stream;
 
@@ -149,7 +149,7 @@ public class TrophyBlock extends AbstractTrophyBlock {
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.ZOMBIE_VILLAGER_CURE, ParticleTypes.CLOUD, secondParticle, secondSoundEvent, useSecondEffects);
             return ItemInteractionResult.SUCCESS;
         }
-        else if (block == MNDBlocks.HOGLIN_TROPHY.get() && heldItem.is(CommonTags.TOOLS_KNIFE)) {
+        else if (block == MNDBlocks.HOGLIN_TROPHY.get() && ItemUtils.isKnife(heldStack)) {
             secondParticle = ParticleTypes.CLOUD;
             secondSoundEvent = SoundEvents.HOGLIN_HURT;
             useSecondEffects = true;
@@ -158,7 +158,7 @@ public class TrophyBlock extends AbstractTrophyBlock {
             popResource(level, pos, new ItemStack(Items.LEATHER, j));
             return ItemInteractionResult.SUCCESS;
         }
-        else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && heldItem.is(CommonTags.TOOLS_KNIFE)) {
+        else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && ItemUtils.isKnife(heldStack)) {
             secondParticle = ParticleTypes.CLOUD;
             secondSoundEvent = SoundEvents.ZOGLIN_HURT;
             useSecondEffects = true;

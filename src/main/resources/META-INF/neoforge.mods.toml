@@ -34,7 +34,7 @@ config = "mynethersdelight.mixins.json"
 [[dependencies.${mod_id}]]
     modId="farmersdelight"
     type="required"
-    versionRange="1.21-1.2.4"
+    versionRange="1.21-1.3"
     ordering="AFTER"
     side="BOTH"
 

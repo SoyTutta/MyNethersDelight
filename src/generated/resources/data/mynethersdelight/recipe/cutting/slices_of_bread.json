@@ -1,0 +1,25 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "mynethersdelight:bread_loaf"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 5,
+        "id": "mynethersdelight:slices_of_bread"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "knife_dig"
+    },
+    {
+      "tag": "c:tools/knife"
+    }
+  ]
+}

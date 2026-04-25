@@ -21,7 +21,7 @@ import java.util.concurrent.CompletableFuture;
 import java.util.Set;
 
 @SuppressWarnings("unused")
-@EventBusSubscriber(modid = MyNethersDelight.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = MyNethersDelight.MODID)
 public class MNDDataGenerators {
 
     public MNDDataGenerators() {

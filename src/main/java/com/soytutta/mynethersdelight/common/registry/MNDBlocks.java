@@ -34,6 +34,20 @@ import java.util.function.ToIntFunction;
 public class MNDBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(Registries.BLOCK, "mynethersdelight");
 
+    public static final Supplier<Block> BLAZIER_BLOCK = BLOCKS.register("blazier_block", () ->
+            new BlazierBlock(Properties.of().mapColor(MapColor.NETHER)
+                    .strength(0.75F, 3.0F)
+                    .lightLevel(state -> {
+                        if (!state.getValue(BlockStateProperties.LIT)) return 0;
+                        return switch (state.getValue(BlazierBlock.HEAT)) {
+                            case SMELTING -> 15;
+                            case BAKING   -> 12;
+                            case CAMPFIRE -> 8;
+                            case SMOKING  -> 4;
+                        };
+                    }))
+    );
+
     public static final Supplier<Block> NETHER_BRICKS_CABINET = BLOCKS.register("nether_bricks_cabinet", () ->
                 new CabinetBlock(Properties.ofFullCopy(Blocks.NETHER_BRICKS))
         );

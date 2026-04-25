@@ -42,12 +42,12 @@ public class PoachingFailureRegistry {
 
         // Frog → Witch
         register(new PoachingFailureCase(EntityType.FROG, EntityType.WITCH, SoundEvents.WITCH_CELEBRATE,
-                (mob, weapon) -> (mob.level().getBiome(mob.blockPosition()).is(Biomes.SWAMP) && mob.level().random.nextFloat() < 0.3F) || (weapon.is(ModTags.KNIVES) && mob.level().random.nextFloat() < 0.3F),
+                (mob, weapon) -> (mob.level().getBiome(mob.blockPosition()).is(Biomes.SWAMP) && mob.level().random.nextFloat() < 0.3F) || (weapon.is(ModTags.Items.KNIVES) && mob.level().random.nextFloat() < 0.3F),
                 CommonEvent::transferDataAndMakeHostile));
 
         // Bat → Witch
         register(new PoachingFailureCase(EntityType.BAT, EntityType.WITCH, SoundEvents.WITCH_CELEBRATE,
-                (mob, weapon) -> (mob.level().getBiome(mob.blockPosition()).is(Biomes.SWAMP) && mob.level().random.nextFloat() < 0.3F) || (weapon.is(ModTags.KNIVES) && mob.level().random.nextFloat() < 0.3F),
+                (mob, weapon) -> (mob.level().getBiome(mob.blockPosition()).is(Biomes.SWAMP) && mob.level().random.nextFloat() < 0.3F) || (weapon.is(ModTags.Items.KNIVES) && mob.level().random.nextFloat() < 0.3F),
                 CommonEvent::transferDataAndMakeHostile));
 
         // Allay → Vex

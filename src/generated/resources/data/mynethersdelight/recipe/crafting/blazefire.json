@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:blaze_rod"
+    },
+    "b": {
+      "item": "minecraft:nether_brick"
+    }
+  },
+  "pattern": [
+    "###",
+    "###",
+    "#b#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "mynethersdelight:blazier"
+  }
+}

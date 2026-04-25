@@ -47,13 +47,13 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(MyCommonTags.FOODS_COOKED_HOGLIN).add(MNDItems.COOKED_LOIN.get(), MNDItems.ROASTED_SAUSAGE.get());
         this.tag(MyCommonTags.FOODS_RAW_SAUSAGE).add(MNDItems.HOGLIN_SAUSAGE.get());
         this.tag(MyCommonTags.FOODS_COOKED_SAUSAGE).add(MNDItems.ROASTED_SAUSAGE.get());
-        this.tag(CommonTags.FOODS_RAW_PORK).addTag(MyCommonTags.FOODS_RAW_HOGLIN);
-        this.tag(CommonTags.FOODS_COOKED_PORK).addTag(MyCommonTags.FOODS_COOKED_HOGLIN);
+        this.tag(CommonTags.Items.FOODS_RAW_PORK).addTag(MyCommonTags.FOODS_RAW_HOGLIN);
+        this.tag(CommonTags.Items.FOODS_COOKED_PORK).addTag(MyCommonTags.FOODS_COOKED_HOGLIN);
         this.tag(MyCommonTags.FOODS_BOILED_EGG).add(MNDItems.BOILED_EGG.get());
         this.tag(MyCommonTags.FOODS_RAW_GHAST).add(MNDItems.GHASTA.get(), MNDItems.GHASMATI.get());
-        this.tag(MyCommonTags.FOODS_RICE_PASTA).add(MNDItems.GHASTA.get());this.tag(CommonTags.FOODS_PASTA).add(MNDItems.GHASTA.get()); this.tag(CommonTags.CROPS_RICE).add(MNDItems.GHASMATI.get());
-        this.tag(CommonTags.FOODS_DOUGH).add(MNDItems.GHAST_DOUGH.get());
-        this.tag(CommonTags.FOODS_COOKED_EGG).addTag(MyCommonTags.FOODS_BOILED_EGG).add(MNDItems.GOLDEN_EGG.get(), MNDItems.ENCHANTED_GOLDEN_EGG.get());
+        this.tag(MyCommonTags.FOODS_RICE_PASTA).add(MNDItems.GHASTA.get());this.tag(CommonTags.Items.FOODS_PASTA).add(MNDItems.GHASTA.get()); this.tag(CommonTags.Items.CROPS_RICE).add(MNDItems.GHASMATI.get());
+        this.tag(CommonTags.Items.FOODS_DOUGH).add(MNDItems.GHAST_DOUGH.get());
+        this.tag(CommonTags.Items.FOODS_COOKED_EGG).addTag(MyCommonTags.FOODS_BOILED_EGG).add(MNDItems.GOLDEN_EGG.get(), MNDItems.ENCHANTED_GOLDEN_EGG.get());
     }
 
     private void registerNeoForgeTags() {
@@ -118,10 +118,10 @@ public class MNDItemTags extends ItemTagsProvider {
     }
 
     public void registerCompatibilityTags() {
-        this.tag(ModTags.WOODEN_CABINETS).add(MNDItems.POWDERY_CABINET.get());
-        this.tag(ModTags.CABINETS).add(MNDItems.NETHER_BRICKS_CABINET.get(),MNDItems.RED_NETHER_BRICKS_CABINET.get(),MNDItems.BLACKSTONE_BRICKS_CABINET.get());
-        this.tag(ModTags.CABBAGE_ROLL_INGREDIENTS).addTag(MyCommonTags.FOODS_RAW_HOGLIN).addTag(MyCommonTags.FOODS_RAW_STRIDER).addTag(MyCommonTags.FOODS_RAW_GHAST);
-        this.tag(ModTags.WILD_CROPS_ITEM).add(MNDItems.BULLET_PEPPER.get(),MNDItems.POWDER_CANNON.get());
+        this.tag(ModTags.Items.FEASTS).add(MNDItems.ROAST_STUFFED_HOGLIN.get(),MNDItems.STRIDERLOAF_BLOCK.get(),MNDItems.COLD_STRIDERLOAF_BLOCK.get(),MNDItems.GHASTA_WITH_CREAM_BLOCK.get(),MNDItems.BREAD_LOAF_BLOCK.get(),MNDItems.MAGMA_CAKE.get());
+        this.tag(ModTags.Items.CABINETS_WOODEN).add(MNDItems.POWDERY_CABINET.get());
+        this.tag(ModTags.Items.CABINETS).add(MNDItems.NETHER_BRICKS_CABINET.get(),MNDItems.RED_NETHER_BRICKS_CABINET.get(),MNDItems.BLACKSTONE_BRICKS_CABINET.get());
+        this.tag(ModTags.Items.WILD_CROPS).add(MNDItems.BULLET_PEPPER.get(),MNDItems.POWDER_CANNON.get());
         this.tag(CompatibilityTags.HORROR_LASAGNA_MEATS).add(MNDItems.MINCED_STRIDER.get(), MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
         this.tag(CompatibilityTags.RAW_MEATS).add(MNDItems.MINCED_STRIDER.get(), MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get());
     }

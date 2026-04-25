@@ -2,6 +2,7 @@ package com.soytutta.mynethersdelight.common.block.feasts;
 
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -24,8 +25,11 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 import java.util.function.Supplier;
 
 public class StriderloafBlock extends FeastBlock {
-    protected static final VoxelShape PLATE_SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 2.0, 15.0);
-    protected static final VoxelShape ROAST_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(5, 2, 5, 11, 6, 11), BooleanOp.OR);
+
+    protected static final VoxelShape SHAPE_NORTH_SOUTH = Shapes.or(Block.box(2.0D, 1.0D, 1.0D, 14.0D, 3.0D, 15.0D), Block.box(2.0D, 0.0D, 3.0D, 14.0D, 2.0D, 5.0D), Block.box(2.0D, 0.0D, 11.0D, 14.0D, 2.0D, 13.0D));
+    protected static final VoxelShape SHAPE_EAST_WEST = Shapes.or(Block.box(1.0D, 1.0D, 2.0D, 15.0D, 3.0D, 14.0D), Block.box(3.0D, 0.0D, 2.0D, 5.0D, 2.0D, 14.0D), Block.box(11.0D, 0.0D, 2.0D, 13.0D, 2.0D, 14.0D));
+    protected static final VoxelShape ROAST_SHAPE_EAST_WEST = Shapes.joinUnoptimized(SHAPE_EAST_WEST, Block.box(5, 2, 5, 11, 8, 11), BooleanOp.OR);
+    protected static final VoxelShape ROAST_SHAPE_NORTH_SOUTH = Shapes.joinUnoptimized(SHAPE_NORTH_SOUTH, Block.box(5, 2, 5, 11, 8, 11), BooleanOp.OR);
 
     public StriderloafBlock(Properties properties, Supplier<Item> servingItem, boolean hasLeftovers) {
         super(properties, servingItem, hasLeftovers);
@@ -36,7 +40,7 @@ public class StriderloafBlock extends FeastBlock {
             if (level.getBlockState(nearbyPos).getFluidState().is(FluidTags.LAVA)) {
                 return true;
             }
-            if (nearbyPos.equals(pos.below()) && level.getBlockState(nearbyPos).is(ModTags.HEAT_SOURCES)) {
+            if (nearbyPos.equals(pos.below()) && level.getBlockState(nearbyPos).is(ModTags.Blocks.HEAT_SOURCES)) {
                 return true;
             }
         }
@@ -72,7 +76,10 @@ public class StriderloafBlock extends FeastBlock {
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return (state.getValue(SERVINGS) == 0) ? PLATE_SHAPE : ROAST_SHAPE;
+        if (state.getValue(FeastBlock.FACING).getAxis().equals(Direction.Axis.X)) {
+            return state.getValue(SERVINGS) == 0 ? SHAPE_NORTH_SOUTH : ROAST_SHAPE_NORTH_SOUTH;
+        }
+        return state.getValue(SERVINGS) == 0 ? SHAPE_EAST_WEST : ROAST_SHAPE_EAST_WEST;
     }
 
     @Override

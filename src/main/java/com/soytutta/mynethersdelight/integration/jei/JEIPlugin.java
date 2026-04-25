@@ -8,7 +8,6 @@ package com.soytutta.mynethersdelight.integration.jei;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.ImmutableList;
-import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import com.soytutta.mynethersdelight.common.utility.MNDTextUtils;
 import com.soytutta.mynethersdelight.integration.jei.category.ForgotingRecipeCategory;
@@ -23,7 +22,6 @@ import mezz.jei.api.registration.IRecipeRegistration;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.integration.jei.FDRecipes;
 
@@ -56,6 +54,10 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(MNDItems.NETHER_STOVE.get()), RecipeTypes.CAMPFIRE_COOKING);
         registration.addRecipeCatalyst(new ItemStack(MNDItems.SOUL_NETHER_STOVE.get()), RecipeTypes.CAMPFIRE_COOKING);
         registration.addRecipeCatalyst(new ItemStack(MNDItems.LETIOS_COMPOST.get()), MNDRecipeTypes.FORGOTING);
+        registration.addRecipeCatalyst(new ItemStack(MNDItems.BLAZIER.get()), RecipeTypes.SMOKING);
+        registration.addRecipeCatalyst(new ItemStack(MNDItems.BLAZIER.get()), RecipeTypes.SMELTING);
+        registration.addRecipeCatalyst(new ItemStack(MNDItems.BLAZIER.get()), RecipeTypes.CAMPFIRE_COOKING);
+        registration.addRecipeCatalyst(new ItemStack(MNDItems.BLAZIER.get()), RecipeTypes.BLASTING);
 
     }
 

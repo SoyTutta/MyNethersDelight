@@ -4,7 +4,7 @@
 //
 package com.soytutta.mynethersdelight.client.event;
 
-import com.soytutta.mynethersdelight.client.renderer.NetherStoveRenderer;
+import com.soytutta.mynethersdelight.client.renderer.BlazeFireRenderer;
 import com.soytutta.mynethersdelight.common.block.utility.MNDWoodTypes;
 import com.soytutta.mynethersdelight.common.registry.MNDBlockEntityTypes;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
@@ -22,10 +22,10 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import vectorwing.farmersdelight.client.renderer.DefaultStoveRenderer;
 
 @EventBusSubscriber(
         modid = "mynethersdelight",
-        bus = EventBusSubscriber.Bus.MOD,
         value = {Dist.CLIENT}
 )
 public class ClientSetupEvents {
@@ -33,7 +33,8 @@ public class ClientSetupEvents {
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(MNDEntityTypes.STRIDER_ROCK.get(), ThrownItemRenderer::new);
-        event.registerBlockEntityRenderer(MNDBlockEntityTypes.NETHER_STOVE.get(), NetherStoveRenderer::new);
+        event.registerBlockEntityRenderer(MNDBlockEntityTypes.NETHER_STOVE.get(), DefaultStoveRenderer::new);
+        event.registerBlockEntityRenderer(MNDBlockEntityTypes.BLAZIER.get(), BlazeFireRenderer::new);
     }
 
     @SubscribeEvent

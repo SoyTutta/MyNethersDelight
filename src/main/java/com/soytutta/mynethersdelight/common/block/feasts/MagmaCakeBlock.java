@@ -167,7 +167,7 @@ public class MagmaCakeBlock extends Block {
             return secondCake(level, pos, state, player);
         }
 
-        if (heldStack.is(ModTags.KNIVES)) {
+        if (ItemUtils.isKnife(heldStack)) {
             return cutSlice(level, pos, state, player);
         }
 

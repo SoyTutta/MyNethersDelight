@@ -18,16 +18,17 @@ import vectorwing.farmersdelight.common.block.FeastBlock;
 
 import java.util.function.Supplier;
 
+import static vectorwing.farmersdelight.common.BlockShapes.TRAY_SHAPE;
+
 public class GhastaWithCreamBlock extends FeastBlock {
-    protected static final VoxelShape PLATE_SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 2.0, 15.0);
-    protected static final VoxelShape ROAST_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2, 2, 2, 14, 6, 14), BooleanOp.OR);
+    protected static final VoxelShape ROAST_SHAPE = Shapes.joinUnoptimized(TRAY_SHAPE, Block.box(2, 2, 2, 14, 6, 14), BooleanOp.OR);
 
     public GhastaWithCreamBlock(BlockBehaviour.Properties properties, Supplier<Item> servingItem, boolean hasLeftovers) {
         super(properties, servingItem, hasLeftovers);
     }
 
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return state.getValue(SERVINGS) == 0 ? PLATE_SHAPE : ROAST_SHAPE;
+        return state.getValue(SERVINGS) == 0 ? TRAY_SHAPE : ROAST_SHAPE;
     }
 
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {

@@ -88,18 +88,21 @@ public class MNDLang extends LanguageProvider {
         this.add("mynethersdelight.jei.forgoting.light", "Sped up by adjacent flames (see below)");
         this.add("mynethersdelight.jei.forgoting.fluid", "Sped up by adjacent lava");
 
+        this.add("block.mynethersdelight.blazier.too_hot", "The temperature is too high or there isn't enough space for this.");
+        this.add("block.mynethersdelight.blazier.too_cold", "The temperature is too low or there isn't enough space for this.");
+
         this.add("mynethersdelight.block.feast.space_required", "You need more space to serve this.");
         this.add("mynethersdelight.block.feast.use_knife", "You need a Knife to cut this.");
 
-        this.add("farmersdelight.tooltip.strider_egg", "Nourished by 1 Harmful Effect");
-        this.add("farmersdelight.tooltip.golden_egg", "Nourished by all harmful effects");
+        this.add("tooltip.farmersdelight.strider_egg", "Nourished by 1 Harmful Effect");
+        this.add("tooltip.farmersdelight.golden_egg", "Nourished by all harmful effects");
 
-        this.add("farmersdelight.tooltip.enchanted_golden_egg", "Nourished by all harmful effects");
+        this.add("tooltip.farmersdelight.enchanted_golden_egg", "Nourished by all harmful effects");
 
-        this.add("farmersdelight.tooltip.hot_cream", "Burning Effects");
+        this.add("tooltip.farmersdelight.hot_cream", "Burning Effects");
 
-        this.add("farmersdelight.tooltip.strider_feed.when_feeding", "When fed to a Strider");
-        this.add("farmersdelight.tooltip.magma_cake_slice", "Spicy frog Snack");
+        this.add("tooltip.farmersdelight.strider_feed.when_feeding", "When fed to a Strider");
+        this.add("tooltip.farmersdelight.magma_cake_slice", "Spicy frog Snack");
 
         this.add("mynethersdelight.jei.info.strider_egg", "A peculiar find, suggesting Striders may be ovoviviparous.\n\nObtainable only through careful hunting.\nhard shell, it can only be eaten starry...");
 

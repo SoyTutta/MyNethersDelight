@@ -53,7 +53,7 @@ public class CommonEvent {
         if (EnchantmentHelper.has(weapon, MNDEnchantmentComponents.POACHING.get())
                 && (mob.getMaxHealth() < 150.0F || mob.getType().is(MNDTags.SPECIAL_HUNT))
                 && (((directSource.hasEffect(MobEffects.LUCK) || directSource.hasEffect(MobEffects.UNLUCK)) && mob.level().random.nextFloat() < 0.6F)
-                || weapon.is(ModTags.KNIVES)
+                || weapon.is(ModTags.Items.KNIVES)
                 || mob.level().random.nextFloat() < 0.4F)) {
 
             if (directSource instanceof ServerPlayer player && !player.isCreative()) {
@@ -90,7 +90,7 @@ public class CommonEvent {
 
             boolean isFail = (mob.level().random.nextFloat() < failProbability
                     || (mob.isBaby() && mob.level().random.nextFloat() < 0.2F)
-                    || weapon.is(ModTags.KNIVES))
+                    || weapon.is(ModTags.Items.KNIVES))
                     && !mob.hasEffect(MobEffects.CONFUSION);
 
             if (isFail) {

@@ -1,6 +1,7 @@
 package com.soytutta.mynethersdelight.common.registry;
 
 import com.soytutta.mynethersdelight.MyNethersDelight;
+import com.soytutta.mynethersdelight.common.block.entity.BlazierBlockEntity;
 import com.soytutta.mynethersdelight.common.block.entity.MNDHangingSignBlockEntity;
 import com.soytutta.mynethersdelight.common.block.entity.MNDSignBlockEntity;
 import com.soytutta.mynethersdelight.common.block.entity.NetherStoveBlockEntity;
@@ -16,7 +17,7 @@ import vectorwing.farmersdelight.common.registry.ModBlockEntityTypes;
 
 import java.util.function.Supplier;
 
-@EventBusSubscriber(modid = MyNethersDelight.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = MyNethersDelight.MODID)
 public class MNDBlockEntityTypes {
 
     public static final DeferredRegister<BlockEntityType<?>> TILES = DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, "mynethersdelight");
@@ -32,6 +33,10 @@ public class MNDBlockEntityTypes {
     public static final Supplier<BlockEntityType<MNDHangingSignBlockEntity>> MND_HSIGN = TILES.register("mnd_hsign", () ->
             BlockEntityType.Builder.of(MNDHangingSignBlockEntity::new,
                     MNDBlocks.POWDERY_HANGING_SIGN.get(), MNDBlocks.POWDERY_WALL_HANGING_SIGN.get()).build((null))
+    );
+    public static final Supplier<BlockEntityType<BlazierBlockEntity>> BLAZIER = TILES.register("blazier", () ->
+            BlockEntityType.Builder.of(BlazierBlockEntity::new,
+                    new Block[]{MNDBlocks.BLAZIER_BLOCK.get()}).build(null)
     );
 
     @SubscribeEvent

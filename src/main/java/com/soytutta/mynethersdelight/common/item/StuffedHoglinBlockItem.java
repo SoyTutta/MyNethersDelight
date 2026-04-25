@@ -3,13 +3,13 @@ package com.soytutta.mynethersdelight.common.item;
 import com.soytutta.mynethersdelight.common.utility.MNDTextUtils;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import vectorwing.farmersdelight.common.item.PlaceableItem;
 
-public class StuffedHoglinBlockItem extends BlockItem {
+public class StuffedHoglinBlockItem extends PlaceableItem {
 
     public StuffedHoglinBlockItem(Block block, Properties properties) {
         super(block, properties);

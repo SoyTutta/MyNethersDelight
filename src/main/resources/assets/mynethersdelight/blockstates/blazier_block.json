@@ -1,0 +1,43 @@
+{
+  "variants": {
+    "facing=north,lit=true,heat=smelting":  { "model": "mynethersdelight:block/blazefire_block_smelting", "y": 270  },
+    "facing=east,lit=true,heat=smelting":   { "model": "mynethersdelight:block/blazefire_block_smelting" },
+    "facing=south,lit=true,heat=smelting":  { "model": "mynethersdelight:block/blazefire_block_smelting", "y": 90 },
+    "facing=west,lit=true,heat=smelting":   { "model": "mynethersdelight:block/blazefire_block_smelting", "y": 180 },
+
+    "facing=north,lit=true,heat=baking":    { "model": "mynethersdelight:block/blazefire_block_baking", "y": 270  },
+    "facing=east,lit=true,heat=baking":     { "model": "mynethersdelight:block/blazefire_block_baking" },
+    "facing=south,lit=true,heat=baking":    { "model": "mynethersdelight:block/blazefire_block_baking", "y": 90 },
+    "facing=west,lit=true,heat=baking":     { "model": "mynethersdelight:block/blazefire_block_baking", "y": 180 },
+
+    "facing=north,lit=true,heat=campfire":  { "model": "mynethersdelight:block/blazefire_block_campfire", "y": 270  },
+    "facing=east,lit=true,heat=campfire":   { "model": "mynethersdelight:block/blazefire_block_campfire" },
+    "facing=south,lit=true,heat=campfire":  { "model": "mynethersdelight:block/blazefire_block_campfire", "y": 90 },
+    "facing=west,lit=true,heat=campfire":   { "model": "mynethersdelight:block/blazefire_block_campfire", "y": 180 },
+
+    "facing=north,lit=true,heat=smoking":   { "model": "mynethersdelight:block/blazefire_block_smoking", "y": 270  },
+    "facing=east,lit=true,heat=smoking":    { "model": "mynethersdelight:block/blazefire_block_smoking" },
+    "facing=south,lit=true,heat=smoking":   { "model": "mynethersdelight:block/blazefire_block_smoking", "y": 90 },
+    "facing=west,lit=true,heat=smoking":    { "model": "mynethersdelight:block/blazefire_block_smoking", "y": 180 },
+
+    "facing=north,lit=false,heat=smelting": { "model": "mynethersdelight:block/blazefire_block", "y": 270  },
+    "facing=east,lit=false,heat=smelting":  { "model": "mynethersdelight:block/blazefire_block" },
+    "facing=south,lit=false,heat=smelting": { "model": "mynethersdelight:block/blazefire_block", "y": 90 },
+    "facing=west,lit=false,heat=smelting":  { "model": "mynethersdelight:block/blazefire_block", "y": 180 },
+
+    "facing=north,lit=false,heat=baking":   { "model": "mynethersdelight:block/blazefire_block", "y": 270  },
+    "facing=east,lit=false,heat=baking":    { "model": "mynethersdelight:block/blazefire_block" },
+    "facing=south,lit=false,heat=baking":   { "model": "mynethersdelight:block/blazefire_block", "y": 90 },
+    "facing=west,lit=false,heat=baking":    { "model": "mynethersdelight:block/blazefire_block", "y": 180 },
+
+    "facing=north,lit=false,heat=campfire": { "model": "mynethersdelight:block/blazefire_block", "y": 270  },
+    "facing=east,lit=false,heat=campfire":  { "model": "mynethersdelight:block/blazefire_block" },
+    "facing=south,lit=false,heat=campfire": { "model": "mynethersdelight:block/blazefire_block", "y": 90 },
+    "facing=west,lit=false,heat=campfire":  { "model": "mynethersdelight:block/blazefire_block", "y": 180 },
+
+    "facing=north,lit=false,heat=smoking":  { "model": "mynethersdelight:block/blazefire_block", "y": 270  },
+    "facing=east,lit=false,heat=smoking":   { "model": "mynethersdelight:block/blazefire_block" },
+    "facing=south,lit=false,heat=smoking":  { "model": "mynethersdelight:block/blazefire_block", "y": 90 },
+    "facing=west,lit=false,heat=smoking":   { "model": "mynethersdelight:block/blazefire_block", "y": 180 }
+  }
+}

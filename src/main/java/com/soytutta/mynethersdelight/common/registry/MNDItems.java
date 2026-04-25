@@ -18,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import vectorwing.farmersdelight.common.item.ConsumableItem;
 import vectorwing.farmersdelight.common.item.MushroomColonyItem;
+import vectorwing.farmersdelight.common.item.PlaceableItem;
 import vectorwing.farmersdelight.common.item.PopsicleItem;
 
 import java.util.function.Supplier;
@@ -39,6 +40,10 @@ public class MNDItems {
     public static Item.Properties bucketFoodItem(FoodProperties food) {
         return (new Item.Properties()).food(food).craftRemainder(Items.BUCKET).stacksTo(3);
     }
+
+    public static final Supplier<Item> BLAZIER = ITEMS.register("blazier", () ->
+            new BlockItem(MNDBlocks.BLAZIER_BLOCK.get(), basicItem())
+    );
 
     public static final Supplier<Item> NETHER_BRICKS_CABINET = ITEMS.register("nether_bricks_cabinet", () ->
             new BlockItem(MNDBlocks.NETHER_BRICKS_CABINET.get(), basicItem())
@@ -184,13 +189,13 @@ public class MNDItems {
             new ConsumableItem(bowlFoodItem(MNDFoodValues.CRIMSON_STROGANOFF), true)
     );
     public static final Supplier<Item> STRIDERLOAF_BLOCK = ITEMS.register("striderloaf", ()  ->
-            new BlockItem(MNDBlocks.STRIDERLOAF_BLOCK.get(), basicItem().stacksTo(1))
+            new PlaceableItem(MNDBlocks.STRIDERLOAF_BLOCK.get(), basicItem().stacksTo(1))
     );
     public static final Supplier<Item> STRIDERLOAF = ITEMS.register("plate_of_striderloaf", ()  ->
             new ConsumableItem(bowlFoodItem(MNDFoodValues.STRIDERLOAF), true)
     );
     public static final Supplier<Item> COLD_STRIDERLOAF_BLOCK = ITEMS.register("cold_striderloaf", ()  ->
-            new BlockItem(MNDBlocks.COLD_STRIDERLOAF_BLOCK.get(), basicItem().stacksTo(1))
+            new PlaceableItem(MNDBlocks.COLD_STRIDERLOAF_BLOCK.get(), basicItem().stacksTo(1))
     );
     public static final Supplier<Item> COLD_STRIDERLOAF = ITEMS.register("plate_of_cold_striderloaf", ()  ->
             new ConsumableItem(bowlFoodItem(MNDFoodValues.COLD_STRIDERLOAF), true)
@@ -275,7 +280,7 @@ public class MNDItems {
             new PopsicleItem(foodItem(MNDFoodValues.TEAR_POPSICLE).rarity(Rarity.RARE))
     );
     public static final Supplier<Item> GHASTA_WITH_CREAM_BLOCK = ITEMS.register("ghasta_with_cream", () ->
-            new BlockItem(MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get(), basicItem().stacksTo(1))
+            new PlaceableItem(MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get(), basicItem().stacksTo(1))
     );
     public static final Supplier<Item> GHASTA_WITH_CREAM = ITEMS.register("plate_of_ghasta_with_cream", () ->
             new ConsumableItem(bowlFoodItem(MNDFoodValues.GHASTA_WITH_CREAM), true)
@@ -293,7 +298,7 @@ public class MNDItems {
             new ConsumableItem(foodItem(MNDFoodValues.TOASTS))
     );
     public static final Supplier<Item> BREAD_LOAF_BLOCK = ITEMS.register("bread_loaf", () ->
-            new BlockItem(MNDBlocks.BREAD_LOAF_BLOCK.get(), basicItem().stacksTo(16))
+            new PlaceableItem(MNDBlocks.BREAD_LOAF_BLOCK.get(), basicItem().stacksTo(16))
     );
     // SPICY
     public static final Supplier<Item> BULLET_PEPPER = ITEMS.register("bullet_pepper", () ->
@@ -349,7 +354,7 @@ public class MNDItems {
     );
     // THOPHY
     public static final Supplier<Item> GOLDEN_TROPHY = ITEMS.register("golden_trophy", () ->
-            new BlockItem(MNDBlocks.GOLDEN_TROPHY.get(), basicItem())
+            new BlockItem(MNDBlocks.GOLDEN_TROPHY.get(), basicItem().rarity(Rarity.EPIC))
     );
     public static final Supplier<Item> HOGLIN_TROPHY = ITEMS.register("hoglin_trophy", () ->
             new BlockItem(MNDBlocks.HOGLIN_TROPHY.get(), basicItem())
@@ -365,24 +370,24 @@ public class MNDItems {
     );
     // STUFFED HOGLIN
     public static final Supplier<Item> HOGLIN_HIDE = ITEMS.register("hoglin_hide", () ->
-            new Item(basicItem())
+            new Item(basicItem().rarity(Rarity.UNCOMMON))
     );
     public static final Supplier<Item> RAW_STUFFED_HOGLIN = ITEMS.register("raw_stuffed_hoglin", () ->
-            new Item(basicItem().stacksTo(1))
+            new Item(basicItem().stacksTo(1).rarity(Rarity.UNCOMMON))
     );
     public static final Supplier<Item> ROAST_STUFFED_HOGLIN = ITEMS.register("roast_stuffed_hoglin", () ->
-            new StuffedHoglinBlockItem(MNDBlocks.STUFFED_HOGLIN.get(),(basicItem().stacksTo(1)))
+            new StuffedHoglinBlockItem(MNDBlocks.STUFFED_HOGLIN.get(),(basicItem().stacksTo(1)).rarity(Rarity.UNCOMMON))
     );
     public static final Supplier<Item> ROAST_EAR = ITEMS.register("roast_ear", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.ROAST_EAR))
+            new ConsumableItem(foodItem(MNDFoodValues.ROAST_EAR).rarity(Rarity.UNCOMMON))
     );
     public static final Supplier<Item> PLATE_OF_STUFFED_HOGLIN_SNOUT = ITEMS.register("plate_of_stuffed_hoglin_snout", ()  ->
-            new ConsumableItem(bowlFoodItem(MNDFoodValues.PLATE_OF_STUFFED_HOGLIN_SNOUT), true)
+            new ConsumableItem(bowlFoodItem(MNDFoodValues.PLATE_OF_STUFFED_HOGLIN_SNOUT).rarity(Rarity.UNCOMMON), true)
     );
     public static final Supplier<Item> PLATE_OF_STUFFED_HOGLIN_HAM = ITEMS.register("plate_of_stuffed_hoglin_ham", ()  ->
-            new ConsumableItem(bowlFoodItem(MNDFoodValues.PLATE_OF_STUFFED_HOGLIN_HAM), true)
+            new ConsumableItem(bowlFoodItem(MNDFoodValues.PLATE_OF_STUFFED_HOGLIN_HAM).rarity(Rarity.UNCOMMON), true)
     );
     public static final Supplier<Item> PLATE_OF_STUFFED_HOGLIN = ITEMS.register("plate_of_stuffed_hoglin", ()  ->
-            new ConsumableItem(bowlFoodItem(MNDFoodValues.PLATE_OF_STUFFED_HOGLIN), true)
+            new ConsumableItem(bowlFoodItem(MNDFoodValues.PLATE_OF_STUFFED_HOGLIN).rarity(Rarity.UNCOMMON), true)
     );
 }

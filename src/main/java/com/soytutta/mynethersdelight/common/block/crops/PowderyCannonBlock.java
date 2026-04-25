@@ -38,7 +38,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.util.TriState;
-import vectorwing.farmersdelight.common.tag.CommonTags;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import static com.soytutta.mynethersdelight.common.block.utility.MNDBlockStateProperties.PRESSURE;
 
@@ -141,6 +141,7 @@ public class PowderyCannonBlock extends BambooStalkBlock {
         builder.add(LIT, PRESSURE);
     }
 
+    @Override
     public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
         return false;
     }
@@ -257,7 +258,7 @@ public class PowderyCannonBlock extends BambooStalkBlock {
 
     protected ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (state.getValue(LIT)) {
-            if (heldStack.is(CommonTags.TOOLS_KNIFE) || heldStack.is(Tags.Items.TOOLS_SHEAR)) {
+            if (ItemUtils.isKnife(heldStack) || heldStack.is(Tags.Items.TOOLS_SHEAR)) {
                 heldStack.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
                 int amount = 3 + level.random.nextInt(6);
                 popResource(level, pos, new ItemStack(MNDItems.BULLET_PEPPER.get(), amount));
@@ -284,7 +285,7 @@ public class PowderyCannonBlock extends BambooStalkBlock {
 
         if (state.getValue(LIT)) {
             ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
-            if (!heldItem.is(CommonTags.TOOLS_KNIFE) && !heldItem.is(Tags.Items.TOOLS_SHEAR)) {
+            if (!ItemUtils.isKnife(heldItem) && !heldItem.is(Tags.Items.TOOLS_SHEAR)) {
                 explodeAndReset(level, pos, state);
                 return Blocks.AIR.defaultBlockState();
             }

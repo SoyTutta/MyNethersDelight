@@ -34,32 +34,32 @@ public class MNDCookingRecipes {
                 .addIngredient(Ingredient.of(Items.WARPED_ROOTS, Items.CRIMSON_ROOTS, ModItems.STRAW.get()))
                 .unlockedByAnyIngredient(Items.CRIMSON_FUNGUS, Items.WARPED_FUNGUS, MNDItems.STRIDER_SLICE.get(), MNDItems.MINCED_STRIDER.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/strider_stew");
+                .save(output, "mynethersdelight:cooking/strider_stew");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.SPICY_NOODLE_SOUP.get(), 1, 200, 1.0F)
                 .addIngredient(MyCommonTags.FOODS_RICE_PASTA)
-                .addIngredient(CommonTags.FOODS_COOKED_EGG)
+                .addIngredient(CommonTags.Items.FOODS_COOKED_EGG)
                 .addIngredient(MNDTags.HOT_SPICE)
                 .addIngredient(MyCommonTags.FOODS_RAW_HOGLIN)
                 .unlockedByAnyIngredient(MNDItems.GHASTA.get(), MNDItems.BULLET_PEPPER.get(), Items.PORKCHOP)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/spicy_noodle_soup");
+                .save(output, "mynethersdelight:cooking/spicy_noodle_soup");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.TWISTED_GHASTA.get(), 1, 200, 1.0F)
                 .addIngredient(MNDItems.GHASTA.get())
                 .addIngredient(Ingredient.of(Items.WARPED_FUNGUS, Items.TWISTING_VINES),2)
                 .unlockedByAnyIngredient(MNDItems.GHASTA.get(), Items.WARPED_FUNGUS, Items.TWISTING_VINES)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/twisted_ghasta");
+                .save(output, "mynethersdelight:cooking/twisted_ghasta");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.FRIES_GHASTA.get(), 1, 100, 1.0F, Items.PAPER)
                 .addIngredient(MNDItems.GHASTA.get(),2)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/fries_ghasta");
+                .save(output, "mynethersdelight:cooking/fries_ghasta");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.GIANT_TAKOYAKI.get(), 1, 200, 1.0F)
                 .addIngredient(MyCommonTags.FOODS_GIANT_TENTACLES)
                 .addIngredient(MyCommonTags.FOODS_GIANT_TENTACLES)
-                .addIngredient(CommonTags.FOODS_DOUGH)
+                .addIngredient(CommonTags.Items.FOODS_DOUGH)
                 .addIngredient(ModItems.ONION.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/giant_tentacles");
+                .save(output, "mynethersdelight:cooking/giant_tentacles");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.SPICY_HOGLIN_STEW.get(), 1, 200, 1.0F)
                 .addIngredient(Ingredient.of(MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get(), MNDItems.ROASTED_SAUSAGE.get(), MNDItems.COOKED_LOIN.get()))
                 .addIngredient(Tags.Items.CROPS_POTATO)
@@ -67,35 +67,35 @@ public class MNDCookingRecipes {
                 .addIngredient(Ingredient.of(MNDItems.BULLET_PEPPER.get(), MNDItems.PEPPER_POWDER.get()))
                 .unlockedByAnyIngredient(MNDItems.HOGLIN_LOIN.get(), MNDItems.BULLET_PEPPER.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/spicy_hoglin_stew");
+                .save(output, "mynethersdelight:cooking/spicy_hoglin_stew");
     }
     private static void cookMeals(RecipeOutput output) {
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.BOILED_EGG.get(), 4, 200, 1.0F)
                 .addIngredient(Ingredient.of(MNDTags.BOILED_EGG_CANDIDATE),4)
                 .unlockedByAnyIngredient(Items.EGG)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/boiled_eggs");
+                .save(output, "mynethersdelight:cooking/boiled_eggs");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.SCOTCH_EGGS.get(), 1, 200, 1.0F)
                 .addIngredient(Ingredient.of(MyCommonTags.FOODS_BOILED_EGG),2)
                 .addIngredient(Ingredient.of(ModItems.MINCED_BEEF.get(), MNDItems.HOGLIN_SAUSAGE.get()))
                 .addIngredient(Tags.Items.FOODS_BREAD)
                 .unlockedByAnyIngredient(Items.EGG)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/scotch_eggs");
+                .save(output, "mynethersdelight:cooking/scotch_eggs");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.EGG_SOUP.get(), 1, 200, 1.0F)
                 .addIngredient(MyCommonTags.FOODS_BOILED_EGG)
-                .addIngredient(Ingredient.of(CommonTags.FOODS_COOKED_EGG),2)
-                .addIngredient(CommonTags.FOODS_ONION)
+                .addIngredient(Ingredient.of(CommonTags.Items.FOODS_COOKED_EGG),2)
+                .addIngredient(CommonTags.Items.FOODS_ONION)
                 .unlockedByAnyIngredient(Items.EGG)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/egg_soup");
+                .save(output, "mynethersdelight:cooking/egg_soup");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.DEVILED_EGG.get(), 2, 100, 1.0F)
                 .addIngredient(MyCommonTags.FOODS_BOILED_EGG)
                 .addIngredient(MNDTags.HOT_SPICE)
                 .addIngredient(Ingredient.of(MNDItems.HOGLIN_SAUSAGE.get(), ModItems.BACON.get()))
                 .unlockedByAnyIngredient(MNDItems.STRIDER_EGG.get(),MNDItems.BOILED_EGG.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/deviled_egg");
+                .save(output, "mynethersdelight:cooking/deviled_egg");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.STRIDER_WITH_GRILLED_FUNGUS.get(), 1, 400, 1.0F)
                 .addIngredient(MNDItems.STRIDER_SLICE.get())
                 .addIngredient(Items.CRIMSON_FUNGUS, 1)
@@ -103,46 +103,46 @@ public class MNDCookingRecipes {
                 .addIngredient(Ingredient.of(Items.WARPED_FUNGUS, Items.CRIMSON_FUNGUS, Items.RED_MUSHROOM, Items.BROWN_MUSHROOM))
                 .unlockedByAnyIngredient(Items.CRIMSON_FUNGUS, Items.WARPED_FUNGUS, MNDItems.STRIDER_SLICE.get(), MNDItems.MINCED_STRIDER.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/strider_and_grilled_fungus");
+                .save(output, "mynethersdelight:cooking/strider_and_grilled_fungus");
 
 
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.CRIMSON_STROGANOFF.get(), 1, 400, 1.0F)
                 .addIngredient(MNDItems.MINCED_STRIDER.get())
                 .addIngredient(Items.CRIMSON_FUNGUS, 2)
-                .addIngredient(CommonTags.FOODS_MILK)
-                .addIngredient(CommonTags.FOODS_PASTA)
+                .addIngredient(Tags.Items.DRINKS_MILK)
+                .addIngredient(CommonTags.Items.FOODS_PASTA)
                 .unlockedByAnyIngredient(MNDItems.MINCED_STRIDER.get(), Items.CRIMSON_FUNGUS)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/crimson_stroganoff");
+                .save(output, "mynethersdelight:cooking/crimson_stroganoff");
 
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.FRIED_HOGLIN_CHOP.get(), 1, 200, 1.0F)
                 .addIngredient(MNDItems.HOGLIN_LOIN.get())
                 .addIngredient(Items.WHEAT)
-                .addIngredient(CommonTags.FOODS_MILK)
+                .addIngredient(Tags.Items.DRINKS_MILK)
                 .addIngredient(Tags.Items.EGGS)
                 .addIngredient(MNDItems.BULLET_PEPPER.get())
                 .unlockedByAnyIngredient(MNDItems.HOGLIN_LOIN.get(), MNDItems.BULLET_PEPPER.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/fried_hoglin_chop");
+                .save(output, "mynethersdelight:cooking/fried_hoglin_chop");
 
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.HOT_WINGS.get(), 1, 150, 0.35F)
-                .addIngredient(CommonTags.FOODS_RAW_CHICKEN)
+                .addIngredient(CommonTags.Items.FOODS_RAW_CHICKEN)
                 .addIngredient(MNDTags.HOT_SPICE)
-                .addIngredient(CommonTags.CROPS_ONION)
+                .addIngredient(CommonTags.Items.CROPS_ONION)
                 .unlockedByAnyIngredient(MNDItems.BULLET_PEPPER.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/hot_wings");
+                .save(output, "mynethersdelight:cooking/hot_wings");
 
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.SPICY_CURRY.get(), 1, 200, 1.0F)
                 .addIngredient(Tags.Items.FOODS_RAW_MEAT)
-                .addIngredient(CommonTags.FOODS_MILK)
+                .addIngredient(Tags.Items.DRINKS_MILK)
                 .addIngredient(MNDTags.HOT_SPICE)
-                .addIngredient(CommonTags.CROPS_RICE)
+                .addIngredient(CommonTags.Items.CROPS_RICE)
                 .addIngredient(vegetablesPatch())
                 .addIngredient(Ingredient.of(Items.PUMPKIN,ModItems.PUMPKIN_SLICE.get()))
                 .unlockedByAnyIngredient(MNDItems.BULLET_PEPPER.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/spicy_curry");
+                .save(output, "mynethersdelight:cooking/spicy_curry");
 
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.ROAST_STUFFED_HOGLIN.get(), 1, 700, 2.0F,Items.BOWL)
                 .addIngredient(MNDTags.HOT_SPICE)
@@ -151,7 +151,7 @@ public class MNDCookingRecipes {
                 .addIngredient(ModItems.NETHER_SALAD.get(), 2)
                 .unlockedByAnyIngredient(MNDItems.RAW_STUFFED_HOGLIN.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/roast_stuffed_hoglin");
+                .save(output, "mynethersdelight:cooking/roast_stuffed_hoglin");
 
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.CHILIDOG.get(), 1, 200, 0.35F,MNDItems.HOTDOG.get())
                 .addIngredient(MNDTags.HOT_SPICE)
@@ -159,13 +159,13 @@ public class MNDCookingRecipes {
                 .addIngredient(Items.NETHER_WART)
                 .unlockedByAnyIngredient(MNDItems.HOTDOG.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/chilidog");
+                .save(output, "mynethersdelight:cooking/chilidog");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.SAUSAGE_AND_POTATOES.get(), 1, 200, 0.35F)
                 .addIngredient(Tags.Items.CROPS_POTATO)
                 .addIngredient(MNDItems.HOGLIN_SAUSAGE.get(), 2)
                 .unlockedByAnyIngredient(MNDItems.HOGLIN_SAUSAGE.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/sausage_and_potatoes");
+                .save(output, "mynethersdelight:cooking/sausage_and_potatoes");
 
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.HOT_CREAM.get(), 1, 50, 1.0F,Items.BUCKET)
                 .addIngredient(MNDTags.HOT_SPICE)
@@ -177,7 +177,7 @@ public class MNDCookingRecipes {
 
                 .unlockedByAnyIngredient(Items.LAVA_BUCKET)
                 .setRecipeBookTab(CookingPotRecipeBookTab.DRINKS)
-                .build(output, "mynethersdelight:cooking/hotcream");
+                .save(output, "mynethersdelight:cooking/hotcream");
 
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.ROCK_SOUP.get(), 1, 50, 0.35F)
                 .addIngredient(Items.MAGMA_CREAM,2)
@@ -185,14 +185,14 @@ public class MNDCookingRecipes {
 
                 .unlockedByAnyIngredient(Items.MAGMA_CREAM)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
-                .build(output, "mynethersdelight:cooking/rock_soup");
+                .save(output, "mynethersdelight:cooking/rock_soup");
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.BURNT_ROLL.get(), 2, 50, 0.35F)
                 .addIngredient(Items.MAGMA_CREAM,2)
                 .addIngredient(Tags.Items.FOODS_RAW_MEAT)
 
                 .unlockedByAnyIngredient(Items.MAGMA_CREAM)
                 .setRecipeBookTab(CookingPotRecipeBookTab.MISC)
-                .build(output, "mynethersdelight:cooking/burn_roll");
+                .save(output, "mynethersdelight:cooking/burn_roll");
         }
 
     private static Ingredient vegetablesPatch() {

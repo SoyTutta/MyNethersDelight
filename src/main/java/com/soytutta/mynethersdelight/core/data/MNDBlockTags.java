@@ -29,9 +29,9 @@ public class MNDBlockTags extends BlockTagsProvider {
 
     protected void registerBlockMineables() {
         this.tag(BlockTags.MINEABLE_WITH_SHOVEL).add(MNDBlocks.LETIOS_COMPOST.get(), MNDBlocks.RESURGENT_SOIL.get(), MNDBlocks.RESURGENT_SOIL_FARMLAND.get());
-        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(MNDBlocks.NETHER_BRICKS_CABINET.get(),MNDBlocks.RED_NETHER_BRICKS_CABINET.get(),MNDBlocks.BLACKSTONE_BRICKS_CABINET.get(),MNDBlocks.NETHER_STOVE.get(),MNDBlocks.GOLDEN_TROPHY.get());
+        this.tag(BlockTags.MINEABLE_WITH_PICKAXE).add(MNDBlocks.BLAZIER_BLOCK.get(),MNDBlocks.NETHER_BRICKS_CABINET.get(),MNDBlocks.RED_NETHER_BRICKS_CABINET.get(),MNDBlocks.BLACKSTONE_BRICKS_CABINET.get(),MNDBlocks.NETHER_STOVE.get(),MNDBlocks.GOLDEN_TROPHY.get());
         this.tag(BlockTags.MINEABLE_WITH_AXE).add(MNDBlocks.HOGLIN_TROPHY.get(),MNDBlocks.WAXED_HOGLIN_TROPHY.get(),MNDBlocks.ZOGLIN_TROPHY.get(),MNDBlocks.SKOGLIN_TROPHY.get(),MNDBlocks.GOLDEN_TROPHY.get(),MNDBlocks.POWDERY_CANNON.get(),MNDBlocks.POWDERY_CANE.get(),MNDBlocks.POWDERY_CHUBBY_SAPLING.get(),MNDBlocks.BULLET_PEPPER.get(),MNDBlocks.BLOCK_OF_POWDERY_CANNON.get(),MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get(),MNDBlocks.POWDERY_MOSAIC.get(),MNDBlocks.POWDERY_MOSAIC_STAIRS.get(),MNDBlocks.POWDERY_MOSAIC_SLAB.get(),MNDBlocks.BULLET_PEPPER_CRATE.get());
-        this.tag(ModTags.MINEABLE_WITH_KNIFE).add(MNDBlocks.STUFFED_HOGLIN.get(),MNDBlocks.BREAD_LOAF_BLOCK.get(),MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get(),MNDBlocks.STRIDERLOAF_BLOCK.get(),MNDBlocks.MAGMA_CAKE_BLOCK.get(),MNDBlocks.POWDERY_CANNON.get(),MNDBlocks.POWDERY_CANE.get(),MNDBlocks.POWDERY_CHUBBY_SAPLING.get(),MNDBlocks.BULLET_PEPPER.get());
+        this.tag(ModTags.Blocks.MINEABLE_WITH_KNIFE).add(MNDBlocks.STUFFED_HOGLIN.get(),MNDBlocks.BREAD_LOAF_BLOCK.get(),MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get(),MNDBlocks.STRIDERLOAF_BLOCK.get(),MNDBlocks.MAGMA_CAKE_BLOCK.get(),MNDBlocks.POWDERY_CANNON.get(),MNDBlocks.POWDERY_CANE.get(),MNDBlocks.POWDERY_CHUBBY_SAPLING.get(),MNDBlocks.BULLET_PEPPER.get());
     }
 
     protected void registerMinecraftTags() {
@@ -78,17 +78,20 @@ public class MNDBlockTags extends BlockTagsProvider {
         this.tag(MNDTags.RESURGENT_SOIL_PLANT).add(Blocks.CACTUS)
                 .addTag(MNDTags.ABOVE_PROPAGATE_PLANT).addTag(MNDTags.BELOW_PROPAGATE_PLANT).addTag(BlockTags.MINEABLE_WITH_HOE).addTag(BlockTags.SWORD_EFFICIENT);
 
-        this.tag(ModTags.TRAY_HEAT_SOURCES).add(MNDBlocks.MAGMA_CAKE_BLOCK.get());
-        this.tag(ModTags.HEAT_SOURCES).add(MNDBlocks.NETHER_STOVE.get(),MNDBlocks.BULLET_PEPPER_CRATE.get());
-        this.tag(ModTags.WILD_CROPS).add(MNDBlocks.BULLET_PEPPER.get());
-        this.tag(ModTags.UNAFFECTED_BY_RICH_SOIL).add(MNDBlocks.WARPED_FUNGUS_COLONY.get(),MNDBlocks.CRIMSON_FUNGUS_COLONY.get());
-        this.tag(ModTags.MUSHROOM_COLONY_GROWABLE_ON).add(MNDBlocks.RESURGENT_SOIL.get());
+        this.tag(ModTags.Blocks.CABINETS).add(MNDBlocks.NETHER_BRICKS_CABINET.get(), MNDBlocks.RED_NETHER_BRICKS_CABINET.get(), MNDBlocks.BLACKSTONE_BRICKS_CABINET.get());
+        this.tag(ModTags.Blocks.CABINETS_WOODEN).add(MNDBlocks.POWDERY_CABINET.get());
+        this.tag(ModTags.Blocks.TRAY_HEAT_SOURCES).add(MNDBlocks.MAGMA_CAKE_BLOCK.get(), MNDBlocks.BLAZIER_BLOCK.get());
+        this.tag(ModTags.Blocks.HEAT_SOURCES).add(MNDBlocks.NETHER_STOVE.get(),MNDBlocks.BULLET_PEPPER_CRATE.get());
+        this.tag(ModTags.Blocks.WILD_CROPS).add(MNDBlocks.BULLET_PEPPER.get());
+        this.tag(ModTags.Blocks.UNAFFECTED_BY_RICH_SOIL).add(MNDBlocks.WARPED_FUNGUS_COLONY.get(),MNDBlocks.CRIMSON_FUNGUS_COLONY.get());
+        this.tag(ModTags.Blocks.MUSHROOM_COLONY_GROWABLE_ON).add(MNDBlocks.RESURGENT_SOIL.get());
+        this.tag(ModTags.Blocks.FEASTS).add(MNDBlocks.STUFFED_HOGLIN.get(), MNDBlocks.STRIDERLOAF_BLOCK.get(), MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get(), MNDBlocks.MAGMA_CAKE_BLOCK.get(), MNDBlocks.BREAD_LOAF_BLOCK.get());
 
         this.tag(MNDTags.SHOWCASE_ACTIVATORS).add(Blocks.WITHER_ROSE, Blocks.SOUL_SAND, MNDBlocks.LETIOS_COMPOST.get(), MNDBlocks.RESURGENT_SOIL.get(), Blocks.NETHER_WART, Blocks.CRIMSON_FUNGUS, MNDBlocks.CRIMSON_FUNGUS_COLONY.get(), Blocks.WARPED_FUNGUS, MNDBlocks.WARPED_FUNGUS_COLONY.get(), Blocks.RED_MUSHROOM, ModBlocks.RED_MUSHROOM_COLONY.get(), Blocks.BROWN_MUSHROOM, ModBlocks.BROWN_MUSHROOM_COLONY.get(), Blocks.TWISTING_VINES, Blocks.WEEPING_VINES, Blocks.BONE_BLOCK);
         this.tag(MNDTags.SHOWCASE_FLAMES).add(Blocks.MAGMA_BLOCK,MNDBlocks.MAGMA_CAKE_BLOCK.get(), Blocks.LANTERN, Blocks.TORCH, MNDBlocks.POWDERY_TORCH.get(), Blocks.SOUL_TORCH, Blocks.SOUL_LANTERN,Blocks.FURNACE,Blocks.SMOKER,Blocks.BLAST_FURNACE,ModBlocks.STOVE.get(),MNDBlocks.NETHER_STOVE.get()).addTag(net.minecraft.tags.BlockTags.CAMPFIRES).addTag(BlockTags.CANDLES);
 
         this.tag(MNDTags.LETIOS_ACTIVATORS).add(Blocks.TWISTING_VINES_PLANT, Blocks.WEEPING_VINES_PLANT).addTag(MNDTags.SHOWCASE_ACTIVATORS);
-        this.tag(MNDTags.LETIOS_FLAMES).add(Blocks.LAVA_CAULDRON,MNDBlocks.POWDERY_CANE.get(),MNDBlocks.POWDERY_CANNON.get(),MNDBlocks.BULLET_PEPPER.get(),MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get(),MNDBlocks.POTTED_BULLET_PEPPER.get(),MNDBlocks.WALL_POWDERY_TORCH.get(),Blocks.WALL_TORCH).addTag(MNDTags.SHOWCASE_FLAMES).addTag(ModTags.HEAT_SOURCES).addTag(BlockTags.CANDLE_CAKES).addTag(net.minecraft.tags.BlockTags.FIRE).add(Blocks.LAVA);
+        this.tag(MNDTags.LETIOS_FLAMES).add(Blocks.LAVA_CAULDRON,MNDBlocks.POWDERY_CANE.get(),MNDBlocks.POWDERY_CANNON.get(),MNDBlocks.BULLET_PEPPER.get(),MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get(),MNDBlocks.POTTED_BULLET_PEPPER.get(),MNDBlocks.WALL_POWDERY_TORCH.get(),Blocks.WALL_TORCH).addTag(MNDTags.SHOWCASE_FLAMES).addTag(ModTags.Blocks.HEAT_SOURCES).addTag(BlockTags.CANDLE_CAKES).addTag(net.minecraft.tags.BlockTags.FIRE).add(Blocks.LAVA);
 
         this.tag(MNDTags.POWDERY_CANNON_PLANTABLE_ON).add(Blocks.MAGMA_BLOCK,MNDBlocks.POWDERY_CANNON.get(),MNDBlocks.POWDERY_CHUBBY_SAPLING.get()).addTag(Tags.Blocks.GRAVELS).addTag(Tags.Blocks.NETHERRACKS).addTag(BlockTags.NYLIUM).addTag(BlockTags.SAND).addTag(BlockTags.DIRT).addTag(BlockTags.BASE_STONE_NETHER).addTag(BlockTags.SOUL_SPEED_BLOCKS);
         this.tag(MNDTags.POWDERY_CANE).add(MNDBlocks.POWDERY_CANNON.get(),MNDBlocks.POWDERY_CANE.get(),MNDBlocks.BULLET_PEPPER.get());

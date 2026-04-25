@@ -1,0 +1,32 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:blaze_rod"
+    }
+  ],
+  "result": [
+    {
+      "item": {
+        "count": 3,
+        "id": "minecraft:blaze_powder"
+      }
+    },
+    {
+      "chance": 0.25,
+      "item": {
+        "count": 1,
+        "id": "minecraft:blaze_powder"
+      }
+    }
+  ],
+  "tool": [
+    {
+      "type": "farmersdelight:item_ability",
+      "action": "knife_dig"
+    },
+    {
+      "tag": "c:tools/knife"
+    }
+  ]
+}
