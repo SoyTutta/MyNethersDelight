@@ -1,7 +1,7 @@
 {
   "block.mynethersdelight.blackstone_bricks_cabinet": "Blackstone Brick Cabinet",
-  "block.mynethersdelight.blazier.too_cold": "The temperature is too low or there isn't enough space for this.",
-  "block.mynethersdelight.blazier.too_hot": "The temperature is too high or there isn't enough space for this.",
+  "block.mynethersdelight.blazier.too_cold": "The temperature is too low for this.",
+  "block.mynethersdelight.blazier.too_hot": "The temperature is too high for this.",
   "block.mynethersdelight.blazier_block": "Blazier",
   "block.mynethersdelight.bread_loaf_block": "Bread Loaf",
   "block.mynethersdelight.bullet_pepper": "Bullet Pepper",

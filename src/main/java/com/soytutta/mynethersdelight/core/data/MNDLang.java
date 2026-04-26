@@ -88,8 +88,8 @@ public class MNDLang extends LanguageProvider {
         this.add("mynethersdelight.jei.forgoting.light", "Sped up by adjacent flames (see below)");
         this.add("mynethersdelight.jei.forgoting.fluid", "Sped up by adjacent lava");
 
-        this.add("block.mynethersdelight.blazier.too_hot", "The temperature is too high or there isn't enough space for this.");
-        this.add("block.mynethersdelight.blazier.too_cold", "The temperature is too low or there isn't enough space for this.");
+        this.add("block.mynethersdelight.blazier.too_hot", "The temperature is too high for this.");
+        this.add("block.mynethersdelight.blazier.too_cold", "The temperature is too low for this.");
 
         this.add("mynethersdelight.block.feast.space_required", "You need more space to serve this.");
         this.add("mynethersdelight.block.feast.use_knife", "You need a Knife to cut this.");
