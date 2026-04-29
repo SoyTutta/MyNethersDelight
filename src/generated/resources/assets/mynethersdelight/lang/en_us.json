@@ -53,6 +53,7 @@
   "effect.mynethersdelight.g_pungent.desc": "Provides natural regeneration while exposed to heat.",
   "enchantment.mynethersdelight.poaching": "Curse of Poaching",
   "enchantment.mynethersdelight.poaching.desc": "Responsible hunting can provide you with extra ingredients!!!\nBut be careful about choosing your target...\n\nThe weapon will be penalty for each hunting attempt",
+  "farmersdelight.tooltip.strider_feed.when_feeding": "When fed to a Strider:",
   "item.minersdelight.egg_soup_cup": "Egg Soup Cup",
   "item.minersdelight.rock_soup_cup": "Rock Soup Cup",
   "item.minersdelight.spicy_hoglin_stew_cup": "Spicy Hoglin Stew Cup",
@@ -141,6 +142,5 @@
   "tooltip.farmersdelight.golden_egg": "Nourished by all harmful effects",
   "tooltip.farmersdelight.hot_cream": "Burning Effects",
   "tooltip.farmersdelight.magma_cake_slice": "Spicy frog Snack",
-  "tooltip.farmersdelight.strider_egg": "Nourished by 1 Harmful Effect",
-  "tooltip.farmersdelight.strider_feed.when_feeding": "When fed to a Strider"
+  "tooltip.farmersdelight.strider_egg": "Nourished by 1 Harmful Effect"
 }

@@ -101,7 +101,7 @@ public class MNDLang extends LanguageProvider {
 
         this.add("tooltip.farmersdelight.hot_cream", "Burning Effects");
 
-        this.add("tooltip.farmersdelight.strider_feed.when_feeding", "When fed to a Strider");
+        this.add("farmersdelight.tooltip.strider_feed.when_feeding", "When fed to a Strider:");
         this.add("tooltip.farmersdelight.magma_cake_slice", "Spicy frog Snack");
 
         this.add("mynethersdelight.jei.info.strider_egg", "A peculiar find, suggesting Striders may be ovoviviparous.\n\nObtainable only through careful hunting.\nhard shell, it can only be eaten starry...");
