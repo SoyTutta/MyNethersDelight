@@ -171,7 +171,7 @@ public class MNDItems {
             new ConsumableItem(bowlFoodItem(MNDFoodValues.EGG_SOUP), true)
     );
     public static final Supplier<Item> STRIDER_SLICE = ITEMS.register("strider_slice", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.STRIDER_SLICE).fireResistant())
+            new ConsumableItem(foodItem(MNDFoodValues.STRIDER_SLICE).fireResistant(), false)
     );
     public static final Supplier<Item> MINCED_STRIDER = ITEMS.register("minced_strider", ()  ->
             new ConsumableItem(foodItem(MNDFoodValues.MINCED_STRIDER).fireResistant())
@@ -202,26 +202,26 @@ public class MNDItems {
     );
     // HOGLIN
     public static final Supplier<Item> HOGLIN_LOIN = ITEMS.register("hoglin_loin", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.HOGLIN_LOIN))
+            new ConsumableItem(foodItem(MNDFoodValues.HOGLIN_LOIN), false)
     );
     // HOGLIN-Sausage
     public static final Supplier<Item> HOGLIN_SAUSAGE = ITEMS.register("hoglin_sausage", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.HOGLIN_SAUSAGE))
+            new ConsumableItem(foodItem(MNDFoodValues.HOGLIN_SAUSAGE), false)
     );
     public static final Supplier<Item> ROASTED_SAUSAGE = ITEMS.register("roasted_sausage", ()  ->
             new ConsumableItem(foodItem(MNDFoodValues.ROASTED_SAUSAGE))
     );
     public static final Supplier<Item> HOTDOG = ITEMS.register("hotdog", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.HOTDOG))
+            new ConsumableItem(foodItem(MNDFoodValues.HOTDOG), false)
     );
     public static final Supplier<Item> HOTDOG_WITH_MIXED_SALAD = ITEMS.register("hotdog_with_mixed_salad", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.HOTDOG_WITH_MIXED_SALAD))
+            new ConsumableItem(foodItem(MNDFoodValues.HOTDOG_WITH_MIXED_SALAD), true)
     );
     public static final Supplier<Item> HOTDOG_WITH_NETHER_SALAD = ITEMS.register("hotdog_with_nether_salad", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.HOTDOG_WITH_NETHER_SALAD))
+            new ConsumableItem(foodItem(MNDFoodValues.HOTDOG_WITH_NETHER_SALAD), false)
     );
     public static final Supplier<Item> SAUSAGE_AND_POTATOES = ITEMS.register("sausage_and_potatoes", ()  ->
-            new ConsumableItem(bowlFoodItem(MNDFoodValues.SAUSAGE_AND_POTATOES))
+            new ConsumableItem(bowlFoodItem(MNDFoodValues.SAUSAGE_AND_POTATOES), false)
     );
     public static final Supplier<Item> BREAKFAST_SAMPLER = ITEMS.register("breakfast_sampler", ()  ->
             new ConsumableItem(bowlFoodItem(MNDFoodValues.BREAKFAST_SAMPLER), true)
@@ -247,7 +247,7 @@ public class MNDItems {
     );
     // GHAST
     public static final Supplier<Item> GHASTA = ITEMS.register("ghasta", () ->
-            new ConsumableItem(foodItem(MNDFoodValues.GHASTA))
+            new ConsumableItem(foodItem(MNDFoodValues.GHASTA), false)
     );
     public static final Supplier<Item> TWISTED_GHASTA = ITEMS.register("twisted_ghasta", () ->
             new ConsumableItem(bowlFoodItem(MNDFoodValues.TWISTED_GHASTA),true)
@@ -262,7 +262,7 @@ public class MNDItems {
             new ConsumableItem(bowlFoodItem(MNDFoodValues.SPICY_NOODLE_SOUP), true)
     );
     public static final Supplier<Item> SPICY_COTTON = ITEMS.register("spicy_cotton", () ->
-            new ConsumableItem(foodItem(MNDFoodValues.SPICY_COTTON))
+            new ConsumableItem(foodItem(MNDFoodValues.SPICY_COTTON), false)
     );
     public static final Supplier<Item> GHASMATI = ITEMS.register("ghasmati", () ->
             new Item(basicItem())
@@ -286,10 +286,10 @@ public class MNDItems {
             new ConsumableItem(bowlFoodItem(MNDFoodValues.GHASTA_WITH_CREAM), true)
     );
     public static final Supplier<Item> GHAST_DOUGH = ITEMS.register("ghast_dough", () ->
-            new ConsumableItem(foodItem(MNDFoodValues.GHASTA))
+            new ConsumableItem(foodItem(MNDFoodValues.GHASTA), false)
     );
     public static final Supplier<Item> GHAST_SOURDOUGH = ITEMS.register("ghast_sourdough", () ->
-            new ConsumableItem(foodItem(MNDFoodValues.GHASTA))
+            new ConsumableItem(foodItem(MNDFoodValues.GHASTA), false)
     );
     public static final Supplier<Item> SLICES_OF_BREAD = ITEMS.register("slices_of_bread", () ->
             new ConsumableItem(foodItem(MNDFoodValues.SLICES_OF_BREAD))
@@ -311,10 +311,10 @@ public class MNDItems {
             new Item(basicItem())
     );
     public static final Supplier<Item> STUFFED_PEPPER = ITEMS.register("stuffed_pepper", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.STUFFED_PEPPER))
+            new ConsumableItem(foodItem(MNDFoodValues.STUFFED_PEPPER), false)
     );
     public static final Supplier<Item> SPICY_SKEWER = ITEMS.register("spicy_skewer", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.SPICY_SKEWER))
+            new ConsumableItem(foodItem(MNDFoodValues.SPICY_SKEWER), false)
     );
     public static final Supplier<Item> CHILIDOG = ITEMS.register("chilidog", ()  ->
             new ConsumableItem(foodItem(MNDFoodValues.CHILIDOG), true)
@@ -336,7 +336,7 @@ public class MNDItems {
             new ConsumableItem(bowlFoodItem(MNDFoodValues.ROCK_SOUP), true)
     );
     public static final Supplier<Item> BURNT_ROLL = ITEMS.register("burnt_roll", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.BURNT_ROLL).fireResistant())
+            new ConsumableItem(foodItem(MNDFoodValues.BURNT_ROLL).fireResistant(), false)
     );
     public static final Supplier<Item> MAGMA_CAKE = ITEMS.register("magma_cake_block", () ->
             new BlockItem(MNDBlocks.MAGMA_CAKE_BLOCK.get(), basicItem().stacksTo(1).fireResistant())
