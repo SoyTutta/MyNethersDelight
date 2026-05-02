@@ -374,7 +374,7 @@ public class PowderyCaneBlock extends BushBlock implements BonemealableBlock {
     private void explodeAndReset(Level level, BlockPos pos, BlockState state) {
         if (!level.isClientSide && state.getValue(LIT)) {
             level.playSound(null, pos, SoundEvents.CREEPER_PRIMED, SoundSource.BLOCKS, 0.5F, 0.25F);
-            level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 3.0F, false, Level.ExplosionInteraction.NONE);
+            level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 0.75F, false, Level.ExplosionInteraction.NONE);
             level.setBlock(pos, state.setValue(LIT, false).setValue(AGE, 0).setValue(PRESSURE, 0), 2);
         }
     }
