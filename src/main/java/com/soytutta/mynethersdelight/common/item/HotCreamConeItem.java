@@ -87,7 +87,7 @@ public class HotCreamConeItem extends ConsumableItem {
     public static final List<MobEffectInstance> EFFECTS;
 
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag isAdvanced) {
-        if (Configuration.FOOD_EFFECT_TOOLTIP.get()) {
+        if (Configuration.ENABLE_FOOD_EFFECT_TOOLTIP.get()) {
             MutableComponent textWhenFeeding = TextUtils.getTranslation("tooltip.strider_feed.when_feeding");
             tooltip.add(textWhenFeeding.withStyle(ChatFormatting.GRAY));
 

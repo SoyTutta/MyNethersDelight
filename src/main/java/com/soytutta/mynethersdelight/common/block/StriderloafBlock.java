@@ -40,7 +40,7 @@ public class StriderloafBlock extends FeastBlock {
             if (level.getBlockState(nearbyPos).getFluidState().is(FluidTags.LAVA)) {
                 return true;
             }
-            if (nearbyPos.equals(pos.below()) && level.getBlockState(nearbyPos).is(ModTags.HEAT_SOURCES)) {
+            if (nearbyPos.equals(pos.below()) && level.getBlockState(nearbyPos).is(ModTags.Blocks.HEAT_SOURCES)) {
                 return true;
             }
         }

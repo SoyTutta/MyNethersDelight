@@ -41,7 +41,7 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.fml.ModList;
 import vectorwing.farmersdelight.common.registry.ModDamageTypes;
-import vectorwing.farmersdelight.common.tag.ModTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import java.util.function.Supplier;
@@ -167,7 +167,7 @@ public class MagmaCakeBlock extends Block {
                 return secondCake(level, pos, state, player);
             }
 
-            if (heldStack.is(ModTags.KNIVES)) {
+            if (heldStack.is(CommonTags.Items.TOOLS_KNIVES)) {
                 return cutSlice(level, pos, state, player);
             }
 
@@ -184,7 +184,7 @@ public class MagmaCakeBlock extends Block {
             return secondCake(level, pos, state, player);
         }
 
-        if (heldStack.is(ModTags.KNIVES)) {
+        if (heldStack.is(CommonTags.Items.TOOLS_KNIVES)) {
             return cutSlice(level, pos, state, player);
         }
         return this.consumeBite(level, pos, state, player);

@@ -164,7 +164,7 @@ public class ResurgentSoilBlock extends Block {
                 performBonemealIfPossible(aboveBlock, pos.above(), aboveState, level, 1);
             }
 
-            if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL) || aboveBlock instanceof TallFlowerBlock) {
+            if (aboveState.is(ModTags.Blocks.UNAFFECTED_BY_RICH_SOIL) || aboveBlock instanceof TallFlowerBlock) {
                 return;
             }
 

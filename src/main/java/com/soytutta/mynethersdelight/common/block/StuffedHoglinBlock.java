@@ -43,7 +43,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import vectorwing.farmersdelight.common.tag.ModTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.ArrayList;
@@ -222,7 +222,7 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
         int servings = state.getValue(SERVINGS);
         ItemStack heldStack = player.getItemInHand(handIn);
         if (servings > 9) {
-            if (heldStack.is(ModTags.KNIVES)) {
+            if (heldStack.is(CommonTags.Items.TOOLS_KNIVES)) {
                 return this.cutEar(level, pos, state);
             }
 

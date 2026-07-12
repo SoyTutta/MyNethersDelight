@@ -29,7 +29,7 @@ import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.event.ForgeEventFactory;
-import vectorwing.farmersdelight.common.tag.ModTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import java.util.function.Supplier;
@@ -75,7 +75,7 @@ public class BreadLoafBlock extends Block
         ItemStack heldStack = player.getItemInHand(hand);
 
         if (level.isClientSide) {
-            if (heldStack.is(ModTags.KNIVES)) {
+            if (heldStack.is(CommonTags.Items.TOOLS_KNIVES)) {
                 return InteractionResult.SUCCESS;
             }
 
@@ -88,7 +88,7 @@ public class BreadLoafBlock extends Block
             }
         }
 
-        if (heldStack.is(ModTags.KNIVES)) {
+        if (heldStack.is(CommonTags.Items.TOOLS_KNIVES)) {
             return this.cutSlice(level, pos, state, player);
         }
 
