@@ -1,12 +1,12 @@
 package com.soytutta.mynethersdelight.common.entity.ia;
 
-import com.google.common.collect.Lists;
+import com.soytutta.mynethersdelight.common.MNDConfiguration;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
-import com.soytutta.mynethersdelight.common.tag.MyCommonTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -22,10 +22,12 @@ import net.minecraft.world.level.block.state.BlockState;
 import com.soytutta.mynethersdelight.common.block.feasts.MagmaCakeBlock;
 
 import java.util.EnumSet;
-import java.util.List;
 
 public class EatMagmaCakeGoal extends Goal {
     private static final int COOLDOWN_TICKS = 5;
+    private static final int TARGET_SEARCH_COOLDOWN = 20;
+    private static final int CAKE_SEARCH_RADIUS = 10;
+    private static final double PLAYER_SEARCH_RANGE = 6.0;
     private static final int TONGUE_ANIMATION_DURATION = 10;
     private static final SoundEvent TONGUE_SOUND = SoundEvents.FROG_EAT;
 
@@ -35,6 +37,8 @@ public class EatMagmaCakeGoal extends Goal {
     private int eatAnimationTick;
     private int tongueAnimationTick;
     private int cooldownTick;
+    private int targetSearchCooldown;
+    private InteractionHand offeredHand;
 
     public EatMagmaCakeGoal(Frog frog) {
         this.frog = frog;
@@ -44,6 +48,24 @@ public class EatMagmaCakeGoal extends Goal {
 
     @Override
     public boolean canUse() {
+        if (!MNDConfiguration.ENABLE_FROG_MAGMA_CAKE_BEHAVIOR.get()) {
+            return false;
+        }
+
+        if (this.offeredHand != null) {
+            if (isTargetValid()) {
+                return true;
+            }
+            this.targetPos = null;
+            this.offeredHand = null;
+        }
+
+        if (this.targetSearchCooldown > 0) {
+            this.targetSearchCooldown--;
+            return false;
+        }
+
+        this.targetSearchCooldown = TARGET_SEARCH_COOLDOWN + this.frog.getRandom().nextInt(TARGET_SEARCH_COOLDOWN);
         updateTarget();
         return this.targetPos != null;
     }
@@ -59,12 +81,15 @@ public class EatMagmaCakeGoal extends Goal {
         this.eatAnimationTick = 0;
         this.tongueAnimationTick = 0;
         this.cooldownTick = COOLDOWN_TICKS;
+        this.targetSearchCooldown = TARGET_SEARCH_COOLDOWN;
+        this.offeredHand = null;
         this.frog.setPose(Pose.STANDING);
     }
 
     @Override
     public boolean canContinueToUse() {
-        return this.targetPos != null;
+        return MNDConfiguration.ENABLE_FROG_MAGMA_CAKE_BEHAVIOR.get()
+                && (this.tongueAnimationTick > 0 && this.targetPos != null || isTargetValid());
     }
 
     @Override
@@ -74,7 +99,6 @@ public class EatMagmaCakeGoal extends Goal {
             return;
         }
 
-        updateTarget();
         moveToTarget();
 
         if (this.targetPos instanceof BlockPos) {
@@ -93,34 +117,46 @@ public class EatMagmaCakeGoal extends Goal {
     }
 
     private void updateTarget() {
-        List<BlockPos> nearbyCakes = findNearbyCakes();
+        this.offeredHand = null;
         double minDistanceSq = Double.MAX_VALUE;
         Object closestTarget = null;
         BlockPos frogPos = this.frog.blockPosition();
 
-        for (BlockPos cakePos : nearbyCakes) {
+        BlockPos cakePos = findNearbyCake();
+        if (cakePos != null) {
             double distanceSq = frogPos.distSqr(cakePos);
-            if (distanceSq < minDistanceSq) {
-                minDistanceSq = distanceSq;
-                closestTarget = cakePos;
-            }
+            minDistanceSq = distanceSq;
+            closestTarget = cakePos;
         }
 
-        Player player = this.level.getNearestPlayer(frog, 6.0);
-        if (player != null && player.distanceToSqr(this.frog) <= 6.0 * 6.0) {
-            ItemStack mainHand = player.getMainHandItem();
-            ItemStack offHand = player.getOffhandItem();
-            if (mainHand.is(MyCommonTags.FOODS_MAGMA_CUBE)||
-                    offHand.is(MyCommonTags.FOODS_MAGMA_CUBE)) {
-                double playerDistanceSq = frogPos.distSqr(player.blockPosition());
-                if (playerDistanceSq < minDistanceSq) {
-                    minDistanceSq = playerDistanceSq;
-                    closestTarget = player;
-                }
+        Player player = this.level.getNearestPlayer(frog, PLAYER_SEARCH_RANGE);
+        if (player != null && isOfferingMagmaCakeSlice(player)) {
+            double playerDistanceSq = frogPos.distSqr(player.blockPosition());
+            if (playerDistanceSq < minDistanceSq) {
+                closestTarget = player;
             }
         }
 
         this.targetPos = closestTarget;
+    }
+
+    private boolean isTargetValid() {
+        if (this.targetPos instanceof BlockPos pos) {
+            return this.level.getBlockState(pos).getBlock() instanceof MagmaCakeBlock;
+        }
+        if (this.targetPos instanceof Player player) {
+            return player.isAlive()
+                    && player.distanceToSqr(this.frog) <= PLAYER_SEARCH_RANGE * PLAYER_SEARCH_RANGE
+                    && (this.offeredHand == null
+                    ? isOfferingMagmaCakeSlice(player)
+                    : player.getItemInHand(this.offeredHand).is(MNDItems.MAGMA_CAKE_SLICE.get()));
+        }
+        return false;
+    }
+
+    private boolean isOfferingMagmaCakeSlice(Player player) {
+        return player.getMainHandItem().is(MNDItems.MAGMA_CAKE_SLICE.get())
+                || player.getOffhandItem().is(MNDItems.MAGMA_CAKE_SLICE.get());
     }
 
     private void moveToTarget() {
@@ -145,23 +181,7 @@ public class EatMagmaCakeGoal extends Goal {
 
             BlockState state = this.level.getBlockState(pos);
             if (state.getBlock() instanceof MagmaCakeBlock) {
-                for (int i = 0; i < 3; i++) {
-                    MagmaCube magmacube = EntityType.MAGMA_CUBE.create(this.level);
-                    if (magmacube != null) {
-                        magmacube.setSize(1, true);
-                        magmacube.setHealth(1);
-                        magmacube.setInvisible(true);
-                        magmacube.setPos(this.frog.getX(), this.frog.getY(), this.frog.getZ());
-                        this.level.addFreshEntity(magmacube);
-
-                        this.frog.doHurtTarget(magmacube);
-                        if (!magmacube.isAlive()) {
-                            magmacube.remove(Entity.RemovalReason.KILLED);
-                        }
-                    }
-                }
-
-                this.frog.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0));
+                simulateMagmaCubeMeal();
 
                 int bites = state.getValue(MagmaCakeBlock.BITES);
                 if (bites < 6) {
@@ -190,39 +210,19 @@ public class EatMagmaCakeGoal extends Goal {
 
         if (entity instanceof Player) {
             Player player = (Player) entity;
-            ItemStack mainHand = player.getMainHandItem();
-            ItemStack offHand = player.getOffhandItem();
-            if (mainHand.getItem() == MNDItems.MAGMA_CAKE_SLICE.get()
-                    || offHand.getItem() == MNDItems.MAGMA_CAKE_SLICE.get()) {
+            ItemStack offeredSlice = getOfferedSlice(player);
+            if (offeredSlice.is(MNDItems.MAGMA_CAKE_SLICE.get())) {
                 this.eatAnimationTick++;
                 if (this.eatAnimationTick == 1) {
                     this.level.playSound(null, this.frog, TONGUE_SOUND, SoundSource.NEUTRAL, 2.0F, 1.0F);
                     this.frog.setPose(Pose.USING_TONGUE);
                     this.frog.getLookControl().setLookAt(entity.getX(), entity.getY(), entity.getZ());
 
-                    if (mainHand.getItem() == MNDItems.MAGMA_CAKE_SLICE.get()) {
-                        mainHand.shrink(1);
-                    } else if (offHand.getItem() == MNDItems.MAGMA_CAKE_SLICE.get()) {
-                        offHand.shrink(1);
+                    if (!player.isCreative()) {
+                        offeredSlice.shrink(1);
                     }
 
-                    for (int i = 0; i < 3; i++) {
-                        MagmaCube magmacube = EntityType.MAGMA_CUBE.create(this.level);
-                        if (magmacube != null) {
-                            magmacube.setSize(1, true);
-                            magmacube.setHealth(1);
-                            magmacube.setInvisible(true);
-                            magmacube.setPos(this.frog.getX(), this.frog.getY(), this.frog.getZ());
-                            this.level.addFreshEntity(magmacube);
-
-                            this.frog.doHurtTarget(magmacube);
-                            if (!magmacube.isAlive()) {
-                                magmacube.remove(Entity.RemovalReason.KILLED);
-                            }
-                        }
-                    }
-
-                    this.frog.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0));
+                    simulateMagmaCubeMeal();
                 }
             }
         }
@@ -234,20 +234,59 @@ public class EatMagmaCakeGoal extends Goal {
         }
     }
 
-    private List<BlockPos> findNearbyCakes() {
-        List<BlockPos> cakePositions = Lists.newArrayList();
-        BlockPos frogPos = this.frog.blockPosition();
-        int searchRadius = 10;
-        for (int x = -searchRadius; x <= searchRadius; ++x) {
-            for (int y = -searchRadius; y <= searchRadius; ++y) {
-                for (int z = -searchRadius; z <= searchRadius; ++z) {
-                    BlockPos pos = frogPos.offset(x, y, z);
-                    if (this.level.getBlockState(pos).getBlock() instanceof MagmaCakeBlock) {
-                        cakePositions.add(pos);
-                    }
+    private BlockPos findNearbyCake() {
+        return BlockPos.findClosestMatch(this.frog.blockPosition(), CAKE_SEARCH_RADIUS, CAKE_SEARCH_RADIUS,
+                        pos -> this.level.getBlockState(pos).getBlock() instanceof MagmaCakeBlock)
+                .map(BlockPos::immutable)
+                .orElse(null);
+    }
+
+    public boolean requestFeeding(Player player, InteractionHand hand) {
+        if (!MNDConfiguration.ENABLE_FROG_MAGMA_CAKE_BEHAVIOR.get()
+                || !player.getItemInHand(hand).is(MNDItems.MAGMA_CAKE_SLICE.get())) {
+            return false;
+        }
+
+        this.targetPos = player;
+        this.offeredHand = hand;
+        this.eatAnimationTick = 0;
+        this.tongueAnimationTick = 0;
+        this.cooldownTick = 0;
+        this.targetSearchCooldown = 0;
+        return true;
+    }
+
+    private ItemStack getOfferedSlice(Player player) {
+        if (this.offeredHand != null) {
+            return player.getItemInHand(this.offeredHand);
+        }
+        return player.getMainHandItem().is(MNDItems.MAGMA_CAKE_SLICE.get())
+                ? player.getMainHandItem()
+                : player.getOffhandItem();
+    }
+
+    private void simulateMagmaCubeMeal() {
+        for (int i = 0; i < 3; i++) {
+            MagmaCube magmaCube = EntityType.MAGMA_CUBE.create(this.level);
+            if (magmaCube != null) {
+                magmaCube.setSize(1, true);
+                magmaCube.setHealth(1);
+                magmaCube.setInvisible(true);
+                magmaCube.setPos(this.frog.getX(), this.frog.getY(), this.frog.getZ());
+                if (!this.level.addFreshEntity(magmaCube)) {
+                    magmaCube.discard();
+                    continue;
+                }
+
+                this.frog.doHurtTarget(magmaCube);
+                if (magmaCube.isAlive()) {
+                    magmaCube.discard();
+                } else {
+                    magmaCube.remove(Entity.RemovalReason.KILLED);
                 }
             }
         }
-        return cakePositions;
+
+        this.frog.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, 200, 0));
     }
 }

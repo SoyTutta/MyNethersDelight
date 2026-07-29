@@ -69,8 +69,8 @@ public class StriderloafBlock extends FeastBlock {
 
     @Override
     public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-        if (worldIn.getBlockState(fromPos).getFluidState().is(FluidTags.LAVA)) {
-            randomTick(state, (ServerLevel) worldIn, pos, null);
+        if (worldIn instanceof ServerLevel serverLevel && worldIn.getBlockState(fromPos).getFluidState().is(FluidTags.LAVA)) {
+            randomTick(state, serverLevel, pos, serverLevel.getRandom());
         }
     }
 

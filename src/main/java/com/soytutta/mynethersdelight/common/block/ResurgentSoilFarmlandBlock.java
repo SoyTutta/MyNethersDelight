@@ -5,19 +5,17 @@
 
 package com.soytutta.mynethersdelight.common.block;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.function.Predicate;
 
+import com.soytutta.mynethersdelight.common.MNDConfiguration;
 import com.soytutta.mynethersdelight.common.block.feasts.MagmaCakeBlock;
+import com.soytutta.mynethersdelight.common.data.PlantRuleEngine;
+import com.soytutta.mynethersdelight.common.data.PlantRuleSet;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvents;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -28,31 +26,27 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.util.TriState;
 import vectorwing.farmersdelight.common.Configuration;
 import vectorwing.farmersdelight.common.block.TomatoBlock;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
-import vectorwing.farmersdelight.common.tag.ModTags;
-import vectorwing.farmersdelight.common.utility.MathUtils;
 
 public class ResurgentSoilFarmlandBlock extends FarmBlock {
+    private static final Predicate<BlockState> TOMATO_CONTINUATION =
+            state -> state.getBlock() instanceof TomatoBlock;
 
     public ResurgentSoilFarmlandBlock(BlockBehaviour.Properties properties) {
         super(properties);
     }
 
     private static boolean hasFireOrLava(LevelReader level, BlockPos pos) {
-        Iterator<BlockPos> var2 = BlockPos.betweenClosed(pos.offset(-7, -7, -7), pos.offset(7, 7, 7)).iterator();
+        int radius = MNDConfiguration.RESURGENT_FARMLAND_HEAT_SEARCH_RADIUS.get();
+        if (radius == 0) {
+            return false;
+        }
 
-        BlockPos nearbyPos;
-        do {
-            if (!var2.hasNext()) {
-                return false;
-            }
-            nearbyPos = var2.next();
+        int verticalRadius = radius / 2;
+        for (BlockPos nearbyPos : BlockPos.betweenClosed(pos.offset(-radius, -verticalRadius, -radius), pos.offset(radius, verticalRadius, radius))) {
             BlockState state = level.getBlockState(nearbyPos);
 
             if (state.getFluidState().is(MNDTags.LETEOS_BOOSTER)) {
@@ -64,7 +58,7 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
             }
 
             if (state.is(MNDTags.LETIOS_FLAMES)) {
-                if (!state.hasProperty(BlockStateProperties.LIT) || (state.hasProperty(BlockStateProperties.LIT) && state.getValue(BlockStateProperties.LIT))) {
+                if (!state.hasProperty(BlockStateProperties.LIT) || state.getValue(BlockStateProperties.LIT)) {
                     int lightLevel = state.getLightEmission(level, nearbyPos);
                     int distance = pos.distManhattan(nearbyPos);
                     if (state.getBlock() instanceof TorchBlock || state.getBlock() instanceof WallTorchBlock) {
@@ -80,7 +74,8 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
                     }
                 }
             }
-        } while(true);
+        }
+        return false;
     }
 
     public static void turnToRichSoil(BlockState state, Level level, BlockPos pos) {
@@ -94,6 +89,7 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
 
     @Override
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, float fallDistance) {
+        entity.causeFallDamage(fallDistance, 1.0F, entity.damageSources().fall());
     }
 
     @Override
@@ -122,7 +118,32 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
         if (level.isClientSide) return;
 
         int moisture = state.getValue(MOISTURE);
+        boolean hasHeat = hasFireOrLava(level, pos) && !level.isRainingAt(pos.above());
 
+        BlockPos initialAbovePos = pos.above();
+        PlantRuleEngine.applySoilTransformRules(level, initialAbovePos, level.getBlockState(initialAbovePos),
+                PlantRuleSet.SoilType.RESURGENT_FARMLAND, random);
+
+        if (!hasHeat) {
+            if (moisture > 0) {
+                level.setBlock(pos, state.setValue(MOISTURE, moisture - 1), 2);
+            }
+        } else if (moisture < 7) {
+            level.setBlock(pos, state.setValue(MOISTURE, 7), 2);
+        }
+
+        if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
+            return;
+        }
+
+        int attempts = PlantRuleEngine.getTickAttempts(random, MNDConfiguration.RESURGENT_SOIL_TICK_MULTIPLIER.get());
+        boolean canRunMoistGrowth = hasHeat && moisture == 7;
+        for (int i = 0; i < attempts; i++) {
+            runGrowthAttempt(level, pos, random, canRunMoistGrowth);
+        }
+    }
+
+    private void runGrowthAttempt(ServerLevel level, BlockPos pos, RandomSource random, boolean canRunMoistGrowth) {
         BlockPos abovePos = pos.above();
         BlockState aboveState = level.getBlockState(abovePos);
         Block aboveBlock = aboveState.getBlock();
@@ -131,64 +152,43 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
         BlockState belowState = level.getBlockState(belowPos);
         Block belowBlock = belowState.getBlock();
 
-        if (!hasFireOrLava(level, pos) || level.isRainingAt(pos.above())) {
-            if (moisture > 0) {
-                level.setBlock(pos, state.setValue(MOISTURE, moisture - 1), 2);
-            }
-        } else if (moisture < 7) {
-                level.setBlock(pos, state.setValue(MOISTURE, 7), 2);
-        } else if (moisture == 7) {
-            if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
-                return;
-            }
+        double ResurgentSoilBoostChance = PlantRuleEngine.getResurgentSoilBoostChance();
 
-            double ResurgentSoilBoostChance = Configuration.RICH_SOIL_BOOST_CHANCE.get() * 1.05F;
-
+        if (canRunMoistGrowth) {
             if (aboveBlock instanceof NetherWartBlock) {
                 int age = aboveState.getValue(NetherWartBlock.AGE);
                 if (age < NetherWartBlock.MAX_AGE) {
-                    aboveState = aboveState.setValue(NetherWartBlock.AGE, age + 1);
-                    level.setBlockAndUpdate(abovePos, aboveState);
+                    level.setBlockAndUpdate(abovePos, aboveState.setValue(NetherWartBlock.AGE, age + 1));
                     return;
                 }
             }
 
-            if (!aboveState.is(MNDTags.NOT_PROPAGATE_PLANT)) {
+            boolean handledAbove = PlantRuleEngine.applyPropagationRules(level, abovePos, aboveState,
+                    PlantRuleSet.RuleDirection.ABOVE, PlantRuleSet.SoilType.RESURGENT_FARMLAND, random,
+                    propagatedState -> propagateAboveIfPossible(propagatedState, abovePos, level),
+                    () -> performBonemealIfPossible(abovePos, level, 1, Direction.UP));
+
+            if (!handledAbove && !aboveState.is(MNDTags.NOT_PROPAGATE_PLANT)) {
                 if (aboveState.is(MNDTags.ABOVE_PROPAGATE_PLANT)
-                        && MathUtils.RAND.nextFloat() <= (ResurgentSoilBoostChance / 3)) {
+                        && PlantRuleEngine.rollPropagation(random, ResurgentSoilBoostChance / 3)) {
                     propagateAboveIfPossible(aboveBlock, abovePos, level);
                 }
 
-                if (aboveBlock instanceof TomatoBlock) {
-                    propagateAboveIfPossible(ModBlocks.BUDDING_TOMATO_CROP.get(), abovePos, level);
-                }
-
-                if (aboveBlock instanceof NetherWartBlock) {
-                    int age = aboveState.getValue(NetherWartBlock.AGE);
-                    if (age < 3) {
-                        return;
-                    } else if (age == 3) {
-                        if (level.random.nextInt(8) == 0){
-                            propagateAboveIfPossible(aboveBlock, abovePos, level);
-                        }
-                    }
-                }
-
-                if ((aboveBlock instanceof DoublePlantBlock)
-                        && MathUtils.RAND.nextFloat() <= (ResurgentSoilBoostChance)) {
+                if (aboveBlock instanceof DoublePlantBlock
+                        && PlantRuleEngine.rollPropagation(random, ResurgentSoilBoostChance)) {
                     propagateAboveIfPossible(aboveBlock, abovePos, level);
                 }
             }
 
             int BonemealChance = 1;
-            if (MathUtils.RAND.nextFloat() <= 0.2f) {
+            if (random.nextFloat() <= 0.2f) {
                 BonemealChance = 2;
-                if (MathUtils.RAND.nextFloat() <= 0.01f) {
+                if (random.nextFloat() <= 0.01f) {
                     BonemealChance = 3;
                 }
             }
 
-            for (int i = 0; i < MathUtils.RAND.nextInt(BonemealChance) + 1; i++) {
+            for (int i = 0; i < random.nextInt(BonemealChance) + 1; i++) {
                 if (!aboveState.isAir()) {
                     performBonemealIfPossible(abovePos, level, 1, Direction.UP);
                 }
@@ -198,101 +198,54 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
             }
         }
 
-        if (Configuration.RICH_SOIL_BOOST_CHANCE.get() == 0.0) {
-            return;
-        }
+        boolean handledBelow = PlantRuleEngine.applyPropagationRules(level, belowPos, belowState,
+                PlantRuleSet.RuleDirection.BELOW, PlantRuleSet.SoilType.RESURGENT_FARMLAND, random,
+                propagatedState -> propagateBelowIfPossible(propagatedState, belowPos, level),
+                () -> performBonemealIfPossible(belowPos, level, 1, Direction.DOWN));
 
-        double ResurgentSoilBoostChance = Configuration.RICH_SOIL_BOOST_CHANCE.get() * 1.05F;
-
-        if (!belowState.is(MNDTags.NOT_PROPAGATE_PLANT)) {
-            if (belowState.is(MNDTags.BELOW_PROPAGATE_PLANT)
-                    && MathUtils.RAND.nextFloat() <= (ResurgentSoilBoostChance * 0.8F)) {
-                propagateBelowIfPossible(belowBlock, belowPos, level);
-            }
+        if (!handledBelow && !belowState.is(MNDTags.NOT_PROPAGATE_PLANT)
+                && belowState.is(MNDTags.BELOW_PROPAGATE_PLANT)
+                && PlantRuleEngine.rollPropagation(random, ResurgentSoilBoostChance * 0.8F)) {
+            propagateBelowIfPossible(belowBlock, belowPos, level);
         }
 
         if ((belowBlock instanceof GrowingPlantHeadBlock || belowBlock instanceof GrowingPlantBodyBlock)
-                && MathUtils.RAND.nextFloat() <= (ResurgentSoilBoostChance * 0.2F)) {
+                && random.nextFloat() <= (ResurgentSoilBoostChance * 0.2F)) {
             performBonemealIfPossible(belowPos, level, 1, Direction.DOWN);
         }
 
         if ((aboveBlock instanceof GrowingPlantHeadBlock || aboveBlock instanceof GrowingPlantBodyBlock)
-                && MathUtils.RAND.nextFloat() <= (ResurgentSoilBoostChance * 0.2F)) {
+                && random.nextFloat() <= (ResurgentSoilBoostChance * 0.2F)) {
             performBonemealIfPossible(abovePos, level, 1, Direction.UP);
         }
     }
 
     private void performBonemealIfPossible(BlockPos position, ServerLevel level, int distance, Direction direction) {
-        if (distance > 10) return;
-
-        BlockState state = level.getBlockState(position);
-        Block block = state.getBlock();
-
-        if (state.isAir() || state.is(ModTags.Blocks.UNAFFECTED_BY_RICH_SOIL) || block instanceof TallFlowerBlock) {
-            return;
-        }
-
-        if (block instanceof BonemealableBlock growable && MathUtils.RAND.nextFloat() <= Configuration.RICH_SOIL_BOOST_CHANCE.get() / distance) {
-            if (growable.isValidBonemealTarget(level, position, state) && CommonHooks.canCropGrow(level, position, state, true)) {
-                growable.performBonemeal(level, level.random, position, state);
-                CommonHooks.fireCropGrowPost(level, position, state);
-
-                for (int i = 0; i < 3; i++) {
-                    double d0 = (double) position.getX() + level.getRandom().nextDouble();
-                    double d1 = (double) position.getY() + level.getRandom().nextDouble();
-                    double d2 = (double) position.getZ() + level.getRandom().nextDouble();
-                    level.sendParticles(ParticleTypes.SOUL, d0, d1, d2, 1, 0.0D, 0.0D, 0.0D, 0.0D);
-                    level.playSound(null, position, SoundEvents.SOUL_ESCAPE.value(), SoundSource.BLOCKS, 1.0F, 1.0F);
-                }
-            }
-        }
-
-        BlockPos nextPos = position.relative(direction);
-        BlockState nextState = level.getBlockState(nextPos);
-        if (nextState.is(block) || nextState.getBlock() instanceof GrowingPlantBlock || nextState.getBlock() instanceof GrowingPlantHeadBlock || nextState.getBlock() instanceof TomatoBlock) {
-            performBonemealIfPossible(nextPos, level, distance + 1, direction);
-        }
+        ResurgentSoilBlock.boostConnectedPlant(position, level, distance, direction,
+                MNDConfiguration.RESURGENT_SOIL_GROWTH_RANGE.get(), TOMATO_CONTINUATION);
     }
 
     private void propagateAboveIfPossible(Block block, BlockPos position, ServerLevel level) {
-        List<BlockPos> validPositions = new ArrayList<>();
-        for (int x = -1; x <= 1; x++) {
-            for (int y = -1; y <= 1; y++) {
-                for (int z = -1; z <= 1; z++) {
-                    BlockPos newPos = position.offset(x, y, z);
-                    BlockState newState = level.getBlockState(newPos);
-                    if (canAboveBlockSurvive(block, newState, level, newPos)) {
-                        validPositions.add(newPos);
-                    }
-                }
-            }
-        }
-
-        if (!validPositions.isEmpty()) {
-            BlockPos plantPos = validPositions.get(level.random.nextInt(validPositions.size()));
-            BlockState targetState = level.getBlockState(plantPos);
-
-            boolean canPropagate = (block instanceof LiquidBlockContainer && targetState.getBlock() == Blocks.WATER)
-                    || (!(block instanceof LiquidBlockContainer) && targetState.getBlock() == Blocks.AIR)
-                    || ((block instanceof SimpleWaterloggedBlock) && (targetState.getBlock() == Blocks.AIR || targetState.getBlock() == Blocks.WATER));
-
-            if (canPropagate) {
-                placeBlock(block, level, plantPos);
-            }
-        }
+        propagateAboveIfPossible(block.defaultBlockState(), position, level);
     }
 
-    private boolean canAboveBlockSurvive(Block block, BlockState newState, ServerLevel level, BlockPos newPos) {
+    private void propagateAboveIfPossible(BlockState propagatedState, BlockPos position, ServerLevel level) {
+        Block block = propagatedState.getBlock();
+        ResurgentSoilBlock.tryPropagatingPlant(propagatedState, position, level,
+                newPos -> canAboveBlockSurvive(block, level, newPos));
+    }
+
+    private static boolean canAboveBlockSurvive(Block block, ServerLevel level, BlockPos newPos) {
         BlockState blockBelowState = level.getBlockState(newPos.below());
         if (block instanceof DoublePlantBlock &&
                 level.getBlockState(newPos.above()).getBlock() == Blocks.AIR) {
             return blockBelowState.getBlock() == ModBlocks.RICH_SOIL_FARMLAND.get()
                     || blockBelowState.getBlock() == MNDBlocks.RESURGENT_SOIL_FARMLAND.get();
-        } else  if (block instanceof NetherWartBlock) {
+        } else if (block instanceof NetherWartBlock) {
             return blockBelowState.getBlock() == Blocks.SOUL_SAND
                     || blockBelowState.getBlock() == MNDBlocks.RESURGENT_SOIL.get()
                     || blockBelowState.getBlock() == MNDBlocks.RESURGENT_SOIL_FARMLAND.get();
-        } else  if (!(block instanceof DoublePlantBlock)) {
+        } else if (!(block instanceof DoublePlantBlock)) {
             return blockBelowState.getBlock() == ModBlocks.RICH_SOIL_FARMLAND.get()
                     || blockBelowState.getBlock() == MNDBlocks.RESURGENT_SOIL_FARMLAND.get();
         }
@@ -300,64 +253,12 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
     }
 
     private void propagateBelowIfPossible(Block block, BlockPos position, ServerLevel level) {
-        List<BlockPos> validPositions = new ArrayList<>();
-        for (int x = -1; x <= 1; x++) {
-            for (int y = -1; y <= 1; y++) {
-                for (int z = -1; z <= 1; z++) {
-                    BlockPos newPos = position.offset(x, y, z);
-
-                    if (canBelowBlockSurvive(level, newPos)) {
-                        validPositions.add(newPos);
-                    }
-                }
-            }
-        }
-
-        if (!validPositions.isEmpty()) {
-            BlockPos plantPos = validPositions.get(level.random.nextInt(validPositions.size()));
-            BlockState targetState = level.getBlockState(plantPos);
-
-            boolean canPropagate = (block instanceof LiquidBlockContainer && targetState.getBlock() == Blocks.WATER)
-                    || (!(block instanceof LiquidBlockContainer) && targetState.getBlock() == Blocks.AIR)
-                    || ((block instanceof SimpleWaterloggedBlock) && (targetState.getBlock() == Blocks.AIR || targetState.getBlock() == Blocks.WATER));
-
-            if (canPropagate) {
-                placeBlock(block, level, plantPos);
-            }
-        }
+        propagateBelowIfPossible(block.defaultBlockState(), position, level);
     }
 
-    private boolean canBelowBlockSurvive(ServerLevel level, BlockPos newPos) {
-        BlockState blockAboveState = level.getBlockState(newPos.above());
-        return blockAboveState.getBlock() == ModBlocks.RICH_SOIL.get()
-                || blockAboveState.getBlock() == MNDBlocks.RESURGENT_SOIL.get()
-                || blockAboveState.getBlock() ==ModBlocks.RICH_SOIL_FARMLAND.get()
-                || blockAboveState.getBlock() == MNDBlocks.RESURGENT_SOIL_FARMLAND.get();
-    }
-
-    private void placeBlock(Block block, ServerLevel level, BlockPos pos) {
-        BlockState state = block.defaultBlockState();
-        if (block instanceof SimpleWaterloggedBlock) {
-            FluidState fluidState = level.getFluidState(pos);
-            if (fluidState.getType() == Fluids.WATER) {
-                state = state.setValue(BlockStateProperties.WATERLOGGED, true);
-            } else {
-                state = state.setValue(BlockStateProperties.WATERLOGGED, false);
-            }
-        }
-        if (block instanceof DoublePlantBlock) {
-            DoublePlantBlock.placeAt(level, state, pos, 3);
-        } else {
-            level.setBlockAndUpdate(pos, state);
-        }
-
-        for (int i = 0; i < 3; i++) {
-            double d0 = (double) pos.getX() + level.getRandom().nextDouble();
-            double d1 = (double) pos.getY() + level.getRandom().nextDouble();
-            double d2 = (double) pos.getZ() + level.getRandom().nextDouble();
-            level.sendParticles(ParticleTypes.SOUL, d0, d1, d2, 1, 0.0D, 0.0D, 0.0D, 0.0D);
-            level.playSound(null, pos, SoundEvents.SOUL_ESCAPE.value(), SoundSource.BLOCKS, 1.0F, 1.0F);
-        }
+    private void propagateBelowIfPossible(BlockState propagatedState, BlockPos position, ServerLevel level) {
+        ResurgentSoilBlock.tryPropagatingPlant(propagatedState, position, level,
+                newPos -> ResurgentSoilBlock.canBelowBlockSurvive(level, newPos));
     }
 
     @Override

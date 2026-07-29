@@ -85,7 +85,6 @@ public class MagmaCakeBlock extends Block {
             Block.box(1.0, 0.0, 1.0, 3.0, 8.0, 15.0)
          }
     };
-    
     protected static final VoxelShape[][] SECOND_SHAPE_BY_BITE = new VoxelShape[][]{
          {
             Shapes.join(Block.box(1, 0, 1, 15, 8, 15), Block.box(2, 8, 2, 14, 16, 14), BooleanOp.OR),
@@ -121,7 +120,6 @@ public class MagmaCakeBlock extends Block {
             Shapes.join(Block.box(1, 0, 1, 15, 8, 15), Block.box(2, 8, 2, 3, 16, 14), BooleanOp.OR)
          }
     };
-    
     public final Supplier<Item> pieSlice;
 
     public MagmaCakeBlock(Properties properties, Supplier<Item> pieSlice) {
@@ -164,7 +162,7 @@ public class MagmaCakeBlock extends Block {
     @Override
     public ItemInteractionResult useItemOn(ItemStack heldStack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hit) {
         if (heldStack.is(MNDItems.MAGMA_CAKE.get())) {
-            return secondCake(level, pos, state, player);
+            return secondCake(level, pos, state, player, heldStack);
         }
 
         if (ItemUtils.isKnife(heldStack)) {
@@ -189,10 +187,13 @@ public class MagmaCakeBlock extends Block {
     }
 
     protected ItemInteractionResult secondCake(Level level, BlockPos pos, BlockState state, Player player) {
+        return secondCake(level, pos, state, player, player.getMainHandItem());
+    }
+
+    protected ItemInteractionResult secondCake(Level level, BlockPos pos, BlockState state, Player player, ItemStack heldStack) {
         Direction direction = player.getDirection().getOpposite();
-        ItemStack heldStack = player.getMainHandItem();
         if (state.getValue(BITES) == 0 && !state.getValue(SECOND_CAKE)) {
-            if (!player.isCreative()) {
+            if (!player.getAbilities().instabuild) {
                 heldStack.shrink(1);
             }
             level.playSound(null, pos, SoundEvents.MAGMA_CUBE_SQUISH_SMALL, SoundSource.PLAYERS, 0.8F, 0.8F);

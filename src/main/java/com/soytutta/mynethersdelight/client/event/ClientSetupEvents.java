@@ -17,27 +17,18 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.neoforged.api.distmarker.Dist;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import vectorwing.farmersdelight.client.renderer.DefaultStoveRenderer;
 
-@EventBusSubscriber(
-        modid = "mynethersdelight",
-        value = {Dist.CLIENT}
-)
 public class ClientSetupEvents {
 
-    @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(MNDEntityTypes.STRIDER_ROCK.get(), ThrownItemRenderer::new);
         event.registerBlockEntityRenderer(MNDBlockEntityTypes.NETHER_STOVE.get(), DefaultStoveRenderer::new);
         event.registerBlockEntityRenderer(MNDBlockEntityTypes.BLAZIER.get(), BlazeFireRenderer::new);
     }
 
-    @SubscribeEvent
     public static void init(final FMLClientSetupEvent event) {
         BlockEntityRenderers.register(MNDBlockEntityTypes.MND_SIGN.get(), SignRenderer::new);
         BlockEntityRenderers.register(MNDBlockEntityTypes.MND_HSIGN.get(), HangingSignRenderer::new);

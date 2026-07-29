@@ -8,20 +8,15 @@ package com.soytutta.mynethersdelight.core.data.recipes;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.ItemAbilities;
-import net.neoforged.neoforge.common.ItemAbility;
-import net.neoforged.neoforge.common.crafting.CompoundIngredient;
 import vectorwing.farmersdelight.common.crafting.ingredient.ItemAbilityIngredient;
-import vectorwing.farmersdelight.common.item.KnifeItem;
 import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
+import static vectorwing.farmersdelight.data.recipe.CuttingRecipes.AXES;
 import static vectorwing.farmersdelight.data.recipe.CuttingRecipes.AXES_STRIP;
 import static vectorwing.farmersdelight.data.recipe.CuttingRecipes.KNIVES;
 
@@ -89,7 +84,7 @@ public class MNDCuttingRecipes {
     }
 
     private static void salvagingWoodenFurniture(RecipeOutput output) {
-        salvagePlankFromFurniture(output, MNDItems.POWDERY_PLANKS.get(), MNDItems.POWDERY_DOOR.get(), MNDItems.POWDERY_TRAPDOOR.get(),MNDItems.POWDERY_SIGN.get(), MNDItems.POWDERY_HANGING_SIGN.get());
+        salvagePlankFromFurniture(output, MNDItems.POWDERY_PLANKS.get(), MNDItems.POWDERY_DOOR.get(), MNDItems.POWDERY_TRAPDOOR.get(), MNDItems.POWDERY_SIGN.get(), MNDItems.POWDERY_HANGING_SIGN.get(), MNDItems.POWDERY_FENCE.get(), MNDItems.POWDERY_FENCE_GATE.get(), MNDItems.POWDERY_PRESSURE_PLATE.get(), MNDItems.POWDERY_BUTTON.get(), MNDItems.POWDERY_CABINET.get());
     }
 
     private static void cuttingVegetables(RecipeOutput output) {
@@ -144,10 +139,8 @@ public class MNDCuttingRecipes {
                 .saveToFD(output);
     }
 
-    private static void salvagePlankFromFurniture(RecipeOutput output, ItemLike plank, ItemLike door, ItemLike trapdoor, ItemLike sign, ItemLike hangingSign) {
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(door), new ItemAbilityIngredient(ItemAbilities.AXE_DIG).toVanilla(), plank).saveToFD(output);
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(trapdoor), new ItemAbilityIngredient(ItemAbilities.AXE_DIG).toVanilla(), plank).saveToFD(output);
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(sign), new ItemAbilityIngredient(ItemAbilities.AXE_DIG).toVanilla(), plank).saveToFD(output);
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(hangingSign), new ItemAbilityIngredient(ItemAbilities.AXE_DIG).toVanilla(), plank).saveToFD(output);
+    private static void salvagePlankFromFurniture(RecipeOutput output, ItemLike plank, ItemLike... furniture) {
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(furniture), AXES, plank, 1, 0.75F)
+                .build(output, "mynethersdelight:salvaging/powdery_furniture");
     }
 }

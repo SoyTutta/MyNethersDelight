@@ -6,8 +6,8 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 public class CompatibilityTags {
-    public static final TagKey<Item> HORROR_LASAGNA_MEATS = externalItemTag("brewinandchewin", "horror_lasagna_meats");
-    public static final TagKey<Item> RAW_MEATS = externalItemTag("brewinandchewin", "horror_lasagna_meats");
+    public static final TagKey<Item> HORROR_LASAGNA_MEATS = externalItemTag("brewinandchewin", "foods/horror_meat");
+    public static final TagKey<Item> RAW_MEATS = externalItemTag("brewinandchewin", "foods/jerky_meat");
 
     public CompatibilityTags() {
     }

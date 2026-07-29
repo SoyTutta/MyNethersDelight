@@ -1,9 +1,12 @@
 package com.soytutta.mynethersdelight.common.events;
 
+import com.soytutta.mynethersdelight.common.MNDConfiguration;
+import com.soytutta.mynethersdelight.common.entity.ia.EatMagmaCakeGoal;
 import com.soytutta.mynethersdelight.common.enchantment.PoachingData;
 import com.soytutta.mynethersdelight.common.enchantment.PoachingFailureCase;
 import com.soytutta.mynethersdelight.common.enchantment.PoachingFailureRegistry;
 import com.soytutta.mynethersdelight.common.registry.MNDEnchantmentComponents;
+import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import com.soytutta.mynethersdelight.common.utility.EntityDropChanceAccessor;
 import net.minecraft.core.particles.ParticleTypes;
@@ -14,10 +17,12 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Difficulty;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.*;
+import net.minecraft.world.entity.animal.frog.Frog;
 import net.minecraft.world.entity.animal.horse.AbstractHorse;
 import net.minecraft.world.entity.monster.*;
 import net.minecraft.world.entity.monster.piglin.PiglinBrute;
@@ -25,10 +30,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.Tiers;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDeathEvent;
 import net.neoforged.neoforge.event.entity.living.LivingDropsEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ModTags;
 
@@ -36,10 +40,28 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-@EventBusSubscriber(bus = EventBusSubscriber.Bus.GAME)
 public class CommonEvent {
 
-    @SubscribeEvent
+    public static void onFrogMagmaCakeInteraction(PlayerInteractEvent.EntityInteract event) {
+        if (!MNDConfiguration.ENABLE_FROG_MAGMA_CAKE_BEHAVIOR.get()
+                || !event.getItemStack().is(MNDItems.MAGMA_CAKE_SLICE.get())
+                || !(event.getTarget() instanceof Frog frog)
+                || !frog.isAlive()) {
+            return;
+        }
+
+        boolean accepted = frog.goalSelector.getAvailableGoals().stream()
+                .map(wrappedGoal -> wrappedGoal.getGoal())
+                .filter(EatMagmaCakeGoal.class::isInstance)
+                .map(EatMagmaCakeGoal.class::cast)
+                .anyMatch(goal -> goal.requestFeeding(event.getEntity(), event.getHand()));
+
+        if (accepted) {
+            event.setCancellationResult(InteractionResult.SUCCESS);
+            event.setCanceled(true);
+        }
+    }
+
     public static void livingDie(LivingDeathEvent event) {
         if (event.getEntity().level().isClientSide || !(event.getEntity() instanceof Mob mob) || event.getSource() == null || !(event.getSource().getDirectEntity() instanceof LivingEntity directSource)) {
             return;
@@ -167,7 +189,6 @@ public class CommonEvent {
         }
     }
 
-    @SubscribeEvent
     public static void onMobDrop(LivingDropsEvent event) {
         if (event.getEntity() instanceof Mob mob && mob.getTags().contains("prevent_drops")) {
             event.getDrops().clear();

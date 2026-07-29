@@ -8,6 +8,9 @@ package com.soytutta.mynethersdelight.integration.jei;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.google.common.collect.ImmutableList;
+import com.soytutta.mynethersdelight.common.MNDConfiguration;
+import com.soytutta.mynethersdelight.common.block.BlazierBlock;
+import com.soytutta.mynethersdelight.common.crafting.BlazierTemperatureRecipe;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import com.soytutta.mynethersdelight.common.utility.MNDTextUtils;
 import com.soytutta.mynethersdelight.integration.jei.category.ForgotingRecipeCategory;
@@ -16,9 +19,12 @@ import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.constants.VanillaTypes;
+import mezz.jei.api.registration.IExtraIngredientRegistration;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import mezz.jei.api.registration.ISubtypeRegistration;
+import mezz.jei.api.registration.IVanillaCategoryExtensionRegistration;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -39,6 +45,26 @@ public class JEIPlugin implements IModPlugin {
         registry.addRecipeCategories(new ForgotingRecipeCategory(registry.getJeiHelpers().getGuiHelper()));
     }
 
+    public void registerItemSubtypes(ISubtypeRegistration registration) {
+        registration.registerSubtypeInterpreter(
+                MNDItems.BLAZIER.get(), BlazierSubtypeInterpreter.INSTANCE);
+    }
+
+    public void registerExtraIngredients(IExtraIngredientRegistration registration) {
+        if (MNDConfiguration.ENABLE_BLAZIER.get()) {
+            registration.addExtraItemStacks(List.of(
+                    BlazierTemperatureRecipeExtension.createBlazierStack(
+                            BlazierBlock.HeatLevel.BAKING, true),
+                    BlazierTemperatureRecipeExtension.createBlazierStack(
+                            BlazierBlock.HeatLevel.CAMPFIRE, true),
+                    BlazierTemperatureRecipeExtension.createBlazierStack(
+                            BlazierBlock.HeatLevel.SMOKING, true),
+                    BlazierTemperatureRecipeExtension.createBlazierStack(
+                            BlazierBlock.HeatLevel.SMOKING, false)
+            ));
+        }
+    }
+
     public void registerRecipes(IRecipeRegistration registration) {
         new FDRecipes();
         registration.addRecipes(MNDRecipeTypes.FORGOTING, ImmutableList.of(new ForgotingDummy()));
@@ -54,11 +80,23 @@ public class JEIPlugin implements IModPlugin {
         registration.addRecipeCatalyst(new ItemStack(MNDItems.NETHER_STOVE.get()), RecipeTypes.CAMPFIRE_COOKING);
         registration.addRecipeCatalyst(new ItemStack(MNDItems.SOUL_NETHER_STOVE.get()), RecipeTypes.CAMPFIRE_COOKING);
         registration.addRecipeCatalyst(new ItemStack(MNDItems.LETIOS_COMPOST.get()), MNDRecipeTypes.FORGOTING);
-        registration.addRecipeCatalyst(new ItemStack(MNDItems.BLAZIER.get()), RecipeTypes.SMOKING);
-        registration.addRecipeCatalyst(new ItemStack(MNDItems.BLAZIER.get()), RecipeTypes.SMELTING);
-        registration.addRecipeCatalyst(new ItemStack(MNDItems.BLAZIER.get()), RecipeTypes.CAMPFIRE_COOKING);
-        registration.addRecipeCatalyst(new ItemStack(MNDItems.BLAZIER.get()), RecipeTypes.BLASTING);
+        if (MNDConfiguration.ENABLE_BLAZIER.get()) {
+            registration.addRecipeCatalyst(blazierCatalyst(BlazierBlock.HeatLevel.SMOKING), RecipeTypes.SMOKING);
+            registration.addRecipeCatalyst(blazierCatalyst(BlazierBlock.HeatLevel.BAKING), RecipeTypes.SMELTING);
+            registration.addRecipeCatalyst(blazierCatalyst(BlazierBlock.HeatLevel.CAMPFIRE), RecipeTypes.CAMPFIRE_COOKING);
+            registration.addRecipeCatalyst(blazierCatalyst(BlazierBlock.HeatLevel.SMELTING), RecipeTypes.BLASTING);
+        }
 
+    }
+
+    public void registerVanillaCategoryExtensions(
+            IVanillaCategoryExtensionRegistration registration) {
+        registration.getCraftingCategory().addExtension(
+                BlazierTemperatureRecipe.class, new BlazierTemperatureRecipeExtension());
+    }
+
+    private static ItemStack blazierCatalyst(BlazierBlock.HeatLevel heat) {
+        return BlazierTemperatureRecipeExtension.createBlazierStack(heat, true);
     }
 
     public ResourceLocation getPluginUid() {

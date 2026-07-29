@@ -5,6 +5,9 @@
 
 package com.soytutta.mynethersdelight.core.data.recipes;
 
+import com.soytutta.mynethersdelight.common.crafting.condition.BlazierEnabledCondition;
+import com.soytutta.mynethersdelight.common.crafting.condition.StoneCabinetsEnabledCondition;
+import com.soytutta.mynethersdelight.common.crafting.BlazierTemperatureRecipe;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
@@ -30,6 +33,12 @@ public class MNDCraftingRecipes {
         recipesBlocks(output);
         recipesCraftedMeals(output);
         SpecialRecipeBuilder.special(FoodServingRecipe::new).save(output, "food_serving");
+        SpecialRecipeBuilder.special(BlazierTemperatureRecipe::heating)
+                .save(output.withConditions(BlazierEnabledCondition.INSTANCE),
+                        "mynethersdelight:crafting/blazier_heating");
+        SpecialRecipeBuilder.special(BlazierTemperatureRecipe::cooling)
+                .save(output.withConditions(BlazierEnabledCondition.INSTANCE),
+                        "mynethersdelight:crafting/blazier_cooling");
     }
 
     private static void recipesVanillaAlternatives(RecipeOutput output) {
@@ -83,16 +92,16 @@ public class MNDCraftingRecipes {
                 .define('#', Items.BLAZE_ROD)
                 .define('b', Items.NETHER_BRICK)
                 .unlockedBy("has_gold_ingot", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BLAZE_ROD))
-                .save(output, "mynethersdelight:crafting/blazefire");
+                .save(output.withConditions(BlazierEnabledCondition.INSTANCE), "mynethersdelight:crafting/blazefire");
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(Items.NETHER_BRICKS), RecipeCategory.BUILDING_BLOCKS, MNDItems.NETHER_BRICKS_CABINET.get())
                 .unlockedBy("has_nether_bricks", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NETHER_BRICKS))
-                .save(output,"mynethersdelight:stonecutting/nether_bricks_cabinet");
+                .save(output.withConditions(StoneCabinetsEnabledCondition.INSTANCE),"mynethersdelight:stonecutting/nether_bricks_cabinet");
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(Items.RED_NETHER_BRICKS), RecipeCategory.BUILDING_BLOCKS, MNDItems.RED_NETHER_BRICKS_CABINET.get())
                 .unlockedBy("has_nether_bricks", InventoryChangeTrigger.TriggerInstance.hasItems(Items.NETHER_BRICKS))
-                .save(output,"mynethersdelight:stonecutting/red_nether_bricks_cabinet");
+                .save(output.withConditions(StoneCabinetsEnabledCondition.INSTANCE),"mynethersdelight:stonecutting/red_nether_bricks_cabinet");
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(Items.POLISHED_BLACKSTONE_BRICKS,Items.POLISHED_BLACKSTONE, Items.BLACKSTONE), RecipeCategory.BUILDING_BLOCKS, MNDItems.BLACKSTONE_BRICKS_CABINET.get())
                 .unlockedBy("has_blackstone", InventoryChangeTrigger.TriggerInstance.hasItems(Items.BLACKSTONE,Items.POLISHED_BLACKSTONE,Items.POLISHED_BLACKSTONE_BRICKS))
-                .save(output,"mynethersdelight:stonecutting/blackstone_bricks_cabinet");
+                .save(output.withConditions(StoneCabinetsEnabledCondition.INSTANCE),"mynethersdelight:stonecutting/blackstone_bricks_cabinet");
         ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,MNDItems.BULLET_PEPPER_CRATE.get(), 1)
                 .requires(MNDItems.BULLET_PEPPER.get(),9)
                 .unlockedBy("has_pepper", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.BULLET_PEPPER.get()))
@@ -116,8 +125,8 @@ public class MNDCraftingRecipes {
                 .define('X', MNDItems.POWDERY_PLANKS_SLAB.get()).define('T', MNDItems.POWDERY_TRAPDOOR.get())
                 .unlockedBy("has_powdery_planks", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDERY_PLANKS.get()))
                 .save(output, "mynethersdelight:crafting/block_of_powdery_cabinet");
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,MNDItems.POWDERY_PLANKS.get(),4)
-                .requires(MNDTags.BLOCK_OF_POWDERY)
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,MNDItems.POWDERY_PLANKS.get(),2)
+                .requires(MNDTags.Items.POWDERY_BLOCKS)
                 .group("planks")
                 .unlockedBy("has_powder_cannon", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDER_CANNON.get()))
                 .save(output, "mynethersdelight:crafting/powdery_plank");
@@ -421,7 +430,7 @@ public class MNDCraftingRecipes {
                 .define('i', Items.ICE)
                 .define('-', Items.STICK)
                 .unlockedBy("has_ghast", InventoryChangeTrigger.TriggerInstance.hasItems(Items.GHAST_TEAR))
-                .save(output, "mypersonaldelight:crafting/tear_popsicle");
+                .save(output, "mynethersdelight:crafting/tear_popsicle");
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.DRIED_GHAST_WITH_MILK.get())
                 .requires(MNDItems.GHASMATI.get())
                 .requires(Tags.Items.DRINKS_MILK)

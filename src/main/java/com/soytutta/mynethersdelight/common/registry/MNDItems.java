@@ -136,7 +136,7 @@ public class MNDItems {
             new SignItem(basicItem().stacksTo(16), MNDBlocks.POWDERY_SIGN.get(), MNDBlocks.POWDERY_WALL_SIGN.get())
     );
     public static final Supplier<Item> POWDERY_HANGING_SIGN = ITEMS.register("powdery_hanging_sign", () ->
-            new SignItem(basicItem().stacksTo(16), MNDBlocks.POWDERY_HANGING_SIGN.get(), MNDBlocks.POWDERY_WALL_HANGING_SIGN.get())
+            new HangingSignItem(MNDBlocks.POWDERY_HANGING_SIGN.get(), MNDBlocks.POWDERY_WALL_HANGING_SIGN.get(), basicItem().stacksTo(16))
     );
     // FUNGUS-Colony
     public static final Supplier<Item> WARPED_FUNGUS_COLONY = ITEMS.register("warped_fungus_colony", () ->
@@ -339,7 +339,7 @@ public class MNDItems {
             new ConsumableItem(foodItem(MNDFoodValues.BURNT_ROLL).fireResistant(), false)
     );
     public static final Supplier<Item> MAGMA_CAKE = ITEMS.register("magma_cake_block", () ->
-            new BlockItem(MNDBlocks.MAGMA_CAKE_BLOCK.get(), basicItem().stacksTo(1).fireResistant())
+            new PlaceableItem(MNDBlocks.MAGMA_CAKE_BLOCK.get(), basicItem().stacksTo(1).fireResistant())
     );
     public static final Supplier<Item> MAGMA_CAKE_SLICE = ITEMS.register("magma_cake_slice",
             () -> new ConsumableItem(foodItem(MNDFoodValues.MAGMA_CAKE_SLICE).stacksTo(16).fireResistant(),

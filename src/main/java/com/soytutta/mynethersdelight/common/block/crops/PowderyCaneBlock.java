@@ -17,6 +17,7 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -29,6 +30,7 @@ import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -37,6 +39,8 @@ import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.util.TriState;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
+
+import javax.annotation.Nullable;
 
 import static com.soytutta.mynethersdelight.common.block.utility.MNDBlockStateProperties.PRESSURE;
 
@@ -83,6 +87,12 @@ public class PowderyCaneBlock extends BushBlock implements BonemealableBlock {
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         Vec3 vec3 = state.getOffset(worldIn, pos);
         return SHAPE.move(vec3.x, vec3.y, vec3.z);
+    }
+
+    @Nullable
+    @Override
+    public PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob entity) {
+        return PathType.DAMAGE_OTHER;
     }
 
     @Override
@@ -179,7 +189,6 @@ public class PowderyCaneBlock extends BushBlock implements BonemealableBlock {
         BlockState blockBelow = world.getBlockState(pos.below());
         int i = state.getValue(AGE);
         if (i < MAX_AGE && blockBelow.is(MNDTags.POWDERY_CANNON_PLANTABLE_ON)
-                && world.getRawBrightness(pos.above(), 0) >= 9
                 && CommonHooks.canCropGrow(world, pos, state, random.nextInt(5) == 0)) {
             int newAge = i + 1;
             BlockState blockstate = state.setValue(AGE, newAge);
@@ -394,7 +403,7 @@ public class PowderyCaneBlock extends BushBlock implements BonemealableBlock {
 
         BlockPos positionToPlaceNewBlock = posOfBottomCane.above();
 
-        if ((level.getBlockState(posOfBottomCane).getValue(LEAVES) != BambooLeaves.NONE || level.getBlockState(posOfBottomCane).getValue(STAGE) == 1) && level.isEmptyBlock(positionToPlaceNewBlock)) {
+        if ((stateOfBottomCane.getValue(LEAVES) != BambooLeaves.NONE || stateOfBottomCane.getValue(STAGE) == 1) && level.isEmptyBlock(positionToPlaceNewBlock)) {
             level.setBlock(positionToPlaceNewBlock, MNDBlocks.BULLET_PEPPER.get().defaultBlockState(), 3);
             return;
         }

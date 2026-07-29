@@ -17,6 +17,7 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -27,6 +28,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.*;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -35,11 +37,13 @@ import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.Tags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
+import javax.annotation.Nullable;
+
 import static com.soytutta.mynethersdelight.common.block.utility.MNDBlockStateProperties.PRESSURE;
 
 public class PowderyFlowerBlock extends BushBlock implements BonemealableBlock {
 
-    public static final MapCodec<PowderyCaneBlock> CODEC = simpleCodec(PowderyCaneBlock::new);
+    public static final MapCodec<PowderyFlowerBlock> CODEC = simpleCodec(PowderyFlowerBlock::new);
     public static final int MAX_AGE = 3;
     public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
     public static final BooleanProperty LIT = BlockStateProperties.LIT;
@@ -53,7 +57,7 @@ public class PowderyFlowerBlock extends BushBlock implements BonemealableBlock {
                 .setValue(PRESSURE, 0));
     }
 
-    public MapCodec<PowderyCaneBlock> codec() {
+    public MapCodec<PowderyFlowerBlock> codec() {
         return CODEC;
     }
 
@@ -72,6 +76,12 @@ public class PowderyFlowerBlock extends BushBlock implements BonemealableBlock {
     public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
         Vec3 vec3 = state.getOffset(worldIn, pos);
         return SHAPE.move(vec3.x, vec3.y, vec3.z);
+    }
+
+    @Nullable
+    @Override
+    public PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob entity) {
+        return PathType.DAMAGE_OTHER;
     }
 
     @Override

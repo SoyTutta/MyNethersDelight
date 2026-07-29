@@ -3,6 +3,7 @@ package com.soytutta.mynethersdelight.common.block.entity;
 import java.util.Optional;
 import javax.annotation.Nullable;
 
+import com.soytutta.mynethersdelight.common.MNDConfiguration;
 import com.soytutta.mynethersdelight.common.block.BlazierBlock;
 import com.soytutta.mynethersdelight.common.registry.MNDBlockEntityTypes;
 import net.minecraft.core.BlockPos;
@@ -47,6 +48,10 @@ public class BlazierBlockEntity extends BlockEntity implements Clearable {
     private final NonNullList<ItemStack> items;
     private final int[] cookingProgress;
     private final int[] cookingTime;
+    @Nullable
+    private BlazierBlock.HeatLevel storedHeat;
+    @Nullable
+    private Boolean storedLit;
 
     private final RecipeManager.CachedCheck<SingleRecipeInput, BlastingRecipe>        blastingCheck;
     private final RecipeManager.CachedCheck<SingleRecipeInput, SmeltingRecipe>        smeltingCheck;
@@ -93,14 +98,14 @@ public class BlazierBlockEntity extends BlockEntity implements Clearable {
             dirty = true;
 
             SingleRecipeInput input = new SingleRecipeInput(stack);
-            boolean hasVanillaRecipe = be.getVanillaCookResult(input, heat, level) != null;
-
-            if (hasVanillaRecipe) {
+            Optional<? extends RecipeHolder<? extends AbstractCookingRecipe>> recipe =
+                    be.getRecipeFor(input, heat, level);
+            if (recipe.isPresent()) {
                 be.cookingProgress[i]++;
 
                 if (be.cookingProgress[i] >= be.cookingTime[i]) {
-                    ItemStack result = be.getVanillaCookResult(input, heat, level);
-                    if (result != null && result.isItemEnabled(level.enabledFeatures())) {
+                    ItemStack result = recipe.get().value().assemble(input, level.registryAccess());
+                    if (result.isItemEnabled(level.enabledFeatures())) {
                         Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), result);
                         be.items.set(i, ItemStack.EMPTY);
                         be.cookingProgress[i] = 0;
@@ -205,18 +210,13 @@ public class BlazierBlockEntity extends BlockEntity implements Clearable {
                 0.0, 0.07, 0.0);
     }
 
-    @Nullable
-    private ItemStack getVanillaCookResult(SingleRecipeInput input,
-                                           BlazierBlock.HeatLevel heat, Level level) {
+    private Optional<? extends RecipeHolder<? extends AbstractCookingRecipe>> getRecipeFor(
+            SingleRecipeInput input, BlazierBlock.HeatLevel heat, Level level) {
         return switch (heat) {
-            case SMELTING -> blastingCheck.getRecipeFor(input, level)
-                    .map(r -> r.value().assemble(input, level.registryAccess())).orElse(null);
-            case BAKING   -> smeltingCheck.getRecipeFor(input, level)
-                    .map(r -> r.value().assemble(input, level.registryAccess())).orElse(null);
-            case CAMPFIRE -> campfireCheck.getRecipeFor(input, level)
-                    .map(r -> r.value().assemble(input, level.registryAccess())).orElse(null);
-            case SMOKING  -> smokingCheck.getRecipeFor(input, level)
-                    .map(r -> r.value().assemble(input, level.registryAccess())).orElse(null);
+            case SMELTING -> blastingCheck.getRecipeFor(input, level);
+            case BAKING -> smeltingCheck.getRecipeFor(input, level);
+            case CAMPFIRE -> campfireCheck.getRecipeFor(input, level);
+            case SMOKING -> smokingCheck.getRecipeFor(input, level);
         };
     }
 
@@ -236,12 +236,7 @@ public class BlazierBlockEntity extends BlockEntity implements Clearable {
         if (!hasFreeSlot()) return Optional.empty();
 
         SingleRecipeInput input = new SingleRecipeInput(stack);
-        return switch (heat) {
-            case SMELTING -> blastingCheck.getRecipeFor(input, this.level).map(r -> (RecipeHolder<?>) r);
-            case BAKING   -> smeltingCheck.getRecipeFor(input, this.level).map(r -> (RecipeHolder<?>) r);
-            case CAMPFIRE -> campfireCheck.getRecipeFor(input, this.level).map(r -> (RecipeHolder<?>) r);
-            case SMOKING  -> smokingCheck.getRecipeFor(input, this.level).map(r -> (RecipeHolder<?>) r);
-        };
+        return getRecipeFor(input, heat, this.level).map(recipe -> (RecipeHolder<?>) recipe);
     }
 
     public boolean hasRecipeInLowerHeat(ItemStack stack) {
@@ -253,13 +248,7 @@ public class BlazierBlockEntity extends BlockEntity implements Clearable {
         for (BlazierBlock.HeatLevel h : BlazierBlock.HeatLevel.values()) {
             if (h == current) { foundCurrent = true; continue; }
             if (!foundCurrent) continue;
-            boolean has = switch (h) {
-                case SMELTING -> blastingCheck.getRecipeFor(input, this.level).isPresent();
-                case BAKING   -> smeltingCheck.getRecipeFor(input, this.level).isPresent();
-                case CAMPFIRE -> campfireCheck.getRecipeFor(input, this.level).isPresent();
-                case SMOKING  -> smokingCheck.getRecipeFor(input, this.level).isPresent();
-            };
-            if (has) return true;
+            if (getRecipeFor(input, h, this.level).isPresent()) return true;
         }
         return false;
     }
@@ -271,28 +260,21 @@ public class BlazierBlockEntity extends BlockEntity implements Clearable {
 
         for (BlazierBlock.HeatLevel h : BlazierBlock.HeatLevel.values()) {
             if (h == current) break;
-            boolean has = switch (h) {
-                case SMELTING -> blastingCheck.getRecipeFor(input, this.level).isPresent();
-                case BAKING   -> smeltingCheck.getRecipeFor(input, this.level).isPresent();
-                case CAMPFIRE -> campfireCheck.getRecipeFor(input, this.level).isPresent();
-                case SMOKING  -> smokingCheck.getRecipeFor(input, this.level).isPresent();
-            };
-            if (has) return true;
+            if (getRecipeFor(input, h, this.level).isPresent()) return true;
         }
         return false;
     }
 
     public int getCookTimeForRecipe(RecipeHolder<?> holder, BlazierBlock.HeatLevel heat) {
         if (!(holder.value() instanceof AbstractCookingRecipe recipe)) return 600;
-        double multiplier = switch (heat) {
-            case SMELTING, SMOKING, BAKING -> 3.0;
+        double modeMultiplier = switch (heat) {
+            case SMELTING, SMOKING -> 6.0;
+            case BAKING -> 3.0;
             case CAMPFIRE -> 1.0;
         };
-        double divisor = switch (heat) {
-            case SMELTING, SMOKING -> 0.5;
-            case BAKING, CAMPFIRE  -> 1.0;
-        };
-        return (int) Math.max(1, (recipe.getCookingTime() / divisor) * multiplier);
+        return (int) Math.max(1, recipe.getCookingTime()
+                * modeMultiplier
+                * MNDConfiguration.BLAZIER_COOKING_TIME_MULTIPLIER.get());
     }
 
     public boolean placeFood(@Nullable LivingEntity entity, ItemStack food, int cookTime) {
@@ -327,6 +309,11 @@ public class BlazierBlockEntity extends BlockEntity implements Clearable {
             System.arraycopy(totals, 0, this.cookingTime, 0,
                     Math.min(this.cookingTime.length, totals.length));
         }
+        this.storedHeat = tag.contains("Heat")
+                ? BlazierBlock.HeatLevel.byName(tag.getString("Heat")).orElse(null)
+                : null;
+        this.storedLit = tag.contains("Lit") ? tag.getBoolean("Lit") : null;
+        this.restoreStoredBlockState();
     }
 
     @Override
@@ -335,6 +322,42 @@ public class BlazierBlockEntity extends BlockEntity implements Clearable {
         ContainerHelper.saveAllItems(tag, this.items, true, registries);
         tag.putIntArray("CookingTimes", this.cookingProgress);
         tag.putIntArray("CookingTotalTimes", this.cookingTime);
+        BlockState state = this.getBlockState();
+        if (state.hasProperty(BlazierBlock.HEAT) && state.hasProperty(BlazierBlock.LIT)) {
+            tag.putString("Heat", state.getValue(BlazierBlock.HEAT).getSerializedName());
+            tag.putBoolean("Lit", state.getValue(BlazierBlock.LIT));
+        }
+    }
+
+    @Override
+    public void onLoad() {
+        super.onLoad();
+        this.restoreStoredBlockState();
+    }
+
+    private void restoreStoredBlockState() {
+        if (this.level == null || this.storedHeat == null && this.storedLit == null) {
+            return;
+        }
+
+        BlockState state = this.level.getBlockState(this.worldPosition);
+        if (!(state.getBlock() instanceof BlazierBlock)) {
+            return;
+        }
+
+        BlockState restoredState = state;
+        if (this.storedHeat != null) {
+            restoredState = restoredState.setValue(BlazierBlock.HEAT, this.storedHeat);
+        }
+        if (this.storedLit != null) {
+            restoredState = restoredState.setValue(BlazierBlock.LIT, this.storedLit);
+        }
+
+        this.storedHeat = null;
+        this.storedLit = null;
+        if (restoredState != state) {
+            this.level.setBlock(this.worldPosition, restoredState, 2);
+        }
     }
 
     @Override
@@ -346,6 +369,8 @@ public class BlazierBlockEntity extends BlockEntity implements Clearable {
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
         CompoundTag tag = new CompoundTag();
         ContainerHelper.saveAllItems(tag, this.items, true, registries);
+        tag.putIntArray("CookingTimes", this.cookingProgress);
+        tag.putIntArray("CookingTotalTimes", this.cookingTime);
         return tag;
     }
 

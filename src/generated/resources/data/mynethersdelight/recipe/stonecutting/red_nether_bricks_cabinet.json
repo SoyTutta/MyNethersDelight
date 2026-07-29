@@ -1,4 +1,9 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "mynethersdelight:stone_cabinets_enabled"
+    }
+  ],
   "type": "minecraft:stonecutting",
   "ingredient": {
     "item": "minecraft:red_nether_bricks"

@@ -5,8 +5,6 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffectCategory;
 import net.minecraft.world.entity.LivingEntity;
 
-import java.util.Random;
-
 public class GoodPungentEffect extends AbstractPungentEffect {
 
     public GoodPungentEffect() {
@@ -22,16 +20,12 @@ public class GoodPungentEffect extends AbstractPungentEffect {
                 entity.heal(2.0F);
 
                 if (!entity.level().isClientSide) {
-                    Random random = new Random();
                     double width = entity.getBbWidth();
                     double height = entity.getBbHeight();
-
-                    for (int i = 0; i < 0.5; i++) {
-                        double x = entity.getX() + (random.nextDouble() - 0.5) * width;
-                        double y = entity.getY() + random.nextDouble() * height;
-                        double z = entity.getZ() + (random.nextDouble() - 0.5) * width;
-                        ((ServerLevel) entity.level()).sendParticles(ParticleTypes.FLAME, x, y, z, 1, 0, 0, 0, 0);
-                    }
+                    double x = entity.getX() + (entity.getRandom().nextDouble() - 0.5) * width;
+                    double y = entity.getY() + entity.getRandom().nextDouble() * height;
+                    double z = entity.getZ() + (entity.getRandom().nextDouble() - 0.5) * width;
+                    ((ServerLevel) entity.level()).sendParticles(ParticleTypes.FLAME, x, y, z, 1, 0, 0, 0, 0);
                 }
             } else {
                 entity.setRemainingFireTicks(0);

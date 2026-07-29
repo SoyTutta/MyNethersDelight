@@ -21,7 +21,7 @@ public class MNDDataMaps extends DataMapProvider
     }
 
     @Override
-    protected void gather() {
+    protected void gather(HolderLookup.Provider provider) {
         builder(NeoForgeDataMaps.COMPOSTABLES)
                 // 30% chance
                 .add(MNDItems.BULLET_PEPPER.get().asItem().builtInRegistryHolder(), new Compostable(0.3F), false)

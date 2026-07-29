@@ -5,22 +5,19 @@
 
 package com.soytutta.mynethersdelight.integration.jei.category;
 
-import com.google.common.collect.ImmutableList;
-
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.ParametersAreNonnullByDefault;
 
 import com.soytutta.mynethersdelight.common.utility.MNDTextUtils;
-import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import com.soytutta.mynethersdelight.integration.jei.MNDRecipeTypes;
 import com.soytutta.mynethersdelight.integration.jei.resource.ForgotingDummy;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.builder.ITooltipBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
@@ -68,8 +65,12 @@ public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> 
         return this.title;
     }
 
-    public IDrawable getBackground() {
-        return this.background;
+    public int getWidth() {
+        return 118;
+    }
+
+    public int getHeight() {
+        return 80;
     }
 
     public IDrawable getIcon() {
@@ -88,19 +89,20 @@ public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> 
     }
 
     public void draw(ForgotingDummy recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        this.background.draw(guiGraphics, 0, 0);
         this.slotIcon.draw(guiGraphics, 63, 53);
         this.slotIcon.draw(guiGraphics, 37, 53);
     }
 
-    public List<Component> getTooltipStrings(ForgotingDummy recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
+    public void getTooltip(ITooltipBuilder tooltip, ForgotingDummy recipe, IRecipeSlotsView recipeSlotsView, double mouseX, double mouseY) {
         if (inIconAt(40, 38, mouseX, mouseY)) {
-            return ImmutableList.of(translateKey(".light"));
+            tooltip.add(translateKey(".light"));
         } else if (inIconAt(53, 38, mouseX, mouseY)) {
-            return ImmutableList.of(translateKey(".fluid"));
+            tooltip.add(translateKey(".fluid"));
         } else if (inIconAt(67, 38, mouseX, mouseY)) {
-            return ImmutableList.of(translateKey(".accelerators"));
-        } else {
-            return inIconOn(49, 9, mouseX, mouseY) ? ImmutableList.of(translateKey(".nether")) : Collections.emptyList();
+            tooltip.add(translateKey(".accelerators"));
+        } else if (inIconOn(49, 9, mouseX, mouseY)) {
+            tooltip.add(translateKey(".nether"));
         }
     }
 

@@ -91,22 +91,24 @@ public class MNDBlocks {
     );
     public static final Supplier<Block> POWDERY_CHUBBY_SAPLING = BLOCKS.register("powdery_chubby_sapling", () ->
             new PowderyCannonSaplingBlock(Properties.ofFullCopy(Blocks.BAMBOO_SAPLING)
-                    .mapColor(MapColor.TERRACOTTA_BLACK).strength(2.0F, 3.0F))
+                    .mapColor(MapColor.TERRACOTTA_BLACK).strength(2.0F, 15.0F)
+                    .sound(SoundType.BAMBOO_SAPLING))
     );
     public static final Supplier<Block> POWDERY_CANNON = BLOCKS.register("powdery_cannon", () ->
             new PowderyCannonBlock(Properties.ofFullCopy(Blocks.BAMBOO)
-                    .mapColor(MapColor.TERRACOTTA_BLACK).strength(3.0F, 3.0F)
+                    .mapColor(MapColor.TERRACOTTA_BLACK).strength(30.0F, 3.0F)
+                    .sound(SoundType.BAMBOO)
                     .lightLevel(litBlockEmission(12)))
     );
     public static final Supplier<Block> POWDERY_CANE = BLOCKS.register("powdery_cane", () ->
             new PowderyCaneBlock(Properties.ofFullCopy(Blocks.BAMBOO)
                     .mapColor(MapColor.TERRACOTTA_BLACK).noCollission()
-                    .instabreak().lightLevel(litBlockEmission(12)))
+                    .instabreak().sound(SoundType.BAMBOO).lightLevel(litBlockEmission(12)))
     );
     public static final Supplier<Block> BULLET_PEPPER = BLOCKS.register("bullet_pepper", () ->
             new PowderyFlowerBlock(Properties.ofFullCopy(Blocks.BAMBOO_SAPLING)
                     .mapColor(MapColor.TERRACOTTA_BLACK).noCollission()
-                    .instabreak().lightLevel(litBlockEmission(8)))
+                    .instabreak().sound(SoundType.BAMBOO_SAPLING).lightLevel(litBlockEmission(8)))
     );
     public static final Supplier<Block> POWDERY_TORCH = BLOCKS.register("powdery_torch", () ->
             new TorchBlock(ParticleTypes.FLAME, Properties.of()
@@ -133,7 +135,7 @@ public class MNDBlocks {
     );
     public static final Supplier<Block> BLOCK_OF_POWDERY_CANNON = BLOCKS.register("powdery_block", () ->
             new StrippableBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_STEM).sound(SoundType.BAMBOO_WOOD)
-                    .instrument(NoteBlockInstrument.BASS).explosionResistance(300.0F)
+                    .instrument(NoteBlockInstrument.BASS).explosionResistance(180.0F)
                     .mapColor(MapColor.TERRACOTTA_BLACK))
     );
     public static final Supplier<Block> BLOCK_OF_STRIPPED_POWDERY_CANNON = BLOCKS.register("stripped_powdery_block", () ->
@@ -203,7 +205,7 @@ public class MNDBlocks {
                     MNDWoodTypes.POWDERY)
     );
     public static final Supplier<Block> POWDERY_WALL_SIGN = BLOCKS.register("powdery_wall_sign", () ->
-            new MNDWallSignBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_WALL_SIGN),
+            new MNDWallSignBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_WALL_SIGN).lootFrom(POWDERY_SIGN),
                     MNDWoodTypes.POWDERY)
     );
     public static final Supplier<Block> POWDERY_HANGING_SIGN = BLOCKS.register("powdery_hanging_sign", () ->
@@ -211,7 +213,7 @@ public class MNDBlocks {
                     MNDWoodTypes.POWDERY)
     );
     public static final Supplier<Block> POWDERY_WALL_HANGING_SIGN = BLOCKS.register("powdery_wall_hanging_sign", () ->
-            new MNDWallHangingSignBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_WALL_HANGING_SIGN),
+            new MNDWallHangingSignBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.CRIMSON_WALL_HANGING_SIGN).lootFrom(POWDERY_HANGING_SIGN),
                     MNDWoodTypes.POWDERY)
     );
     public static final Supplier<Block> STRIDERLOAF_BLOCK = BLOCKS.register("striderloaf_block", () ->

@@ -1,0 +1,410 @@
+{
+  "values": {
+    "minecraft:crimson_fungus": {
+      "rules": [
+        {
+          "chance_mode": "absolute",
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "replace",
+            "result": {
+              "block": "mynethersdelight:crimson_fungus_colony"
+            }
+          }
+        },
+        {
+          "chance": 0.4,
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "minecraft:crimson_fungus"
+            }
+          }
+        }
+      ]
+    },
+    "minecraft:warped_fungus": {
+      "rules": [
+        {
+          "chance_mode": "absolute",
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "replace",
+            "result": {
+              "block": "mynethersdelight:warped_fungus_colony"
+            }
+          }
+        },
+        {
+          "chance": 0.4,
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "minecraft:warped_fungus"
+            }
+          }
+        }
+      ]
+    },
+    "minecraft:brown_mushroom": {
+      "rules": [
+        {
+          "chance_mode": "absolute",
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "replace",
+            "result": {
+              "block": "farmersdelight:brown_mushroom_colony"
+            }
+          }
+        },
+        {
+          "chance": 0.4,
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "minecraft:brown_mushroom"
+            }
+          }
+        }
+      ]
+    },
+    "minecraft:red_mushroom": {
+      "rules": [
+        {
+          "chance_mode": "absolute",
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "replace",
+            "result": {
+              "block": "farmersdelight:red_mushroom_colony"
+            }
+          }
+        },
+        {
+          "chance": 0.4,
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "minecraft:red_mushroom"
+            }
+          }
+        }
+      ]
+    },
+    "mynethersdelight:crimson_fungus_colony": {
+      "rules": [
+        {
+          "chance": 0.4,
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "state": {
+            "age": "3"
+          },
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "mynethersdelight:crimson_fungus_colony"
+            }
+          }
+        },
+        {
+          "chance": 0.4,
+          "chance_mode": "absolute",
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "minecraft:crimson_fungus"
+            }
+          }
+        }
+      ]
+    },
+    "mynethersdelight:warped_fungus_colony": {
+      "rules": [
+        {
+          "chance": 0.4,
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "state": {
+            "age": "3"
+          },
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "mynethersdelight:warped_fungus_colony"
+            }
+          }
+        },
+        {
+          "chance": 0.4,
+          "chance_mode": "absolute",
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "minecraft:warped_fungus"
+            }
+          }
+        }
+      ]
+    },
+    "farmersdelight:brown_mushroom_colony": {
+      "rules": [
+        {
+          "chance": 0.4,
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "state": {
+            "age": "3"
+          },
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "farmersdelight:brown_mushroom_colony"
+            }
+          }
+        },
+        {
+          "chance": 0.4,
+          "chance_mode": "absolute",
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "minecraft:brown_mushroom"
+            }
+          }
+        }
+      ]
+    },
+    "farmersdelight:red_mushroom_colony": {
+      "rules": [
+        {
+          "chance": 0.4,
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "state": {
+            "age": "3"
+          },
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "farmersdelight:red_mushroom_colony"
+            }
+          }
+        },
+        {
+          "chance": 0.4,
+          "chance_mode": "absolute",
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "minecraft:red_mushroom"
+            }
+          }
+        }
+      ]
+    },
+    "mynethersdelight:powdery_torch": {
+      "rules": [
+        {
+          "chance": 0.06666666666666667,
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "conditions": [
+            {
+              "type": "air",
+              "offset": [
+                0,
+                1,
+                0
+              ]
+            }
+          ],
+          "action": {
+            "type": "place_blocks",
+            "blocks": [
+              {
+                "state": {
+                  "block": "mynethersdelight:powdery_cane",
+                  "properties": {
+                    "age": "1"
+                  }
+                }
+              },
+              {
+                "offset": [
+                  0,
+                  1,
+                  0
+                ],
+                "state": {
+                  "block": "mynethersdelight:bullet_pepper",
+                  "properties": {
+                    "age": "2",
+                    "lit": "true"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "mynethersdelight:powdery_cane": {
+      "rules": [
+        {
+          "chance": 0.4,
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "mynethersdelight:bullet_pepper"
+            }
+          }
+        }
+      ]
+    },
+    "mynethersdelight:powdery_cannon": {
+      "rules": [
+        {
+          "chance": 0.2,
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "mynethersdelight:powdery_chubby_sapling"
+            }
+          }
+        }
+      ]
+    },
+    "minecraft:bamboo": {
+      "rules": [
+        {
+          "chance": 0.2,
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "minecraft:bamboo_sapling"
+            }
+          }
+        }
+      ]
+    },
+    "minecraft:pink_petals": {
+      "rules": [
+        {
+          "chance_mode": "absolute",
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "state": {
+            "flower_amount": {
+              "max": "3"
+            }
+          },
+          "action": {
+            "type": "bonemeal"
+          }
+        },
+        {
+          "chance": 0.16666666666666666,
+          "chance_mode": "absolute",
+          "direction": "above",
+          "soil": "resurgent_soil",
+          "state": {
+            "flower_amount": "4"
+          },
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "minecraft:pink_petals"
+            }
+          }
+        }
+      ]
+    },
+    "farmersdelight:tomatoes": {
+      "rules": [
+        {
+          "chance": 0.3333333333333333,
+          "direction": "above",
+          "soil": "resurgent_farmland",
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "farmersdelight:tomatoes"
+            }
+          }
+        },
+        {
+          "chance_mode": "absolute",
+          "direction": "above",
+          "soil": "resurgent_farmland",
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "farmersdelight:budding_tomatoes"
+            }
+          }
+        }
+      ]
+    },
+    "minecraft:nether_wart": {
+      "rules": [
+        {
+          "chance": 0.3333333333333333,
+          "direction": "above",
+          "soil": "resurgent_farmland",
+          "state": {
+            "age": "3"
+          },
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "minecraft:nether_wart"
+            }
+          }
+        },
+        {
+          "chance": 0.125,
+          "chance_mode": "absolute",
+          "direction": "above",
+          "soil": "resurgent_farmland",
+          "state": {
+            "age": "3"
+          },
+          "action": {
+            "type": "propagate",
+            "result": {
+              "block": "minecraft:nether_wart"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

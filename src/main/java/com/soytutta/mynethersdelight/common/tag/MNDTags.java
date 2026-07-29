@@ -15,6 +15,14 @@ import net.minecraft.world.level.material.Fluid;
 public class MNDTags {
     public static final TagKey<Item> BLOCK_OF_POWDERY = modItemTag("block_of_powdery");
 
+    public static class Blocks {
+        public static final TagKey<Block> POWDERY_BLOCKS = modBlockTag("powdery_blocks");
+    }
+
+    public static class Items {
+        public static final TagKey<Item> POWDERY_BLOCKS = modItemTag("powdery_blocks");
+    }
+
     public static final TagKey<Block> RESURGENT_SOIL_PLANT = modBlockTag("resurgent_soil_plant");
 
     public static final TagKey<Block> NOT_PROPAGATE_PLANT = modBlockTag("not_propagate_plant");

@@ -2,15 +2,21 @@ package com.soytutta.mynethersdelight.common.block;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nullable;
 
+import com.soytutta.mynethersdelight.common.MNDConfiguration;
 import com.soytutta.mynethersdelight.common.block.entity.BlazierBlockEntity;
 import com.soytutta.mynethersdelight.common.registry.MNDBlockEntityTypes;
+import com.soytutta.mynethersdelight.common.registry.MNDItems;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.TextColor;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
@@ -23,14 +29,19 @@ import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.component.BlockItemStateProperties;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
@@ -45,6 +56,7 @@ import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
@@ -59,18 +71,37 @@ public class BlazierBlock extends BaseEntityBlock {
     protected static final VoxelShape PLATE_SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 2.0, 15.0);
     protected static final VoxelShape SHAPE_BLAZEFIRE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0F, 0.0F, 2.0F, 14.0F, 6.0F, 14.0F), BooleanOp.OR);
     protected static final VoxelShape SHAPE_BLAZEFIRE_SMOKING = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(2.0F, 0.0F, 2.0F, 14.0F, 4.0F, 14.0F), BooleanOp.OR);
+    private static final int EXTINGUISHED_TOOLTIP_COLOR = 0x8B2635;
 
     public enum HeatLevel implements StringRepresentable {
-        SMELTING("smelting"),
-        BAKING("baking"),
-        CAMPFIRE("campfire"),
-        SMOKING("smoking");
+        SMELTING("smelting", 0xFFB52A),
+        BAKING("baking", 0xF08324),
+        CAMPFIRE("campfire", 0xD65A2B),
+        SMOKING("smoking", 0xB23A33);
 
         private final String name;
-        HeatLevel(String name) { this.name = name; }
+        private final int tooltipColor;
+
+        HeatLevel(String name, int tooltipColor) {
+            this.name = name;
+            this.tooltipColor = tooltipColor;
+        }
 
         @Override
         public String getSerializedName() { return this.name; }
+
+        public int getTooltipColor() {
+            return this.tooltipColor;
+        }
+
+        public static Optional<HeatLevel> byName(String name) {
+            for (HeatLevel heat : values()) {
+                if (heat.name.equals(name)) {
+                    return Optional.of(heat);
+                }
+            }
+            return Optional.empty();
+        }
 
         public Optional<HeatLevel> decrease() {
             return switch (this) {
@@ -78,6 +109,15 @@ public class BlazierBlock extends BaseEntityBlock {
                 case BAKING   -> Optional.of(CAMPFIRE);
                 case CAMPFIRE -> Optional.of(SMOKING);
                 case SMOKING  -> Optional.empty();
+            };
+        }
+
+        public Optional<HeatLevel> increase() {
+            return switch (this) {
+                case SMELTING -> Optional.empty();
+                case BAKING   -> Optional.of(SMELTING);
+                case CAMPFIRE -> Optional.of(BAKING);
+                case SMOKING  -> Optional.of(CAMPFIRE);
             };
         }
 
@@ -107,9 +147,36 @@ public class BlazierBlock extends BaseEntityBlock {
     }
 
     @Override
+    public void appendHoverText(ItemStack stack, Item.TooltipContext context,
+                                List<Component> tooltip, TooltipFlag tooltipFlag) {
+        BlockItemStateProperties properties = stack.getOrDefault(DataComponents.BLOCK_STATE,
+                BlockItemStateProperties.EMPTY);
+        Boolean lit = properties.get(LIT);
+        HeatLevel heat = properties.get(HEAT);
+        HeatLevel displayedHeat = heat == null ? HeatLevel.SMELTING : heat;
+        String heatName = Boolean.FALSE.equals(lit)
+                ? "extinguished"
+                : displayedHeat.getSerializedName();
+        int heatColor = Boolean.FALSE.equals(lit)
+                ? EXTINGUISHED_TOOLTIP_COLOR
+                : displayedHeat.getTooltipColor();
+        Component heatComponent = Component.translatable(
+                        "tooltip.mynethersdelight.blazier.heat." + heatName)
+                .withStyle(style -> style.withColor(TextColor.fromRgb(heatColor)));
+
+        tooltip.add(Boolean.FALSE.equals(lit)
+                ? heatComponent
+                : Component.translatable("tooltip.mynethersdelight.blazier.heat",
+                        heatComponent).withStyle(ChatFormatting.GRAY));
+    }
+
+    @Override
     protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level,
                                               BlockPos pos, Player player, InteractionHand hand,
                                               BlockHitResult hitResult) {
+        if (!MNDConfiguration.ENABLE_BLAZIER.get()) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
         BlockEntity be = level.getBlockEntity(pos);
         if (!(be instanceof BlazierBlockEntity blazeEntity)) {
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -147,6 +214,7 @@ public class BlazierBlock extends BaseEntityBlock {
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
                                                Player player, BlockHitResult hitResult) {
+        if (!MNDConfiguration.ENABLE_BLAZIER.get()) return InteractionResult.PASS;
         if (!player.isShiftKeyDown()) return InteractionResult.PASS;
         if (!level.isClientSide) {
             boolean isLit = state.getValue(LIT);
@@ -169,15 +237,16 @@ public class BlazierBlock extends BaseEntityBlock {
                     new ItemStack(Items.BLAZE_POWDER, level.random.nextInt(2)));
 
             if (next.isPresent()) {
-                boolean keepLit = current != HeatLevel.SMOKING;
                 level.setBlock(pos, state
                         .setValue(HEAT, next.get())
-                        .setValue(LIT, keepLit), 11);
+                        .setValue(LIT, true), 11);
+                level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH,
+                        SoundSource.BLOCKS, 0.35F, 1.3F);
             } else {
                 level.setBlock(pos, state.setValue(LIT, false), 11);
+                level.levelEvent(LevelEvent.SOUND_EXTINGUISH_FIRE, pos, 0);
             }
 
-            level.playSound(null, pos, SoundEvents.FIRE_EXTINGUISH, SoundSource.BLOCKS, 1.0F, 1.0F);
             level.gameEvent(player, GameEvent.BLOCK_CHANGE, pos);
         }
         return InteractionResult.sidedSuccess(level.isClientSide);
@@ -185,7 +254,7 @@ public class BlazierBlock extends BaseEntityBlock {
 
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (state.getValue(LIT) && entity instanceof LivingEntity) {
+        if (MNDConfiguration.ENABLE_BLAZIER.get() && state.getValue(LIT) && entity instanceof LivingEntity) {
             int damage = switch (state.getValue(HEAT)) {
                 case SMELTING -> 4;
                 case BAKING   -> 3;
@@ -195,6 +264,14 @@ public class BlazierBlock extends BaseEntityBlock {
             entity.hurt(level.damageSources().campfire(), damage);
         }
         super.entityInside(state, level, pos, entity);
+    }
+
+    @Nullable
+    @Override
+    public PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob entity) {
+        return MNDConfiguration.ENABLE_BLAZIER.get() && state.getValue(LIT)
+                ? PathType.DAMAGE_FIRE
+                : null;
     }
 
     @Override
@@ -214,6 +291,7 @@ public class BlazierBlock extends BaseEntityBlock {
 
     @Override
     public BlockState getStateForPlacement(BlockPlaceContext context) {
+        if (!MNDConfiguration.ENABLE_BLAZIER.get()) return null;
         LevelAccessor level = context.getLevel();
         BlockPos pos = context.getClickedPos();
         if (level.getFluidState(pos).is(FluidTags.WATER)) return null;
@@ -224,6 +302,15 @@ public class BlazierBlock extends BaseEntityBlock {
     }
 
     @Override
+    public ItemStack getCloneItemStack(LevelReader level, BlockPos pos, BlockState state) {
+        ItemStack stack = new ItemStack(MNDItems.BLAZIER.get());
+        stack.set(DataComponents.BLOCK_STATE, BlockItemStateProperties.EMPTY
+                .with(LIT, state.getValue(LIT))
+                .with(HEAT, state.getValue(HEAT)));
+        return stack;
+    }
+
+    @Override
     protected void onRemove(BlockState state, Level level, BlockPos pos,
                             BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
@@ -231,16 +318,6 @@ public class BlazierBlock extends BaseEntityBlock {
             if (be instanceof BlazierBlockEntity blazeEntity) {
                 Containers.dropContents(level, pos, blazeEntity.getItems());
             }
-
-            int powderToDrop = state.getValue(LIT)
-                    ? state.getValue(HEAT).getBlazepowderDrop(level.random)
-                    : 0;
-
-            if (powderToDrop > 0) {
-                Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(),
-                        new ItemStack(Items.BLAZE_POWDER, powderToDrop));
-            }
-
             super.onRemove(state, level, pos, newState, isMoving);
         }
     }
@@ -268,6 +345,7 @@ public class BlazierBlock extends BaseEntityBlock {
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state,
                                                                   BlockEntityType<T> type) {
+        if (!MNDConfiguration.ENABLE_BLAZIER.get()) return null;
         if (!state.getValue(LIT)) {
             return createTickerHelper(type, MNDBlockEntityTypes.BLAZIER.get(),
                     BlazierBlockEntity::cooldownTick);
@@ -283,6 +361,7 @@ public class BlazierBlock extends BaseEntityBlock {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (!MNDConfiguration.ENABLE_BLAZIER.get()) return;
         if (!state.getValue(LIT)) return;
 
         HeatLevel heat = state.getValue(HEAT);

@@ -28,7 +28,7 @@ repositories {
         name = "BlameJared"
         url = "https://maven.blamejared.com"
     }
-    maven { url "https://maven.ryanliptak.com/" }
+    maven { url = "https://maven.ryanliptak.com/" }
     maven { url = "https://api.modrinth.com/maven" }
 }
 
@@ -110,7 +110,7 @@ configurations {
 }
 
 dependencies {
-    implementation "vectorwing.farmersdelight:FarmersDelight:1.21.1-1.3.0-rc2"
+    implementation "maven.modrinth:farmers-delight:${delight_version}"
     // compile against the JEI API but do not include it at runtime
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
@@ -123,7 +123,7 @@ dependencies {
 
     compileOnly "maven.modrinth:miners-delight:${minersdelight_version}"
     compileOnly "maven.modrinth:lodestonelib:1.7.1"
-    implementation "maven.modrinth:tuttas-doors:${tuttasdoors_version}"
+    implementation "maven.modrinth:alltuttasneeds:${alltuttasneeds_version}"
 
     def ctDep = "com.blamejared.crafttweaker:CraftTweaker-neoforge-${mod_minecraft}:${crafttweaker_version}"
     compileOnly ctDep
@@ -159,7 +159,7 @@ publishing {
     }
     repositories {
         maven {
-            url "file://${project.projectDir}/repo"
+            url = "file://${project.projectDir}/repo"
         }
     }
 }

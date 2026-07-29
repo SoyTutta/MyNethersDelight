@@ -4,11 +4,11 @@
   "group": "planks",
   "ingredients": [
     {
-      "tag": "mynethersdelight:block_of_powdery"
+      "tag": "mynethersdelight:powdery_blocks"
     }
   ],
   "result": {
-    "count": 4,
+    "count": 2,
     "id": "mynethersdelight:powdery_planks"
   }
 }

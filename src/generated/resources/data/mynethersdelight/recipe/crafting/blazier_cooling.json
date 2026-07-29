@@ -1,0 +1,9 @@
+{
+  "neoforge:conditions": [
+    {
+      "type": "mynethersdelight:blazier_enabled"
+    }
+  ],
+  "type": "mynethersdelight:blazier_cooling",
+  "category": "misc"
+}

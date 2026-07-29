@@ -1,4 +1,10 @@
 {
+  "neoforge:conditions": [
+    {
+      "type": "neoforge:mod_loaded",
+      "modid": "brewinandchewin"
+    }
+  ],
   "type": "brewinandchewin:fermenting",
   "base_fluid": {
     "amount": 500,

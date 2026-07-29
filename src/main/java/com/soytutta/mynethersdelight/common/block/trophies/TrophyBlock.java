@@ -23,6 +23,7 @@ import net.minecraft.util.FastColor;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -136,10 +137,12 @@ public class TrophyBlock extends AbstractTrophyBlock {
 
         if (block == MNDBlocks.HOGLIN_TROPHY.get() && (heldItem.is(MNDTags.HOGLIN_WAXED))) {
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.WAXED_HOGLIN_TROPHY.get(), SoundEvents.HONEYCOMB_WAX_ON, ParticleTypes.WAX_ON, secondParticle, secondSoundEvent, useSecondEffects);
+            consumeInteractionItem(level, player, heldItem);
             return ItemInteractionResult.SUCCESS;
         }
         else if (block == MNDBlocks.WAXED_HOGLIN_TROPHY.get() && heldItem.canPerformAction(ItemAbilities.AXE_WAX_OFF)) {
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.AXE_WAX_OFF, ParticleTypes.WAX_OFF, secondParticle, secondSoundEvent, useSecondEffects);
+            damageInteractionTool(level, player, hand, heldItem);
             return ItemInteractionResult.SUCCESS;
         }
         else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && heldItem.is(MNDTags.HOGLIN_CURE)) {
@@ -147,6 +150,7 @@ public class TrophyBlock extends AbstractTrophyBlock {
             secondSoundEvent = SoundEvents.ENCHANTMENT_TABLE_USE;
             useSecondEffects = true;
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.ZOMBIE_VILLAGER_CURE, ParticleTypes.CLOUD, secondParticle, secondSoundEvent, useSecondEffects);
+            consumeInteractionItem(level, player, heldItem);
             return ItemInteractionResult.SUCCESS;
         }
         else if (block == MNDBlocks.HOGLIN_TROPHY.get() && ItemUtils.isKnife(heldStack)) {
@@ -154,6 +158,7 @@ public class TrophyBlock extends AbstractTrophyBlock {
             secondSoundEvent = SoundEvents.HOGLIN_HURT;
             useSecondEffects = true;
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.SKOGLIN_TROPHY.get(), ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), ParticleTypes.DAMAGE_INDICATOR, secondParticle, secondSoundEvent, useSecondEffects);
+            damageInteractionTool(level, player, hand, heldItem);
             int j = 1 + level.random.nextInt(2);
             popResource(level, pos, new ItemStack(Items.LEATHER, j));
             return ItemInteractionResult.SUCCESS;
@@ -163,6 +168,7 @@ public class TrophyBlock extends AbstractTrophyBlock {
             secondSoundEvent = SoundEvents.ZOGLIN_HURT;
             useSecondEffects = true;
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.SKOGLIN_TROPHY.get(), ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), ParticleTypes.DAMAGE_INDICATOR, secondParticle, secondSoundEvent, useSecondEffects);
+            damageInteractionTool(level, player, hand, heldItem);
             int j = 1 + level.random.nextInt(2);
             popResource(level, pos, new ItemStack(Items.ROTTEN_FLESH, j));
             return ItemInteractionResult.SUCCESS;
@@ -172,6 +178,7 @@ public class TrophyBlock extends AbstractTrophyBlock {
             secondSoundEvent = SoundEvents.HOGLIN_AMBIENT;
             useSecondEffects = true;
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.ARMOR_EQUIP_LEATHER.value(), ParticleTypes.HAPPY_VILLAGER, secondParticle, secondSoundEvent, useSecondEffects);
+            consumeInteractionItem(level, player, heldItem);
             return ItemInteractionResult.SUCCESS;
         }
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -198,6 +205,18 @@ public class TrophyBlock extends AbstractTrophyBlock {
                     level.playSound(null, pos, secondSoundEvent, SoundSource.BLOCKS, 1.0F, 1.0F);
                 }
             }
+        }
+    }
+
+    private void consumeInteractionItem(Level level, Player player, ItemStack heldItem) {
+        if (!level.isClientSide() && !player.getAbilities().instabuild) {
+            heldItem.shrink(1);
+        }
+    }
+
+    private void damageInteractionTool(Level level, Player player, InteractionHand hand, ItemStack heldItem) {
+        if (!level.isClientSide()) {
+            heldItem.hurtAndBreak(1, player, LivingEntity.getSlotForHand(hand));
         }
     }
 

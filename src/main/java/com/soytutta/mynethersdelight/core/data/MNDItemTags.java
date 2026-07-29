@@ -54,9 +54,12 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(MyCommonTags.FOODS_RICE_PASTA).add(MNDItems.GHASTA.get());this.tag(CommonTags.Items.FOODS_PASTA).add(MNDItems.GHASTA.get()); this.tag(CommonTags.Items.CROPS_RICE).add(MNDItems.GHASMATI.get());
         this.tag(CommonTags.Items.FOODS_DOUGH).add(MNDItems.GHAST_DOUGH.get());
         this.tag(CommonTags.Items.FOODS_COOKED_EGG).addTag(MyCommonTags.FOODS_BOILED_EGG).add(MNDItems.GOLDEN_EGG.get(), MNDItems.ENCHANTED_GOLDEN_EGG.get());
+        this.tag(MyCommonTags.Items.STORAGE_BLOCKS_BULLET_PEPPER).add(MNDItems.BULLET_PEPPER_CRATE.get());
     }
 
     private void registerNeoForgeTags() {
+        this.tag(Tags.Items.STORAGE_BLOCKS).addTag(MyCommonTags.Items.STORAGE_BLOCKS_BULLET_PEPPER);
+        this.tag(Tags.Items.STRIPPED_LOGS).add(MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
         this.tag(Tags.Items.FOODS_GOLDEN).add(MNDItems.GOLDEN_EGG.get(), MNDItems.ENCHANTED_GOLDEN_EGG.get());
         this.tag(Tags.Items.FOODS_SOUP).add(MNDItems.EGG_SOUP.get(), MNDItems.SPICY_NOODLE_SOUP.get(), MNDItems.ROCK_SOUP.get());
         this.tag(Tags.Items.FOODS_EDIBLE_WHEN_PLACED).add(MNDItems.BREAD_LOAF_BLOCK.get(), MNDItems.ROAST_STUFFED_HOGLIN.get(), MNDItems.STRIDERLOAF_BLOCK.get(), MNDItems.COLD_STRIDERLOAF_BLOCK.get(), MNDItems.GHASTA_WITH_CREAM_BLOCK.get(), MNDItems.MAGMA_CAKE.get());
@@ -69,7 +72,8 @@ public class MNDItemTags extends ItemTagsProvider {
     private void registerModTags() {
         this.tag(MNDTags.STUFFED_HOGLIN_ITEMS).add(MNDItems.ROAST_EAR.get(), MNDItems.PLATE_OF_STUFFED_HOGLIN.get(), MNDItems.PLATE_OF_STUFFED_HOGLIN_HAM.get(), MNDItems.PLATE_OF_STUFFED_HOGLIN_SNOUT.get());
 
-        this.tag(MNDTags.BLOCK_OF_POWDERY).add(MNDItems.BLOCK_OF_POWDERY_CANNON.get(), MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
+        this.tag(MNDTags.Items.POWDERY_BLOCKS).add(MNDItems.BLOCK_OF_POWDERY_CANNON.get(), MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
+        this.tag(MNDTags.BLOCK_OF_POWDERY).addTag(MNDTags.Items.POWDERY_BLOCKS);
 
         this.tag(MNDTags.STOVE_SOUL_FUEL).addTag(ItemTags.SOUL_FIRE_BASE_BLOCKS);
         this.tag(MNDTags.STOVE_FIRE_FUEL).addTag(MNDTags.HOT_SPICE).add(Items.BLAZE_ROD, Items.FIRE_CHARGE, Items.MAGMA_CREAM, Items.MAGMA_BLOCK);
@@ -110,7 +114,7 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(ItemTags.SIGNS).add(MNDItems.POWDERY_SIGN.get());
         this.tag(ItemTags.HANGING_SIGNS).add(MNDItems.POWDERY_HANGING_SIGN.get());
 
-        this.tag(ItemTags.NON_FLAMMABLE_WOOD).addTag(MNDTags.BLOCK_OF_POWDERY).add(MNDItems.POWDERY_PLANKS.get(),MNDItems.POWDERY_MOSAIC.get(),
+        this.tag(ItemTags.NON_FLAMMABLE_WOOD).addTag(MNDTags.Items.POWDERY_BLOCKS).add(MNDItems.POWDERY_PLANKS.get(),MNDItems.POWDERY_MOSAIC.get(),
                 MNDItems.POWDERY_PLANKS_SLAB.get(),MNDItems.POWDERY_MOSAIC_SLAB.get(),MNDItems.POWDERY_PLANKS_STAIRS.get(),MNDItems.POWDERY_MOSAIC_STAIRS.get(),
                 MNDItems.POWDERY_FENCE.get(),MNDItems.POWDERY_FENCE_GATE.get(),MNDItems.POWDERY_DOOR.get(),MNDItems.POWDERY_TRAPDOOR.get(),
                 MNDItems.POWDERY_PRESSURE_PLATE.get(),MNDItems.POWDERY_BUTTON.get(),MNDItems.POWDERY_SIGN.get(),MNDItems.POWDERY_HANGING_SIGN.get());

@@ -88,11 +88,55 @@ public class MNDLang extends LanguageProvider {
         this.add("mynethersdelight.jei.forgoting.light", "Sped up by adjacent flames (see below)");
         this.add("mynethersdelight.jei.forgoting.fluid", "Sped up by adjacent lava");
 
-        this.add("block.mynethersdelight.blazier.too_hot", "The temperature is too high for this.");
-        this.add("block.mynethersdelight.blazier.too_cold", "The temperature is too low for this.");
+        this.add("block.mynethersdelight.blazier.too_hot", "The fire is too intense.");
+        this.add("block.mynethersdelight.blazier.too_cold", "The fire isn't burning hot enough.");
+        this.add("tooltip.mynethersdelight.blazier.heat", "Heat: %s");
+        this.add("tooltip.mynethersdelight.blazier.heat.smelting", "White-hot");
+        this.add("tooltip.mynethersdelight.blazier.heat.baking", "Blazing");
+        this.add("tooltip.mynethersdelight.blazier.heat.campfire", "Live flame");
+        this.add("tooltip.mynethersdelight.blazier.heat.smoking", "Embers");
+        this.add("tooltip.mynethersdelight.blazier.heat.extinguished", "Blazier Base");
 
         this.add("mynethersdelight.block.feast.space_required", "You need more space to serve this.");
         this.add("mynethersdelight.block.feast.use_knife", "You need a Knife to cut this.");
+
+        this.add("mynethersdelight.configuration.title", "My Nether's Delight — Settings");
+        this.add("mynethersdelight.configuration.section.mynethersdelight.common.toml", "Common settings");
+        this.add("mynethersdelight.configuration.section.mynethersdelight.common.toml.title", "Common settings");
+        this.add("mynethersdelight.configuration.settings", "General");
+        this.add("mynethersdelight.configuration.settings.button", "General");
+        this.add("mynethersdelight.configuration.settings.tooltip", "Configure general gameplay settings.");
+        this.add("mynethersdelight.configuration.enablePiglinFoodTrades", "Enable Piglin Food Trades");
+        this.add("mynethersdelight.configuration.enablePiglinFoodTrades.tooltip", "Allows Piglins to barter food items and Strider Rocks from this mod. Special hunting-related trades are not affected.");
+        this.add("mynethersdelight.configuration.piglinFoodTradeChance", "Piglin Food Trade Chance");
+        this.add("mynethersdelight.configuration.piglinFoodTradeChance.tooltip", "The chance that a Piglin barter gives food or Strider Rocks from this mod. Uses a decimal percentage: 0.25 means 25%.");
+        this.add("mynethersdelight.configuration.enableFrogMagmaCakeBehavior", "Enable Frog Magma Cake Behavior");
+        this.add("mynethersdelight.configuration.enableFrogMagmaCakeBehavior.tooltip", "Allows Frogs to seek out Magma Cake and Magma Cake Slices, and lets players feed slices directly to a Frog.");
+        this.add("mynethersdelight.configuration.farming", "Farming");
+        this.add("mynethersdelight.configuration.farming.button", "Farming");
+        this.add("mynethersdelight.configuration.farming.tooltip", "Configure Resurgent Soil and Resurgent Soil Farmland behavior.");
+        this.add("mynethersdelight.configuration.enableResurgentSoilPropagation", "Enable Resurgent Soil Propagation");
+        this.add("mynethersdelight.configuration.enableResurgentSoilPropagation.tooltip", "Allows Resurgent Soil and Resurgent Soil Farmland to propagate nearby plants.");
+        this.add("mynethersdelight.configuration.resurgentSoilTickMultiplier", "Resurgent Soil Tick Multiplier");
+        this.add("mynethersdelight.configuration.resurgentSoilTickMultiplier.tooltip", "Multiplies the number of growth, transformation and propagation attempts made by Resurgent Soil and Resurgent Soil Farmland. Farmland hydration and drying are not affected.");
+        this.add("mynethersdelight.configuration.resurgentSoilGrowthRange", "Resurgent Soil Growth Range");
+        this.add("mynethersdelight.configuration.resurgentSoilGrowthRange.tooltip", "The maximum vertical distance that Resurgent Soil and Resurgent Soil Farmland follow connected plants while applying growth.");
+        this.add("mynethersdelight.configuration.resurgentFarmlandHeatSearchRadius", "Farmland Heat Search Radius");
+        this.add("mynethersdelight.configuration.resurgentFarmlandHeatSearchRadius.tooltip", "The horizontal radius used to search for valid heat sources. Vertical range is half this value. Set to 0 to disable heat hydration.");
+        this.add("mynethersdelight.configuration.crafting", "Crafting");
+        this.add("mynethersdelight.configuration.crafting.button", "Crafting");
+        this.add("mynethersdelight.configuration.crafting.tooltip", "Configure craftable features and Blazier behavior.");
+        this.add("mynethersdelight.configuration.enableBlazier", "Enable Blazier");
+        this.add("mynethersdelight.configuration.enableBlazier.tooltip", "Master switch for the Blazier. Disabling hides its creative-tab item and recipes, and stops its behavior.");
+        this.add("mynethersdelight.configuration.blazierCookingTimeMultiplier", "Blazier Cooking Time Multiplier");
+        this.add("mynethersdelight.configuration.blazierCookingTimeMultiplier.tooltip", "Multiplies cooking time in every Blazier mode while preserving their original 6 / 3 / 1 / 6 time proportions. Higher values take longer.");
+        this.add("mynethersdelight.configuration.enableStoneCabinets", "Enable Stone Cabinets");
+        this.add("mynethersdelight.configuration.enableStoneCabinets.tooltip", "Enables Nether Brick, Red Nether Brick and Blackstone Brick Cabinets. Disabling hides their creative-tab items and recipes.");
+        this.add("mynethersdelight.configuration.world", "World");
+        this.add("mynethersdelight.configuration.world.button", "World");
+        this.add("mynethersdelight.configuration.world.tooltip", "Configure world generation.");
+        this.add("mynethersdelight.configuration.generatePowderyCane", "Generate Powdery Cane");
+        this.add("mynethersdelight.configuration.generatePowderyCane.tooltip", "Controls whether Powdery Cane patches generate naturally in Crimson Forests.");
 
         this.add("tooltip.farmersdelight.strider_egg", "Nourished by 1 Harmful Effect");
         this.add("tooltip.farmersdelight.golden_egg", "Nourished by all harmful effects");

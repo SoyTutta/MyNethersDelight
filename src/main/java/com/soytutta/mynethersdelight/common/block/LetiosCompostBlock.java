@@ -4,6 +4,7 @@
 //
 package com.soytutta.mynethersdelight.common.block;
 
+import com.soytutta.mynethersdelight.common.data.PlantRuleEngine;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import net.minecraft.core.BlockPos;
@@ -29,6 +30,7 @@ import net.neoforged.neoforge.common.util.TriState;
 
 public class LetiosCompostBlock extends Block {
     public static IntegerProperty FORGOTING = IntegerProperty.create("forgoting", 0, 9);
+    private static final ThreadLocal<Boolean> APPLYING_PLANT_RULE = ThreadLocal.withInitial(() -> false);
 
     public LetiosCompostBlock(BlockBehaviour.Properties properties) {
         super(properties);
@@ -52,7 +54,7 @@ public class LetiosCompostBlock extends Block {
         if (!worldIn.isClientSide) {
             float chance = 0.0F;
             boolean hasLeteosBooster = false;
-            boolean isSoulBiome = false;
+            boolean isSoulBiome = worldIn.getBiome(pos).is(Biomes.SOUL_SAND_VALLEY);
 
             for (BlockPos neighborPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
                 BlockState neighborState = worldIn.getBlockState(neighborPos);
@@ -70,19 +72,32 @@ public class LetiosCompostBlock extends Block {
                 if (neighborState.getFluidState().is(MNDTags.LETEOS_BOOSTER)) {
                     hasLeteosBooster = true;
                 }
-
-                if (worldIn.getBiome(pos).is(Biomes.SOUL_SAND_VALLEY)) {
-                    isSoulBiome = true;
-                }
             }
 
             chance += hasLeteosBooster ? 0.3F : 0.0F;
             chance += isSoulBiome ? 0.3F : 0.0F;
-            if (worldIn.getRandom().nextFloat() <= chance && worldIn.dimensionType().ultraWarm()) {
+            if (random.nextFloat() <= chance && worldIn.dimensionType().ultraWarm()) {
                 if (state.getValue(FORGOTING) == this.getMaxForgotingStage()) {
                     worldIn.setBlock(pos, MNDBlocks.RESURGENT_SOIL.get().defaultBlockState(), 3);
                 } else {
                     worldIn.setBlock(pos, state.setValue(FORGOTING, (Integer) state.getValue(FORGOTING) + 1), 3);
+                }
+            }
+        }
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block neighborBlock, BlockPos neighborPos, boolean movedByPiston) {
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+        if (level instanceof ServerLevel serverLevel && neighborPos.equals(pos.above()) && !APPLYING_PLANT_RULE.get()) {
+            BlockState plantState = serverLevel.getBlockState(neighborPos);
+            if (!plantState.isAir()) {
+                APPLYING_PLANT_RULE.set(true);
+                try {
+                    PlantRuleEngine.applyLetiosCompostRules(serverLevel, neighborPos, plantState, serverLevel.random);
+                } finally {
+                    APPLYING_PLANT_RULE.remove();
                 }
             }
         }

@@ -1,6 +1,7 @@
 package com.soytutta.mynethersdelight.common.registry;
 
 import com.soytutta.mynethersdelight.MyNethersDelight;
+import com.soytutta.mynethersdelight.common.MNDConfiguration;
 import com.soytutta.mynethersdelight.common.utility.MNDTextUtils;
 import net.minecraft.core.registries.*;
 import net.minecraft.world.item.*;
@@ -18,11 +19,15 @@ public class MNDCreativeTab {
                 .title(MNDTextUtils.getTranslation("itemGroup.main"))
                 .icon(MNDItems.NETHER_STOVE.get()::getDefaultInstance)
                 .displayItems((parameters, output) -> {
-                    output.accept(MNDItems.BLAZIER.get());
+                    if (MNDConfiguration.ENABLE_BLAZIER.get()) {
+                        output.accept(MNDItems.BLAZIER.get());
+                    }
                     output.accept(MNDItems.NETHER_STOVE.get());
-                    output.accept(MNDItems.RED_NETHER_BRICKS_CABINET.get());
-                    output.accept(MNDItems.NETHER_BRICKS_CABINET.get());
-                    output.accept(MNDItems.BLACKSTONE_BRICKS_CABINET.get());
+                    if (MNDConfiguration.ENABLE_STONE_CABINETS.get()) {
+                        output.accept(MNDItems.RED_NETHER_BRICKS_CABINET.get());
+                        output.accept(MNDItems.NETHER_BRICKS_CABINET.get());
+                        output.accept(MNDItems.BLACKSTONE_BRICKS_CABINET.get());
+                    }
                     output.accept(MNDItems.POWDERY_CABINET.get());
                     output.accept(MNDItems.BULLET_PEPPER_CRATE.get());
                     output.accept(MNDItems.LETIOS_COMPOST.get());

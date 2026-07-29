@@ -247,7 +247,7 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
                 level.playSound(null, pos, SoundEvents.WOOD_BREAK, SoundSource.PLAYERS, 1.0F, 1.0F);
                 level.destroyBlock(pos, true);
             } else {
-                player.displayClientMessage(TextUtils.getTranslation("block.feast.use_container", (new ItemStack(Items.BOWL)).getHoverName()), true);
+                player.displayClientMessage(TextUtils.block("feast.use_container", (new ItemStack(Items.BOWL)).getHoverName()), true);
             }
         }
 
@@ -259,6 +259,9 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
         BedPart part = state.getValue(PART);
         BlockPos pairPos = pos.relative(getDirectionToOther(part, state.getValue(FACING)));
         BlockState pairState = level.getBlockState(pairPos);
+        if (!isValidPair(state, pairState) || servings <= 0) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
         level.setBlock(pairPos, pairState.setValue(SERVINGS, servings - 1), 3);
         level.setBlock(pos, state.setValue(SERVINGS, servings - 1), 3);
         Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MNDItems.ROAST_EAR.get()));
@@ -272,6 +275,9 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
         BlockPos pairPos = pos.relative(getDirectionToOther(part, state.getValue(FACING)));
         BlockState pairState = level.getBlockState(pairPos);
         ItemStack heldItem = player.getItemInHand(handIn);
+        if (!isValidPair(state, pairState) || servings <= 0) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
         level.setBlock(pairPos, pairState.setValue(SERVINGS, servings - 1), 3);
         level.setBlock(pos, state.setValue(SERVINGS, servings - 1), 3);
         if (!player.isCreative()) {
@@ -284,6 +290,13 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
 
         level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
         return ItemInteractionResult.SUCCESS;
+    }
+
+    private boolean isValidPair(BlockState state, BlockState pairState) {
+        return pairState.is(this)
+                && pairState.hasProperty(PART)
+                && pairState.hasProperty(SERVINGS)
+                && pairState.getValue(PART) != state.getValue(PART);
     }
 
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {

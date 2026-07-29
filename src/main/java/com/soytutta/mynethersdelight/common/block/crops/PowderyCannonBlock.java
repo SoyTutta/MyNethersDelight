@@ -14,6 +14,7 @@ import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.level.block.BambooStalkBlock;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.*;
@@ -30,6 +31,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.pathfinder.PathType;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
@@ -39,6 +41,8 @@ import net.neoforged.neoforge.common.CommonHooks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.util.TriState;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
+
+import javax.annotation.Nullable;
 
 import static com.soytutta.mynethersdelight.common.block.utility.MNDBlockStateProperties.PRESSURE;
 
@@ -83,6 +87,12 @@ public class PowderyCannonBlock extends BambooStalkBlock {
 
     protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
         return false;
+    }
+
+    @Nullable
+    @Override
+    public PathType getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob entity) {
+        return PathType.DAMAGE_OTHER;
     }
 
     @Override
@@ -419,7 +429,7 @@ public class PowderyCannonBlock extends BambooStalkBlock {
 
         BlockPos positionToPlaceNewBlock = posOfTopCannon.above();
 
-        if ((level.getBlockState(posOfTopCannon).getValue(BambooStalkBlock.LEAVES) != BambooLeaves.NONE || level.getBlockState(posOfTopCannon).getValue(BambooStalkBlock.STAGE) == 1) && level.isEmptyBlock(positionToPlaceNewBlock)) {
+        if ((stateOfTopCannon.getValue(BambooStalkBlock.LEAVES) != BambooLeaves.NONE || stateOfTopCannon.getValue(BambooStalkBlock.STAGE) == 1) && level.isEmptyBlock(positionToPlaceNewBlock)) {
             level.setBlock(positionToPlaceNewBlock, MNDBlocks.BULLET_PEPPER.get().defaultBlockState(), 3);
             return;
         }
