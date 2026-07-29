@@ -148,7 +148,7 @@ public class ResurgentSoilFarmlandBlock extends FarmBlock {
                 }
             }
 
-            if (aboveState.is(ModTags.UNAFFECTED_BY_RICH_SOIL) || aboveBlock instanceof TallFlowerBlock) {
+            if (aboveState.is(ModTags.Blocks.UNAFFECTED_BY_RICH_SOIL) || aboveBlock instanceof TallFlowerBlock) {
                 return;
             }
 

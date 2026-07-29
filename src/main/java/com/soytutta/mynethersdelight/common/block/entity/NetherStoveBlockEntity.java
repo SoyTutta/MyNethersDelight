@@ -80,7 +80,7 @@ public class NetherStoveBlockEntity extends SyncedBlockEntity {
     public static void cookingTick(Level level, BlockPos pos, BlockState state, NetherStoveBlockEntity stove) {
         boolean isStoveLit = state.getValue(NetherStoveBlock.LIT);
         if (stove.isStoveBlockedAbove()) {
-            if (!ItemUtils.isInventoryEmpty(stove.inventory)) {
+            if (ItemUtils.doesInventoryHaveItems(stove.inventory)) {
                 ItemUtils.dropItems(level, pos, stove.inventory);
                 stove.inventoryChanged();
             }

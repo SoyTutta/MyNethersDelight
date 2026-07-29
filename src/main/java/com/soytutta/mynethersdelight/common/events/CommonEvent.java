@@ -30,8 +30,8 @@ import net.minecraft.world.level.biome.Biomes;
 import net.minecraftforge.event.entity.living.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
-import vectorwing.farmersdelight.common.tag.ModTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 
 import java.util.List;
 import java.util.Map;
@@ -43,11 +43,11 @@ public class CommonEvent {
         if (!event.getEntity().level().isClientSide
                 && event.getEntity() instanceof Mob mob && event.getSource() != null
                 && event.getSource().getDirectEntity() instanceof LivingEntity directSource
-                && directSource.getItemInHand(InteractionHand.MAIN_HAND).is(ForgeTags.TOOLS)) {
+                && directSource.getItemInHand(InteractionHand.MAIN_HAND).is(CommonTags.Items.TOOLS)) {
             if (directSource.getItemInHand(InteractionHand.MAIN_HAND).getEnchantmentLevel(MNDEnchantments.HUNTING.get()) > 0
                     && (mob.getMaxHealth() < 150.0F || mob.getType().is(MNDTags.SPECIAL_HUNT))
                     && (((directSource.hasEffect(MobEffects.LUCK) || directSource.hasEffect(MobEffects.UNLUCK)) && event.getEntity().level().random.nextFloat() < 0.6F)
-                    || directSource.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.KNIVES)
+                    || directSource.getItemInHand(InteractionHand.MAIN_HAND).is(CommonTags.Items.TOOLS_KNIVES)
                     || event.getEntity().level().random.nextFloat() < 0.4F)) {
 
                 Difficulty difficulty = event.getEntity().level().getDifficulty();
@@ -83,13 +83,13 @@ public class CommonEvent {
                 // FAILED HUNT
                 if ((event.getEntity().level().random.nextFloat() < FailProbability
                         || (mob.isBaby() && event.getEntity().level().random.nextFloat() < 0.2F)
-                        || directSource.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.KNIVES))
+                        || directSource.getItemInHand(InteractionHand.MAIN_HAND).is(CommonTags.Items.TOOLS_KNIVES))
                         && !mob.hasEffect(MobEffects.CONFUSION)) {
 
                     if (mob instanceof Horse horse
                             && (event.getEntity().level().random.nextFloat() < (FailProbability / 2)
                             || (horse.isTamed() && event.getEntity().level().random.nextFloat() < FailProbability)
-                            || (directSource.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.KNIVES) && event.getEntity().level().random.nextFloat() < FailProbability))) {
+                            || (directSource.getItemInHand(InteractionHand.MAIN_HAND).is(CommonTags.Items.TOOLS_KNIVES) && event.getEntity().level().random.nextFloat() < FailProbability))) {
 
                         ZombieHorse zombieHorse = EntityType.ZOMBIE_HORSE.create(mob.level());
                         if (zombieHorse != null) {
@@ -125,7 +125,7 @@ public class CommonEvent {
                     if ((mob instanceof Frog || mob instanceof Bat)
                             && (event.getEntity().level().random.nextFloat() < (FailProbability / 2)
                             || (mob.level().getBiome(mob.blockPosition()).is(Biomes.SWAMP) && event.getEntity().level().random.nextFloat() < 0.3F)
-                            || (directSource.getItemInHand(InteractionHand.MAIN_HAND).is(ModTags.KNIVES) && event.getEntity().level().random.nextFloat() < 0.3F))) {
+                            || (directSource.getItemInHand(InteractionHand.MAIN_HAND).is(CommonTags.Items.TOOLS_KNIVES) && event.getEntity().level().random.nextFloat() < 0.3F))) {
 
                         Witch witch = EntityType.WITCH.create(mob.level());
                         if (witch != null) {

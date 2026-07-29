@@ -41,7 +41,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 
 import java.util.Random;
 import java.util.stream.Stream;
@@ -172,7 +172,7 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.WAXED_HOGLIN_TROPHY.get(), SoundEvents.HONEYCOMB_WAX_ON, ParticleTypes.WAX_ON, secondParticle, secondSoundEvent, useSecondEffects);
             return InteractionResult.SUCCESS;
         }
-        else if (block == MNDBlocks.WAXED_HOGLIN_TROPHY.get() && heldItem.is(ForgeTags.TOOLS_AXES)) {
+        else if (block == MNDBlocks.WAXED_HOGLIN_TROPHY.get() && heldItem.is(CommonTags.Items.TOOLS_AXES)) {
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.HONEYCOMB_WAX_ON, ParticleTypes.WAX_OFF, secondParticle, secondSoundEvent, useSecondEffects);
             return InteractionResult.SUCCESS;
         }
@@ -183,7 +183,7 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.ZOMBIE_VILLAGER_CURE, ParticleTypes.CLOUD, secondParticle, secondSoundEvent, useSecondEffects);
             return InteractionResult.SUCCESS;
         }
-        else if (block == MNDBlocks.HOGLIN_TROPHY.get() && heldItem.is(ForgeTags.TOOLS_KNIVES)) {
+        else if (block == MNDBlocks.HOGLIN_TROPHY.get() && heldItem.is(CommonTags.Items.TOOLS_KNIVES)) {
             secondParticle = ParticleTypes.CLOUD;
             secondSoundEvent = SoundEvents.HOGLIN_HURT;
             useSecondEffects = true;
@@ -192,7 +192,7 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
             popResource(level, pos, new ItemStack(Items.LEATHER, j));
             return InteractionResult.SUCCESS;
         }
-        else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && heldItem.is(ForgeTags.TOOLS_KNIVES)) {
+        else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && heldItem.is(CommonTags.Items.TOOLS_KNIVES)) {
             secondParticle = ParticleTypes.CLOUD;
             secondSoundEvent = SoundEvents.ZOGLIN_HURT;
             useSecondEffects = true;
@@ -215,7 +215,7 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
         if (level.isClientSide()) return;
 
         ItemStack heldItem = player.getItemInHand(hand);
-        if (heldItem.is(ForgeTags.TOOLS)) {
+        if (heldItem.is(CommonTags.Items.TOOLS)) {
             heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
         } else if (!player.getAbilities().instabuild) {
             heldItem.shrink(1);

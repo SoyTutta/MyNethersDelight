@@ -5,6 +5,7 @@
 
 package com.soytutta.mynethersdelight.core.data.recipes;
 
+import com.soytutta.mynethersdelight.MyNethersDelight;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import net.minecraft.data.recipes.FinishedRecipe;
 import net.minecraft.sounds.SoundEvents;
@@ -15,7 +16,7 @@ import net.minecraftforge.common.ToolActions;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.common.crafting.ingredient.ToolActionIngredient;
 import vectorwing.farmersdelight.common.registry.ModItems;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.data.builder.CuttingBoardRecipeBuilder;
 
 import java.util.Objects;
@@ -35,53 +36,62 @@ public class MNDCuttingRecipes {
 
     private static void cuttingAnimalItems(Consumer<FinishedRecipe> consumer) {
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.GHASTA.get()),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         MNDItems.GHASMATI.get())
                 .addResultWithChance(MNDItems.GHASMATI.get(), 0.05F)
-                .build(consumer, "mynethersdelight:cutting/ghasmati");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.STRIDER_ROCK.get()),
-                        Ingredient.of(ForgeTags.TOOLS_PICKAXES),
+                        Ingredient.of(CommonTags.Items.TOOLS_PICKAXES),
                         MNDItems.STRIDER_EGG.get())
                 .addResultWithChance(Items.BONE_MEAL, 0.25F)
-                .build(consumer, "mynethersdelight:cutting/strider_egg");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.STRIDER_SLICE.get()),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         MNDItems.MINCED_STRIDER.get(), 2)
                 .addResult(Items.STRING)
                 .addResultWithChance(Items.STRING, 0.5F, 2)
-                .build(consumer, "mynethersdelight:cutting/minced_strider");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.HOGLIN_LOIN.get()),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         MNDItems.HOGLIN_SAUSAGE.get(), 2)
-                .build(consumer, "mynethersdelight:cutting/hoglin_sausage");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.HOGLIN_HIDE.get())
-                        , Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        , Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         Items.LEATHER, 4)
                 .addResultWithChance(Items.LEATHER, 0.5F, 2)
-                .build(consumer, "mynethersdelight:cutting/hoglin_hide");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BLAZE_ROD),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         Items.BLAZE_POWDER, 3)
                 .addResultWithChance(Items.BLAZE_POWDER, 0.25F, 1)
-                .build(consumer, "mynethersdelight:cutting/balze_rod");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
 
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.HOGLIN_TROPHY.get()),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         MNDItems.SKOGLIN_TROPHY.get())
                 .addResult(Items.LEATHER)
                 .addResultWithChance(Items.LEATHER, 0.5F, 2)
-                .build(consumer, "mynethersdelight:cutting/skoglin_trophy");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.ZOGLIN_TROPHY.get()),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         MNDItems.SKOGLIN_TROPHY.get())
                 .addResult(Items.ROTTEN_FLESH)
                 .addResultWithChance(Items.ROTTEN_FLESH, 0.5F, 2)
-                .build(consumer, "mynethersdelight:cutting/skoglin_trophy_alt");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
 
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.WAXED_HOGLIN_TROPHY.get()),
-                        Ingredient.of(ForgeTags.TOOLS_AXES),
+                        Ingredient.of(CommonTags.Items.TOOLS_AXES),
                         MNDItems.HOGLIN_TROPHY.get())
-                .build(consumer, "mynethersdelight:cutting/hoglin_trophy");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
     }
     private static void strippingWood(Consumer<FinishedRecipe> consumer) {
         stripLogForBark(consumer, MNDItems.BLOCK_OF_POWDERY_CANNON.get(), MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
@@ -93,57 +103,67 @@ public class MNDCuttingRecipes {
 
     private static void cuttingVegetables(Consumer<FinishedRecipe> consumer) {
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.SUGAR_CANE),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         Items.SUGAR, 1)
                 .addResultWithChance(Items.SUGAR, 0.25F, 1)
-                .build(consumer, "farmersdelight:cutting/sugar_cane_alt");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CARVED_PUMPKIN),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         ModItems.PUMPKIN_SLICE.get(), 1)
                 .addResultWithChance(Items.PUMPKIN_SEEDS, 0.25F, 1)
-                .build(consumer, "farmersdelight:cutting/pumpkin_slice_alt");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.POWDER_CANNON.get()),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         Items.GUNPOWDER, 1)
                 .addResultWithChance(Items.GUNPOWDER, 0.25F, 1)
-                .build(consumer, "mynethersdelight:cutting/gunpowder_cane");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.BULLET_PEPPER.get()),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         Items.BLAZE_POWDER, 1)
                 .addResultWithChance(Items.BLAZE_POWDER, 0.25F, 1)
-                .build(consumer, "mynethersdelight:cutting/bullet_pepper");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.CRIMSON_FUNGUS_COLONY.get()),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         Items.CRIMSON_FUNGUS, 5)
-                .build(consumer, "mynethersdelight:cutting/crimson_fungus");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.WARPED_FUNGUS_COLONY.get()),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         Items.WARPED_FUNGUS, 5)
-                .build(consumer, "mynethersdelight:cutting/warped_fungus");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
     }
 
     private static void cuttingFoods(Consumer<FinishedRecipe> consumer) {
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.MAGMA_CAKE.get()),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         MNDItems.MAGMA_CAKE_SLICE.get(), 7)
-                .build(consumer, "mynethersdelight:cutting/magma_cake");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.BREAD_LOAF_BLOCK.get()),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         MNDItems.SLICES_OF_BREAD.get(), 5)
-                .build(consumer, "mynethersdelight:cutting/slices_of_bread");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.GHAST_SOURDOUGH.get()),
-                        Ingredient.of(ForgeTags.TOOLS_KNIVES),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         MNDItems.GHAST_DOUGH.get(), 3)
-                .build(consumer, "mynethersdelight:cutting/ghast_dough");
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
     }
 
     private static void stripLogForBark(Consumer<FinishedRecipe> consumer, ItemLike log, ItemLike strippedLog) {
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(log), new ToolActionIngredient(ToolActions.AXE_STRIP), strippedLog).addResult(ModItems.STRAW.get()).addSound(Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getKey(SoundEvents.AXE_STRIP)).toString()).build(consumer);
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(log), new ToolActionIngredient(ToolActions.AXE_STRIP), strippedLog).addResult(ModItems.STRAW.get()).addSound(Objects.requireNonNull(ForgeRegistries.SOUND_EVENTS.getKey(SoundEvents.AXE_STRIP)).toString()).setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
     }
 
     private static void salvagePlankFromFurniture(Consumer<FinishedRecipe> consumer, ItemLike plank, ItemLike door, ItemLike trapdoor, ItemLike sign) {
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(door), new ToolActionIngredient(ToolActions.AXE_DIG), plank).build(consumer);
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(trapdoor), new ToolActionIngredient(ToolActions.AXE_DIG), plank).build(consumer);
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(sign), new ToolActionIngredient(ToolActions.AXE_DIG), plank).build(consumer);
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(door), new ToolActionIngredient(ToolActions.AXE_DIG), plank).setNamespace(MyNethersDelight.MODID).save(consumer);
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(trapdoor), new ToolActionIngredient(ToolActions.AXE_DIG), plank).setNamespace(MyNethersDelight.MODID).save(consumer);
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(sign), new ToolActionIngredient(ToolActions.AXE_DIG), plank).setNamespace(MyNethersDelight.MODID).save(consumer);
     }
 }

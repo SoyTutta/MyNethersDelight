@@ -20,7 +20,7 @@ import net.minecraftforge.common.Tags;
 import vectorwing.farmersdelight.common.registry.ModBlocks;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.registry.ModRecipeSerializers;
-import vectorwing.farmersdelight.common.tag.ForgeTags;
+import vectorwing.farmersdelight.common.tag.CommonTags;
 
 import java.util.function.Consumer;
 
@@ -64,7 +64,7 @@ public class MNDCraftingRecipes {
                 .define('#',(Ingredient.of(ModItems.CANVAS.get(), Items.STRING)))
                 .unlockedBy("has_powder_cannon_or_canvas", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.POWDER_CANNON.get(),ModItems.CANVAS.get()))
                 .save(consumer, new ResourceLocation( "mynethersdelight:crafting/scaffolding_alt"));
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,ModBlocks.BASKET.get())
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,ModBlocks.BAMBOO_BASKET.get())
                 .pattern("B b")
                 .pattern("# #")
                 .pattern("b#B")
@@ -306,7 +306,7 @@ public class MNDCraftingRecipes {
                 .save(consumer, new ResourceLocation( "mynethersdelight:crafting/bleeding_tartar"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.HOTDOG.get())
                 .requires(MNDItems.ROASTED_SAUSAGE.get())
-                .requires(ForgeTags.BREAD)
+                .requires(CommonTags.Items.BREAD)
                 .unlockedBy("has_sausage", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.HOGLIN_SAUSAGE.get()))
                 .save(consumer, new ResourceLocation( "mynethersdelight:crafting/hotdog"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.HOTDOG_WITH_MIXED_SALAD.get(),2)
@@ -335,7 +335,7 @@ public class MNDCraftingRecipes {
                 .group("blue_tenderloin_steak_group")
                 .save(consumer, new ResourceLocation( "mynethersdelight:crafting/blue_tenderloin_steak"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.NETHER_BURGER.get())
-                .requires(ForgeTags.BREAD)
+                .requires(CommonTags.Items.BREAD)
                 .requires(MNDTags.COOKED_HOGLIN_LOIN)
                 .requires(Items.TWISTING_VINES)
                 .requires(Items.CRIMSON_FUNGUS)
@@ -358,9 +358,9 @@ public class MNDCraftingRecipes {
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.BREAKFAST_SAMPLER.get())
                 .requires(MNDItems.ROASTED_SAUSAGE.get(),2)
                 .requires(Ingredient.of(Items.HONEY_BOTTLE, MNDItems.STRIDER_EGG.get()))
-                .requires(ForgeTags.COOKED_EGGS)
-                .requires(ForgeTags.COOKED_EGGS)
-                .requires(ForgeTags.BREAD)
+                .requires(CommonTags.Items.COOKED_EGGS)
+                .requires(CommonTags.Items.COOKED_EGGS)
+                .requires(CommonTags.Items.BREAD)
                 .requires(Items.BOWL)
                 .unlockedBy("has_sausage", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.ROASTED_SAUSAGE.get()))
                 .save(consumer, new ResourceLocation( "mynethersdelight:crafting/breakfast_sampler"));
@@ -375,8 +375,8 @@ public class MNDCraftingRecipes {
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.STUFFED_PEPPER.get())
                 .requires(MNDItems.BULLET_PEPPER.get())
-                .requires(ForgeTags.COOKED_PORK)
-                .requires(ForgeTags.MILK)
+                .requires(CommonTags.Items.COOKED_PORK)
+                .requires(CommonTags.Items.MILK)
                 .unlockedBy("has_pepper", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.BULLET_PEPPER.get()))
                 .save(consumer, new ResourceLocation( "mynethersdelight:crafting/stuffed_pepper"));
 
@@ -407,13 +407,13 @@ public class MNDCraftingRecipes {
                 .save(consumer, new ResourceLocation( "mypersonaldelight:crafting/tear_popsicle"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.DRIED_GHAST_WITH_MILK.get())
                 .requires(MNDItems.GHASMATI.get())
-                .requires(ForgeTags.MILK)
+                .requires(CommonTags.Items.MILK)
                 .requires(Items.BOWL)
                 .unlockedBy("has_ghasmati", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHASMATI.get()))
                 .save(consumer, new ResourceLocation( "mynethersdelight:crafting/dried_ghast_with_milk"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.SIZZLING_PUDDING.get())
                 .requires(MNDItems.GHASMATI.get())
-                .requires(ForgeTags.MILK)
+                .requires(CommonTags.Items.MILK)
                 .requires(Tags.Items.EGGS)
                 .requires(Items.BLAZE_POWDER)
                 .requires(Items.BOWL)
@@ -444,15 +444,15 @@ public class MNDCraftingRecipes {
                 .save(consumer, new ResourceLocation( "mynethersdelight:crafting/ghast_dough"));
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.GHAST_SOURDOUGH.get())
                 .requires(MNDItems.GHAST_DOUGH.get())
-                .requires(ForgeTags.DOUGH)
-                .requires(ForgeTags.DOUGH)
-                .requires(ForgeTags.DOUGH)
+                .requires(CommonTags.Items.DOUGH)
+                .requires(CommonTags.Items.DOUGH)
+                .requires(CommonTags.Items.DOUGH)
                 .unlockedBy("has_ghast", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHASMATI.get(),MNDItems.GHASTA.get()))
                 .save(consumer, new ResourceLocation( "mynethersdelight:crafting/ghast_sourdough"));
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,MNDItems.GHAST_SALAD.get())
                 .requires(MyCommonTags.FOODS_RAW_GHAST)
-                .requires(ForgeTags.VEGETABLES)
+                .requires(CommonTags.Items.VEGETABLES)
                 .requires(Tags.Items.CROPS_CARROT)
                 .requires(Items.BOWL)
                 .unlockedBy("has_ghast", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHASMATI.get(),MNDItems.GHASTA.get()))
