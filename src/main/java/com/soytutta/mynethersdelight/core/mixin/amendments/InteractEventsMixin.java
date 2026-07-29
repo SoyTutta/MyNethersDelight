@@ -1,7 +1,6 @@
 package com.soytutta.mynethersdelight.core.mixin.amendments;
 
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
-import net.mehvahdjukaar.amendments.events.behaviors.InteractEvents;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -11,11 +10,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.BlockHitResult;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(value = InteractEvents.class, remap = false)
+@Pseudo
+@Mixin(targets = "net.mehvahdjukaar.amendments.events.behaviors.InteractEvents", remap = false)
 public class InteractEventsMixin {
 
     @Inject(method = "onItemUsedOnBlock", at = @At("HEAD"), cancellable = true)

@@ -1,5 +1,6 @@
 package com.soytutta.mynethersdelight.common.registry;
 
+import com.soytutta.mynethersdelight.common.block.entity.BlazierBlockEntity;
 import com.soytutta.mynethersdelight.common.block.entity.MNDHangingSignBlockEntity;
 import com.soytutta.mynethersdelight.common.block.entity.MNDSignBlockEntity;
 import com.soytutta.mynethersdelight.common.block.entity.NetherStoveBlockEntity;
@@ -15,6 +16,7 @@ public class MNDBlockEntityTypes {
     public static final RegistryObject<BlockEntityType<NetherStoveBlockEntity>> NETHER_STOVE;
     public static final RegistryObject<BlockEntityType<MNDSignBlockEntity>> MND_SIGN;
     public static final RegistryObject<BlockEntityType<MNDHangingSignBlockEntity>> MND_HSIGN;
+    public static final RegistryObject<BlockEntityType<BlazierBlockEntity>> BLAZIER;
 
     public MNDBlockEntityTypes() {
     }
@@ -31,6 +33,10 @@ public class MNDBlockEntityTypes {
         MND_HSIGN = TILES.register("mnd_hsign", () ->
                 BlockEntityType.Builder.of(MNDHangingSignBlockEntity::new,
                         MNDBlocks.POWDERY_HANGING_SIGN.get(), MNDBlocks.POWDERY_WALL_HANGING_SIGN.get()).build((null))
+        );
+        BLAZIER = TILES.register("blazier", () ->
+                BlockEntityType.Builder.of(BlazierBlockEntity::new,
+                        MNDBlocks.BLAZIER_BLOCK.get()).build(null)
         );
     }
 }

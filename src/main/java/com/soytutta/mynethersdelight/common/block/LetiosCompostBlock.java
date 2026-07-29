@@ -10,7 +10,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -48,8 +47,8 @@ public class LetiosCompostBlock extends Block {
     public void randomTick(BlockState state, ServerLevel worldIn, BlockPos pos, RandomSource random) {
         if (!worldIn.isClientSide) {
             float chance = 0.0F;
-            boolean hasLava = false;
-            boolean isSoulBiome = false;
+            boolean hasLeteosBooster = false;
+            boolean isSoulBiome = worldIn.getBiome(pos).is(Biomes.SOUL_SAND_VALLEY);
 
             for (BlockPos neighborPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
                 BlockState neighborState = worldIn.getBlockState(neighborPos);
@@ -64,18 +63,14 @@ public class LetiosCompostBlock extends Block {
                     }
                 }
 
-                if (neighborState.getFluidState().is(FluidTags.LAVA)) {
-                    hasLava = true;
-                }
-
-                if (worldIn.getBiome(pos).is(Biomes.SOUL_SAND_VALLEY)) {
-                    isSoulBiome = true;
+                if (neighborState.getFluidState().is(MNDTags.LETEOS_BOOSTER)) {
+                    hasLeteosBooster = true;
                 }
             }
 
-            chance += hasLava ? 0.3F : 0.0F;
+            chance += hasLeteosBooster ? 0.3F : 0.0F;
             chance += isSoulBiome ? 0.3F : 0.0F;
-            if (worldIn.getRandom().nextFloat() <= chance && worldIn.dimensionType().ultraWarm()) {
+            if (random.nextFloat() <= chance && worldIn.dimensionType().ultraWarm()) {
                 if (state.getValue(FORGOTING) == this.getMaxForgotingStage()) {
                     worldIn.setBlock(pos, MNDBlocks.RESURGENT_SOIL.get().defaultBlockState(), 3);
                 } else {
@@ -106,10 +101,36 @@ public class LetiosCompostBlock extends Block {
     @OnlyIn(Dist.CLIENT)
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         super.animateTick(state, level, pos, random);
-        if (random.nextInt(10) == 0 && level.dimensionType().ultraWarm()) {
-            level.addParticle(ParticleTypes.SOUL, (double)pos.getX() + (double)random.nextFloat(), (double)pos.getY() + 1.1, (double)pos.getZ() + (double)random.nextFloat(), 0.0, 0.0, 0.0);
+        if (level.dimensionType().ultraWarm() && random.nextInt(10) == 0) {
+            level.addParticle(hasActivatorNear(level, pos) ? ParticleTypes.SOUL : ParticleTypes.MYCELIUM,
+                    pos.getX() + random.nextFloat(), pos.getY() + 1.1,
+                    pos.getZ() + random.nextFloat(), 0.0, 0.0, 0.0);
         }
     }
+
+    private boolean hasActivatorNear(Level level, BlockPos pos) {
+        if (level.getBiome(pos).is(Biomes.SOUL_SAND_VALLEY)) {
+            return true;
+        }
+        for (BlockPos neighborPos : BlockPos.betweenClosed(
+                pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
+            if (neighborPos.equals(pos)) {
+                continue;
+            }
+            BlockState neighborState = level.getBlockState(neighborPos);
+            if (neighborState.is(MNDTags.LETIOS_ACTIVATORS)
+                    || neighborState.getFluidState().is(MNDTags.LETEOS_BOOSTER)) {
+                return true;
+            }
+            if (neighborState.is(MNDTags.LETIOS_FLAMES)
+                    && (!neighborState.hasProperty(BlockStateProperties.LIT)
+                    || neighborState.getValue(BlockStateProperties.LIT))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean canSustainPlant(BlockState state, BlockGetter world, BlockPos pos, Direction facing, IPlantable plantable) {
             if (plantable instanceof NetherWartBlock && facing == Direction.UP) {
                 return true;

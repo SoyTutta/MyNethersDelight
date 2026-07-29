@@ -23,9 +23,14 @@
     {
       "tag": "forge:crops/carrot"
     },
-    {
-      "item": "mynethersdelight:bullet_pepper"
-    }
+    [
+      {
+        "item": "mynethersdelight:bullet_pepper"
+      },
+      {
+        "item": "mynethersdelight:pepper_powder"
+      }
+    ]
   ],
   "recipe_book_tab": "meals",
   "result": {

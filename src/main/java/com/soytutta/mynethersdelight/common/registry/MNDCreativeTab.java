@@ -1,6 +1,7 @@
 package com.soytutta.mynethersdelight.common.registry;
 
 import com.soytutta.mynethersdelight.MyNethersDelight;
+import com.soytutta.mynethersdelight.common.MNDConfiguration;
 import com.soytutta.mynethersdelight.common.utility.MNDTextUtils;
 import com.soytutta.mynethersdelight.integration.addonsdelight.MNDItemsMD;
 import net.minecraft.core.registries.*;
@@ -25,10 +26,15 @@ public class MNDCreativeTab {
     private static void MNDMainTabContents(BuildCreativeModeTabContentsEvent event) {
         if (event.getTab() != MY_NETHERS_DELIGHT_TAB.get()) return;
 
+        if (MNDConfiguration.ENABLE_BLAZIER.get()) {
+            event.accept(MNDItems.BLAZIER.get());
+        }
         event.accept(MNDItems.NETHER_STOVE.get());
-        event.accept(MNDItems.RED_NETHER_BRICKS_CABINET.get());
-        event.accept(MNDItems.NETHER_BRICKS_CABINET.get());
-        event.accept(MNDItems.BLACKSTONE_BRICKS_CABINET.get());
+        if (MNDConfiguration.ENABLE_STONE_CABINETS.get()) {
+            event.accept(MNDItems.RED_NETHER_BRICKS_CABINET.get());
+            event.accept(MNDItems.NETHER_BRICKS_CABINET.get());
+            event.accept(MNDItems.BLACKSTONE_BRICKS_CABINET.get());
+        }
         event.accept(MNDItems.POWDERY_CABINET.get());
         event.accept(MNDItems.BULLET_PEPPER_CRATE.get());
         event.accept(MNDItems.LETIOS_COMPOST.get());
@@ -64,6 +70,7 @@ public class MNDCreativeTab {
         event.accept(MNDItems.CRIMSON_FUNGUS_COLONY.get());
         event.accept(MNDItems.WARPED_FUNGUS_COLONY.get());
 
+        event.accept(MNDItems.GOLDEN_TROPHY.get());
         event.accept(MNDItems.HOGLIN_TROPHY.get());
         event.accept(MNDItems.ZOGLIN_TROPHY.get());
         event.accept(MNDItems.SKOGLIN_TROPHY.get());
@@ -132,6 +139,7 @@ public class MNDCreativeTab {
         event.accept(MNDItems.TOASTS.get());
 
         event.accept(MNDItems.BULLET_PEPPER.get());
+        event.accept(MNDItems.PEPPER_POWDER.get());
         event.accept(MNDItems.STUFFED_PEPPER.get());
         event.accept(MNDItems.SPICY_SKEWER.get());
         event.accept(MNDItems.CHILIDOG.get());

@@ -40,7 +40,7 @@ import vectorwing.farmersdelight.FarmersDelight;
 @ParametersAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> {
-    public static final ResourceLocation UID = new ResourceLocation(FarmersDelight.MODID, "composition");
+    public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(FarmersDelight.MODID, "composition");
     private static final int slotSize = 22;
     private final Component title = MNDTextUtils.getTranslation("jei.forgoting");
 
@@ -51,7 +51,7 @@ public class ForgotingRecipeCategory implements IRecipeCategory<ForgotingDummy> 
     private final ItemStack resurgentSoil;
 
     public ForgotingRecipeCategory(IGuiHelper helper) {
-        ResourceLocation backgroundImage = new ResourceLocation("mynethersdelight", "textures/gui/jei/composition.png");
+        ResourceLocation backgroundImage = ResourceLocation.fromNamespaceAndPath("mynethersdelight", "textures/gui/jei/composition.png");
         this.background = helper.createDrawable(backgroundImage, 0, 0, 118, 80);
         this.letiosCompost = new ItemStack(MNDBlocks.LETIOS_COMPOST.get());
         this.resurgentSoil = new ItemStack(MNDItems.RESURGENT_SOIL.get());

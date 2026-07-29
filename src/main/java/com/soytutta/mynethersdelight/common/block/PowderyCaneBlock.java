@@ -1,8 +1,5 @@
 package com.soytutta.mynethersdelight.common.block;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
@@ -14,24 +11,21 @@ import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.BonemealableBlock;
-import net.minecraft.world.level.block.BushBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.block.state.properties.IntegerProperty;
-import net.minecraft.world.level.block.state.properties.Property;
+import net.minecraft.world.level.block.state.properties.*;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.BlockHitResult;
@@ -40,124 +34,248 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
-import vectorwing.farmersdelight.common.tag.CommonTags;
+import net.minecraftforge.common.Tags;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
 
-import java.util.Random;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public class PowderyCaneBlock extends BushBlock implements IPlantable, BonemealableBlock {
-    public static final BooleanProperty LIT = BooleanProperty.create("lit");
+    public static final int MAX_AGE = 3;
+    public static final IntegerProperty AGE = BlockStateProperties.AGE_3;
+    public static final BooleanProperty LIT = BlockStateProperties.LIT;
+    public static final EnumProperty<BambooLeaves> LEAVES = BlockStateProperties.BAMBOO_LEAVES;
+    public static final IntegerProperty STAGE = BlockStateProperties.STAGE;
+    public static final IntegerProperty PRESSURE = IntegerProperty.create("pressure", 0, 2);
     public static final BooleanProperty BASE = BooleanProperty.create("base");
     public static final BooleanProperty LEAVE = BooleanProperty.create("leave");
-    public static final IntegerProperty AGE = IntegerProperty.create("age", 0, 2);
-    public static final IntegerProperty PRESSURE = IntegerProperty.create("pressure", 0, 2);
     private static final VoxelShape SHAPE = Block.box(6.5, 0.0, 6.5, 10.5, 16.0, 10.5);
 
     public PowderyCaneBlock(BlockBehaviour.Properties properties) {
         super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(LIT, false).setValue(LEAVE, false).setValue(BASE, false).setValue(PRESSURE, 0).setValue(AGE, 0));
-    }
-
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        super.createBlockStateDefinition(builder);
-        builder.add(LIT, BASE, LEAVE, AGE, PRESSURE);
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
-        return new ItemStack(MNDItems.BULLET_PEPPER.get());
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public VoxelShape getShape(BlockState state, BlockGetter worldIn, BlockPos pos, CollisionContext context) {
-        Vec3 vec3 = state.getOffset(worldIn, pos);
-        return SHAPE.move(vec3.x, vec3.y, vec3.z);
+        registerDefaultState(stateDefinition.any()
+                .setValue(AGE, 0)
+                .setValue(LIT, false)
+                .setValue(PRESSURE, 0)
+                .setValue(LEAVES, BambooLeaves.NONE)
+                .setValue(STAGE, 0)
+                .setValue(BASE, false)
+                .setValue(LEAVE, false));
     }
 
     @Override
     public boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockState blockBelow = level.getBlockState(pos.below());
-        return blockBelow.is(MNDTags.POWDERY_CANNON_PLANTABLE_ON) || blockBelow.is(MNDTags.POWDERY_CANE);
+        return blockBelow.is(MNDTags.POWDERY_CANNON_PLANTABLE_ON)
+                || blockBelow.is(MNDBlocks.POWDERY_CANE.get())
+                || blockBelow.canSustainPlant(level, pos.below(), Direction.UP, this);
     }
-
-    public BlockState updateShape(BlockState state, Direction direction, BlockState offsetState, LevelAccessor level, BlockPos pos, BlockPos offsetPos) {
-        if (state.getValue(PRESSURE) > 0) {
-            level.scheduleTick(pos, this, 1);
-        }
-        BlockState blockAbove = level.getBlockState(pos.above());
-        BlockState blockBelow = level.getBlockState(pos.below());
-
-        if (blockBelow.is(MNDTags.POWDERY_CANNON_PLANTABLE_ON)) {
-            state = state.setValue(BASE, true);
-        }
-        else if (!blockAbove.is(MNDBlocks.BULLET_PEPPER.get()) && !blockAbove.is(Blocks.AIR)) {
-            state = state.setValue(LEAVE, false);
-        }
-        else if (blockBelow.is(MNDBlocks.POWDERY_CANE.get()) && !state.getValue(BASE) && !state.getValue(LEAVE)) {
-            state = state.setValue(LEAVE, new Random().nextInt(100) < 85);
-        }
-        return super.updateShape(state, direction, offsetState, level, pos, offsetPos);
-    }
-
 
     @Override
     @SuppressWarnings("deprecation")
+    public ItemStack getCloneItemStack(BlockGetter level, BlockPos pos, BlockState state) {
+        return new ItemStack(state.getValue(AGE) == 0
+                ? MNDItems.BULLET_PEPPER.get() : MNDItems.POWDER_CANNON.get());
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        Vec3 offset = state.getOffset(level, pos);
+        return SHAPE.move(offset.x, offset.y, offset.z);
+    }
+
+    @Override
+    public BlockPathTypes getBlockPathType(BlockState state, BlockGetter level,
+                                           BlockPos pos, @Nullable Mob mob) {
+        return BlockPathTypes.DAMAGE_OTHER;
+    }
+
+    @Override
+    public BlockPathTypes getAdjacentBlockPathType(BlockState state, BlockGetter level,
+                                                   BlockPos pos, @Nullable Mob mob,
+                                                   BlockPathTypes originalType) {
+        return BlockPathTypes.DANGER_OTHER;
+    }
+
+    @Override
+    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState,
+                                  LevelAccessor level, BlockPos pos, BlockPos neighborPos) {
+        if (!state.canSurvive(level, pos)) {
+            level.scheduleTick(pos, this, 2);
+            return state;
+        }
+        return super.updateShape(state, direction, neighborState, level, pos, neighborPos);
+    }
+
+    @Override
+    @Nullable
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+        if (!fluidState.isEmpty()) {
+            return null;
+        }
+
+        BlockPos belowPos = context.getClickedPos().below();
+        BlockState blockBelow = context.getLevel().getBlockState(belowPos);
+        boolean canSustain = blockBelow.is(MNDTags.POWDERY_CANNON_PLANTABLE_ON)
+                || blockBelow.is(MNDBlocks.POWDERY_CANE.get())
+                || blockBelow.canSustainPlant(context.getLevel(), belowPos, Direction.UP, this);
+        if (!canSustain) {
+            return null;
+        }
+
+        if (blockBelow.is(MNDTags.POWDERY_CANNON_PLANTABLE_ON)
+                || !blockBelow.is(MNDBlocks.POWDERY_CANE.get())) {
+            return defaultBlockState().setValue(AGE, 1);
+        }
+        return defaultBlockState();
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(AGE, LEAVES, STAGE, LIT, PRESSURE, BASE, LEAVE);
+    }
+
+    @Override
+    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+        return false;
+    }
+
+    @Override
+    public boolean isRandomlyTicking(BlockState state) {
+        return state.getValue(STAGE) == 0
+                || state.getValue(AGE) < MAX_AGE && state.getValue(AGE) > 0;
+    }
+
+    @Override
     public void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (level.isClientSide) return;
-        BlockPos posAbove = pos.above();
-        BlockState stateAbove = level.getBlockState(posAbove);
-        int age = state.getValue(AGE);
+        if (!state.is(this)) {
+            return;
+        }
+        ensureBulletPepperAtTop(level, pos);
+
         int pressure = state.getValue(PRESSURE);
         boolean isLit = state.getValue(LIT);
         if (!state.canSurvive(level, pos)) {
             if (isLit) {
-                explodeAndReset(level, pos, state, age);
+                explodeAndReset(level, pos, state);
             }
             level.destroyBlock(pos, true);
+            return;
         }
+
         if (pressure > 0) {
+            BlockPos abovePos = pos.above();
+            BlockState aboveState = level.getBlockState(abovePos);
+            if (aboveState.hasProperty(PRESSURE)
+                    && aboveState.getValue(PRESSURE) < pressure) {
+                level.setBlock(abovePos, aboveState.setValue(PRESSURE, pressure), 3);
+                level.scheduleTick(abovePos, aboveState.getBlock(), 1);
+            }
+        }
+
+        if (pressure == 2 && isLit) {
+            explodeAndReset(level, pos, state);
+            return;
+        }
+
+        if (pressure > 0) {
+            level.scheduleTick(pos, this, 20);
             level.setBlock(pos, state.setValue(PRESSURE, pressure - 1), 2);
         }
-        if (stateAbove.hasProperty(PRESSURE) && stateAbove.getValue(PRESSURE) < 2 && (stateAbove.is(MNDTags.POWDERY_CANE) || stateAbove.is(MNDBlocks.BULLET_PEPPER.get()))) {
-            level.setBlock(posAbove, stateAbove.setValue(PRESSURE, stateAbove.getValue(PRESSURE) + 1), 2);
-        }
-        if (pressure == 2 && isLit) {
-            explodeAndReset(level, pos, state, age);
-        }
     }
 
     @Override
-    @SuppressWarnings("deprecation")
-    public void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        int age = state.getValue(AGE);
-        BlockState blockBelow = world.getBlockState(pos.below());
-
-        if (age < 2 && ForgeHooks.onCropsGrowPre(world, pos, state, random.nextInt(3) == 0) && (blockBelow.is(MNDBlocks.RESURGENT_SOIL.get()) || blockBelow.is(MNDBlocks.POWDERY_CANNON.get()))) {
-            world.setBlock(pos, state.setValue(AGE, age + 1), 2);
-            ForgeHooks.onCropsGrowPost(world, pos, state);
-        }
-        else if (world.isEmptyBlock(pos.above())) {
-            world.setBlockAndUpdate(pos.above(), MNDBlocks.BULLET_PEPPER.get().defaultBlockState());
-        }
-        else if (age == 2) {
-            world.setBlock(pos, state.setValue(LIT, true), 2);
-        }
-    }
-
-    @Override
-    @SuppressWarnings("deprecation")
-    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (!(entity instanceof LivingEntity) || entity.getType() == EntityType.PANDA || entity.getType() == EntityType.BEE || entity.isCrouching())
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (!state.is(this)) {
             return;
+        }
+
+        BlockState blockBelow = level.getBlockState(pos.below());
+        int age = state.getValue(AGE);
+        if (age < MAX_AGE && blockBelow.is(MNDTags.POWDERY_CANNON_PLANTABLE_ON)
+                && ForgeHooks.onCropsGrowPre(level, pos, state, random.nextInt(5) == 0)) {
+            int newAge = age + 1;
+            BlockState newState = state.setValue(AGE, newAge);
+            if (newAge == MAX_AGE) {
+                newState = newState.setValue(LIT, true);
+            }
+            level.setBlock(pos, newState, 2);
+            ForgeHooks.onCropsGrowPost(level, pos, newState);
+            level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(newState));
+        }
+
+        int maxHeight = getSkyAccessMaxHeight(level, pos);
+        int heightAbove = getHeightAboveUpToMax(level, pos, level.getMaxBuildHeight());
+        int heightBelow = getHeightBelowUpToMax(level, pos, level.getMaxBuildHeight());
+        int totalHeight = heightAbove + heightBelow + 1;
+        BlockPos topPos = pos.above(heightAbove);
+        BlockState topState = level.getBlockState(topPos);
+
+        if (state.getValue(STAGE) == 0 && topState.is(MNDBlocks.POWDERY_CANE.get())
+                && pos.equals(topPos)) {
+            int blocksToDisplace = calculateBlocksToDisplace(level, topPos.above());
+            boolean canGrow = totalHeight < maxHeight
+                    && blocksToDisplace != Integer.MAX_VALUE
+                    && topPos.above().getY() + blocksToDisplace < level.getMaxBuildHeight();
+            if (canGrow && ForgeHooks.onCropsGrowPre(
+                    level, pos, state, random.nextInt(2) == 0)) {
+                growCannon(topState, level, topPos, random, totalHeight);
+                ForgeHooks.onCropsGrowPost(level, topPos, topState);
+            }
+        }
+        level.scheduleTick(pos, this, 1);
+    }
+
+    @Override
+    public void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        if (!(entity instanceof LivingEntity livingEntity)
+                || entity.getType() == EntityType.PANDA
+                || entity.getType() == EntityType.BEE
+                || livingEntity.isCrouching()) {
+            return;
+        }
+
+        entity.makeStuckInBlock(state, new Vec3(0.8F, 0.75F, 0.8F));
         entity.hurt(level.damageSources().cactus(), 1.0F);
-        entity.makeStuckInBlock(state, new Vec3(0.8, 0.75, 0.8));
-        if (!level.isClientSide && state.getValue(PRESSURE) < 2) {
-            level.setBlock(pos, state.setValue(PRESSURE, state.getValue(PRESSURE) + 1), 2);
+        if (!level.isClientSide) {
+            int pressure = state.getValue(PRESSURE);
+            if (pressure < 2) {
+                level.setBlock(pos, state.setValue(PRESSURE, pressure + 1), 2);
+            }
+            level.scheduleTick(pos, this, 1);
+            if (state.getValue(LIT)) {
+                explodeAndReset(level, pos, state);
+            }
         }
+    }
+
+    @Override
+    @SuppressWarnings("deprecation")
+    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player,
+                                 InteractionHand hand, BlockHitResult hitResult) {
+        ItemStack heldItem = player.getItemInHand(hand);
+        int age = state.getValue(AGE);
+        if (age > 1 && state.getValue(LIT)
+                && (ItemUtils.isKnife(heldItem) || heldItem.is(Tags.Items.SHEARS))) {
+            int amount = 1 + level.random.nextInt(2) + (age == MAX_AGE ? 1 : 0);
+            popResource(level, pos, new ItemStack(MNDItems.BULLET_PEPPER.get(), amount));
+            level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES,
+                    SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
+            BlockState newState = state.setValue(LIT, false).setValue(AGE, 0).setValue(PRESSURE, 0);
+            level.setBlock(pos, newState, 2);
+            level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, newState));
+            return InteractionResult.sidedSuccess(level.isClientSide);
+        }
+
         if (state.getValue(LIT)) {
-            plantPepper(level, pos);
+            if (!level.isClientSide) {
+                explodeAndReset(level, pos, state);
+            }
+            return InteractionResult.sidedSuccess(level.isClientSide);
         }
+        return super.use(state, level, pos, player, hand, hitResult);
     }
 
     @Override
@@ -167,103 +285,194 @@ public class PowderyCaneBlock extends BushBlock implements IPlantable, Bonemeala
         }
         if (state.getValue(LIT)) {
             ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
-            if (!heldItem.is(CommonTags.Items.TOOLS_KNIVES) || !heldItem.is(net.minecraftforge.common.Tags.Items.SHEARS)) {
-                int age = state.hasProperty(AGE) ? state.getValue(AGE) : 0;
-                explodeAndReset(level, pos, state, age);
+            if (!ItemUtils.isKnife(heldItem) && !heldItem.is(Tags.Items.SHEARS)) {
+                explodeAndReset(level, pos, state);
             }
         }
         super.playerWillDestroy(level, pos, state, player);
     }
 
+    @Override
+    public boolean isPathfindable(@Nonnull BlockState state, @Nonnull BlockGetter level,
+                                  @Nonnull BlockPos pos, @Nonnull PathComputationType pathType) {
+        return false;
+    }
 
     @Override
-    public void wasExploded(Level level, BlockPos pos, Explosion explosion) {
-        BlockState state = level.getBlockState(pos);
-        if (!level.isClientSide && state.hasProperty(LIT) && state.getValue(LIT)) {
-            int age = state.hasProperty(AGE) ? state.getValue(AGE) : 0;
-            explodeAndReset(level, pos, state, age);
+    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos,
+                                         BlockState state, boolean isClientSide) {
+        int maxHeight = getSkyAccessMaxHeight(level, pos);
+        int heightAbove = getHeightAboveUpToMax(level, pos, level.getMaxBuildHeight());
+        int heightBelow = getHeightBelowUpToMax(level, pos, level.getMaxBuildHeight());
+        int totalHeight = heightAbove + heightBelow + 1;
+        BlockPos topPos = pos.above(heightAbove);
+        BlockState topState = level.getBlockState(topPos);
+        if (!topState.is(MNDBlocks.POWDERY_CANE.get()) || topState.getValue(STAGE) == 1) {
+            return false;
+        }
+
+        BlockPos newPos = topPos.above();
+        int blocksToDisplace = calculateBlocksToDisplace(level, newPos);
+        return totalHeight < maxHeight
+                && blocksToDisplace != Integer.MAX_VALUE
+                && newPos.getY() + blocksToDisplace < level.getMaxBuildHeight();
+    }
+
+    @Override
+    public boolean isBonemealSuccess(Level level, RandomSource random,
+                                     BlockPos pos, BlockState state) {
+        return true;
+    }
+
+    @Override
+    public void performBonemeal(ServerLevel level, RandomSource random,
+                                BlockPos pos, BlockState state) {
+        int age = state.getValue(AGE);
+        if (age < MAX_AGE && age > 0) {
+            int newAge = age + 1;
+            BlockState newState = state.setValue(AGE, newAge);
+            if (newAge == MAX_AGE) {
+                newState = newState.setValue(LIT, true);
+            }
+            level.setBlock(pos, newState, 2);
+            level.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(newState));
+            return;
+        }
+
+        int maxHeight = getSkyAccessMaxHeight(level, pos);
+        int segmentsToGrow = 1 + random.nextInt(2);
+        for (int i = 0; i < segmentsToGrow; i++) {
+            int heightAbove = getHeightAboveUpToMax(level, pos, level.getMaxBuildHeight());
+            int heightBelow = getHeightBelowUpToMax(level, pos, level.getMaxBuildHeight());
+            int totalHeight = heightAbove + heightBelow + 1;
+            BlockPos topPos = pos.above(heightAbove);
+            BlockState topState = level.getBlockState(topPos);
+            if (!topState.is(MNDBlocks.POWDERY_CANE.get()) || topState.getValue(STAGE) == 1) {
+                return;
+            }
+
+            BlockPos newPos = topPos.above();
+            int blocksToDisplace = calculateBlocksToDisplace(level, newPos);
+            if (totalHeight >= maxHeight || blocksToDisplace == Integer.MAX_VALUE
+                    || newPos.getY() + blocksToDisplace >= level.getMaxBuildHeight()) {
+                return;
+            }
+            growCannon(topState, level, topPos, random, totalHeight);
         }
     }
 
-    private void plantPepper(Level level, BlockPos pos) {
-        for (Direction direction : Direction.values()) {
-            BlockPos neighborPos = pos.relative(direction);
-            BlockState neighborState = level.getBlockState(neighborPos);
-            BlockState belowNeighborState = level.getBlockState(neighborPos.below());
-            if (neighborState.isAir() && belowNeighborState.is(MNDTags.POWDERY_CANNON_PLANTABLE_ON) && level.random.nextFloat() < 0.25) {
-                level.setBlock(neighborPos, MNDBlocks.BULLET_PEPPER.get().defaultBlockState(), 3);
+    private void ensureBulletPepperAtTop(Level level, BlockPos pos) {
+        int heightAbove = getHeightAboveUpToMax(level, pos, level.getMaxBuildHeight());
+        BlockPos pepperPos = pos.above(heightAbove + 1);
+        BlockState pepperState = level.getBlockState(pepperPos);
+        if (!pepperState.is(MNDBlocks.BULLET_PEPPER.get())
+                && (level.isEmptyBlock(pepperPos) || pepperState.canBeReplaced())) {
+            level.setBlock(pepperPos, MNDBlocks.BULLET_PEPPER.get().defaultBlockState(), 3);
+        }
+    }
+
+    private int calculateBlocksToDisplace(LevelReader level, BlockPos startPos) {
+        int blocksToDisplace = 0;
+        BlockPos checkPos = startPos;
+        while (checkPos.getY() < level.getMaxBuildHeight()) {
+            BlockState checkState = level.getBlockState(checkPos);
+            if (checkState.isAir()) {
                 break;
             }
+            if (checkState.is(MNDBlocks.BULLET_PEPPER.get())
+                    || checkState.is(MNDBlocks.POWDERY_CANE.get())) {
+                blocksToDisplace++;
+                checkPos = checkPos.above();
+            } else {
+                return Integer.MAX_VALUE;
+            }
+        }
+        return blocksToDisplace;
+    }
+
+    private void explodeAndReset(Level level, BlockPos pos, BlockState state) {
+        if (!level.isClientSide && state.getValue(LIT)) {
+            level.playSound(null, pos, SoundEvents.CREEPER_PRIMED,
+                    SoundSource.BLOCKS, 0.5F, 0.25F);
+            level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
+                    0.75F, false, Level.ExplosionInteraction.NONE);
+            level.setBlock(pos, state.setValue(LIT, false)
+                    .setValue(AGE, 0).setValue(PRESSURE, 0), 2);
         }
     }
 
-    private void explodeAndReset(Level level, BlockPos pos, BlockState state, int age) {
-        level.playSound(null, pos, SoundEvents.CREEPER_PRIMED, SoundSource.BLOCKS, 0.5F, 0.25F);
-        level.explode(null, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, 1.25F,  false, Level.ExplosionInteraction.NONE);
-        level.setBlock(pos, state.setValue(LIT, false), 2);
-        if (state.hasProperty(AGE) && age > 0) {
-            level.setBlock(pos, state.setValue(AGE, age - 1), 3);
+    protected void growCannon(BlockState bottomState, Level level, BlockPos bottomPos,
+                              RandomSource random, int currentHeight) {
+        int maxHeight = getSkyAccessMaxHeight(level, bottomPos);
+        int newStage = currentHeight + 1 >= maxHeight
+                || currentHeight + 1 >= maxHeight - 5 && random.nextFloat() < 0.25F ? 1 : 0;
+        BlockPos newPos = bottomPos.above();
+
+        if ((bottomState.getValue(LEAVES) != BambooLeaves.NONE
+                || bottomState.getValue(STAGE) == 1) && level.isEmptyBlock(newPos)) {
+            level.setBlock(newPos, MNDBlocks.BULLET_PEPPER.get().defaultBlockState(), 3);
+            return;
         }
-    }
 
-    @Override
-    @SuppressWarnings("deprecation")
-    public InteractionResult use(BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult context) {
-        ItemStack heldItem = player.getItemInHand(hand);
+        BlockPos scanPos = newPos;
+        BlockState scanState = level.getBlockState(scanPos);
+        while (scanPos.getY() < level.getMaxBuildHeight()
+                && (scanState.is(MNDBlocks.POWDERY_CANE.get())
+                || scanState.is(MNDBlocks.BULLET_PEPPER.get()))) {
+            scanPos = scanPos.above();
+            scanState = level.getBlockState(scanPos);
+        }
 
-         if (heldItem.is(CommonTags.Items.TOOLS_KNIVES) || heldItem.is(net.minecraftforge.common.Tags.Items.SHEARS)) {
-             int age = state.getValue(AGE);
-             if (state.getValue(LIT)) {
-                 if (age > 0) {
-                    level.setBlock(pos, state.setValue(AGE, age - 1), 3);
+        BlockPos blockToMove = scanPos.below();
+        while (blockToMove.compareTo(newPos) >= 0) {
+            BlockState stateToMove = level.getBlockState(blockToMove);
+            if (!stateToMove.isAir()) {
+                level.setBlock(blockToMove.above(), stateToMove, 3);
+            }
+            blockToMove = blockToMove.below();
+        }
+
+        level.setBlock(newPos, defaultBlockState().setValue(STAGE, newStage), 3);
+        int newHeightAbove = getHeightAboveUpToMax(
+                level, newPos, level.getMaxBuildHeight());
+        for (int i = newHeightAbove; i >= 0; i--) {
+            BlockPos canePos = newPos.above(i);
+            BlockState caneState = level.getBlockState(canePos);
+            if (caneState.is(MNDBlocks.POWDERY_CANE.get())) {
+                BambooLeaves leaves = i == newHeightAbove ? BambooLeaves.SMALL : BambooLeaves.NONE;
+                if (caneState.getValue(LEAVES) != leaves) {
+                    level.setBlock(canePos, caneState.setValue(LEAVES, leaves), 3);
                 }
-                 int j = 2 + level.random.nextInt(3);
-                 popResource(level, pos, new ItemStack(MNDItems.BULLET_PEPPER.get(), j));
-                 level.setBlock(pos, state.setValue(LIT, Boolean.FALSE), 2);
-                 heldItem.hurtAndBreak(1, player, (action) -> { action.broadcastBreakEvent(hand); });
-                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-             }
-             else if (state.getValue(LEAVE)) {
-                 level.setBlock(pos, state.setValue(LEAVE, Boolean.FALSE), 2);
-                 heldItem.hurtAndBreak(1, player, (action) -> { action.broadcastBreakEvent(hand); });
-                 level.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + level.random.nextFloat() * 0.4F);
-             }
-             return InteractionResult.sidedSuccess(level.isClientSide);
-         }
-        return super.use(state, level, pos, player, hand, context);
+            }
+        }
+
+        BlockState bottomCaneState = level.getBlockState(bottomPos);
+        if (bottomCaneState.is(MNDBlocks.POWDERY_CANE.get())
+                && bottomCaneState.getValue(LEAVES) != BambooLeaves.NONE) {
+            level.setBlock(bottomPos,
+                    bottomCaneState.setValue(LEAVES, BambooLeaves.NONE), 3);
+        }
     }
 
-    @Override
-    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return false;
+    private int getSkyAccessMaxHeight(LevelReader level, BlockPos pos) {
+        return level.canSeeSky(pos) ? 5 : 3;
     }
 
-    @Override
-    public boolean isPathfindable(@Nonnull BlockState state, @Nonnull BlockGetter world, @Nonnull BlockPos pos, @Nonnull PathComputationType path) {
-        return false;
+    protected int getHeightAboveUpToMax(BlockGetter level, BlockPos pos, int maxHeight) {
+        int height;
+        for (height = 0; height < maxHeight
+                && level.getBlockState(pos.above(height + 1))
+                .is(MNDBlocks.POWDERY_CANE.get()); height++) {
+        }
+        return height;
     }
 
-    @Override
-    public BlockPathTypes getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
-        return BlockPathTypes.DAMAGE_OTHER;
-    }
-
-    @Override
-    public BlockPathTypes getAdjacentBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob, BlockPathTypes originalType) {
-        return BlockPathTypes.DANGER_OTHER;
-    }
-
-    @Override
-    public boolean isValidBonemealTarget(LevelReader level, BlockPos pos, BlockState state, boolean isClientSide) {
-        return false;
-    }
-
-    @Override
-    public boolean isBonemealSuccess(Level level, RandomSource random, BlockPos pos, BlockState state) {
-        return false;
-    }
-
-    @Override
-    public void performBonemeal(ServerLevel level, RandomSource random, BlockPos pos, BlockState state) {
+    protected int getHeightBelowUpToMax(BlockGetter level, BlockPos pos, int maxHeight) {
+        int height;
+        for (height = 0; height < maxHeight
+                && level.getBlockState(pos.below(height + 1))
+                .is(MNDBlocks.POWDERY_CANE.get()); height++) {
+        }
+        return height;
     }
 }

@@ -43,6 +43,7 @@ public class StriderRockEntity extends ThrowableItemProjectile {
 
     }
 
+    @Override
     protected void onHitEntity(EntityHitResult result) {
         super.onHitEntity(result);
         result.getEntity().hurt(result.getEntity().damageSources().thrown(this, this.getOwner()), 1.0F);

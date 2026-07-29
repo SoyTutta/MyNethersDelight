@@ -56,7 +56,7 @@ public class GoldenEggItem extends ConsumableItem {
             }
             nourishmentDuration = Math.min(Math.max(nourishmentDuration, 100), nourishmentMaxDuration);
 
-            consumer.addEffect(new MobEffectInstance(ModEffects.NOURISHMENT.get(), nourishmentDuration, 0));
+            consumer.addEffect(new MobEffectInstance(ModEffects.NOURISHMENT.get(), nourishmentDuration, 0, false, false));
             consumer.removeEffect(effectInstance.getEffect());
             removedEffects = true;
         }

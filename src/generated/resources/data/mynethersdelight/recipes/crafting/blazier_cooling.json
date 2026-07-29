@@ -1,0 +1,17 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "mynethersdelight:config_enabled",
+          "setting": "blazier"
+        }
+      ],
+      "recipe": {
+        "type": "mynethersdelight:blazier_cooling",
+        "category": "misc"
+      }
+    }
+  ]
+}

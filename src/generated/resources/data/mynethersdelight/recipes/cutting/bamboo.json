@@ -1,0 +1,16 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    {
+      "item": "minecraft:bamboo"
+    }
+  ],
+  "result": [
+    {
+      "item": "minecraft:stick"
+    }
+  ],
+  "tool": {
+    "tag": "forge:tools/knives"
+  }
+}

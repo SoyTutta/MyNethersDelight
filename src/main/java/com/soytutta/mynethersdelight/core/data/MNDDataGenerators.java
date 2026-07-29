@@ -7,7 +7,6 @@ package com.soytutta.mynethersdelight.core.data;
 
 import com.soytutta.mynethersdelight.MyNethersDelight;
 import com.soytutta.mynethersdelight.core.data.worldgen.MNDConfiguredFeatures;
-import com.soytutta.mynethersdelight.core.data.worldgen.biome.MNDBiomeModifiers;
 import com.soytutta.mynethersdelight.core.data.worldgen.placement.MNDPlacements;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
@@ -19,7 +18,6 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.data.event.GatherDataEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -50,8 +48,7 @@ public class MNDDataGenerators {
 
         RegistrySetBuilder registrySetBuilder = new RegistrySetBuilder()
                 .add(Registries.CONFIGURED_FEATURE, MNDConfiguredFeatures::bootstrap)
-                .add(Registries.PLACED_FEATURE, MNDPlacements::bootstrap)
-                .add(ForgeRegistries.Keys.BIOME_MODIFIERS, MNDBiomeModifiers::bootstrap);
+                .add(Registries.PLACED_FEATURE, MNDPlacements::bootstrap);
         generator.addProvider(true, new DatapackBuiltinEntriesProvider(
                 output,
                 lookupProvider,

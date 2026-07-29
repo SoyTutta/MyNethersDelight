@@ -72,13 +72,19 @@ public class MNDCookingRecipes {
                 .addIngredient(Ingredient.of(MNDItems.HOGLIN_LOIN.get(), MNDItems.HOGLIN_SAUSAGE.get(), MNDItems.ROASTED_SAUSAGE.get(), MNDItems.COOKED_LOIN.get()))
                 .addIngredient(Tags.Items.CROPS_POTATO)
                 .addIngredient(Tags.Items.CROPS_CARROT)
-                .addIngredient(MNDItems.BULLET_PEPPER.get())
+                .addIngredient(Ingredient.of(MNDItems.BULLET_PEPPER.get(), MNDItems.PEPPER_POWDER.get()))
                 .unlockedByAnyIngredient(MNDItems.HOGLIN_LOIN.get(), MNDItems.BULLET_PEPPER.get())
                 .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
                 .setNamespace(MyNethersDelight.MODID)
                 .save(consumer);
     }
     private static void cookMeals(Consumer<FinishedRecipe> consumer) {
+        CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.BOILED_EGG.get(), 4, 200, 1.0F)
+                .addIngredient(Ingredient.of(MNDTags.BOILED_EGG_CANDIDATE), 4)
+                .unlockedByAnyIngredient(MNDItems.STRIDER_EGG.get())
+                .setRecipeBookTab(CookingPotRecipeBookTab.MEALS)
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.SCOTCH_EGGS.get(), 1, 200, 1.0F)
                 .addIngredient(Ingredient.of(MyCommonTags.FOODS_BOILED_EGG),2)
                 .addIngredient(Ingredient.of(ModItems.MINCED_BEEF.get(), MNDItems.HOGLIN_SAUSAGE.get()))
@@ -185,7 +191,7 @@ public class MNDCookingRecipes {
         CookingPotRecipeBuilder.cookingPotRecipe(MNDItems.HOT_CREAM.get(), 1, 50, 1.0F,Items.BUCKET)
                 .addIngredient(MNDTags.HOT_SPICE)
                 .addIngredient(Tags.Items.EGGS)
-                .addIngredient(MNDItems.BULLET_PEPPER.get())
+                .addIngredient(Ingredient.of(MNDItems.BULLET_PEPPER.get(), MNDItems.PEPPER_POWDER.get()))
                 .addIngredient(Items.MAGMA_CREAM)
                 .addIngredient(Items.LAVA_BUCKET)
                 .addIngredient(Items.MAGMA_CREAM)

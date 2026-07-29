@@ -1,0 +1,34 @@
+{
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "mynethersdelight:config_enabled",
+          "setting": "blazier"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:crafting_shaped",
+        "category": "misc",
+        "key": {
+          "#": {
+            "item": "minecraft:blaze_rod"
+          },
+          "b": {
+            "item": "minecraft:nether_brick"
+          }
+        },
+        "pattern": [
+          "###",
+          "###",
+          "#b#"
+        ],
+        "result": {
+          "item": "mynethersdelight:blazier"
+        },
+        "show_notification": true
+      }
+    }
+  ]
+}

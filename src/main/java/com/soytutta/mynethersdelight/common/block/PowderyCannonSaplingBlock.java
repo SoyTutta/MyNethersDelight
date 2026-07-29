@@ -4,6 +4,8 @@ import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import com.soytutta.mynethersdelight.common.tag.MNDTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -30,11 +32,21 @@ public class PowderyCannonSaplingBlock extends BambooSaplingBlock {
     }
 
     @Override
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (random.nextInt(3) == 0 && level.isEmptyBlock(pos.above())) {
+            this.growBamboo(level, pos);
+        }
+    }
+
+    @Override
     public BlockState updateShape(BlockState state, Direction direction, BlockState offsetState, LevelAccessor level, BlockPos pos, BlockPos offsetPos) {
         if (!state.canSurvive(level, pos)) {
             return Blocks.AIR.defaultBlockState();
         } else {
-            if (direction == Direction.UP && offsetState.is(MNDBlocks.POWDERY_CANNON.get())) {
+            if (direction == Direction.UP && (offsetState.is(MNDBlocks.POWDERY_CANNON.get())
+                    || offsetState.is(MNDBlocks.POWDERY_CANE.get())
+                    || offsetState.is(MNDBlocks.BULLET_PEPPER.get())
+                    || offsetState.is(Blocks.BAMBOO))) {
                 level.setBlock(pos, MNDBlocks.POWDERY_CANNON.get().defaultBlockState(), 2);
             }
 

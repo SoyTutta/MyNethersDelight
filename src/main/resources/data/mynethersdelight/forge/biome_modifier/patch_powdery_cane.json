@@ -1,0 +1,12 @@
+{
+  "forge:conditions": [
+    {
+      "type": "mynethersdelight:config_enabled",
+      "setting": "powdery_cane_generation"
+    }
+  ],
+  "type": "forge:add_features",
+  "biomes": "minecraft:crimson_forest",
+  "features": "mynethersdelight:patch_powdery_cane",
+  "step": "vegetal_decoration"
+}

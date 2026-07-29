@@ -7,11 +7,11 @@
   ],
   "result": [
     {
-      "item": "minecraft:blaze_powder"
+      "item": "mynethersdelight:pepper_powder"
     },
     {
       "chance": 0.25,
-      "item": "minecraft:blaze_powder"
+      "item": "mynethersdelight:pepper_powder"
     }
   ],
   "tool": {

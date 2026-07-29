@@ -43,7 +43,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import vectorwing.farmersdelight.common.tag.CommonTags;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 import java.util.ArrayList;
@@ -188,10 +188,6 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
                 return this.defaultBlockState().setValue(FACING, direction);
             }
         }
-        Player player = context.getPlayer();
-        if (player != null) {
-            player.displayClientMessage(MNDTextUtils.getTranslation("block.feast.space_required"), true);
-        }
         return null;
     }
 
@@ -222,7 +218,7 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
         int servings = state.getValue(SERVINGS);
         ItemStack heldStack = player.getItemInHand(handIn);
         if (servings > 9) {
-            if (heldStack.is(CommonTags.Items.TOOLS_KNIVES)) {
+            if (ItemUtils.isKnife(heldStack)) {
                 return this.cutEar(level, pos, state);
             }
 
@@ -260,6 +256,9 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
         BedPart part = state.getValue(PART);
         BlockPos pairPos = pos.relative(getDirectionToOther(part, state.getValue(FACING)));
         BlockState pairState = level.getBlockState(pairPos);
+        if (!isValidPair(state, pairState) || servings <= 0) {
+            return InteractionResult.PASS;
+        }
         level.setBlock(pairPos, pairState.setValue(SERVINGS, servings - 1), 3);
         level.setBlock(pos, state.setValue(SERVINGS, servings - 1), 3);
         Containers.dropItemStack(level, pos.getX(), pos.getY(), pos.getZ(), new ItemStack(MNDItems.ROAST_EAR.get()));
@@ -273,6 +272,9 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
         BlockPos pairPos = pos.relative(getDirectionToOther(part, state.getValue(FACING)));
         BlockState pairState = level.getBlockState(pairPos);
         ItemStack heldItem = player.getItemInHand(handIn);
+        if (!isValidPair(state, pairState) || servings <= 0) {
+            return InteractionResult.PASS;
+        }
         level.setBlock(pairPos, pairState.setValue(SERVINGS, servings - 1), 3);
         level.setBlock(pos, state.setValue(SERVINGS, servings - 1), 3);
         if (!player.isCreative()) {
@@ -285,6 +287,13 @@ public class StuffedHoglinBlock extends HorizontalDirectionalBlock {
 
         level.playSound(null, pos, SoundEvents.ARMOR_EQUIP_GENERIC, SoundSource.PLAYERS, 1.0F, 1.0F);
         return InteractionResult.SUCCESS;
+    }
+
+    private boolean isValidPair(BlockState state, BlockState pairState) {
+        return pairState.is(this)
+                && pairState.hasProperty(PART)
+                && pairState.hasProperty(SERVINGS)
+                && pairState.getValue(PART) != state.getValue(PART);
     }
 
     public int getAnalogOutputSignal(BlockState blockState, Level level, BlockPos pos) {

@@ -18,7 +18,7 @@ import net.minecraftforge.common.world.ForgeBiomeModifiers;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class MNDBiomeModifiers {
-    private static final ResourceKey<BiomeModifier> FEATURE_PATCH_POWDERY_CANE = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, new ResourceLocation(MyNethersDelight.MODID, "patch_powdery_cane"));
+    private static final ResourceKey<BiomeModifier> FEATURE_PATCH_POWDERY_CANE = ResourceKey.create(ForgeRegistries.Keys.BIOME_MODIFIERS, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, "patch_powdery_cane"));
     public static void bootstrap(BootstapContext<BiomeModifier> context) {
         HolderGetter<PlacedFeature> placedFeatureLookup = context.lookup(Registries.PLACED_FEATURE);
         Holder<PlacedFeature> propelplantPatchPlacedFeature = placedFeatureLookup.getOrThrow(MNDPlacements.PATCH_POWDERY_CANE);

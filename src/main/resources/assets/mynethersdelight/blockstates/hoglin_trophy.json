@@ -1,18 +1,33 @@
 {
   "variants": {
-    "facing=east": {
+    "facing=east,hit=false": {
       "model": "mynethersdelight:block/hoglin_trophy",
-	"y": 90
+      "y": 90
     },
-    "facing=north": {
+    "facing=north,hit=false": {
       "model": "mynethersdelight:block/hoglin_trophy"
     },
-    "facing=south": {
+    "facing=south,hit=false": {
       "model": "mynethersdelight:block/hoglin_trophy",
       "y": 180
     },
-    "facing=west": {
+    "facing=west,hit=false": {
       "model": "mynethersdelight:block/hoglin_trophy",
+      "y": 270
+    },
+    "facing=east,hit=true": {
+      "model": "mynethersdelight:block/hoglin_trophy_tackle",
+      "y": 90
+    },
+    "facing=north,hit=true": {
+      "model": "mynethersdelight:block/hoglin_trophy_tackle"
+    },
+    "facing=south,hit=true": {
+      "model": "mynethersdelight:block/hoglin_trophy_tackle",
+      "y": 180
+    },
+    "facing=west,hit=true": {
+      "model": "mynethersdelight:block/hoglin_trophy_tackle",
       "y": 270
     }
   }

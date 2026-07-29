@@ -1,0 +1,29 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "nether_trophy",
+  "key": {
+    "B": {
+      "item": "minecraft:gold_block"
+    },
+    "G": {
+      "item": "mynethersdelight:golden_trophy"
+    },
+    "S": {
+      "item": "mynethersdelight:skoglin_trophy"
+    },
+    "i": {
+      "item": "minecraft:gold_ingot"
+    }
+  },
+  "pattern": [
+    "iGi",
+    "iBi",
+    "iSi"
+  ],
+  "result": {
+    "count": 2,
+    "item": "mynethersdelight:golden_trophy"
+  },
+  "show_notification": true
+}

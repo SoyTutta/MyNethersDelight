@@ -8,37 +8,6 @@
           "type": "minecraft:item",
           "functions": [
             {
-              "enchantments": [
-                "mynethersdelight:poaching"
-              ],
-              "function": "minecraft:enchant_randomly"
-            }
-          ],
-          "name": "minecraft:book",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
-              "enchantments": [
-                "mynethersdelight:poaching"
-              ],
-              "function": "minecraft:enchant_randomly"
-            }
-          ],
-          "name": "minecraft:iron_sword",
-          "weight": 1
-        },
-        {
-          "type": "minecraft:item",
-          "name": "mynethersdelight:hoglin_hide",
-          "weight": 2
-        },
-        {
-          "type": "minecraft:item",
-          "functions": [
-            {
               "add": false,
               "count": {
                 "type": "minecraft:uniform",
@@ -114,10 +83,6 @@
           ],
           "name": "mynethersdelight:hoglin_loin",
           "weight": 25
-        },
-        {
-          "type": "minecraft:empty",
-          "weight": 65
         }
       ],
       "rolls": 1.0

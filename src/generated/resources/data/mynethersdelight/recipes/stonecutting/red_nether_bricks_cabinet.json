@@ -1,8 +1,21 @@
 {
-  "type": "minecraft:stonecutting",
-  "count": 1,
-  "ingredient": {
-    "item": "minecraft:red_nether_bricks"
-  },
-  "result": "mynethersdelight:red_nether_bricks_cabinet"
+  "type": "forge:conditional",
+  "recipes": [
+    {
+      "conditions": [
+        {
+          "type": "mynethersdelight:config_enabled",
+          "setting": "stone_cabinets"
+        }
+      ],
+      "recipe": {
+        "type": "minecraft:stonecutting",
+        "count": 1,
+        "ingredient": {
+          "item": "minecraft:red_nether_bricks"
+        },
+        "result": "mynethersdelight:red_nether_bricks_cabinet"
+      }
+    }
+  ]
 }

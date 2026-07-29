@@ -38,8 +38,7 @@ public class HotCreamItem extends DrinkableItem {
         boolean removedEffects = false;
 
         if (!consumer.fireImmune()) {
-            consumer.setRemainingFireTicks(consumer.getRemainingFireTicks() + 2);
-            consumer.setSecondsOnFire(30);
+            consumer.setRemainingFireTicks(30);
         }
 
         Iterator<MobEffectInstance> iterator = consumer.getActiveEffects().iterator();
@@ -53,22 +52,18 @@ public class HotCreamItem extends DrinkableItem {
         }
 
         for (MobEffectInstance effectInstance : effectsToRemove) {
-            MobEffect effect = effectInstance.getEffect();
-            consumer.removeEffect(effect);
-        }
-
-        for (MobEffectInstance effectInstance : effectsToRemove) {
             int remainingDuration = effectInstance.getDuration();
-            int fireResistanceSeconds = remainingDuration / 5;
-            int purgentSeconds = fireResistanceSeconds / 2;
+            int fireResistanceDuration = remainingDuration / 5;
+            int pungentDuration = fireResistanceDuration / 2;
+            MobEffect effect = effectInstance.getEffect();
 
-            if (fireResistanceSeconds > 0) {
-                consumer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireResistanceSeconds * 3));
+            if (consumer.removeEffect(effect)) {
+                consumer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE,
+                        fireResistanceDuration > 600 ? fireResistanceDuration * 3 : 400));
+                consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT.get(),
+                        pungentDuration > 400 ? pungentDuration * 3 : 600, 2, false, false, true));
+                removedEffects = true;
             }
-            if (purgentSeconds > 0) {
-                consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT.get(), purgentSeconds * 3,2));
-            }
-            removedEffects = true;
         }
 
         if (removedEffects) {

@@ -17,6 +17,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import vectorwing.farmersdelight.common.item.ConsumableItem;
 import vectorwing.farmersdelight.common.item.MushroomColonyItem;
+import vectorwing.farmersdelight.common.item.PlaceableItem;
 import vectorwing.farmersdelight.common.item.PopsicleItem;
 
 import java.util.function.Supplier;
@@ -37,6 +38,9 @@ public class MNDItems {
     public static Item.Properties bucketFoodItem(FoodProperties food) {
         return (new Item.Properties()).food(food).craftRemainder(Items.BUCKET).stacksTo(3);
     }
+    public static final Supplier<Item> BLAZIER = ITEMS.register("blazier", () ->
+            new BlockItem(MNDBlocks.BLAZIER_BLOCK.get(), basicItem())
+    );
     public static final Supplier<Item> NETHER_BRICKS_CABINET = ITEMS.register("nether_bricks_cabinet", () ->
             new BlockItem(MNDBlocks.NETHER_BRICKS_CABINET.get(), basicItem())
     );
@@ -128,7 +132,7 @@ public class MNDItems {
             new SignItem(basicItem().stacksTo(16), MNDBlocks.POWDERY_SIGN.get(), MNDBlocks.POWDERY_WALL_SIGN.get())
     );
     public static final Supplier<Item> POWDERY_HANGING_SIGN = ITEMS.register("powdery_hanging_sign", () ->
-            new SignItem(basicItem().stacksTo(16), MNDBlocks.POWDERY_HANGING_SIGN.get(), MNDBlocks.POWDERY_WALL_HANGING_SIGN.get())
+            new HangingSignItem(MNDBlocks.POWDERY_HANGING_SIGN.get(), MNDBlocks.POWDERY_WALL_HANGING_SIGN.get(), basicItem().stacksTo(16))
     );
     // FUNGUS-Colony
     public static final Supplier<Item> WARPED_FUNGUS_COLONY = ITEMS.register("warped_fungus_colony", () ->
@@ -163,7 +167,7 @@ public class MNDItems {
             new ConsumableItem(bowlFoodItem(MNDFoodValues.EGG_SOUP), true)
     );
     public static final Supplier<Item> STRIDER_SLICE = ITEMS.register("strider_slice", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.STRIDER_SLICE).fireResistant())
+            new ConsumableItem(foodItem(MNDFoodValues.STRIDER_SLICE).fireResistant(), false)
     );
     public static final Supplier<Item> MINCED_STRIDER = ITEMS.register("minced_strider", ()  ->
             new ConsumableItem(foodItem(MNDFoodValues.MINCED_STRIDER).fireResistant())
@@ -181,39 +185,39 @@ public class MNDItems {
             new ConsumableItem(bowlFoodItem(MNDFoodValues.CRIMSON_STROGANOFF), true)
     );
     public static final Supplier<Item> STRIDERLOAF_BLOCK = ITEMS.register("striderloaf", ()  ->
-            new BlockItem(MNDBlocks.STRIDERLOAF_BLOCK.get(), basicItem().stacksTo(1))
+            new PlaceableItem(MNDBlocks.STRIDERLOAF_BLOCK.get(), basicItem().stacksTo(1))
     );
     public static final Supplier<Item> STRIDERLOAF = ITEMS.register("plate_of_striderloaf", ()  ->
             new ConsumableItem(bowlFoodItem(MNDFoodValues.STRIDERLOAF), true)
     );
     public static final Supplier<Item> COLD_STRIDERLOAF_BLOCK = ITEMS.register("cold_striderloaf", ()  ->
-            new BlockItem(MNDBlocks.COLD_STRIDERLOAF_BLOCK.get(), basicItem().stacksTo(1))
+            new PlaceableItem(MNDBlocks.COLD_STRIDERLOAF_BLOCK.get(), basicItem().stacksTo(1))
     );
     public static final Supplier<Item> COLD_STRIDERLOAF = ITEMS.register("plate_of_cold_striderloaf", ()  ->
             new ConsumableItem(bowlFoodItem(MNDFoodValues.COLD_STRIDERLOAF), true)
     );
     // HOGLIN
     public static final Supplier<Item> HOGLIN_LOIN = ITEMS.register("hoglin_loin", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.HOGLIN_LOIN))
+            new ConsumableItem(foodItem(MNDFoodValues.HOGLIN_LOIN), false)
     );
     // HOGLIN-Sausage
     public static final Supplier<Item> HOGLIN_SAUSAGE = ITEMS.register("hoglin_sausage", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.HOGLIN_SAUSAGE))
+            new ConsumableItem(foodItem(MNDFoodValues.HOGLIN_SAUSAGE), false)
     );
     public static final Supplier<Item> ROASTED_SAUSAGE = ITEMS.register("roasted_sausage", ()  ->
             new ConsumableItem(foodItem(MNDFoodValues.ROASTED_SAUSAGE))
     );
     public static final Supplier<Item> HOTDOG = ITEMS.register("hotdog", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.HOTDOG))
+            new ConsumableItem(foodItem(MNDFoodValues.HOTDOG), false)
     );
     public static final Supplier<Item> HOTDOG_WITH_MIXED_SALAD = ITEMS.register("hotdog_with_mixed_salad", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.HOTDOG_WITH_MIXED_SALAD))
+            new ConsumableItem(foodItem(MNDFoodValues.HOTDOG_WITH_MIXED_SALAD), true)
     );
     public static final Supplier<Item> HOTDOG_WITH_NETHER_SALAD = ITEMS.register("hotdog_with_nether_salad", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.HOTDOG_WITH_NETHER_SALAD))
+            new ConsumableItem(foodItem(MNDFoodValues.HOTDOG_WITH_NETHER_SALAD), false)
     );
     public static final Supplier<Item> SAUSAGE_AND_POTATOES = ITEMS.register("sausage_and_potatoes", ()  ->
-            new ConsumableItem(bowlFoodItem(MNDFoodValues.SAUSAGE_AND_POTATOES))
+            new ConsumableItem(bowlFoodItem(MNDFoodValues.SAUSAGE_AND_POTATOES), false)
     );
     public static final Supplier<Item> BREAKFAST_SAMPLER = ITEMS.register("breakfast_sampler", ()  ->
             new ConsumableItem(bowlFoodItem(MNDFoodValues.BREAKFAST_SAMPLER), true)
@@ -239,7 +243,7 @@ public class MNDItems {
     );
     // GHAST
     public static final Supplier<Item> GHASTA = ITEMS.register("ghasta", () ->
-            new ConsumableItem(foodItem(MNDFoodValues.GHASTA))
+            new ConsumableItem(foodItem(MNDFoodValues.GHASTA), false)
     );
     public static final Supplier<Item> TWISTED_GHASTA = ITEMS.register("twisted_ghasta", () ->
             new ConsumableItem(bowlFoodItem(MNDFoodValues.TWISTED_GHASTA),true)
@@ -254,7 +258,7 @@ public class MNDItems {
             new ConsumableItem(bowlFoodItem(MNDFoodValues.SPICY_NOODLE_SOUP), true)
     );
     public static final Supplier<Item> SPICY_COTTON = ITEMS.register("spicy_cotton", () ->
-            new ConsumableItem(foodItem(MNDFoodValues.SPICY_COTTON))
+            new ConsumableItem(foodItem(MNDFoodValues.SPICY_COTTON), false)
     );
     public static final Supplier<Item> GHASMATI = ITEMS.register("ghasmati", () ->
             new Item(basicItem())
@@ -269,19 +273,19 @@ public class MNDItems {
             new ConsumableItem(bowlFoodItem(MNDFoodValues.SIZZLING_PUDDING), false)
     );
     public static final Supplier<Item> TEAR_POPSICLE = ITEMS.register("tear_popsicle", () ->
-            new PopsicleItem(foodItem(MNDFoodValues.TEAR_POPSICLE))
+            new PopsicleItem(foodItem(MNDFoodValues.TEAR_POPSICLE).rarity(Rarity.RARE))
     );
     public static final Supplier<Item> GHASTA_WITH_CREAM_BLOCK = ITEMS.register("ghasta_with_cream", () ->
-            new BlockItem(MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get(), basicItem().stacksTo(1))
+            new PlaceableItem(MNDBlocks.GHASTA_WITH_CREAM_BLOCK.get(), basicItem().stacksTo(1))
     );
     public static final Supplier<Item> GHASTA_WITH_CREAM = ITEMS.register("plate_of_ghasta_with_cream", () ->
             new ConsumableItem(bowlFoodItem(MNDFoodValues.GHASTA_WITH_CREAM), true)
     );
     public static final Supplier<Item> GHAST_DOUGH = ITEMS.register("ghast_dough", () ->
-            new ConsumableItem(foodItem(MNDFoodValues.GHASTA))
+            new ConsumableItem(foodItem(MNDFoodValues.GHASTA), false)
     );
     public static final Supplier<Item> GHAST_SOURDOUGH = ITEMS.register("ghast_sourdough", () ->
-            new ConsumableItem(foodItem(MNDFoodValues.GHASTA))
+            new ConsumableItem(foodItem(MNDFoodValues.GHASTA), false)
     );
     public static final Supplier<Item> SLICES_OF_BREAD = ITEMS.register("slices_of_bread", () ->
             new ConsumableItem(foodItem(MNDFoodValues.SLICES_OF_BREAD))
@@ -290,7 +294,7 @@ public class MNDItems {
             new ConsumableItem(foodItem(MNDFoodValues.TOASTS))
     );
     public static final Supplier<Item> BREAD_LOAF_BLOCK = ITEMS.register("bread_loaf", () ->
-            new BlockItem(MNDBlocks.BREAD_LOAF_BLOCK.get(), basicItem().stacksTo(16))
+            new PlaceableItem(MNDBlocks.BREAD_LOAF_BLOCK.get(), basicItem().stacksTo(16))
     );
     // SPICY
     public static final Supplier<Item> BULLET_PEPPER = ITEMS.register("bullet_pepper", () ->
@@ -299,11 +303,14 @@ public class MNDItems {
                             .food(MNDFoodValues.BULLET_PEPPER)
             )
     );
+    public static final Supplier<Item> PEPPER_POWDER = ITEMS.register("pepper_powder", () ->
+            new Item(basicItem())
+    );
     public static final Supplier<Item> STUFFED_PEPPER = ITEMS.register("stuffed_pepper", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.STUFFED_PEPPER))
+            new ConsumableItem(foodItem(MNDFoodValues.STUFFED_PEPPER), false)
     );
     public static final Supplier<Item> SPICY_SKEWER = ITEMS.register("spicy_skewer", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.SPICY_SKEWER))
+            new ConsumableItem(foodItem(MNDFoodValues.SPICY_SKEWER), false)
     );
     public static final Supplier<Item> CHILIDOG = ITEMS.register("chilidog", ()  ->
             new ConsumableItem(foodItem(MNDFoodValues.CHILIDOG), true)
@@ -325,10 +332,10 @@ public class MNDItems {
             new ConsumableItem(bowlFoodItem(MNDFoodValues.ROCK_SOUP), true)
     );
     public static final Supplier<Item> BURNT_ROLL = ITEMS.register("burnt_roll", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.BURNT_ROLL).fireResistant())
+            new ConsumableItem(foodItem(MNDFoodValues.BURNT_ROLL).fireResistant(), false)
     );
     public static final Supplier<Item> MAGMA_CAKE = ITEMS.register("magma_cake_block", () ->
-            new BlockItem(MNDBlocks.MAGMA_CAKE.get(), basicItem().stacksTo(1).fireResistant())
+            new PlaceableItem(MNDBlocks.MAGMA_CAKE.get(), basicItem().stacksTo(1).fireResistant())
     );
     public static final Supplier<Item> MAGMA_CAKE_SLICE = ITEMS.register("magma_cake_slice",
             () -> new ConsumableItem(foodItem(MNDFoodValues.MAGMA_CAKE_SLICE).stacksTo(16).fireResistant(),
@@ -342,6 +349,9 @@ public class MNDItems {
             new HotCreamConeItem(foodItem(MNDFoodValues.HOT_CREAM_CONE).stacksTo(16))
     );
     // THOPHY
+    public static final Supplier<Item> GOLDEN_TROPHY = ITEMS.register("golden_trophy", () ->
+            new BlockItem(MNDBlocks.GOLDEN_TROPHY.get(), basicItem().rarity(Rarity.EPIC))
+    );
     public static final Supplier<Item> HOGLIN_TROPHY = ITEMS.register("hoglin_trophy", () ->
             new BlockItem(MNDBlocks.HOGLIN_TROPHY.get(), basicItem())
     );
@@ -356,24 +366,24 @@ public class MNDItems {
     );
     // STUFFED HOGLIN
     public static final Supplier<Item> HOGLIN_HIDE = ITEMS.register("hoglin_hide", () ->
-            new Item(basicItem())
+            new Item(basicItem().rarity(Rarity.UNCOMMON))
     );
     public static final Supplier<Item> RAW_STUFFED_HOGLIN = ITEMS.register("raw_stuffed_hoglin", () ->
-            new Item(basicItem().stacksTo(1))
+            new Item(basicItem().stacksTo(1).rarity(Rarity.UNCOMMON))
     );
     public static final Supplier<Item> ROAST_STUFFED_HOGLIN = ITEMS.register("roast_stuffed_hoglin", () ->
-            new BlockItem(MNDBlocks.STUFFED_HOGLIN.get(),(basicItem().stacksTo(1)))
+            new StuffedHoglinBlockItem(MNDBlocks.STUFFED_HOGLIN.get(), basicItem().stacksTo(1).rarity(Rarity.UNCOMMON))
     );
     public static final Supplier<Item> ROAST_EAR = ITEMS.register("roast_ear", ()  ->
-            new ConsumableItem(foodItem(MNDFoodValues.ROAST_EAR))
+            new ConsumableItem(foodItem(MNDFoodValues.ROAST_EAR).rarity(Rarity.UNCOMMON))
     );
     public static final Supplier<Item> PLATE_OF_STUFFED_HOGLIN_SNOUT = ITEMS.register("plate_of_stuffed_hoglin_snout", ()  ->
-            new ConsumableItem(bowlFoodItem(MNDFoodValues.PLATE_OF_STUFFED_HOGLIN_SNOUT), true)
+            new ConsumableItem(bowlFoodItem(MNDFoodValues.PLATE_OF_STUFFED_HOGLIN_SNOUT).rarity(Rarity.UNCOMMON), true)
     );
     public static final Supplier<Item> PLATE_OF_STUFFED_HOGLIN_HAM = ITEMS.register("plate_of_stuffed_hoglin_ham", ()  ->
-            new ConsumableItem(bowlFoodItem(MNDFoodValues.PLATE_OF_STUFFED_HOGLIN_HAM), true)
+            new ConsumableItem(bowlFoodItem(MNDFoodValues.PLATE_OF_STUFFED_HOGLIN_HAM).rarity(Rarity.UNCOMMON), true)
     );
     public static final Supplier<Item> PLATE_OF_STUFFED_HOGLIN = ITEMS.register("plate_of_stuffed_hoglin", ()  ->
-            new ConsumableItem(bowlFoodItem(MNDFoodValues.PLATE_OF_STUFFED_HOGLIN), true)
+            new ConsumableItem(bowlFoodItem(MNDFoodValues.PLATE_OF_STUFFED_HOGLIN).rarity(Rarity.UNCOMMON), true)
     );
 }

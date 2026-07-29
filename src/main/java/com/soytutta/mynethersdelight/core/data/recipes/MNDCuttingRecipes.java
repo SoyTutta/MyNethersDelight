@@ -50,7 +50,6 @@ public class MNDCuttingRecipes {
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.STRIDER_SLICE.get()),
                         Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         MNDItems.MINCED_STRIDER.get(), 2)
-                .addResult(Items.STRING)
                 .addResultWithChance(Items.STRING, 0.5F, 2)
                 .setNamespace(MyNethersDelight.MODID)
                 .save(consumer);
@@ -75,15 +74,15 @@ public class MNDCuttingRecipes {
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.HOGLIN_TROPHY.get()),
                         Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         MNDItems.SKOGLIN_TROPHY.get())
-                .addResult(Items.LEATHER)
-                .addResultWithChance(Items.LEATHER, 0.5F, 2)
+                .addResult(Items.LEATHER, 2)
+                .addResultWithChance(Items.LEATHER, 0.5F)
                 .setNamespace(MyNethersDelight.MODID)
                 .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.ZOGLIN_TROPHY.get()),
                         Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         MNDItems.SKOGLIN_TROPHY.get())
-                .addResult(Items.ROTTEN_FLESH)
-                .addResultWithChance(Items.ROTTEN_FLESH, 0.5F, 2)
+                .addResult(Items.ROTTEN_FLESH, 2)
+                .addResultWithChance(Items.ROTTEN_FLESH, 0.5F)
                 .setNamespace(MyNethersDelight.MODID)
                 .save(consumer);
 
@@ -98,16 +97,13 @@ public class MNDCuttingRecipes {
     }
 
     private static void salvagingWoodenFurniture(Consumer<FinishedRecipe> consumer) {
-        salvagePlankFromFurniture(consumer, MNDItems.POWDERY_PLANKS.get(), MNDItems.POWDERY_DOOR.get(), MNDItems.POWDERY_TRAPDOOR.get(), MNDItems.POWDERY_SIGN.get());
+        salvagePlankFromFurniture(consumer, MNDItems.POWDERY_PLANKS.get(), MNDItems.POWDERY_DOOR.get(),
+                MNDItems.POWDERY_TRAPDOOR.get(), MNDItems.POWDERY_SIGN.get(), MNDItems.POWDERY_HANGING_SIGN.get(),
+                MNDItems.POWDERY_FENCE.get(), MNDItems.POWDERY_FENCE_GATE.get(), MNDItems.POWDERY_PRESSURE_PLATE.get(),
+                MNDItems.POWDERY_BUTTON.get(), MNDItems.POWDERY_CABINET.get());
     }
 
     private static void cuttingVegetables(Consumer<FinishedRecipe> consumer) {
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.SUGAR_CANE),
-                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
-                        Items.SUGAR, 1)
-                .addResultWithChance(Items.SUGAR, 0.25F, 1)
-                .setNamespace(MyNethersDelight.MODID)
-                .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.CARVED_PUMPKIN),
                         Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
                         ModItems.PUMPKIN_SLICE.get(), 1)
@@ -116,14 +112,19 @@ public class MNDCuttingRecipes {
                 .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.POWDER_CANNON.get()),
                         Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
-                        Items.GUNPOWDER, 1)
+                        Items.STICK, 1)
                 .addResultWithChance(Items.GUNPOWDER, 0.25F, 1)
+                .setNamespace(MyNethersDelight.MODID)
+                .save(consumer);
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(Items.BAMBOO),
+                        Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
+                        Items.STICK, 1)
                 .setNamespace(MyNethersDelight.MODID)
                 .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.BULLET_PEPPER.get()),
                         Ingredient.of(CommonTags.Items.TOOLS_KNIVES),
-                        Items.BLAZE_POWDER, 1)
-                .addResultWithChance(Items.BLAZE_POWDER, 0.25F, 1)
+                        MNDItems.PEPPER_POWDER.get(), 1)
+                .addResultWithChance(MNDItems.PEPPER_POWDER.get(), 0.25F, 1)
                 .setNamespace(MyNethersDelight.MODID)
                 .save(consumer);
         CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(MNDItems.CRIMSON_FUNGUS_COLONY.get()),
@@ -161,9 +162,9 @@ public class MNDCuttingRecipes {
                 .save(consumer);
     }
 
-    private static void salvagePlankFromFurniture(Consumer<FinishedRecipe> consumer, ItemLike plank, ItemLike door, ItemLike trapdoor, ItemLike sign) {
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(door), new ToolActionIngredient(ToolActions.AXE_DIG), plank).setNamespace(MyNethersDelight.MODID).save(consumer);
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(trapdoor), new ToolActionIngredient(ToolActions.AXE_DIG), plank).setNamespace(MyNethersDelight.MODID).save(consumer);
-        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(sign), new ToolActionIngredient(ToolActions.AXE_DIG), plank).setNamespace(MyNethersDelight.MODID).save(consumer);
+    private static void salvagePlankFromFurniture(Consumer<FinishedRecipe> consumer, ItemLike plank, ItemLike... furniture) {
+        CuttingBoardRecipeBuilder.cuttingRecipe(Ingredient.of(furniture), new ToolActionIngredient(ToolActions.AXE_DIG), plank, 1, 0.75F)
+                .salvaging()
+                .save(consumer, net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, "salvaging/powdery_furniture"));
     }
 }

@@ -15,12 +15,12 @@ import net.minecraft.world.damagesource.DamageTypes;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -34,17 +34,17 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.level.pathfinder.BlockPathTypes;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.BooleanOp;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
-import net.minecraftforge.fml.ModList;
 import vectorwing.farmersdelight.common.registry.ModDamageTypes;
-import vectorwing.farmersdelight.common.tag.CommonTags;
 import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import java.util.function.Supplier;
+import javax.annotation.Nullable;
 
 public class MagmaCakeBlock extends Block {
     public static final BooleanProperty SECOND_CAKE = BooleanProperty.create("second_cake");
@@ -164,10 +164,10 @@ public class MagmaCakeBlock extends Block {
         ItemStack heldStack = player.getItemInHand(hand);
         if (level.isClientSide) {
             if (heldStack.is(MNDItems.MAGMA_CAKE.get())) {
-                return secondCake(level, pos, state, player);
+                return secondCake(level, pos, state, player, heldStack);
             }
 
-            if (heldStack.is(CommonTags.Items.TOOLS_KNIVES)) {
+            if (ItemUtils.isKnife(heldStack)) {
                 return cutSlice(level, pos, state, player);
             }
 
@@ -181,28 +181,30 @@ public class MagmaCakeBlock extends Block {
         }
 
         if (heldStack.is(MNDItems.MAGMA_CAKE.get())) {
-            return secondCake(level, pos, state, player);
+            return secondCake(level, pos, state, player, heldStack);
         }
 
-        if (heldStack.is(CommonTags.Items.TOOLS_KNIVES)) {
+        if (ItemUtils.isKnife(heldStack)) {
             return cutSlice(level, pos, state, player);
         }
         return this.consumeBite(level, pos, state, player);
     }
     protected InteractionResult secondCake(Level level, BlockPos pos, BlockState state, Player player) {
+        return secondCake(level, pos, state, player, player.getMainHandItem());
+    }
+
+    protected InteractionResult secondCake(Level level, BlockPos pos, BlockState state, Player player, ItemStack heldStack) {
         Direction direction = player.getDirection().getOpposite();
-        ItemStack heldStack = player.getMainHandItem();
-        if (ModList.get().isLoaded("amendments")) {
-            if (state.getValue(BITES) == 0 && !state.getValue(SECOND_CAKE)) {
-                if (!player.isCreative()) {
-                    heldStack.shrink(1);
-                }
-                level.setBlock(pos, state.setValue(SECOND_CAKE_FACING, direction)
-                        .setValue(SECOND_CAKE, true), 3);
+        if (state.getValue(BITES) == 0 && !state.getValue(SECOND_CAKE)) {
+            if (!player.isCreative()) {
+                heldStack.shrink(1);
             }
-        } else { return InteractionResult.PASS; }
-        level.playSound(null, pos, SoundEvents.MAGMA_CUBE_SQUISH_SMALL, SoundSource.PLAYERS, 0.8F, 0.8F);
-        return InteractionResult.SUCCESS;
+            level.playSound(null, pos, SoundEvents.MAGMA_CUBE_SQUISH_SMALL, SoundSource.PLAYERS, 0.8F, 0.8F);
+            level.setBlock(pos, state.setValue(SECOND_CAKE_FACING, direction)
+                    .setValue(SECOND_CAKE, true), 3);
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
     }
 
     protected InteractionResult consumeBite(Level level, BlockPos pos, BlockState state, Player playerIn) {
@@ -254,7 +256,7 @@ public class MagmaCakeBlock extends Block {
     }
 
     public void stepOn(Level level, BlockPos pos, BlockState state, Entity entity) {
-        if (!entity.fireImmune() && entity instanceof LivingEntity && !EnchantmentHelper.hasFrostWalker((LivingEntity)entity)) {
+        if (!entity.isSteppingCarefully() && entity instanceof LivingEntity) {
             entity.hurt(ModDamageTypes.getSimpleDamageSource(level, DamageTypes.HOT_FLOOR), 1.0F);
         }
         super.stepOn(level, pos, state, entity);
@@ -305,5 +307,11 @@ public class MagmaCakeBlock extends Block {
     @Override
     public boolean isPathfindable(BlockState state, BlockGetter level, BlockPos pos, PathComputationType type) {
         return false;
+    }
+
+    @Nullable
+    @Override
+    public BlockPathTypes getBlockPathType(BlockState state, BlockGetter level, BlockPos pos, @Nullable Mob mob) {
+        return BlockPathTypes.DAMAGE_FIRE;
     }
 }

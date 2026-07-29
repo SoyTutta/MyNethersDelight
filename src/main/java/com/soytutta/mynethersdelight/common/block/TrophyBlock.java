@@ -40,14 +40,15 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.common.ToolActions;
 import vectorwing.farmersdelight.common.registry.ModSounds;
-import vectorwing.farmersdelight.common.tag.CommonTags;
+import vectorwing.farmersdelight.common.utility.ItemUtils;
 
 import java.util.Random;
 import java.util.stream.Stream;
 
 
-public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
+public class TrophyBlock extends AbstractTrophyBlock {
     public static IntegerProperty ROTTING = IntegerProperty.create("rotting", 0, 2);
     public static final DirectionProperty FACING;
     public static final BooleanProperty WATERLOGGED;
@@ -99,8 +100,12 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
 
 
     public TrophyBlock(BlockBehaviour.Properties properties) {
-        super(properties);
-        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH).setValue(WATERLOGGED, false).setValue(ROTTING, 0));
+        this(properties, 0.5D, 0.24D);
+    }
+
+    public TrophyBlock(BlockBehaviour.Properties properties, double pushStrength, double pushVerticalStrength) {
+        super(properties, pushStrength, pushVerticalStrength);
+        this.registerDefaultState(this.defaultBlockState().setValue(ROTTING, 0));
     }
 
 
@@ -120,7 +125,7 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     public boolean isRandomlyTicking(BlockState state) {
-        return true;
+        return state.getValue(ROTTING) < getMaxRottingStage();
     }
 
     @Override
@@ -149,7 +154,9 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
         BlockState currentState = worldIn.getBlockState(pos);
         worldIn.playSound(null, pos, SoundEvents.HOGLIN_CONVERTED_TO_ZOMBIFIED, SoundSource.BLOCKS, 1.0F, 1.0F);
         Direction facing = currentState.getValue(FACING);
-        worldIn.setBlock(pos, MNDBlocks.ZOGLIN_TROPHY.get().defaultBlockState().setValue(FACING, facing), 3);
+        worldIn.setBlock(pos, MNDBlocks.ZOGLIN_TROPHY.get().defaultBlockState()
+                .setValue(FACING, facing)
+                .setValue(WATERLOGGED, currentState.getValue(WATERLOGGED)), 3);
 
         for (int i = 0; i < 10; i++) {
             double d0 = (double) pos.getX() + random.nextDouble();
@@ -170,10 +177,12 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
 
         if (block == MNDBlocks.HOGLIN_TROPHY.get() && (heldItem.is(MNDTags.HOGLIN_WAXED))) {
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.WAXED_HOGLIN_TROPHY.get(), SoundEvents.HONEYCOMB_WAX_ON, ParticleTypes.WAX_ON, secondParticle, secondSoundEvent, useSecondEffects);
+            consumeInteractionItem(level, player, heldItem);
             return InteractionResult.SUCCESS;
         }
-        else if (block == MNDBlocks.WAXED_HOGLIN_TROPHY.get() && heldItem.is(CommonTags.Items.TOOLS_AXES)) {
-            processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.HONEYCOMB_WAX_ON, ParticleTypes.WAX_OFF, secondParticle, secondSoundEvent, useSecondEffects);
+        else if (block == MNDBlocks.WAXED_HOGLIN_TROPHY.get() && heldItem.canPerformAction(ToolActions.AXE_WAX_OFF)) {
+            processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.AXE_WAX_OFF, ParticleTypes.WAX_OFF, secondParticle, secondSoundEvent, useSecondEffects);
+            damageInteractionTool(level, player, hand, heldItem);
             return InteractionResult.SUCCESS;
         }
         else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && heldItem.is(MNDTags.HOGLIN_CURE)) {
@@ -181,22 +190,25 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
             secondSoundEvent = SoundEvents.ENCHANTMENT_TABLE_USE;
             useSecondEffects = true;
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.ZOMBIE_VILLAGER_CURE, ParticleTypes.CLOUD, secondParticle, secondSoundEvent, useSecondEffects);
+            consumeInteractionItem(level, player, heldItem);
             return InteractionResult.SUCCESS;
         }
-        else if (block == MNDBlocks.HOGLIN_TROPHY.get() && heldItem.is(CommonTags.Items.TOOLS_KNIVES)) {
+        else if (block == MNDBlocks.HOGLIN_TROPHY.get() && ItemUtils.isKnife(heldItem)) {
             secondParticle = ParticleTypes.CLOUD;
             secondSoundEvent = SoundEvents.HOGLIN_HURT;
             useSecondEffects = true;
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.SKOGLIN_TROPHY.get(), ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), ParticleTypes.DAMAGE_INDICATOR, secondParticle, secondSoundEvent, useSecondEffects);
+            damageInteractionTool(level, player, hand, heldItem);
             int j = 1 + level.random.nextInt(2);
             popResource(level, pos, new ItemStack(Items.LEATHER, j));
             return InteractionResult.SUCCESS;
         }
-        else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && heldItem.is(CommonTags.Items.TOOLS_KNIVES)) {
+        else if (block == MNDBlocks.ZOGLIN_TROPHY.get() && ItemUtils.isKnife(heldItem)) {
             secondParticle = ParticleTypes.CLOUD;
             secondSoundEvent = SoundEvents.ZOGLIN_HURT;
             useSecondEffects = true;
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.SKOGLIN_TROPHY.get(), ModSounds.BLOCK_CUTTING_BOARD_KNIFE.get(), ParticleTypes.DAMAGE_INDICATOR, secondParticle, secondSoundEvent, useSecondEffects);
+            damageInteractionTool(level, player, hand, heldItem);
             int j = 1 + level.random.nextInt(2);
             popResource(level, pos, new ItemStack(Items.ROTTEN_FLESH, j));
             return InteractionResult.SUCCESS;
@@ -206,6 +218,7 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
             secondSoundEvent = SoundEvents.HOGLIN_AMBIENT;
             useSecondEffects = true;
             processTrophyInteraction(level, pos, player, hand, MNDBlocks.HOGLIN_TROPHY.get(), SoundEvents.ARMOR_EQUIP_LEATHER, ParticleTypes.HAPPY_VILLAGER, secondParticle, secondSoundEvent, useSecondEffects);
+            consumeInteractionItem(level, player, heldItem);
             return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
@@ -214,15 +227,11 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
     private void processTrophyInteraction(Level level, BlockPos pos, Player player, InteractionHand hand, Block trophyBlock, SoundEvent soundEvent, ParticleOptions particle, ParticleOptions secondParticle, SoundEvent secondSoundEvent, boolean useSecondEffects) {
         if (level.isClientSide()) return;
 
-        ItemStack heldItem = player.getItemInHand(hand);
-        if (heldItem.is(CommonTags.Items.TOOLS)) {
-            heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
-        } else if (!player.getAbilities().instabuild) {
-            heldItem.shrink(1);
-        }
-
         level.playSound(null, pos, soundEvent, SoundSource.BLOCKS, 0.8F, 0.8F);
-        level.setBlockAndUpdate(pos, trophyBlock.defaultBlockState().setValue(FACING, level.getBlockState(pos).getValue(FACING)));
+        BlockState oldState = level.getBlockState(pos);
+        level.setBlockAndUpdate(pos, trophyBlock.defaultBlockState()
+                .setValue(FACING, oldState.getValue(FACING))
+                .setValue(WATERLOGGED, oldState.getValue(WATERLOGGED)));
 
         if (!level.isClientSide && level instanceof ServerLevel serverLevel) {
             for (int i = 0; i < 6; i++) {
@@ -235,6 +244,18 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
                     level.playSound(null, pos, secondSoundEvent, SoundSource.BLOCKS, 1.0F, 1.0F);
                 }
             }
+        }
+    }
+
+    private void consumeInteractionItem(Level level, Player player, ItemStack heldItem) {
+        if (!level.isClientSide() && !player.getAbilities().instabuild) {
+            heldItem.shrink(1);
+        }
+    }
+
+    private void damageInteractionTool(Level level, Player player, InteractionHand hand, ItemStack heldItem) {
+        if (!level.isClientSide()) {
+            heldItem.hurtAndBreak(1, player, (p) -> p.broadcastBreakEvent(hand));
         }
     }
 
@@ -296,8 +317,8 @@ public class TrophyBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING, WATERLOGGED, ROTTING);
         super.createBlockStateDefinition(builder);
+        builder.add(ROTTING);
     }
 
     @Override

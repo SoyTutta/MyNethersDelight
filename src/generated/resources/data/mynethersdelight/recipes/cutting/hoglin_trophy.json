@@ -2,15 +2,23 @@
   "type": "farmersdelight:cutting",
   "ingredients": [
     {
-      "item": "mynethersdelight:waxed_hoglin_trophy"
+      "item": "mynethersdelight:hoglin_trophy"
     }
   ],
   "result": [
     {
-      "item": "mynethersdelight:hoglin_trophy"
+      "item": "mynethersdelight:skoglin_trophy"
+    },
+    {
+      "count": 2,
+      "item": "minecraft:leather"
+    },
+    {
+      "chance": 0.5,
+      "item": "minecraft:leather"
     }
   ],
   "tool": {
-    "tag": "forge:tools/axes"
+    "tag": "forge:tools/knives"
   }
 }

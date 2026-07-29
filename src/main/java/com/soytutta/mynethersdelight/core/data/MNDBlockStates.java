@@ -2,6 +2,7 @@ package com.soytutta.mynethersdelight.core.data;
 
 import com.soytutta.mynethersdelight.MyNethersDelight;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
+import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.*;
@@ -26,7 +27,7 @@ public class MNDBlockStates extends BlockStateProvider {
     }
 
     public ResourceLocation resourceBlock(String path) {
-        return new ResourceLocation("mynethersdelight", "block/" + path);
+        return ResourceLocation.fromNamespaceAndPath("mynethersdelight", "block/" + path);
     }
 
     protected void registerStatesAndModels() {
@@ -40,9 +41,8 @@ public class MNDBlockStates extends BlockStateProvider {
         this.crateBlock(MNDBlocks.BULLET_PEPPER_CRATE.get(), "bullet_pepper");
         this.cabinetBlock(MNDBlocks.POWDERY_CABINET.get(), "powdery");
         this.simpleBlock(MNDBlocks.POWDERY_PLANKS.get());
-        this.logBlock(((RotatedPillarBlock) MNDBlocks.BLOCK_OF_POWDERY_CANNON.get()));
-
-        this.logBlock(((RotatedPillarBlock) MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get()));
+        this.uvLockedLogBlock((RotatedPillarBlock) MNDBlocks.BLOCK_OF_POWDERY_CANNON.get());
+        this.uvLockedLogBlock((RotatedPillarBlock) MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
 
         this.stairsBlock(((StairBlock) MNDBlocks.POWDERY_PLANKS_STAIRS.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
         this.slabBlock(((SlabBlock) MNDBlocks.POWDERY_PLANKS_SLAB.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()), blockTexture(MNDBlocks.POWDERY_PLANKS.get()));
@@ -83,6 +83,17 @@ public class MNDBlockStates extends BlockStateProvider {
 
     public ModelFile existingModel(String path) {
         return new ModelFile.ExistingModelFile(this.resourceBlock(path), this.models().existingFileHelper);
+    }
+
+    private void uvLockedLogBlock(RotatedPillarBlock block) {
+        String name = this.blockName(block);
+        this.getVariantBuilder(block)
+                .partialState().with(RotatedPillarBlock.AXIS, Direction.Axis.X)
+                .modelForState().modelFile(this.existingModel(name + "_x")).addModel()
+                .partialState().with(RotatedPillarBlock.AXIS, Direction.Axis.Y)
+                .modelForState().modelFile(this.existingModel(name + "_y")).addModel()
+                .partialState().with(RotatedPillarBlock.AXIS, Direction.Axis.Z)
+                .modelForState().modelFile(this.existingModel(name + "_z")).addModel();
     }
 
     public void hangingSignBlock(Block signBlock, Block wallSignBlock, ResourceLocation texture) {

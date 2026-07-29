@@ -3,6 +3,7 @@ package com.soytutta.mynethersdelight.common.block;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
@@ -28,8 +29,20 @@ import vectorwing.farmersdelight.common.tag.ModTags;
 import java.util.function.Supplier;
 
 public class StriderloafBlock extends FeastBlock {
-    protected static final VoxelShape PLATE_SHAPE = Block.box(1.0, 0.0, 1.0, 15.0, 2.0, 15.0);
-    protected static final VoxelShape ROAST_SHAPE;
+    protected static final VoxelShape SHAPE_NORTH_SOUTH = Shapes.or(
+            Block.box(2, 1, 1, 14, 3, 15),
+            Block.box(2, 0, 3, 14, 2, 5),
+            Block.box(2, 0, 11, 14, 2, 13));
+    protected static final VoxelShape SHAPE_EAST_WEST = Shapes.or(
+            Block.box(1, 1, 2, 15, 3, 14),
+            Block.box(3, 0, 2, 5, 2, 14),
+            Block.box(11, 0, 2, 13, 2, 14));
+    protected static final VoxelShape ROAST_SHAPE_EAST_WEST =
+            Shapes.joinUnoptimized(SHAPE_EAST_WEST,
+                    Block.box(5, 2, 5, 11, 8, 11), BooleanOp.OR);
+    protected static final VoxelShape ROAST_SHAPE_NORTH_SOUTH =
+            Shapes.joinUnoptimized(SHAPE_NORTH_SOUTH,
+                    Block.box(5, 2, 5, 11, 8, 11), BooleanOp.OR);
 
     public StriderloafBlock(Properties properties, Supplier<Item> servingItem, boolean hasLeftovers) {
         super(properties, servingItem, hasLeftovers);
@@ -69,14 +82,20 @@ public class StriderloafBlock extends FeastBlock {
 
     @Override
     public void neighborChanged(BlockState state, Level worldIn, BlockPos pos, Block blockIn, BlockPos fromPos, boolean isMoving) {
-        if (worldIn.getBlockState(fromPos).getFluidState().is(FluidTags.LAVA)) {
-            tick(state, (ServerLevel) worldIn, pos, null);
+        if (worldIn instanceof ServerLevel serverLevel
+                && worldIn.getBlockState(fromPos).getFluidState().is(FluidTags.LAVA)) {
+            tick(state, serverLevel, pos, serverLevel.getRandom());
         }
     }
 
     @Override
     public VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return (state.getValue(SERVINGS) == 0) ? PLATE_SHAPE : ROAST_SHAPE;
+        if (state.getValue(FACING).getAxis() == Direction.Axis.X) {
+            return state.getValue(SERVINGS) == 0
+                    ? SHAPE_NORTH_SOUTH : ROAST_SHAPE_NORTH_SOUTH;
+        }
+        return state.getValue(SERVINGS) == 0
+                ? SHAPE_EAST_WEST : ROAST_SHAPE_EAST_WEST;
     }
 
     @Override
@@ -97,7 +116,4 @@ public class StriderloafBlock extends FeastBlock {
         return new ItemStack(MNDItems.STRIDERLOAF_BLOCK.get());
     }
 
-    static {
-        ROAST_SHAPE = Shapes.joinUnoptimized(PLATE_SHAPE, Block.box(5, 2, 5, 11, 6, 11), BooleanOp.OR);
-    }
 }

@@ -7,16 +7,8 @@
     },
     {
       "when": {
-        "leave": "true"
-      },
-      "apply": {
-        "model": "mynethersdelight:block/cane_leaves"
-      }
-    },
-    {
-      "when": {
-        "base": "true",
-        "age": "0"
+        "age": "1",
+        "lit": "false"
       },
       "apply": {
         "model": "mynethersdelight:block/cane_base_0"
@@ -24,16 +16,6 @@
     },
     {
       "when": {
-        "base": "true",
-        "lit": "false",
-        "age": "1"
-      },
-      "apply": {
-        "model": "mynethersdelight:block/cane_base_1"
-      }
-    }, {
-      "when": {
-        "base": "true",
         "lit": "false",
         "age": "2"
       },
@@ -43,9 +25,32 @@
     },
     {
       "when": {
-        "base": "true",
-        "lit": "true",
-        "age": "2"
+        "lit": "false",
+        "age": "3"
+      },
+      "apply": {
+        "model": "mynethersdelight:block/cane_base_1"
+      }
+    },
+    {
+      "when": {
+        "leaves": "small"
+      },
+      "apply": {
+        "model": "mynethersdelight:block/cane_leaves"
+      }
+    },
+    {
+      "when": {
+        "leaves": "large"
+      },
+      "apply": {
+        "model": "mynethersdelight:block/cannon_small_leaves"
+      }
+    },
+    {
+      "when": {
+        "lit": "true"
       },
       "apply": {
         "model": "mynethersdelight:block/cane_base_on"

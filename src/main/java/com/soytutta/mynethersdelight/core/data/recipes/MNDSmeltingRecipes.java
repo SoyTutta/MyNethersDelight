@@ -33,28 +33,28 @@ public class MNDSmeltingRecipes {  public MNDSmeltingRecipes() {
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(MNDItems.GHAST_DOUGH.get()), RecipeCategory.FOOD,
                         Items.BREAD, 0.35F, 200)
                 .unlockedBy("has_dough", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHAST_DOUGH.get()))
-                .save(consumer, new ResourceLocation(MyNethersDelight.MODID, "bread_from_smelting"));
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, "bread_from_smelting"));
 
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(MNDItems.GHAST_DOUGH.get()), RecipeCategory.FOOD,
                         Items.BREAD, 0.35F, 100)
                 .unlockedBy("has_dough", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHAST_DOUGH.get()))
-                .save(consumer, new ResourceLocation(MyNethersDelight.MODID, "bread_from_smoking"));
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, "bread_from_smoking"));
 
         SimpleCookingRecipeBuilder.smelting(Ingredient.of(MNDItems.GHAST_SOURDOUGH.get()), RecipeCategory.FOOD,
                         MNDItems.BREAD_LOAF_BLOCK.get(), 0.35F, 400)
                 .unlockedBy("has_dough", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHAST_SOURDOUGH.get()))
-                .save(consumer, new ResourceLocation(MyNethersDelight.MODID, "bread_loaf_from_smelting"));
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, "bread_loaf_from_smelting"));
 
         SimpleCookingRecipeBuilder.smoking(Ingredient.of(MNDItems.GHAST_SOURDOUGH.get()), RecipeCategory.FOOD,
                         MNDItems.BREAD_LOAF_BLOCK.get(), 0.35F, 200)
                 .unlockedBy("has_dough", InventoryChangeTrigger.TriggerInstance.hasItems(MNDItems.GHAST_SOURDOUGH.get()))
-                .save(consumer, new ResourceLocation(MyNethersDelight.MODID, "bread_loaf_from_smoking"));
+                .save(consumer, ResourceLocation.fromNamespaceAndPath(MyNethersDelight.MODID, "bread_loaf_from_smoking"));
 
         foodSmeltingRecipes("toast", Ingredient.of(MNDItems.SLICES_OF_BREAD.get()), MNDItems.TOASTS.get(), 0.15F, consumer);
     }
 
     private static void foodSmeltingRecipes(String name, Ingredient ingredient, ItemLike result, float experience, Consumer<FinishedRecipe> consumer) {
-        String namePrefix = (new ResourceLocation("mynethersdelight", name)).toString();
+        String namePrefix = (ResourceLocation.fromNamespaceAndPath("mynethersdelight", name)).toString();
 
         ItemLike[] items = Arrays.stream(ingredient.getItems())
                 .map(ItemStack::getItem)

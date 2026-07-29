@@ -1,6 +1,5 @@
 package com.soytutta.mynethersdelight.common.item;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import com.google.common.collect.Lists;
@@ -39,7 +38,6 @@ import vectorwing.farmersdelight.common.utility.MathUtils;
 import vectorwing.farmersdelight.common.utility.TextUtils;
 
 
-@EventBusSubscriber(modid = "mynethersdelight", bus = Bus.FORGE)
 public class HotCreamConeItem extends ConsumableItem {
 
     public HotCreamConeItem(Properties properties) {
@@ -51,37 +49,33 @@ public class HotCreamConeItem extends ConsumableItem {
     }
 
     public void affectConsumer(ItemStack stack, Level level, LivingEntity consumer) {
-        Iterator<MobEffectInstance> itr = consumer.getActiveEffects().iterator();
-        ArrayList<MobEffect> compatibleEffects = new ArrayList<>();
+        boolean removedEffect = false;
 
         if (!consumer.fireImmune()) {
-            consumer.setRemainingFireTicks(consumer.getRemainingFireTicks() + 1);
-            consumer.setSecondsOnFire(10);
+            consumer.setRemainingFireTicks(10);
         }
 
-        MobEffectInstance selectedEffect;
-        while(itr.hasNext()) {
-            selectedEffect = itr.next();
-            if (selectedEffect.isCurativeItem(new ItemStack(Items.MILK_BUCKET))) {
-                compatibleEffects.add(selectedEffect.getEffect());
+        Iterator<MobEffectInstance> iterator = consumer.getActiveEffects().iterator();
+        while (iterator.hasNext() && !removedEffect) {
+            MobEffectInstance effectInstance = iterator.next();
+            if (effectInstance.isCurativeItem(new ItemStack(Items.MILK_BUCKET))) {
+                int remainingDuration = effectInstance.getDuration();
+                int fireResistanceDuration = remainingDuration / 5;
+                int pungentDuration = fireResistanceDuration / 2;
+
+                if (consumer.removeEffect(effectInstance.getEffect())) {
+                    consumer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE,
+                            fireResistanceDuration > 200 ? fireResistanceDuration * 3 : 400));
+                    consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT.get(),
+                            pungentDuration > 200 ? pungentDuration * 3 : 600, 2, false, false, true));
+                    removedEffect = true;
+                }
             }
         }
 
-        if (!compatibleEffects.isEmpty()) {
-            MobEffect effectToRemove = compatibleEffects.get(level.random.nextInt(compatibleEffects.size()));
-            selectedEffect = consumer.getEffect(effectToRemove);
-            int purgentSeconds = selectedEffect.getDuration() / 15;
-            int fireResistanceSeconds = purgentSeconds / 2;
-            consumer.removeEffect(selectedEffect.getEffect());
-
-            if (fireResistanceSeconds > 0) {
-                consumer.addEffect(new MobEffectInstance(MobEffects.FIRE_RESISTANCE, fireResistanceSeconds * 3));
-            }
-            if (purgentSeconds > 0) {
-                consumer.addEffect(new MobEffectInstance(MNDEffects.GPUNGENT.get(), purgentSeconds * 3));
-            }
-        }
+        if (removedEffect) {
             level.playSound(null, consumer.blockPosition(), SoundEvents.LAVA_EXTINGUISH, consumer.getSoundSource(), 1.0F, 1.0F);
+        }
     }
 
     public static final List<MobEffectInstance> EFFECTS;
@@ -116,34 +110,17 @@ public class HotCreamConeItem extends ConsumableItem {
     public InteractionResult interactLivingEntity(ItemStack stack, Player playerIn, LivingEntity target,
                                                   InteractionHand hand) {
         if (target instanceof Strider strider) {
-            strider.setHealth(strider.getMaxHealth());
-            for (MobEffectInstance effect : EFFECTS) {
-                strider.addEffect(new MobEffectInstance(effect));
+            if (strider.isAlive()) {
+                return InteractionResult.SUCCESS;
             }
-
-            strider.level().playSound(null, target.blockPosition(), SoundEvents.STRIDER_HAPPY, SoundSource.PLAYERS,
-                    0.8F, 0.8F);
-
-            for (int i = 0; i < 5; ++i) {
-                double d0 = MathUtils.RAND.nextGaussian() * 0.02;
-                double d1 = MathUtils.RAND.nextGaussian() * 0.02;
-                double d2 = MathUtils.RAND.nextGaussian() * 0.02;
-                strider.level().addParticle(ModParticleTypes.STAR.get(), strider.getRandomX(1.0),
-                        strider.getRandomY() + 0.5, strider.getRandomZ(1.0), d0, d1, d2);
-            }
-
-            if (!playerIn.isCreative()) {
-                stack.shrink(1);
-            }
-
-            return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }
 
     static {
         EFFECTS = Lists.newArrayList(new MobEffectInstance[] {
-                new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 6000, 1)});
+                new MobEffectInstance(MobEffects.MOVEMENT_SPEED, 1200, 1),
+                new MobEffectInstance(MNDEffects.GPUNGENT.get(), 1200, 0, false, false)});
     }
 
     @EventBusSubscriber(modid = "mynethersdelight", bus = Bus.FORGE)
@@ -166,7 +143,7 @@ public class HotCreamConeItem extends ConsumableItem {
                             entity.addEffect(new MobEffectInstance(effect));
                         }
 
-                        entity.level().playSound(null, target.blockPosition(), SoundEvents.STRIDER_HAPPY,
+                        entity.level().playSound(null, target.blockPosition(), SoundEvents.GENERIC_EAT,
                                 SoundSource.PLAYERS, 0.8F, 0.8F);
 
                         for (int i = 0; i < 5; ++i) {
@@ -174,11 +151,12 @@ public class HotCreamConeItem extends ConsumableItem {
                             double d1 = MathUtils.RAND.nextGaussian() * 0.02;
                             double d2 = MathUtils.RAND.nextGaussian() * 0.02;
                             entity.level().addParticle(ModParticleTypes.STAR.get(),
-                                    entity.getRandomX(1.0), entity.getRandomY() + 0.5, entity.getRandomZ(1.0), d0,
+                                    entity.getRandomX(0.75), entity.getRandomY() + 0.5, entity.getRandomZ(0.75), d0,
                                     d1, d2);
                         }
 
                         if (!player.isCreative()) {
+                            player.addItem(heldStack.getCraftingRemainingItem());
                             heldStack.shrink(1);
                         }
 

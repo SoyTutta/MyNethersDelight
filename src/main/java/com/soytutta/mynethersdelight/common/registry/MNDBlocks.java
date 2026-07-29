@@ -31,6 +31,22 @@ import java.util.function.ToIntFunction;
 public class MNDBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, "mynethersdelight");
 
+    public static final Supplier<Block> BLAZIER_BLOCK = BLOCKS.register("blazier_block", () ->
+            new BlazierBlock(Properties.of().mapColor(MapColor.NETHER)
+                    .strength(0.75F, 3.0F)
+                    .lightLevel(state -> {
+                        if (!state.getValue(BlockStateProperties.LIT)) {
+                            return 0;
+                        }
+                        return switch (state.getValue(BlazierBlock.HEAT)) {
+                            case SMELTING -> 15;
+                            case BAKING -> 12;
+                            case CAMPFIRE -> 8;
+                            case SMOKING -> 4;
+                        };
+                    }))
+    );
+
     public static final Supplier<Block> NETHER_BRICKS_CABINET = BLOCKS.register("nether_bricks_cabinet", () ->
         new CabinetBlock(Properties.copy(Blocks.NETHER_BRICKS))
     );
@@ -74,11 +90,11 @@ public class MNDBlocks {
     );
     public static final Supplier<Block> POWDERY_CHUBBY_SAPLING = BLOCKS.register("powdery_chubby_sapling", () ->
             new PowderyCannonSaplingBlock(Properties.copy(Blocks.BAMBOO_SAPLING)
-                    .mapColor(MapColor.TERRACOTTA_BLACK).strength(2.0F, 3.0F))
+                    .mapColor(MapColor.TERRACOTTA_BLACK).strength(2.0F, 15.0F))
     );
     public static final Supplier<Block> POWDERY_CANNON = BLOCKS.register("powdery_cannon", () ->
             new PowderyCannonBlock(Properties.copy(Blocks.BAMBOO)
-                    .mapColor(MapColor.TERRACOTTA_BLACK).strength(3.0F, 3.0F)
+                    .mapColor(MapColor.TERRACOTTA_BLACK).strength(30.0F, 3.0F)
                     .lightLevel(litBlockEmission(12)))
     );
     public static final Supplier<Block> POWDERY_CANE = BLOCKS.register("powdery_cane", () ->
@@ -117,7 +133,7 @@ public class MNDBlocks {
     );
     public static final Supplier<Block> BLOCK_OF_POWDERY_CANNON = BLOCKS.register("powdery_block", () ->
             new StrippableBlock(BlockBehaviour.Properties.copy(Blocks.CRIMSON_STEM).sound(SoundType.BAMBOO_WOOD)
-                    .instrument(NoteBlockInstrument.BASS).explosionResistance(300.0F)
+                    .instrument(NoteBlockInstrument.BASS).explosionResistance(180.0F)
                     .mapColor(MapColor.TERRACOTTA_BLACK))
     );
     public static final Supplier<Block> BLOCK_OF_STRIPPED_POWDERY_CANNON = BLOCKS.register("stripped_powdery_block", () ->
@@ -221,6 +237,13 @@ public class MNDBlocks {
             new StuffedHoglinBlock(Properties.copy(Blocks.CAKE)
                     .mapColor(MapColor.TERRACOTTA_PINK))
     );
+    public static final Supplier<Block> GOLDEN_TROPHY = BLOCKS.register("golden_trophy", () ->
+            new GoldenTrophyBlock(Properties.of()
+                    .mapColor(MapColor.GOLD)
+                    .instrument(NoteBlockInstrument.BELL)
+                    .strength(3.0F, 6.0F)
+                    .sound(SoundType.METAL), 1.2D, 0.57D)
+    );
     public static final Supplier<Block> HOGLIN_TROPHY = BLOCKS.register("hoglin_trophy", () ->
             new TrophyBlock(Properties.copy(Blocks.CRIMSON_PLANKS)
                     .mapColor(MapColor.TERRACOTTA_PINK))
@@ -231,11 +254,11 @@ public class MNDBlocks {
     );
     public static final Supplier<Block> ZOGLIN_TROPHY = BLOCKS.register("zoglin_trophy", () ->
             new TrophyBlock(Properties.copy(Blocks.CRIMSON_PLANKS)
-                    .mapColor(MapColor.TERRACOTTA_GREEN))
+                    .mapColor(MapColor.TERRACOTTA_GREEN), 0.7D, 0.33D)
     );
     public static final Supplier<Block> SKOGLIN_TROPHY = BLOCKS.register("skoglin_trophy", () ->
             new TrophyBlock(Properties.copy(Blocks.BONE_BLOCK)
-                    .mapColor(MapColor.TERRACOTTA_WHITE))
+                    .mapColor(MapColor.TERRACOTTA_WHITE), 0.3D, 0.14D)
     );
 
     private static ToIntFunction<BlockState> FlameBlockEmission(int lightValue) {

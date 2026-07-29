@@ -9,9 +9,9 @@
       }
     },
     {
-      "chance": 0.025,
-      "condition": "minecraft:random_chance_with_looting",
-      "looting_multiplier": 0.01
+      "condition": "minecraft:table_bonus",
+      "enchantment": "minecraft:looting",
+      "chances": [0.025, 0.035, 0.045, 0.055]
     }
   ],
   "item": "farmersdelight:onion"

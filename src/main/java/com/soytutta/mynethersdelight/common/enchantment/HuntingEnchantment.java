@@ -32,6 +32,16 @@ public class HuntingEnchantment extends Enchantment {
     }
 
     @Override
+    public int getMinCost(int level) {
+        return 25;
+    }
+
+    @Override
+    public int getMaxCost(int level) {
+        return 50;
+    }
+
+    @Override
     public boolean isCurse() { return true; }
 
     @Override

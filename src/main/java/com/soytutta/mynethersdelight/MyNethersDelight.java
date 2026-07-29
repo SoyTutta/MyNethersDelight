@@ -1,14 +1,18 @@
 package com.soytutta.mynethersdelight;
 
 import com.mojang.serialization.Codec;
+import com.soytutta.mynethersdelight.common.MNDConfiguration;
 import com.soytutta.mynethersdelight.common.MNDCommonSetup;
+import com.soytutta.mynethersdelight.common.crafting.condition.ConfigEnabledCondition;
 import com.soytutta.mynethersdelight.common.events.CommonEvent;
 import com.soytutta.mynethersdelight.common.loot.MNDPastrySlicingModifier;
+import com.soytutta.mynethersdelight.common.loot.PiglinFoodLootModifier;
 import com.soytutta.mynethersdelight.common.loot.RemplaceLootModifier;
 import com.soytutta.mynethersdelight.common.registry.*;
 import com.soytutta.mynethersdelight.integration.MNDEveryCompat;
 import com.soytutta.mynethersdelight.integration.addonsdelight.MNDItemsMD;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.crafting.CraftingHelper;
 import net.minecraftforge.common.loot.IGlobalLootModifier;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModList;
@@ -28,6 +32,8 @@ public class MyNethersDelight
 
     public MyNethersDelight() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        MNDConfiguration.register();
+        CraftingHelper.register(ConfigEnabledCondition.SERIALIZER);
         modEventBus.addListener(MNDCommonSetup::init);
         MNDItems.ITEMS.register(modEventBus);
         if (ModList.get().isLoaded("miners_delight")) {
@@ -40,6 +46,7 @@ public class MyNethersDelight
         MNDEntityTypes.ENTITIES.register(modEventBus);
         MNDCreativeTab.TABS.register(modEventBus);
         MNDBiomeFeatures.FEATURES.register(modEventBus);
+        MNDRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(new CommonEvent());
         registerLootSerializers(modEventBus);
@@ -52,6 +59,7 @@ public class MyNethersDelight
         DeferredRegister<Codec<? extends IGlobalLootModifier>> LOOT = DeferredRegister.create(ForgeRegistries.Keys.GLOBAL_LOOT_MODIFIER_SERIALIZERS, MyNethersDelight.MODID);
         RegistryObject<Codec<RemplaceLootModifier>> REMPLACE_ITEM = LOOT.register("remplace_item", RemplaceLootModifier.CODEC);
         RegistryObject<Codec<MNDPastrySlicingModifier>> PASTRY_SLICING= LOOT.register("pastry_slicing", MNDPastrySlicingModifier.CODEC);
+        LOOT.register("piglin_food", PiglinFoodLootModifier.CODEC);
 
         LOOT.register(bus);
     }

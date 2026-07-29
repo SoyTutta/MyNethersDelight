@@ -1,5 +1,5 @@
 {
-  "type": "farmersdelight:add_loot_table",
+  "type": "mynethersdelight:piglin_food",
   "conditions":
   [
     {
@@ -7,5 +7,6 @@
       "loot_table_id": "minecraft:gameplay/piglin_bartering"
     }
   ],
-  "lootTable": "mynethersdelight:gameplay/mnd_piglin_bartering"
+  "lootTable": "mynethersdelight:gameplay/mnd_piglin_bartering",
+  "lootTableWithoutFood": "mynethersdelight:gameplay/mnd_piglin_bartering_without_food"
 }

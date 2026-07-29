@@ -1,4 +1,5 @@
 {
+  "block.mynethersdelight.blackstone_bricks_cabinet": "Шафка з чорнокам'яної цегли",
   "block.mynethersdelight.bullet_pepper": "Запальний перець",
   "block.mynethersdelight.bullet_pepper_crate": "Ящик запальних перців",
   "block.mynethersdelight.cold_striderloaf_block": "Холодний булкач",
@@ -31,6 +32,7 @@
   "block.mynethersdelight.powdery_stairs": "Порохові сходи",
   "block.mynethersdelight.powdery_torch": "Пороховий смолоскип",
   "block.mynethersdelight.powdery_trapdoor": "Пороховий люк",
+  "block.mynethersdelight.red_nether_bricks_cabinet": "Шафка з червоної незерської цегли",
   "block.mynethersdelight.resurgent_soil": "Відроджувальний ґрунт",
   "block.mynethersdelight.resurgent_soil_farmland": "Відроджувальна рілля",
   "block.mynethersdelight.skoglin_trophy": "Трофей скоґліна",
@@ -46,9 +48,9 @@
   "effect.mynethersdelight.g_pungent.desc": "Регенерується з теплом",
   "enchantment.mynethersdelight.poaching": "Браконьєрство",
   "enchantment.mynethersdelight.poaching.desc": "Відповідальне полювання може надати вам додаткові інгредієнти!!!\nАле будьте обережні при виборі своєї цілі...",
-  "farmersdelight.tooltip.hot_cream": "Ефекти горіння",
-  "farmersdelight.tooltip.magma_cake_slice": "Пікантний жаб'ячий перекус",
-  "farmersdelight.tooltip.strider_egg": "Живиться 1 шкідливим ефектом",
+  "tooltip.farmersdelight.hot_cream": "Ефекти горіння",
+  "tooltip.farmersdelight.magma_cake_slice": "Пікантний жаб'ячий перекус",
+  "tooltip.farmersdelight.strider_egg": "Живиться 1 шкідливим ефектом",
   "farmersdelight.tooltip.strider_feed.when_feeding": "При згодовуванні блукачу",
   "item.miners_delight.rock_soup_cup": "Горня кам'яного супу",
   "item.miners_delight.spicy_hoglin_stew_cup": "Горня пікантного тушкованого гоґліна",
@@ -58,6 +60,7 @@
   "item.mynethersdelight.blue_tenderloin_steak": "Синій ніжний стейк",
   "item.mynethersdelight.boiled_egg": "Зварене яйце",
   "item.mynethersdelight.breakfast_sampler": "Сніданок",
+  "item.mynethersdelight.bullet_pepper": "Запальний перець",
   "item.mynethersdelight.burnt_roll": "Згорілий рол",
   "item.mynethersdelight.chilidog": "Чилі-доґ",
   "item.mynethersdelight.cooked_loin": "Смажена гоґлінська вирізка",
@@ -85,6 +88,7 @@
   "item.mynethersdelight.plate_of_stuffed_hoglin_ham": "Тарілка начиненої гоґлінської шинки",
   "item.mynethersdelight.plate_of_stuffed_hoglin_snout": "Тарілка начиненого гоґлінського носа",
   "item.mynethersdelight.raw_stuffed_hoglin": "Сирий начинений гоґлін",
+  "item.mynethersdelight.red_loin_on_a_stick": "Червона вирізка на палиці",
   "item.mynethersdelight.roast_ear": "Смажене вухо",
   "item.mynethersdelight.roasted_sausage": "Смажена сосиска",
   "item.mynethersdelight.rock_soup": "Кам'яний суп",
@@ -99,6 +103,7 @@
   "item.mynethersdelight.strider_slice": "Шматок блукача",
   "item.mynethersdelight.strider_stew": "Тушкований блукач",
   "item.mynethersdelight.strider_with_grilled_fungus": "Блукач зі смаженим грибом",
+  "mynethersdelight.block.feast.space_required": "Вам потрібно більше місця, щоб розмістити це.",
   "mynethersdelight.block.feast.use_knife": "Вам потрібен ніж, щоб розрізати це.",
   "mynethersdelight.itemGroup.main": "My Nether's Delight",
   "mynethersdelight.jei.forgoting": "Забуття",
@@ -115,5 +120,5 @@
   "mynethersdelight.jei.info.plate_of_stuffed_hoglin": "Це дивовижно, як багато страв можна отримати з настільки примітивного бенкету...",
   "mynethersdelight.jei.info.r_soil": "Майже кожна рослина чи врожай почувається комфортно на цьому ґрунті, якщо ви хочете зволожити його, вам потрібен вогонь замість води.",
   "mynethersdelight.jei.info.strider_egg": "Чекайте... Блукачі відкладають яйця? це дивно...\n\nПроїхали, його можна отримати лиш при обережному мисливстві.\nтверда шкаралупа унеможливлює його споживання без обробки...",
-  "mynethersdelight.jei.info.wild_powdery": "Порохові тростини інвазійні культури багряного лісу.\n\nЇх ягоди вибухають при контакті, спробуйте розрізати червоне стебло..."
+  "mynethersdelight.jei.info.wild_powdery": "Порохові тростини інвазійні культури багряного лісу.\n\nЇхні ягоди вибухають при контакті, спробуйте розрізати червоне стебло..."
 }

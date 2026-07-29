@@ -1,17 +1,18 @@
 {
+	"format_version": "1.21.11",
 	"credit": "Made with Blockbench",
 	"render_type": "minecraft:cutout",
 	"textures": {
 		"1": "mynethersdelight:block/striderloaf_cold",
 		"2": "mynethersdelight:block/tray_striderloaf_cold",
-		"particle": "farmersdelight:block/tray_bottom",
-		"bowl": "farmersdelight:block/tray_bottom"
+		"3": "mynethersdelight:block/nether_patter",
+		"particle": "mynethersdelight:block/nether_patter"
 	},
 	"elements": [
 		{
-			"from": [9, 2.1, 9],
-			"to": [13, 2.1, 12],
-			"rotation": {"angle": -22.5, "axis": "y", "origin": [13, 0, 10]},
+			"from": [9, 3.1, 9],
+			"to": [13, 3.1, 12],
+			"rotation": {"angle": -22.5, "axis": "y", "origin": [13, 1, 10]},
 			"faces": {
 				"north": {"uv": [0, 0, 0, 4], "rotation": 90, "texture": "#1"},
 				"east": {"uv": [0, 0, 0, 3], "rotation": 270, "texture": "#1"},
@@ -23,16 +24,39 @@
 		},
 		{
 			"name": "base",
-			"from": [1, 0, 1],
-			"to": [15, 2, 15],
-			"rotation": {"angle": 0, "axis": "y", "origin": [1, 0, 1]},
+			"from": [1, 1, 2],
+			"to": [15, 3, 14],
 			"faces": {
-				"north": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
-				"east": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
-				"south": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
-				"west": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
-				"up": {"uv": [1, 1, 15, 15], "texture": "#2"},
-				"down": {"uv": [1, 1, 15, 15], "texture": "#bowl"}
+				"north": {"uv": [0, 12, 14, 14], "texture": "#2"},
+				"east": {"uv": [14, 0, 16, 12], "rotation": 90, "texture": "#2"},
+				"south": {"uv": [0, 12, 14, 14], "texture": "#2"},
+				"west": {"uv": [14, 12, 16, 0], "rotation": 90, "texture": "#2"},
+				"up": {"uv": [0, 0, 14, 12], "texture": "#2"},
+				"down": {"uv": [0, 0, 14, 12], "texture": "#3"}
+			}
+		},
+		{
+			"name": "east_support",
+			"from": [11, 0, 2],
+			"to": [13, 1, 14],
+			"faces": {
+				"north": {"uv": [14, 15, 16, 16], "texture": "#2"},
+				"east": {"uv": [2, 15, 14, 16], "texture": "#2"},
+				"south": {"uv": [0, 15, 2, 16], "texture": "#2"},
+				"west": {"uv": [2, 15, 14, 16], "texture": "#2"},
+				"down": {"uv": [2, 14, 14, 16], "rotation": 90, "texture": "#2", "cullface": "down"}
+			}
+		},
+		{
+			"name": "west_support",
+			"from": [3, 0, 2],
+			"to": [5, 1, 14],
+			"faces": {
+				"north": {"uv": [14, 15, 16, 16], "texture": "#2"},
+				"east": {"uv": [2, 15, 14, 16], "texture": "#2"},
+				"south": {"uv": [0, 15, 2, 16], "texture": "#2"},
+				"west": {"uv": [2, 15, 14, 16], "texture": "#2"},
+				"down": {"uv": [2, 14, 14, 16], "rotation": 90, "texture": "#2", "cullface": "down"}
 			}
 		}
 	],
@@ -40,9 +64,12 @@
 		{
 			"name": "striderloaf",
 			"origin": [2, 2, 2],
+			"scope": 0,
 			"color": 0,
 			"children": [0]
 		},
-		1
+		1,
+		2,
+		3
 	]
 }

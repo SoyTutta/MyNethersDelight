@@ -1,0 +1,29 @@
+{
+  "forge:conditions": [
+    {
+      "type": "forge:mod_loaded",
+      "modid": "brewinandchewin"
+    }
+  ],
+  "type": "brewinandchewin:fermenting",
+  "basefluid": {
+    "count": 500,
+    "fluidString": "minecraft:milk"
+  },
+  "experience": 2.0,
+  "fermentingtime": 9600,
+  "ingredients": [
+    {
+      "item": "mynethersdelight:ghast_dough"
+    },
+    {
+      "item": "mynethersdelight:ghasmati"
+    }
+  ],
+  "recipe_book_tab": "meals",
+  "result": {
+    "count": 1,
+    "item": "mynethersdelight:ghast_sourdough"
+  },
+  "temperature": 5
+}

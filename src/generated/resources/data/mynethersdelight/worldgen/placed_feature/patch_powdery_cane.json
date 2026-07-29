@@ -2,23 +2,12 @@
   "feature": "mynethersdelight:patch_powdery_cane",
   "placement": [
     {
-      "type": "minecraft:count",
-      "count": 8
+      "type": "minecraft:rarity_filter",
+      "chance": 16
     },
     {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:height_range",
-      "height": {
-        "type": "minecraft:uniform",
-        "max_inclusive": {
-          "below_top": 0
-        },
-        "min_inclusive": {
-          "above_bottom": 0
-        }
-      }
+      "type": "minecraft:count_on_every_layer",
+      "count": 1
     },
     {
       "type": "minecraft:biome"

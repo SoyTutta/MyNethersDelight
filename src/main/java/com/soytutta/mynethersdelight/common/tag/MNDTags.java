@@ -8,6 +8,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.material.Fluid;
 
 public class MNDTags {
 
@@ -21,6 +22,8 @@ public class MNDTags {
 
     public static final TagKey<Block> LETIOS_ACTIVATORS = modBlockTag("letios_activators");
     public static final TagKey<Block> LETIOS_FLAMES = modBlockTag("letios_flames");
+    public static final TagKey<Fluid> LETEOS_BOOSTER = TagKey.create(Registries.FLUID,
+            ResourceLocation.fromNamespaceAndPath("mynethersdelight", "leteos_booster"));
     public static final TagKey<Block> SHOWCASE_ACTIVATORS = modBlockTag("showcase_activators");
     public static final TagKey<Block> SHOWCASE_FLAMES = modBlockTag("showcase_flames");
 
@@ -56,13 +59,13 @@ public class MNDTags {
     public MNDTags() {}
 
     private static TagKey<Item> modItemTag(String path) {
-        return ItemTags.create(new ResourceLocation("mynethersdelight:" + path));
+        return ItemTags.create(ResourceLocation.parse("mynethersdelight:" + path));
     }
     private static TagKey<Block> modBlockTag(String path) {
-        return BlockTags.create(new ResourceLocation("mynethersdelight:" + path));
+        return BlockTags.create(ResourceLocation.parse("mynethersdelight:" + path));
     }
     private static TagKey<EntityType<?>> modEntityTag(String path) {
-        return TagKey.create(Registries.ENTITY_TYPE, new ResourceLocation("farmersdelight", path));
+        return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath("mynethersdelight", path));
     }
 
 }

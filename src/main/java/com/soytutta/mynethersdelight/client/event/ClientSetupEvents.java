@@ -5,6 +5,7 @@
 package com.soytutta.mynethersdelight.client.event;
 
 import com.soytutta.mynethersdelight.client.renderer.NetherStoveRenderer;
+import com.soytutta.mynethersdelight.client.renderer.BlazeFireRenderer;
 import com.soytutta.mynethersdelight.common.block.utility.MNDWoodTypes;
 import com.soytutta.mynethersdelight.common.registry.MNDBlockEntityTypes;
 import com.soytutta.mynethersdelight.common.registry.MNDBlocks;
@@ -40,6 +41,7 @@ public class ClientSetupEvents {
     @SubscribeEvent
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerBlockEntityRenderer(MNDBlockEntityTypes.NETHER_STOVE.get(), NetherStoveRenderer::new);
+        event.registerBlockEntityRenderer(MNDBlockEntityTypes.BLAZIER.get(), BlazeFireRenderer::new);
     }
 
     @SubscribeEvent

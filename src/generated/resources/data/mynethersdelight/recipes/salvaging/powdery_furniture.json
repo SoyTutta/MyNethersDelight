@@ -1,0 +1,44 @@
+{
+  "type": "farmersdelight:cutting",
+  "ingredients": [
+    [
+      {
+        "item": "mynethersdelight:powdery_door"
+      },
+      {
+        "item": "mynethersdelight:powdery_trapdoor"
+      },
+      {
+        "item": "mynethersdelight:powdery_sign"
+      },
+      {
+        "item": "mynethersdelight:powdery_hanging_sign"
+      },
+      {
+        "item": "mynethersdelight:powdery_fence"
+      },
+      {
+        "item": "mynethersdelight:powdery_fence_gate"
+      },
+      {
+        "item": "mynethersdelight:powdery_pressure_plate"
+      },
+      {
+        "item": "mynethersdelight:powdery_button"
+      },
+      {
+        "item": "mynethersdelight:powdery_cabinet"
+      }
+    ]
+  ],
+  "result": [
+    {
+      "chance": 0.75,
+      "item": "mynethersdelight:powdery_planks"
+    }
+  ],
+  "tool": {
+    "type": "farmersdelight:tool_action",
+    "action": "axe_dig"
+  }
+}

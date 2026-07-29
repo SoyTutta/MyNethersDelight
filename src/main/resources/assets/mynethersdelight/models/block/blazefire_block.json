@@ -1,0 +1,40 @@
+{
+	"credit": "Made with Blockbench",
+	"render_type": "minecraft:cutout",
+	"textures": {
+		"1": "mynethersdelight:block/blazefire_off",
+		"particle": "mynethersdelight:block/nether_bowl",
+		"bowl": "mynethersdelight:block/nether_bowl"
+	},
+	"elements": [
+		{
+			"name": "base",
+			"from": [1, 0, 1],
+			"to": [15, 2, 15],
+			"rotation": {"angle": 0, "axis": "y", "origin": [1, 0, 1]},
+			"faces": {
+				"north": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
+				"east": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
+				"south": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
+				"west": {"uv": [1, 11, 15, 13], "texture": "#bowl"},
+				"up": {"uv": [1, 1, 15, 15], "texture": "#1"},
+				"down": {"uv": [1, 1, 15, 15], "texture": "#bowl"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "Blaze",
+			"origin": [2, 2, 2],
+			"color": 0,
+			"children": []
+		},
+		{
+			"name": "fire",
+			"origin": [2, 2, 2],
+			"color": 0,
+			"children": []
+		},
+		0
+	]
+}

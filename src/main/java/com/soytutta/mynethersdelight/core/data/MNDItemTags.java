@@ -18,6 +18,7 @@ import net.minecraft.data.tags.TagsProvider;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import vectorwing.farmersdelight.common.registry.ModItems;
 import vectorwing.farmersdelight.common.tag.ModTags;
@@ -31,9 +32,9 @@ public class MNDItemTags extends ItemTagsProvider {
     }
 
     protected void addTags(HolderLookup.Provider provider) {
+        this.registerMyCommonTags();
         this.registerCommonTags();
         this.registerModTags();
-        this.registerCommonTags();
         this.registerMinecraftTags();
         this.registerCompatibilityTags();
     }
@@ -53,7 +54,10 @@ public class MNDItemTags extends ItemTagsProvider {
 
     private void registerModTags() {
         this.tag(ModTags.Items.CABINETS_WOODEN).add(MNDItems.POWDERY_CABINET.get());
-        this.tag(ModTags.Items.CABINETS).add(MNDItems.NETHER_BRICKS_CABINET.get());
+        this.tag(ModTags.Items.CABINETS).add(MNDItems.NETHER_BRICKS_CABINET.get(), MNDItems.RED_NETHER_BRICKS_CABINET.get(), MNDItems.BLACKSTONE_BRICKS_CABINET.get());
+        this.tag(ModTags.Items.FEASTS).add(MNDItems.ROAST_STUFFED_HOGLIN.get(), MNDItems.STRIDERLOAF_BLOCK.get(),
+                MNDItems.COLD_STRIDERLOAF_BLOCK.get(), MNDItems.GHASTA_WITH_CREAM_BLOCK.get(),
+                MNDItems.BREAD_LOAF_BLOCK.get(), MNDItems.MAGMA_CAKE.get());
 
         this.tag(MNDTags.BLOCK_OF_POWDERY).add(MNDItems.BLOCK_OF_POWDERY_CANNON.get(), MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
 
@@ -66,7 +70,7 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(MNDTags.CURRY_MEATS).add(Items.CHICKEN,ModItems.CHICKEN_CUTS.get(),Items.BEEF,ModItems.MINCED_BEEF.get(),Items.MUTTON,ModItems.MUTTON_CHOPS.get(),
                 Items.PORKCHOP,ModItems.BACON.get(),ModItems.HAM.get(),MNDItems.HOGLIN_SAUSAGE.get(), MNDItems.HOGLIN_LOIN.get(),
                 MNDItems.MINCED_STRIDER.get());
-        this.tag(MNDTags.HOT_SPICE).add(Items.BLAZE_POWDER).addTag(MNDTags.BULLET_PEPPER);
+        this.tag(MNDTags.HOT_SPICE).add(Items.BLAZE_POWDER, MNDItems.BULLET_PEPPER.get(), MNDItems.PEPPER_POWDER.get()).addTag(MNDTags.BULLET_PEPPER);
         this.tag(MNDTags.STRIDER_MEATS).addTag(MNDTags.STRIDER_SLICE).addTag(MNDTags.MINCED_STRIDER);
         this.tag(MNDTags.STUFFED_HOGLIN_ITEMS).add(MNDItems.ROAST_EAR.get(), MNDItems.PLATE_OF_STUFFED_HOGLIN.get(),
                 MNDItems.PLATE_OF_STUFFED_HOGLIN_HAM.get(), MNDItems.PLATE_OF_STUFFED_HOGLIN_SNOUT.get());
@@ -76,6 +80,8 @@ public class MNDItemTags extends ItemTagsProvider {
     }
 
     private void registerCommonTags() {
+        this.tag(Tags.Items.STORAGE_BLOCKS).addTag(MyCommonTags.Items.STORAGE_BLOCKS_BULLET_PEPPER);
+        this.tag(MyCommonTags.Items.STORAGE_BLOCKS_BULLET_PEPPER).add(MNDItems.BULLET_PEPPER_CRATE.get());
         this.tag(CommonTags.Items.COOKED_EGGS).addTag(MyCommonTags.FOODS_BOILED_EGG).add(MNDItems.GOLDEN_EGG.get(), MNDItems.ENCHANTED_GOLDEN_EGG.get());;
         this.tag(CommonTags.Items.EGGS).add(MNDItems.STRIDER_EGG.get());
         this.tag(CommonTags.Items.PASTA_RAW_PASTA).add(MNDItems.GHASTA.get());
@@ -83,15 +89,16 @@ public class MNDItemTags extends ItemTagsProvider {
         this.tag(CommonTags.Items.DOUGH).add(MNDItems.GHAST_DOUGH.get());
         this.tag(CommonTags.Items.CROPS_RICE).add(MNDItems.GHASMATI.get());
         this.tag(CommonTags.Items.GRAIN_RICE).add(MNDItems.GHASMATI.get());
-        this.tag(CommonTags.Items.RAW_FISHES).add(MNDItems.STRIDER_SLICE.get());
+        this.tag(CommonTags.Items.RAW_FISHES).add(MNDItems.STRIDER_SLICE.get(), MNDItems.GHASTA.get());
         this.tag(CommonTags.Items.RAW_PORK).add(MNDItems.HOGLIN_SAUSAGE.get()).addTag(MyCommonTags.FOODS_RAW_HOGLIN);
         this.tag(CommonTags.Items.COOKED_PORK).addTag(MyCommonTags.FOODS_COOKED_HOGLIN);
         this.tag(CommonTags.Items.BREAD).add(MNDItems.SLICES_OF_BREAD.get(), MNDItems.TOASTS.get());
     }
 
     private void registerMinecraftTags() {
-        this.tag(ItemTags.SOUL_FIRE_BASE_BLOCKS).add(MNDItems.LETIOS_COMPOST.get(), MNDItems.RESURGENT_SOIL.get());
+        this.tag(ItemTags.SOUL_FIRE_BASE_BLOCKS).add(MNDItems.LETIOS_COMPOST.get(), MNDItems.RESURGENT_SOIL.get(), MNDItems.RESURGENT_SOIL_FARMLAND.get());
         this.tag(ItemTags.PIGLIN_FOOD).addTag(MNDTags.STUFFED_HOGLIN_ITEMS).addTag(MNDTags.COOKED_HOGLIN).addTag(MNDTags.RAW_HOGLIN);
+        this.tag(ItemTags.PIGLIN_LOVED).add(MNDItems.GOLDEN_EGG.get(), MNDItems.ENCHANTED_GOLDEN_EGG.get(), MNDItems.GOLDEN_TROPHY.get());
         this.tag(ItemTags.PLANKS).add(MNDItems.POWDERY_PLANKS.get());
         this.tag(ItemTags.WOODEN_BUTTONS).add(MNDItems.POWDERY_BUTTON.get());
         this.tag(ItemTags.WOODEN_PRESSURE_PLATES).add(MNDItems.POWDERY_PRESSURE_PLATE.get());

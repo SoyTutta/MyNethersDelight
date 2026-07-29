@@ -1,6 +1,7 @@
 package com.soytutta.mynethersdelight.common;
 
 import com.soytutta.mynethersdelight.common.entity.StriderRockEntity;
+import com.soytutta.mynethersdelight.common.enchantment.PoachingFailureRegistry;
 import com.soytutta.mynethersdelight.common.registry.MNDItems;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
@@ -19,6 +20,7 @@ public class MNDCommonSetup {
         event.enqueueWork(() -> {
             registerDispenserBehaviors();
             registerCompostables();
+            PoachingFailureRegistry.registerAll();
         });
     }
     public static void registerDispenserBehaviors() {
@@ -32,7 +34,8 @@ public class MNDCommonSetup {
         ComposterBlock.COMPOSTABLES.put(MNDItems.WARPED_FUNGUS_COLONY.get(), 1.0F);
         ComposterBlock.COMPOSTABLES.put(MNDItems.CRIMSON_FUNGUS_COLONY.get(), 1.0F);
         ComposterBlock.COMPOSTABLES.put(MNDItems.BULLET_PEPPER.get(), 0.3F);
-        ComposterBlock.COMPOSTABLES.put(MNDItems.STRIDER_EGG.get(), 0.4F);
+        ComposterBlock.COMPOSTABLES.put(MNDItems.STRIDER_EGG.get(), 0.3F);
+        ComposterBlock.COMPOSTABLES.put(MNDItems.GHASMATI.get(), 0.65F);
         ComposterBlock.COMPOSTABLES.put(MNDItems.GHASTA.get(), 1.0F);
     }
 }
