@@ -82,6 +82,7 @@ public class MNDItemTags extends ItemTagsProvider {
     private void registerCommonTags() {
         this.tag(Tags.Items.STORAGE_BLOCKS).addTag(MyCommonTags.Items.STORAGE_BLOCKS_BULLET_PEPPER);
         this.tag(MyCommonTags.Items.STORAGE_BLOCKS_BULLET_PEPPER).add(MNDItems.BULLET_PEPPER_CRATE.get());
+        this.tag(MyCommonTags.Items.STRIPPED_LOGS).add(MNDItems.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
         this.tag(CommonTags.Items.COOKED_EGGS).addTag(MyCommonTags.FOODS_BOILED_EGG).add(MNDItems.GOLDEN_EGG.get(), MNDItems.ENCHANTED_GOLDEN_EGG.get());;
         this.tag(CommonTags.Items.EGGS).add(MNDItems.STRIDER_EGG.get());
         this.tag(CommonTags.Items.PASTA_RAW_PASTA).add(MNDItems.GHASTA.get());

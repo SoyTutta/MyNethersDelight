@@ -61,7 +61,9 @@ public class BlazierTemperatureRecipeExtension implements ICraftingCategoryExten
                 craftingGridHelper.createAndSetInputs(builder, inputs, 0, 0);
         IRecipeSlotBuilder outputSlot =
                 craftingGridHelper.createAndSetOutputs(builder, outputs);
-        builder.createFocusLink(inputSlots.get(0), outputSlot);
+        IRecipeSlotBuilder blazierInputSlot =
+                inputSlots.get(recipe.isHeating() ? 0 : 4);
+        builder.createFocusLink(blazierInputSlot, outputSlot);
         builder.setShapeless();
     }
 

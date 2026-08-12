@@ -67,6 +67,7 @@ public class MNDBlockTags extends BlockTagsProvider {
     protected void registerCommonTags() {
         this.tag(Tags.Blocks.STORAGE_BLOCKS).addTag(MyCommonTags.Blocks.STORAGE_BLOCKS_BULLET_PEPPER);
         this.tag(MyCommonTags.Blocks.STORAGE_BLOCKS_BULLET_PEPPER).add(MNDBlocks.BULLET_PEPPER_CRATE.get());
+        this.tag(MyCommonTags.Blocks.STRIPPED_LOGS).add(MNDBlocks.BLOCK_OF_STRIPPED_POWDERY_CANNON.get());
         this.tag(BlockTags.DIRT).add(MNDBlocks.RESURGENT_SOIL.get(), MNDBlocks.RESURGENT_SOIL_FARMLAND.get());
         this.tag(BlockTags.NYLIUM).add(MNDBlocks.LETIOS_COMPOST.get(), MNDBlocks.RESURGENT_SOIL.get(), MNDBlocks.RESURGENT_SOIL_FARMLAND.get());
         this.tag(BlockTags.INFINIBURN_NETHER).add(MNDBlocks.LETIOS_COMPOST.get(), MNDBlocks.RESURGENT_SOIL.get(), MNDBlocks.RESURGENT_SOIL_FARMLAND.get());

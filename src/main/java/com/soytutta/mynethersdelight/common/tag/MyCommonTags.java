@@ -23,10 +23,12 @@ public class MyCommonTags {
 
     public static class Blocks {
         public static final TagKey<Block> STORAGE_BLOCKS_BULLET_PEPPER = commonBlockTag("storage_blocks/bullet_pepper");
+        public static final TagKey<Block> STRIPPED_LOGS = commonBlockTag("stripped_logs");
     }
 
     public static class Items {
         public static final TagKey<Item> STORAGE_BLOCKS_BULLET_PEPPER = commonItemTag("storage_blocks/bullet_pepper");
+        public static final TagKey<Item> STRIPPED_LOGS = commonItemTag("stripped_logs");
     }
 
     private static TagKey<Block> commonBlockTag(String path) {
