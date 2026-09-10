@@ -277,7 +277,6 @@ public class PowderyCaneBlock extends BushBlock implements BonemealableBlock {
             ItemStack heldItem = player.getItemInHand(InteractionHand.MAIN_HAND);
             if (!ItemUtils.isKnife(heldItem) && !heldItem.is(Tags.Items.TOOLS_SHEAR)) {
                 explodeAndReset(level, pos, state);
-                return Blocks.AIR.defaultBlockState();
             }
         }
         return super.playerWillDestroy(level, pos, state, player);
